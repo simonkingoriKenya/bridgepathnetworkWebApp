@@ -4,13 +4,21 @@ import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
-  UserCheck, Calculator, ArrowRight, CheckCircle2, TrendingUp
+  UserCheck, Calculator, ArrowRight, CheckCircle2, TrendingUp, Clock
 } from "lucide-react";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
-export const services = [
+export const services: {
+  slug: string;
+  icon: React.ReactNode;
+  label: string;
+  shortDesc: string;
+  highlights: string[];
+  tag: string | null;
+  comingSoon?: boolean;
+}[] = [
   {
     slug: "employment-of-record",
     icon: <Users className="h-6 w-6" />,
@@ -50,6 +58,7 @@ export const services = [
     shortDesc: "Accurate, compliant payroll across 45+ African countries.",
     highlights: ["Multi-currency payroll", "Tax filings", "Social security compliance"],
     tag: "Essential",
+    comingSoon: true,
   },
   {
     slug: "psychometric-assessments",
@@ -128,33 +137,64 @@ export default function ServicesPage() {
           >
             {services.map((s) => (
               <motion.div key={s.slug} variants={cardVariants}>
-                <Link href={`/services/${s.slug}`}>
-                  <div className="group h-full bg-white rounded-2xl border border-gray-100 hover:border-green-300 hover:shadow-xl transition-all duration-300 p-7 cursor-pointer flex flex-col">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-green-50" style={{ backgroundColor: GREEN + "12", color: GREEN }}>
-                        {s.icon}
+                {s.comingSoon ? (
+                  <div className="relative h-full">
+                    <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 flex flex-col opacity-60 pointer-events-none select-none">
+                      <div className="flex items-start justify-between mb-5">
+                        <div className="h-14 w-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#e5e7eb", color: "#9ca3af" }}>
+                          {s.icon}
+                        </div>
                       </div>
-                      {s.tag && (
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
-                          {s.tag}
-                        </span>
-                      )}
+                      <h3 className="text-lg font-bold mb-2 text-gray-400">{s.label}</h3>
+                      <p className="text-sm text-gray-400 leading-relaxed mb-4 flex-1">{s.shortDesc}</p>
+                      <ul className="space-y-1.5 mb-5">
+                        {s.highlights.map((h) => (
+                          <li key={h} className="flex items-center gap-2 text-xs text-gray-400">
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-gray-300" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <h3 className="text-lg font-bold mb-2 group-hover:text-green-700 transition-colors" style={{ color: DARK }}>{s.label}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{s.shortDesc}</p>
-                    <ul className="space-y-1.5 mb-5">
-                      {s.highlights.map((h) => (
-                        <li key={h} className="flex items-center gap-2 text-xs text-gray-600">
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex items-center gap-1.5 text-sm font-semibold mt-auto" style={{ color: GREEN }}>
-                      Learn more <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm" style={{ backgroundColor: "#FFF7ED", color: "#C2410C", border: "1px solid #FED7AA" }}>
+                      <Clock className="h-3 w-3" />
+                      Coming Soon
+                    </div>
+                    <div className="absolute inset-0 rounded-2xl flex items-end justify-center pb-6 pointer-events-none">
+                      <div className="px-4 py-2 rounded-full text-xs font-semibold text-white shadow" style={{ backgroundColor: "#C2410C" }}>
+                        Launching Soon — Stay Tuned
+                      </div>
                     </div>
                   </div>
-                </Link>
+                ) : (
+                  <Link href={`/services/${s.slug}`}>
+                    <div className="group h-full bg-white rounded-2xl border border-gray-100 hover:border-green-300 hover:shadow-xl transition-all duration-300 p-7 cursor-pointer flex flex-col">
+                      <div className="flex items-start justify-between mb-5">
+                        <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-green-50" style={{ backgroundColor: GREEN + "12", color: GREEN }}>
+                          {s.icon}
+                        </div>
+                        {s.tag && (
+                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+                            {s.tag}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-green-700 transition-colors" style={{ color: DARK }}>{s.label}</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{s.shortDesc}</p>
+                      <ul className="space-y-1.5 mb-5">
+                        {s.highlights.map((h) => (
+                          <li key={h} className="flex items-center gap-2 text-xs text-gray-600">
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="flex items-center gap-1.5 text-sm font-semibold mt-auto" style={{ color: GREEN }}>
+                        Learn more <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Link>
+                )}
               </motion.div>
             ))}
           </motion.div>

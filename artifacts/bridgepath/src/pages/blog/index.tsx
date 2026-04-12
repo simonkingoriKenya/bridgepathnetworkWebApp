@@ -80,7 +80,7 @@ Ready to expand in Africa? [Get in touch](/#contact) with our team today.
     date: "March 22, 2026",
     readTime: "7 min read",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
-    author: { name: "Priya Nair", role: "Chief People Officer", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" },
+    author: { name: "Aisha Diallo", role: "Chief People Officer", avatar: "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=80&q=80" },
     content: `
 Artificial intelligence is no longer a distant concept for African HR professionals — it is reshaping how organizations attract, assess, and retain talent across the continent. From AI-powered CV screening tools to predictive analytics for employee turnover, the technology is arriving fast, and companies that adopt it early are gaining a meaningful edge.
 
@@ -131,7 +131,7 @@ The future of work in Africa is digital, distributed, and data-driven. Organizat
     excerpt: "The new NSSF regulations affect all employers in East Africa. Here is what you need to understand to remain compliant.",
     date: "March 10, 2026",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80",
     author: { name: "Jean-Pierre Nkurunziza", role: "Head of East Africa", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&q=80" },
     content: `
 Following years of legal battles and multiple court orders, Kenya's National Social Security Fund (NSSF) new contribution rates are now fully in effect for 2026. For employers operating in East Africa — whether directly or through an Employment of Record partner — understanding these changes is critical to maintaining payroll compliance.
@@ -187,8 +187,8 @@ Being proactive — and working with a partner who tracks these changes on your 
     excerpt: "Top professionals are using platforms like Bridgepath Network to find international opportunities from anywhere on the continent.",
     date: "February 28, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80",
-    author: { name: "David Mensah", role: "COO, Bridgepath Network", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" },
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
+    author: { name: "David Mensah", role: "COO, Bridgepath Network", avatar: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=80&q=80" },
     content: `
 Ten years ago, an ambitious software engineer in Accra who wanted to work for a European tech company had two realistic options: emigrate, or wait for the company to open a local office. Today, that same engineer can be hired as a remote employee of a company in Berlin, London, or Toronto — fully legally, compliantly, and from the comfort of their home in Ghana — within two weeks.
 

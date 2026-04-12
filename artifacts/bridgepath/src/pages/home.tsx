@@ -8,8 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from "@/pages/blog/index";
 import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
-  UserCheck, Calculator, ChevronLeft, ChevronRight, ChevronDown, ChevronUp,
-  TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight
+  UserCheck, Calculator, ChevronDown, ChevronUp,
+  TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock
 } from "lucide-react";
 
 const GREEN = "#8CC63F";
@@ -20,7 +20,7 @@ const services = [
   { icon: <UserCheck className="h-6 w-6" />, label: "Secondment Services", slug: "secondment-services" },
   { icon: <Globe className="h-6 w-6" />, label: "Expatriate Services", slug: "expatriate-services" },
   { icon: <Briefcase className="h-6 w-6" />, label: "HR Consultancy", slug: "hr-consultancy" },
-  { icon: <Calculator className="h-6 w-6" />, label: "Payroll & Tax Admin", slug: "payroll-tax" },
+  { icon: <Calculator className="h-6 w-6" />, label: "Payroll & Tax Admin", slug: "payroll-tax", comingSoon: true },
   { icon: <BarChart3 className="h-6 w-6" />, label: "Psychometric Assessments", slug: "psychometric-assessments" },
   { icon: <FileText className="h-6 w-6" />, label: "Recruitment Services", slug: "recruitment-services" },
   { icon: <Users className="h-6 w-6" />, label: "Staff Outsourcing", slug: "staff-outsourcing" },
@@ -34,14 +34,14 @@ const whyPartner = [
   { icon: <Star className="h-7 w-7" />, title: "Dedicated team for better value", desc: "Optimize your HR processes, improving results with reduced costs." },
 ];
 
-const testimonials = [
-  { quote: "Bridgepath has been providing HR outsourcing services including payroll management across several countries in Africa. Their team is responsive and provides efficient HR support across our businesses.", company: "Diversey Eastern & Central Africa Ltd", author: "Amara Osei", role: "HR Director", avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" },
-  { quote: "Working with Bridgepath transformed our ability to hire across Africa. Their deep local knowledge and compliance expertise saved us months of work and thousands of dollars.", company: "TechVision Global", author: "Marcus Fernandez", role: "VP People", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" },
-  { quote: "As a diaspora professional, BridgePath made it effortless to find opportunities back home in Ghana. I landed my dream role in Accra within six weeks of signing up.", company: "Self-employed via BridgePath", author: "Efua Mensah", role: "Senior Data Scientist", avatar: "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=80&q=80" },
-  { quote: "The platform is intuitive and the support team genuinely understands the African talent market. We've now hired in Kenya, Nigeria, and South Africa through BridgePath.", company: "Inchcape Africa", author: "Priya Nair", role: "Talent Acquisition Lead", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" },
+const africaStats = [
+  { value: "700M+", label: "Working-age Africans by 2030", context: "The world's fastest-growing labour force, driving global demand for African talent." },
+  { value: "60%", label: "of Africa is under 25", context: "A youthful, tech-savvy workforce ready to power the next generation of business." },
+  { value: "$3T+", label: "Africa's combined GDP by 2030", context: "A continent-sized opportunity that forward-looking companies are already capitalising on." },
+  { value: "11M", label: "New professionals annually", context: "Africa adds more young workers to the global economy than any other region each year." },
+  { value: "54", label: "Countries, one talent pool", context: "With the right HR partner, pan-African hiring is no longer complex — it's your advantage." },
+  { value: "45+", label: "Countries BridgePath covers", context: "From Accra to Nairobi to Lagos — we make compliant hiring simple across the continent." },
 ];
-
-const clientLogos = ["AMADEUS", "Inchcape", "Diversey", "VisionFun", "NSSF"];
 
 const stats = [
   { value: "45+", label: "African Countries" },
@@ -70,7 +70,6 @@ const faqs = [
 
 export default function Home() {
   const { toast } = useToast();
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [contactForm, setContactForm] = useState({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
   const [contactSubmitting, setContactSubmitting] = useState(false);
@@ -220,15 +219,28 @@ export default function Home() {
             {services.map((s, i) => (
               <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
                 style={{ borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none", borderBottom: i < services.length - 3 ? "1px solid #e5e7eb" : "none" }}
+                className="relative"
               >
-                <Link href={`/services/${s.slug}`}>
-                  <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group cursor-pointer h-full">
-                    <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
+                {s.comingSoon ? (
+                  <div className="flex flex-col items-center text-center p-8 h-full opacity-50 cursor-not-allowed select-none">
+                    <div className="h-14 w-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-4 text-gray-300">
                       {s.icon}
                     </div>
-                    <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
+                    <p className="text-sm font-medium text-gray-400">{s.label}</p>
+                    <span className="mt-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full" style={{ backgroundColor: "#FFF7ED", color: "#C2410C" }}>
+                      <Clock className="h-2.5 w-2.5" /> Coming Soon
+                    </span>
                   </div>
-                </Link>
+                ) : (
+                  <Link href={`/services/${s.slug}`}>
+                    <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group cursor-pointer h-full">
+                      <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
+                        {s.icon}
+                      </div>
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
+                    </div>
+                  </Link>
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -303,44 +315,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Africa Opportunity — replaces fake testimonials */}
       <section className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>
-              Leading Brands <span style={{ color: GREEN }}>Trust</span> Our Services
-            </h2>
-            <p className="text-gray-500 mt-1 text-sm">What our clients say about working with us</p>
-          </div>
-          <div className="px-8 md:px-10 py-12 max-w-4xl mx-auto">
-          <div className="bg-gray-50 rounded-2xl p-10" style={{ border: "1px solid #e5e7eb" }}>
-            <div className="text-5xl font-serif leading-none mb-4" style={{ color: GREEN }}>"</div>
-            <p className="text-gray-700 text-lg leading-relaxed mb-6 italic">{testimonials[testimonialIdx].quote}</p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <img
-                  src={testimonials[testimonialIdx].avatar}
-                  alt={testimonials[testimonialIdx].author}
-                  className="h-11 w-11 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">{testimonials[testimonialIdx].author}</p>
-                  <p className="text-xs text-gray-500">{testimonials[testimonialIdx].role} · {testimonials[testimonialIdx].company}</p>
-                </div>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-200">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>The Africa Opportunity</span>
+                <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
+                  Why Africa is the world's<br />
+                  <span style={{ color: GREEN }}>next talent frontier</span>
+                </h2>
               </div>
-              <div className="flex gap-2">
-                {[0, 1].map(btn => (
-                  <button key={btn} onClick={() => setTestimonialIdx(btn === 0 ? (testimonialIdx - 1 + testimonials.length) % testimonials.length : (testimonialIdx + 1) % testimonials.length)}
-                    className="h-9 w-9 rounded-full border border-gray-200 flex items-center justify-center hover:border-green-400 transition-colors">
-                    {btn === 0 ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                  </button>
-                ))}
-              </div>
+              <p className="text-sm text-gray-500 max-w-xs leading-relaxed">
+                The numbers tell a story of unstoppable growth. BridgePath positions you at the centre of it.
+              </p>
             </div>
           </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
-            {clientLogos.map(logo => <div key={logo} className="text-gray-400 font-bold text-sm tracking-widest uppercase">{logo}</div>)}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            {africaStats.map((stat, i) => (
+              <div
+                key={i}
+                className="p-8 md:p-10 group hover:bg-gray-50/60 transition-colors"
+                style={{
+                  borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none",
+                  borderBottom: i < 3 ? "1px solid #e5e7eb" : "none",
+                }}
+              >
+                <div className="text-4xl font-bold mb-1" style={{ color: GREEN }}>{stat.value}</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: DARK }}>{stat.label}</div>
+                <p className="text-xs text-gray-500 leading-relaxed">{stat.context}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

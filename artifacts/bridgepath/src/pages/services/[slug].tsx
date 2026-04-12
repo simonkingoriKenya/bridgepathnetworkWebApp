@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, Users, FileText, Briefcase, Globe, Award, BarChart3, UserCheck, Calculator, ArrowRight, Phone, Mail, TrendingUp, Shield, Clock, Star } from "lucide-react";
 
+
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
@@ -55,7 +56,7 @@ const serviceData: Record<string, {
   "secondment-services": {
     icon: <UserCheck className="h-8 w-8" />,
     label: "Secondment Services",
-    heroImg: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=85",
+    heroImg: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=85",
     tagline: "Flexible workforce deployment across borders",
     description: "Our Secondment Services facilitate the temporary transfer of employees from one organization to another while maintaining their original employment relationship. This is ideal for project-based assignments, knowledge transfer, or cross-company collaboration while ensuring full legal compliance.",
     benefits: [
@@ -89,7 +90,7 @@ const serviceData: Record<string, {
   "expatriate-services": {
     icon: <Globe className="h-8 w-8" />,
     label: "Expatriate Services",
-    heroImg: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85",
+    heroImg: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=85",
     tagline: "Moving talent into Africa — done right",
     description: "BridgePath provides comprehensive support for companies relocating international employees to Africa, or moving African talent globally. Our expatriate services cover every aspect of the relocation lifecycle — from immigration and work permits to housing, schooling, and ongoing HR support.",
     benefits: [
@@ -123,7 +124,7 @@ const serviceData: Record<string, {
   "hr-consultancy": {
     icon: <Briefcase className="h-8 w-8" />,
     label: "HR Consultancy",
-    heroImg: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=85",
+    heroImg: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=85",
     tagline: "Strategic HR guidance for Africa's dynamic market",
     description: "Our HR Consultancy service delivers expert human resources advisory to organizations operating or expanding in Africa. Whether you need to design HR policies, restructure your people operations, or build a high-performance culture, our experienced consultants bring deep regional knowledge to every engagement.",
     benefits: [
@@ -191,7 +192,7 @@ const serviceData: Record<string, {
   "psychometric-assessments": {
     icon: <BarChart3 className="h-8 w-8" />,
     label: "Psychometric Assessments",
-    heroImg: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=85",
+    heroImg: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=85",
     tagline: "Hire the right people, every time",
     description: "Our psychometric assessment services use scientifically validated tools to evaluate candidates' cognitive abilities, personality traits, and leadership potential. These insights help employers make informed, objective hiring decisions — reducing turnover and improving team performance.",
     benefits: [
@@ -330,6 +331,41 @@ export default function ServiceDetail() {
   const [match, params] = useRoute("/services/:slug");
   const slug = params?.slug || "";
   const service = serviceData[slug];
+
+  if (slug === "payroll-tax") {
+    return (
+      <div className="min-h-screen flex flex-col bg-white">
+        <Navbar />
+        <section className="flex-1 flex flex-col items-center justify-center px-4 py-32 text-center">
+          <div className="h-20 w-20 rounded-full flex items-center justify-center mb-6 mx-auto" style={{ backgroundColor: "#FFF7ED" }}>
+            <Calculator className="h-9 w-9" style={{ color: "#C2410C" }} />
+          </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-sm font-bold" style={{ backgroundColor: "#FFF7ED", color: "#C2410C", border: "1px solid #FED7AA" }}>
+            <Clock className="h-4 w-4" />
+            Coming Soon
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: DARK }}>Payroll &amp; Tax Admin</h1>
+          <p className="text-gray-500 text-lg max-w-xl mb-8 leading-relaxed mx-auto">
+            We're building a best-in-class, multi-country payroll and tax administration service for Africa. Be the first to know when it launches.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/#contact">
+              <button className="px-8 py-3 font-semibold text-white rounded-xl hover:opacity-90" style={{ backgroundColor: GREEN }}>
+                Notify Me at Launch
+              </button>
+            </Link>
+            <Link href="/services">
+              <button className="px-8 py-3 font-semibold rounded-xl border-2 transition-all hover:bg-gray-50" style={{ borderColor: "#e5e7eb", color: DARK }}>
+                Explore Other Services
+              </button>
+            </Link>
+          </div>
+          <p className="text-xs text-gray-400 mt-8">Expected Q3 2026</p>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!service) {
     return (

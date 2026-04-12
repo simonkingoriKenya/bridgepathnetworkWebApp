@@ -23,10 +23,11 @@ const quickLinks = [
   { label: "AI CV Review", href: "/cv-review" },
 ];
 
-const countries = [
-  "Ghana", "Kenya", "Nigeria",
-  "Tanzania", "Uganda", "Rwanda",
-  "South Africa", "Senegal", "Zambia",
+const regions = [
+  { label: "West Africa", countries: "Ghana · Nigeria · Senegal · Ivory Coast" },
+  { label: "East Africa", countries: "Kenya · Uganda · Tanzania · Rwanda · Ethiopia" },
+  { label: "Southern Africa", countries: "South Africa · Zambia · Zimbabwe" },
+  { label: "Central Africa", countries: "DRC · Cameroon · and more" },
 ];
 
 export function Footer() {
@@ -126,17 +127,20 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Col 4 – Countries We Serve */}
+        {/* Col 4 – Pan-African Footprint */}
         <div className="p-8 md:p-10 flex flex-col gap-5">
-          <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Countries We Serve</h4>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
-            {countries.map((c) => (
-              <li key={c} className="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer">
-                {c}
+          <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Pan-African Reach</h4>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            We support hiring and HR operations across all major regions of Africa — with local expertise that makes the difference.
+          </p>
+          <ul className="space-y-3.5 mt-1">
+            {regions.map((r) => (
+              <li key={r.label}>
+                <div className="text-xs font-semibold text-gray-300 mb-0.5">{r.label}</div>
+                <div className="text-xs text-gray-600">{r.countries}</div>
               </li>
             ))}
           </ul>
-          <p className="text-xs text-gray-600 mt-auto">+36 more across Africa</p>
         </div>
       </div>
 
