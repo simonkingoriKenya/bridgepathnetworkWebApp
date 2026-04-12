@@ -104,7 +104,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero — Full-page vibrant */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-gray-100">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=90"
@@ -151,60 +151,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What is BridgePath — 4 columns */}
-      <section id="about" className="py-16 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-1">
-              <h2 className="text-xl font-bold mb-3" style={{ color: DARK }}>What is BridgePath</h2>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">BridgePath is a talent marketplace designed for Africa. We connect:</p>
-              <ul className="space-y-2">
-                {["Diaspora professionals looking to work in Africa", "Local talent seeking new opportunities", "Businesses looking to hire qualified candidates"].map(item => (
-                  <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
-                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: GREEN }} /> {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm font-medium mt-4 text-gray-700">All in one platform.</p>
-            </div>
+      {/* What is BridgePath — 4 columns grid panels */}
+      <section id="about" className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div className="grid grid-cols-1 md:grid-cols-4" style={{ borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb", maxWidth: "1280px", margin: "0 auto" }}>
+          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
+            <h2 className="text-lg font-bold mb-3" style={{ color: DARK }}>What is BridgePath</h2>
+            <p className="text-gray-500 text-xs leading-relaxed mb-4">BridgePath is a talent marketplace designed for Africa. We connect:</p>
+            <ul className="space-y-2">
+              {["Diaspora professionals looking to work in Africa", "Local talent seeking new opportunities", "Businesses looking to hire qualified candidates"].map(item => (
+                <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: GREEN }} /> {item}
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs font-medium mt-4 text-gray-700">All in one platform.</p>
+          </div>
 
-            <div className="border-l border-gray-100 pl-8">
-              <h3 className="font-bold text-gray-800 mb-3">For Professionals</h3>
-              <p className="text-sm text-gray-500 mb-4">Find opportunities across Africa.</p>
-              <Link href="/auth/signup">
-                <span className="text-sm font-semibold underline underline-offset-2 cursor-pointer" style={{ color: GREEN }}>
-                  Create Your Profile →
-                </span>
-              </Link>
-            </div>
+          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
+            <h3 className="font-bold text-gray-800 mb-3 text-sm">For Professionals</h3>
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Find opportunities across Africa. Build your career from anywhere.</p>
+            <Link href="/auth/signup">
+              <span className="text-xs font-semibold underline underline-offset-2 cursor-pointer" style={{ color: GREEN }}>
+                Create Your Profile →
+              </span>
+            </Link>
+          </div>
 
-            <div className="border-l border-gray-100 pl-8">
-              <h3 className="font-bold text-gray-800 mb-3">For Employers</h3>
-              <p className="text-sm text-gray-500 mb-4">Hire the right talent, faster.</p>
-              <Link href="/auth/signup?role=employer">
-                <button className="px-4 py-2 text-sm font-semibold text-white rounded-lg" style={{ backgroundColor: DARK }}>
-                  Post a Job
-                </button>
-              </Link>
-            </div>
+          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
+            <h3 className="font-bold text-gray-800 mb-3 text-sm">For Employers</h3>
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Hire the right talent, faster. Compliant across 45+ countries.</p>
+            <Link href="/auth/signup?role=employer">
+              <button className="px-4 py-2 text-xs font-semibold text-white rounded-lg" style={{ backgroundColor: DARK }}>
+                Post a Job
+              </button>
+            </Link>
+          </div>
 
-            <div className="border-l border-gray-100 pl-8">
-              <h3 className="font-bold text-gray-800 mb-3">How It Works</h3>
-              <ol className="space-y-2">
-                {["Create Your Profile", "Explore Opportunities", "Connect & Grow"].map((step, i) => (
-                  <li key={step} className="flex items-center gap-2 text-sm text-gray-600">
-                    <span className="h-5 w-5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 text-white" style={{ backgroundColor: GREEN }}>{i + 1}</span>
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </div>
+          <div className="p-8 md:p-10">
+            <h3 className="font-bold text-gray-800 mb-3 text-sm">How It Works</h3>
+            <ol className="space-y-3">
+              {["Create Your Profile", "Explore Opportunities", "Connect & Grow"].map((step, i) => (
+                <li key={step} className="flex items-center gap-2.5 text-xs text-gray-600">
+                  <span className="h-5 w-5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 text-white" style={{ backgroundColor: GREEN }}>{i + 1}</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
@@ -213,17 +211,19 @@ export default function Home() {
             <p className="text-gray-500 max-w-2xl mx-auto">Our HR services are crucial in ensuring that companies remain compliant with work regulations in Africa.</p>
           </div>
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-4xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-0 max-w-4xl mx-auto border border-gray-100 rounded-2xl overflow-hidden"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.12 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
           >
             {services.map((s, i) => (
-              <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}>
+              <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                style={{ borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none", borderBottom: i < services.length - 3 ? "1px solid #e5e7eb" : "none" }}
+              >
                 <Link href={`/services/${s.slug}`}>
-                  <div className="flex flex-col items-center text-center p-6 rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-md transition-all group cursor-pointer h-full">
-                    <div className="h-16 w-16 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
+                  <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group cursor-pointer h-full">
+                    <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
                       {s.icon}
                     </div>
                     <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
@@ -245,17 +245,19 @@ export default function Home() {
       </section>
 
       {/* Why Partner */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
+      <section className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
               Why <span style={{ color: GREEN }}>partner</span> with us
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Our services ensure companies remain compliant with work regulations across Africa.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm">Our services ensure companies remain compliant with work regulations across Africa.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {whyPartner.map((w, i) => (
-              <div key={i} className="text-center p-6">
+              <div key={i} className="p-8 md:p-10 text-center"
+                style={{ borderRight: i < whyPartner.length - 1 ? "1px solid #e5e7eb" : "none" }}
+              >
                 <div className="h-14 w-14 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: GREEN + "15", color: GREEN }}>
                   {w.icon}
                 </div>
@@ -268,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* Regional presence */}
-      <section className="py-20" style={{ backgroundColor: "#2d3e2a" }}>
+      <section className="py-20" style={{ backgroundColor: "#2d3e2a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-6xl mx-auto">
             <div className="flex-1 w-full text-left">
@@ -302,13 +304,16 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-8 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3" style={{ color: DARK }}>
-            Leading Brands <span style={{ color: GREEN }}>Trust</span> Our Services
-          </h2>
-          <p className="text-center text-gray-500 mb-10">What our clients say about working with us</p>
-          <div className="bg-gray-50 rounded-2xl p-10">
+      <section className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>
+              Leading Brands <span style={{ color: GREEN }}>Trust</span> Our Services
+            </h2>
+            <p className="text-gray-500 mt-1 text-sm">What our clients say about working with us</p>
+          </div>
+          <div className="px-8 md:px-10 py-12 max-w-4xl mx-auto">
+          <div className="bg-gray-50 rounded-2xl p-10" style={{ border: "1px solid #e5e7eb" }}>
             <div className="text-5xl font-serif leading-none mb-4" style={{ color: GREEN }}>"</div>
             <p className="text-gray-700 text-lg leading-relaxed mb-6 italic">{testimonials[testimonialIdx].quote}</p>
             <div className="flex items-center justify-between">
@@ -336,29 +341,33 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
             {clientLogos.map(logo => <div key={logo} className="text-gray-400 font-bold text-sm tracking-widest uppercase">{logo}</div>)}
           </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16" style={{ backgroundColor: "#4a6741" }}>
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-            {stats.map((s, i) => (
-              <div key={i}>
-                <div className="text-3xl md:text-4xl font-bold text-white">{s.value}</div>
-                <div className="text-xs font-medium uppercase tracking-wider text-gray-300 mt-1">{s.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
+      {/* Stats */}
+      <section style={{ backgroundColor: "#4a6741", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="grid grid-cols-2 md:grid-cols-5" style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid rgba(255,255,255,0.08)", borderRight: "1px solid rgba(255,255,255,0.08)" }}>
+          {stats.map((s, i) => (
+            <div key={i} className="py-14 text-center"
+              style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}
+            >
+              <div className="text-3xl md:text-4xl font-bold text-white">{s.value}</div>
+              <div className="text-xs font-medium uppercase tracking-wider text-gray-300 mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Contact Form */}
-      <section id="contact" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 md:px-8">
+      <section id="contact" className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
+            <h2 className="text-3xl font-bold" style={{ color: DARK }}>Looking for something specific?</h2>
+            <p className="text-gray-500 mt-1 text-sm">Our team will get back to you within 24 hours</p>
+          </div>
+          <div className="px-8 md:px-10 py-12">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-2" style={{ color: DARK }}>Looking for something specific?</h2>
-            <p className="text-center text-gray-500 mb-10">Our team will get back to you within 24 hours</p>
             <form className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100" onSubmit={handleContactSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
@@ -399,28 +408,36 @@ export default function Home() {
               </p>
             </form>
           </div>
+          </div>
         </div>
       </section>
 
       {/* News */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>News and Insights</h2>
-            <p className="text-gray-500 mt-2">For organisations and people</p>
+      <section className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
+          <div className="px-8 md:px-10 py-10 border-b border-gray-200 flex items-end justify-between">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>News and Insights</h2>
+              <p className="text-gray-500 mt-1 text-sm">For organisations and people</p>
+            </div>
+            <Link href="/blog" className="text-xs font-semibold flex items-center gap-1 shrink-0" style={{ color: GREEN }}>
+              View all <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4">
             {newsArticles.map((article, i) => (
               <Link key={i} href={`/blog/${article.slug}`}>
-                <div className="group rounded-2xl overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer h-full flex flex-col">
-                  <div className="h-40 overflow-hidden">
+                <div className="group cursor-pointer h-full flex flex-col hover:bg-gray-50/60 transition-colors"
+                  style={{ borderRight: i < newsArticles.length - 1 ? "1px solid #e5e7eb" : "none" }}
+                >
+                  <div className="h-44 overflow-hidden">
                     <img
                       src={article.image}
                       alt=""
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="p-5 flex flex-col flex-1">
+                  <div className="p-6 flex flex-col flex-1" style={{ borderTop: "1px solid #e5e7eb" }}>
                     <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded w-fit" style={{ backgroundColor: GREEN + "20", color: GREEN }}>{article.tag}</span>
                     <h3 className="font-bold text-gray-900 mt-3 mb-2 text-sm leading-snug group-hover:text-green-700 transition-colors line-clamp-2">{article.title}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{article.excerpt}</p>
@@ -437,19 +454,21 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 md:px-8 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: DARK }}>Frequently asked questions</h2>
-          <div className="space-y-3">
+      <section className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>Frequently asked questions</h2>
+          </div>
+          <div className="px-8 md:px-10 py-10 max-w-3xl mx-auto">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-semibold hover:text-green-700 transition-colors" style={{ color: DARK }}>
+              <div key={i} style={{ borderBottom: "1px solid #e5e7eb" }}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between py-5 text-left text-sm font-semibold hover:text-green-700 transition-colors" style={{ color: DARK }}>
                   <span>{faq.q}</span>
                   {openFaq === i ? <ChevronUp className="h-4 w-4 shrink-0 ml-4" style={{ color: GREEN }} /> : <ChevronDown className="h-4 w-4 shrink-0 ml-4 text-gray-400" />}
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-50">
-                    <div className="pt-4">{faq.a}</div>
+                  <div className="pb-5 text-xs text-gray-600 leading-relaxed">
+                    {faq.a}
                   </div>
                 )}
               </div>

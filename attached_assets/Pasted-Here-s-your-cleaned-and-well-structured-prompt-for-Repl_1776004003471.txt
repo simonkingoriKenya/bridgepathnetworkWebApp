@@ -1,0 +1,123 @@
+Here’s your cleaned and well-structured prompt for Replit (no changes to meaning, just organized and clarified):
+
+---
+
+**Prompt:**
+
+I want you to redesign and rebuild the dashboards and onboarding system from scratch.
+
+### 1. Dashboard Separation
+
+* Currently, when I sign in as a professional (job seeker), I see items meant for employers/companies. This must be fixed.
+* Create **two completely separate dashboards**:
+
+  1. **Job Seeker Dashboard**
+  2. **Company/Organization Dashboard**
+* Each dashboard must only show features relevant to its role.
+
+---
+
+### 2. Authentication & Onboarding (Rebuild بالكامل)
+
+Scrap the existing system and create a new flow:
+
+#### Job Seeker Flow:
+
+1. Sign up / Sign in (Job Seeker)
+2. Onboarding process (collect relevant profile info)
+3. Redirect to Job Seeker Dashboard
+
+#### Company/Organization Flow:
+
+1. Separate Sign up / Sign in (Company)
+2. Company onboarding (company details, needs, etc.)
+3. Redirect to Company Dashboard
+
+---
+
+### 3. Dashboard Features
+
+#### Job Seeker Dashboard:
+
+* Profile management
+* Job browsing
+* Applications tracking
+* AI Resume Review feature (free)
+* Human Resume Review option → costs **$20 USD (one-time optional payment)**
+
+#### Company Dashboard:
+
+* Manage job postings
+* View applicants
+* Company profile/settings
+* Services are **not fixed price**
+
+  * Include a **“Get in Touch / Contact Us”** option for pricing discussions
+
+---
+
+### 4. Navigation & Core Functionality
+
+* Clean and intuitive dashboard navigation
+* Smooth switching between dashboard sections
+* Include:
+
+  * Login / Logout
+  * Settings
+  * Dashboard home
+* Ensure all navigation flows work correctly end-to-end
+
+---
+
+### 5. UI/UX Requirements
+
+* Match dashboard colors with the landing page for consistency
+* Design should feel **premium and modern**
+* Ensure **mobile-first design** (most users are on phones)
+* Make the UI flow effortless and intuitive
+
+---
+
+### 6. Visual Design Details
+
+* Add subtle background elements:
+
+  * Mesh/gradient backgrounds
+  * Tiny dotted patterns in dashboards
+* Header and footer:
+
+  * Clean and minimal
+  * Include subtle line accents similar to the reference image
+
+---
+
+### 7. Demo Data
+
+* Populate the entire app with **mock data**
+
+  * Job listings
+  * User profiles
+  * Applications
+* Ensure the app feels complete for demo purposes
+
+---
+
+### 8. General Expectations
+
+* Think and act like a full-stack developer
+* Ensure everything works smoothly:
+
+  * Authentication
+  * Dashboard rendering
+  * Navigation
+* Focus on usability, structure, and scalability
+
+---
+
+If you want, I can also convert this into:
+
+* a **step-by-step build plan**, or
+* a **database schema + API structure**, or
+* a **React / Next.js project scaffold**
+
+Just tell me 👍
