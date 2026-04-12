@@ -1,7 +1,7 @@
 import { useGetDashboardStats, useGetMyApplications } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { Link } from "wouter";
-import { FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot, ShieldCheck, Lock, TrendingUp, Star, Briefcase } from "lucide-react";
+import { FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot, ShieldCheck, Lock, TrendingUp, Briefcase } from "lucide-react";
 import { format } from "date-fns";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
