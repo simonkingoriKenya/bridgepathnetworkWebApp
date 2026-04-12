@@ -44,7 +44,7 @@ export default function Login() {
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ backgroundColor: DARK }}>
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=85')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85')" }}
         />
         <div
           className="absolute inset-0"

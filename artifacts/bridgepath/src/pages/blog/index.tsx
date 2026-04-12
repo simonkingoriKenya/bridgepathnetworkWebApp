@@ -15,7 +15,7 @@ export const blogPosts = [
     excerpt: "We explore the key differences between PEOs and other types of HR service providers across Africa — and why it matters for your business.",
     date: "April 9, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
     author: { name: "Amara Osei", role: "CEO, Bridgepath Network", avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" },
     content: `
 When companies expand into Africa, one of the first HR decisions they face is choosing the right employment partner. The two most commonly confused options are **Professional Employer Organizations (PEOs)** and **traditional employment agencies**. While both provide talent-related services, they operate very differently — and choosing the wrong one can cost you time, money, and compliance exposure.

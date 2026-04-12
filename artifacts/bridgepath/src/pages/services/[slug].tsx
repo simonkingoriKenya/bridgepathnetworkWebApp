@@ -22,7 +22,7 @@ const serviceData: Record<string, {
   "employment-of-record": {
     icon: <Users className="h-8 w-8" />,
     label: "Employment of Record",
-    heroImg: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=85",
+    heroImg: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85",
     tagline: "Hire anyone in Africa — without a local entity",
     description: "Our Employment of Record (EoR) service allows businesses to legally employ workers in African countries without establishing a local legal entity. BridgePath becomes the employer of record on paper, handling all local legal obligations including employment contracts, payroll, tax compliance, and statutory benefits — while your team member works exclusively for you.",
     benefits: [

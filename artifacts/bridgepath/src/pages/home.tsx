@@ -106,8 +106,8 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-gray-100">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=90"
-            alt="African professionals collaborating in a bright modern office"
+            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1600&q=90"
+            alt="Diverse African and international professionals in a boardroom meeting"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.88) 50%, rgba(26,35,64,0.3) 100%)" }} />
