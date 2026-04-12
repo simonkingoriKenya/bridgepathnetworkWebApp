@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
+import loginHero from "@assets/unnamed_1776009115714.jpg";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -43,12 +44,12 @@ export default function Login() {
     <div className="min-h-screen flex" style={{ backgroundColor: "#f8f9fc" }}>
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ backgroundColor: DARK }}>
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85')" }}
+          className="absolute inset-0 bg-cover bg-center opacity-55"
+          style={{ backgroundImage: `url("${loginHero}")` }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(26,35,64,0.97) 0%, rgba(26,35,64,0.55) 100%)" }}
+          style={{ background: "linear-gradient(to top, rgba(26,35,64,0.86) 0%, rgba(26,35,64,0.28) 100%)" }}
         />
         <div className="relative z-10 p-12 flex flex-col justify-between h-full">
           <Link href="/" className="flex flex-col gap-1">

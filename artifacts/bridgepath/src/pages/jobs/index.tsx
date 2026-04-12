@@ -75,6 +75,7 @@ function ApplyModal({ open, onClose, jobTitle }: { open: boolean; onClose: () =>
 }
 
 export default function JobsList() {
+  const [, navigate] = useLocation();
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState<string>("all");
@@ -107,7 +108,7 @@ export default function JobsList() {
     if (!isAuthenticated) {
       setApplyJob(job);
     } else {
-      window.location.href = `/jobs/${job.id}`;
+      navigate(`/jobs/${job.id}`);
     }
   };
 

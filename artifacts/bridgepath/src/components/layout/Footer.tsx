@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Twitter, Linkedin, Facebook, Youtube, Mail, MapPin, ArrowRight } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 const GREEN = "#8CC63F";
 const DARK = "#111814";
@@ -14,13 +15,12 @@ const serviceLinks = [
   { label: "Staff Outsourcing", href: "/services/staff-outsourcing" },
 ];
 
-const quickLinks = [
+const publicQuickLinks = [
   { label: "Home", href: "/" },
   { label: "Find Jobs", href: "/jobs" },
   { label: "All Services", href: "/services" },
   { label: "About Us", href: "/about" },
   { label: "Insights & News", href: "/blog" },
-  { label: "AI CV Review", href: "/cv-review" },
 ];
 
 const regions = [
@@ -31,6 +31,19 @@ const regions = [
 ];
 
 export function Footer() {
+  const { isAuthenticated, user } = useAuth();
+  const quickLinks = [
+    ...publicQuickLinks,
+    {
+      label: "AI CV Review",
+      href: !isAuthenticated
+        ? "/auth/signup?role=job_seeker"
+        : user?.role === "job_seeker"
+          ? "/cv-review"
+          : "/dashboard/employer",
+    },
+  ];
+
   return (
     <footer style={{ backgroundColor: DARK }} className="text-gray-400">
 

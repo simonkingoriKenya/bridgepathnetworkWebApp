@@ -56,6 +56,7 @@ A premium hiring platform connecting global employers with Africa's best talent.
 13. **Legal pages** — `/privacy`, `/terms`, and `/cookies` linked from the footer
 14. **Employer landing page** (`/employers`) — Public employer CTA page with Post a Job and Browse Candidates actions
 15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages for browsing profiles and simple conversations
+16. **Blog imagery** — Blog cards, author avatars, article heroes, and login hero use local African professional photos from `attached_assets/unnamed_*.jpg`; article heroes use a taller `50vh` layout to avoid cramped cropping.
 
 ## Auth Flow
 
@@ -91,7 +92,8 @@ A premium hiring platform connecting global employers with Africa's best talent.
 - Main nav with Services dropdown (9 services), About, Find Jobs, Contact
 - User avatar dropdown with Dashboard, Profile, Logout when signed in
 - Mobile hamburger menu
-- Employer sidebar navigation uses Dashboard, Jobs, Candidates, Messages
+- Employer sidebar navigation uses Dashboard/Jobs, Candidates, Messages, with Post a Job kept as a separate header action.
+- Protected role mismatches redirect users to their own dashboard instead of the public home page.
 
 ## DB Schema Notes
 

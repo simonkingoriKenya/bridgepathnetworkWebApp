@@ -56,7 +56,7 @@ function ProtectedRoute({ component: Component, allowedRoles, useLayout = true }
   }
 
   if (allowedRoles && user && !allowedRoles.includes(user.role)) {
-    return <Redirect to="/" />;
+    return <Redirect to={user.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker"} />;
   }
 
   if (useLayout) {

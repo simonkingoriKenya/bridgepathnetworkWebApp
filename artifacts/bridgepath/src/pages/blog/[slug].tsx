@@ -121,10 +121,10 @@ export default function BlogPost() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <div className="relative h-72 md:h-96 overflow-hidden">
-        <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.92) 0%, rgba(26,35,64,0.4) 60%, transparent 100%)" }} />
-        <div className="absolute bottom-0 left-0 right-0 p-8">
+      <div className="relative h-[50vh] min-h-[340px] md:min-h-[460px] overflow-hidden">
+        <img src={post.image} alt={post.title} className="w-full h-full object-cover object-top" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.94) 0%, rgba(26,35,64,0.62) 48%, rgba(26,35,64,0.18) 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 px-4 py-8 md:p-10">
           <div className="container mx-auto max-w-3xl">
             <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white mb-4 transition-colors">
               <ArrowLeft className="h-4 w-4" /> Back to Insights
@@ -137,7 +137,7 @@ export default function BlogPost() {
                 <Clock className="h-3 w-3" /> {post.readTime}
               </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight">{post.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">{post.title}</h1>
           </div>
         </div>
       </div>

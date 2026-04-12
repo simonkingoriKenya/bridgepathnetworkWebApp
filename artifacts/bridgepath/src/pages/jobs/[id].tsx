@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRoute, Link } from "wouter";
+import { useRoute, Link, useLocation } from "wouter";
 import { useGetJob, useCreateApplication, useGetMyApplications } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { Navbar } from "@/components/layout/Navbar";
@@ -18,6 +18,7 @@ export default function JobDetail() {
   const jobId = params?.id ? parseInt(params.id) : 0;
   
   const { user, isAuthenticated } = useAuth();
+  const [, navigate] = useLocation();
   const { toast } = useToast();
   
   const { data: job, isLoading, error } = useGetJob(jobId, {
@@ -40,7 +41,7 @@ export default function JobDetail() {
 
   const handleApply = () => {
     if (!isAuthenticated) {
-      window.location.href = `/auth/login?redirect=/jobs/${jobId}`;
+      navigate(`/auth/login?redirect=/jobs/${jobId}`);
       return;
     }
 

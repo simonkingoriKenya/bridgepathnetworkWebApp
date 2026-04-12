@@ -2,11 +2,20 @@ import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Briefcase, Search, Users } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
 export default function EmployersPage() {
+  const { isAuthenticated, user } = useAuth();
+  const employerHref = (path: string) =>
+    !isAuthenticated
+      ? "/auth/signup?role=employer"
+      : user?.role === "employer"
+        ? path
+        : "/dashboard/jobseeker";
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
@@ -21,10 +30,10 @@ export default function EmployersPage() {
                   BridgePath helps employers connect with diaspora and local professionals across Ghana, Kenya, and remote African markets.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                  <Link href="/jobs/new" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold" style={{ backgroundColor: GREEN }}>
+                  <Link href={employerHref("/jobs/new")} className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold" style={{ backgroundColor: GREEN }}>
                     <Briefcase className="h-4 w-4" /> Post a Job
                   </Link>
-                  <Link href="/candidates" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold border" style={{ color: DARK, borderColor: "#d1d5db" }}>
+                  <Link href={employerHref("/candidates")} className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold border" style={{ color: DARK, borderColor: "#d1d5db" }}>
                     <Search className="h-4 w-4" /> Browse Candidates
                   </Link>
                 </div>

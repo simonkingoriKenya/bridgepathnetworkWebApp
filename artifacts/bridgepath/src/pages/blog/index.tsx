@@ -3,6 +3,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, Tag } from "lucide-react";
+import blogHero1 from "@assets/unnamed_1776009115714.jpg";
+import blogHero2 from "@assets/unnamed_(1)_1776009115714.jpg";
+import blogHero3 from "@assets/unnamed_(2)_1776009115713.jpg";
+import blogHero4 from "@assets/unnamed_(3)_1776009115713.jpg";
+import authorAvatar1 from "@assets/unnamed_(8)_1776009115711.jpg";
+import authorAvatar2 from "@assets/unnamed_(4)_1776009115713.jpg";
+import authorAvatar3 from "@assets/unnamed_(5)_1776009115712.jpg";
+import authorAvatar4 from "@assets/unnamed_(6)_1776009115712.jpg";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -15,8 +23,8 @@ export const blogPosts = [
     excerpt: "We explore the key differences between PEOs and other types of HR service providers across Africa — and why it matters for your business.",
     date: "April 9, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
-    author: { name: "Amara Osei", role: "CEO, Bridgepath Network", avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" },
+    image: blogHero1,
+    author: { name: "Amara Osei", role: "CEO, Bridgepath Network", avatar: authorAvatar1 },
     content: `
 When companies expand into Africa, one of the first HR decisions they face is choosing the right employment partner. The two most commonly confused options are **Professional Employer Organizations (PEOs)** and **traditional employment agencies**. While both provide talent-related services, they operate very differently — and choosing the wrong one can cost you time, money, and compliance exposure.
 
@@ -79,8 +87,8 @@ Ready to expand in Africa? [Get in touch](/#contact) with our team today.
     excerpt: "Artificial intelligence is rapidly changing how companies recruit and assess talent across Africa. Here's what HR leaders need to know.",
     date: "March 22, 2026",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
-    author: { name: "Aisha Diallo", role: "Chief People Officer", avatar: "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=80&q=80" },
+    image: blogHero2,
+    author: { name: "Aisha Diallo", role: "Chief People Officer", avatar: authorAvatar2 },
     content: `
 Artificial intelligence is no longer a distant concept for African HR professionals — it is reshaping how organizations attract, assess, and retain talent across the continent. From AI-powered CV screening tools to predictive analytics for employee turnover, the technology is arriving fast, and companies that adopt it early are gaining a meaningful edge.
 
@@ -131,8 +139,8 @@ The future of work in Africa is digital, distributed, and data-driven. Organizat
     excerpt: "The new NSSF regulations affect all employers in East Africa. Here is what you need to understand to remain compliant.",
     date: "March 10, 2026",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80",
-    author: { name: "Jean-Pierre Nkurunziza", role: "Head of East Africa", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&q=80" },
+    image: blogHero3,
+    author: { name: "Jean-Pierre Nkurunziza", role: "Head of East Africa", avatar: authorAvatar3 },
     content: `
 Following years of legal battles and multiple court orders, Kenya's National Social Security Fund (NSSF) new contribution rates are now fully in effect for 2026. For employers operating in East Africa — whether directly or through an Employment of Record partner — understanding these changes is critical to maintaining payroll compliance.
 
@@ -187,8 +195,8 @@ Being proactive — and working with a partner who tracks these changes on your 
     excerpt: "Top professionals are using platforms like Bridgepath Network to find international opportunities from anywhere on the continent.",
     date: "February 28, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
-    author: { name: "David Mensah", role: "COO, Bridgepath Network", avatar: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=80&q=80" },
+    image: blogHero4,
+    author: { name: "David Mensah", role: "COO, Bridgepath Network", avatar: authorAvatar4 },
     content: `
 Ten years ago, an ambitious software engineer in Accra who wanted to work for a European tech company had two realistic options: emigrate, or wait for the company to open a local office. Today, that same engineer can be hired as a remote employee of a company in Berlin, London, or Toronto — fully legally, compliantly, and from the comfort of their home in Ghana — within two weeks.
 
