@@ -1,0 +1,398 @@
+Here’s your **refined version with the rules properly applied** — no styling/color/structure changes, only content, images, and workflow adjustments:
+
+---
+
+# 🔷 PHASE 1: HOMEPAGE CONTENT & IMAGE UPDATE (HIGH PRIORITY)
+
+## 1. Hero Section (Replace Immediately)
+
+**Goal:** Strong first impression (corporate + credible)
+
+* Headline:
+  *Connecting Talent to Opportunity Across Africa*
+
+* Subtext:
+  *BridgePath is a modern careers and hiring platform designed to connect diaspora and local professionals with high-quality opportunities across Africa — starting with Ghana and Kenya.*
+
+* CTAs:
+
+  * 🟢 Find Opportunities
+  * 🔵 Hire Talent
+
+✅ **Tasks:**
+
+* Replace current copy (no layout changes)
+* Keep existing structure, spacing, and typography
+* Replace hero image:
+
+  * Use **client sample images first**
+  * Ensure image matches African corporate context (black professionals, clear, high-quality)
+
+---
+
+## 2. Positioning Section
+
+**Goal:** Explain platform clearly (no fluff)
+
+* Update content:
+
+  > BridgePath is built to support the evolving workforce across Africa...
+
+✅ **Tasks:**
+
+* Replace text only
+* Keep existing layout and structure unchanged
+
+---
+
+## 3. Credibility Section (VERY IMPORTANT)
+
+**Goal:** Build trust fast
+
+* Section title:
+  *Built on Real Hiring Experience*
+
+* Content emphasis:
+
+  * Global HR leadership
+  * 20+ years experience
+  * Multiple industries
+
+✅ **Tasks:**
+
+* Update content only
+* Replace/insert image:
+
+  * Use **client samples first**, then similar visuals
+* Keep component structure unchanged
+
+---
+
+## 4. “For Professionals” Section
+
+**Goal:** Speak directly to candidates
+
+✅ Include:
+
+* Career growth
+* Ghana + Kenya opportunities
+* Profile building
+* Easy applications
+
+✅ **Tasks:**
+
+* Update text only
+* Keep existing UI components (cards/icons)
+
+---
+
+## 5. “For Employers” Section (NEW CONTENT, SAME STRUCTURE)
+
+**Goal:** Make it feel like a serious hiring platform
+
+✅ Include:
+
+* Access diaspora + local talent
+* Pre-screened / verified candidates
+* Faster hiring
+
+✅ **Tasks:**
+
+* Add content within existing section structure (do not redesign layout)
+* Ensure consistency with “For Professionals” section
+
+---
+
+## 6. How It Works Section
+
+**Goal:** Simple 3-step clarity
+
+1. Create Profile
+2. Discover Opportunities or Talent
+3. Engage and Grow
+
+✅ **Tasks:**
+
+* Update text only
+* Keep current layout (cards/steps)
+
+---
+
+## 7. Focus Areas Section
+
+**Goal:** Show seriousness + scope
+
+* Technology
+* Finance
+* HR & Operations
+* Customer Success
+* Leadership
+
+✅ **Tasks:**
+
+* Replace content only
+* Keep grid/layout unchanged
+
+---
+
+## 8. Early Access Section
+
+**Goal:** Drive urgency
+
+* “Launching in Ghana and Kenya”
+
+✅ **Tasks:**
+
+* Update text only
+* Keep existing component structure
+
+---
+
+## 9. Final CTA Section
+
+**Goal:** Conversion
+
+* Headline:
+  *Start building your future with BridgePath*
+
+* Buttons:
+
+  * 🟢 Find Opportunities
+  * 🔵 Hire Talent
+
+✅ **Tasks:**
+
+* Replace text only
+* Keep layout and styling unchanged
+
+---
+
+# 🔷 PHASE 2: EMPLOYER EXPERIENCE (WORKFLOW ONLY)
+
+## 10. Employer Landing Page
+
+**Goal:** Entry point for businesses
+
+* Headline:
+  *Hire the Right Talent Across Africa*
+
+* CTAs:
+
+  * 🟢 Post a Job
+  * 🔵 Browse Candidates
+
+✅ **Tasks:**
+
+* Update content only
+* Keep existing page structure
+
+---
+
+## 11. Employer Dashboard (V1 – SIMPLE)
+
+**Goal:** Clean + structured
+
+### Layout (UNCHANGED):
+
+#### Top Navigation:
+
+* Dashboard
+* Jobs
+* Candidates
+* Messages
+
+#### Dashboard Overview Cards:
+
+* Active Jobs
+* Applications Received
+* Shortlisted Candidates
+
+#### Quick Actions:
+
+* ➕ Post New Job
+* 🔍 Search Candidates
+* 📩 View Messages
+
+✅ **Tasks:**
+
+* Keep layout exactly as is
+* Update functionality/order:
+
+👉 **Active items appear FIRST**
+👉 **“Coming Soon” items appear LAST**
+
+---
+
+## 12. Post a Job Flow (KEEP SIMPLE)
+
+**Goal:** Reduce friction
+
+Fields:
+
+* Job Title
+* Location (Ghana / Kenya / Remote)
+* Job Type
+* Description
+* Requirements
+
+✅ **Tasks:**
+
+* Implement as-is
+* No additional complexity
+* No UI redesign
+
+---
+
+## 13. Candidate Listing Page
+
+**Goal:** Easy scanning
+
+Each card:
+
+* Name
+* Role / Experience
+* Location
+* Skills
+* “View Profile” button
+
+✅ **Tasks:**
+
+* Keep existing card structure
+* Update content only if needed
+
+---
+
+## 14. Candidate Profile (Employer View)
+
+**Goal:** Decision-making clarity
+
+Include:
+
+* Full experience
+* CV
+* Skills
+* Contact / Message button
+
+✅ **Tasks:**
+
+* Keep layout unchanged
+* Populate with structured content
+
+---
+
+## 15. Messaging (V1 SIMPLE)
+
+**Goal:** Basic communication
+
+* Simple chat / messaging
+* No advanced features
+
+✅ **Tasks:**
+
+* Implement minimal functionality only
+* Reuse existing UI patterns
+
+---
+
+# 🔷 PHASE 3: IMAGE IMPLEMENTATION (CRITICAL)
+
+## 16. Image Strategy
+
+### Primary Rule:
+
+👉 **Use client-provided sample images FIRST**
+
+### Then:
+
+* Add supporting images that match:
+
+  * Same tone
+  * Same professionalism
+  * Same African corporate identity
+
+### Image Direction:
+
+* Black professionals (primary)
+* African corporate environments
+* Mix of:
+
+  * Modern business wear
+  * African print corporate wear
+
+### Application:
+
+* Replace images across:
+
+  * Hero section
+  * Homepage sections
+  * Employer views
+
+✅ **Tasks:**
+
+1. Start with client samples
+2. Apply across key sections
+3. Expand with matching images where needed
+
+---
+
+# 🔷 PRIORITY EXECUTION PLAN
+
+## 🔥 DO FIRST
+
+1. Replace images (using client samples)
+2. Update homepage content
+3. Apply content across all sections
+
+---
+
+## 🔥 DO NEXT
+
+4. Employer landing page content
+5. Employer dashboard ordering fix (active vs coming soon)
+
+---
+
+## 🔥 THEN
+
+6. Implement employer workflows:
+
+   * Post job
+   * Candidate listing
+   * Candidate profile
+   * Messaging (basic)
+
+---
+
+# 🔷 WHAT’S FEASIBLE FOR V1
+
+✅ **Fully feasible now:**
+
+* Homepage content updates
+* Image replacement
+* Employer landing page
+* Dashboard (existing UI)
+* Job posting flow
+* Candidate listing & profile
+
+⚠️ **Keep simple:**
+
+* Messaging
+* Filtering
+* Advanced features
+
+---
+
+# 🔷 FINAL DIRECTIVE
+
+* Do NOT change structure
+* Do NOT change styling
+* Do NOT change color theme
+
+👉 Only:
+
+* Update **content**
+* Replace **images (starting with client samples)**
+* Implement **workflows**
+* Adjust **dashboard ordering (active first, coming soon last)**
+
+---
