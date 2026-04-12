@@ -24,7 +24,6 @@ import BlogIndex from "@/pages/blog/index";
 import BlogPost from "@/pages/blog/[slug]";
 import AuthCallback from "@/pages/auth/callback";
 import ForgotPassword from "@/pages/auth/forgot-password";
-import UpdatePassword from "@/pages/auth/update-password";
 import JobSeekerOnboarding from "@/pages/onboarding/jobseeker";
 import EmployerOnboarding from "@/pages/onboarding/employer";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
@@ -73,7 +72,6 @@ function Router() {
       <Route path="/auth/signup" component={Signup} />
       <Route path="/auth/callback" component={AuthCallback} />
       <Route path="/auth/forgot-password" component={ForgotPassword} />
-      <Route path="/auth/update-password" component={UpdatePassword} />
       <Route path="/onboarding/jobseeker">
         {() => <ProtectedRoute component={JobSeekerOnboarding} allowedRoles={["job_seeker"]} useLayout={false} />}
       </Route>

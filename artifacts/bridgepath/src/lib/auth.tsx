@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "./supabase";
+import { absoluteAppUrl } from "./utils";
 import type { Session, User } from "@supabase/supabase-js";
 
 export type AppUser = {
@@ -15,11 +16,14 @@ interface AuthContextType {
   session: Session | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  signInWithEmail: (email: string, password: string) => Promise<{ error?: string }>;
-  signUpWithEmail: (email: string, password: string, name: string, role: string) => Promise<{ error?: string }>;
-  signInWithGoogle: () => Promise<{ error?: string }>;
-  resetPasswordForEmail: (email: string) => Promise<{ error?: string }>;
-  updatePassword: (newPassword: string) => Promise<{ error?: string }>;
+  /** Magic link for existing users only (sign-in). */
+  sendSignInMagicLink: (email: string) => Promise<{ error?: string }>;
+  /** Magic link for new accounts; stores role/name in metadata and localStorage for callback. */
+  sendSignUpMagicLink: (
+    email: string,
+    name: string,
+    role: "job_seeker" | "employer",
+  ) => Promise<{ error?: string }>;
   logout: () => Promise<void>;
   updateRole: (role: string) => void;
   login: (token: string, user: any) => void;
@@ -55,6 +59,8 @@ async function syncProfileToUser(user: User): Promise<AppUser> {
   if (prof?.full_name) localStorage.setItem(NAME_KEY, prof.full_name);
   return buildAppUser(user, role, name);
 }
+
+const magicLinkRedirect = () => absoluteAppUrl("auth/callback");
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AppUser | null>(null);
@@ -102,65 +108,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const signInWithEmail = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return { error: error.message };
-    if (data.user) {
-      try {
-        setUser(await syncProfileToUser(data.user));
-      } catch {
-        setUser(buildAppUser(data.user));
-      }
-    }
-    return {};
-  };
-
-  const signUpWithEmail = async (email: string, password: string, name: string, role: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
+  const sendSignInMagicLink = async (email: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
       options: {
-        data: { full_name: name, name, role },
+        emailRedirectTo: magicLinkRedirect(),
+        shouldCreateUser: false,
       },
     });
     if (error) return { error: error.message };
+    return {};
+  };
+
+  const sendSignUpMagicLink = async (
+    email: string,
+    name: string,
+    role: "job_seeker" | "employer",
+  ) => {
     localStorage.setItem(ROLE_KEY, role);
-    localStorage.setItem(NAME_KEY, name);
-    if (data.user) {
-      try {
-        await supabase.from("profiles").upsert(
-          { id: data.user.id, role, full_name: name },
-          { onConflict: "id" },
-        );
-      } catch {
-        /* table may not exist yet, or session not active until email is confirmed */
-      }
-      setUser(buildAppUser(data.user, role, name));
-    }
-    return {};
-  };
-
-  const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
+    localStorage.setItem(NAME_KEY, name.trim());
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: magicLinkRedirect(),
+        shouldCreateUser: true,
+        data: {
+          full_name: name.trim(),
+          name: name.trim(),
+          role,
+        },
       },
     });
-    if (error) return { error: error.message };
-    return {};
-  };
-
-  const resetPasswordForEmail = async (email: string) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/auth/update-password`,
-    });
-    if (error) return { error: error.message };
-    return {};
-  };
-
-  const updatePassword = async (newPassword: string) => {
-    const { error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) return { error: error.message };
     return {};
   };
@@ -192,11 +170,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         session,
         isLoading,
         isAuthenticated: !!user,
-        signInWithEmail,
-        signUpWithEmail,
-        signInWithGoogle,
-        resetPasswordForEmail,
-        updatePassword,
+        sendSignInMagicLink,
+        sendSignUpMagicLink,
         logout,
         updateRole,
         login,

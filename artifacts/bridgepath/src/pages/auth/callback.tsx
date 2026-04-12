@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { supabase } from "@/lib/supabase";
 import { Loader2 } from "lucide-react";
-import { fetchProfile } from "@/lib/supabaseProfile";
+import { fetchProfile, upsertProfile } from "@/lib/supabaseProfile";
 
 const GREEN = "#8CC63F";
+const ROLE_KEY = "bridgepath_user_role";
+const NAME_KEY = "bridgepath_user_name";
 
 export default function AuthCallback() {
   const [, setLocation] = useLocation();
@@ -20,24 +22,38 @@ export default function AuthCallback() {
         return;
       }
 
-      const prof = await fetchProfile(session.user.id);
-      const role =
-        prof?.role ||
-        session.user.user_metadata?.role ||
-        localStorage.getItem("bridgepath_user_role") ||
+      const u = session.user;
+      const roleRaw =
+        (await fetchProfile(u.id))?.role ||
+        (u.user_metadata?.role as string | undefined) ||
+        localStorage.getItem(ROLE_KEY) ||
         "job_seeker";
+      const role: "job_seeker" | "employer" =
+        roleRaw === "employer" ? "employer" : "job_seeker";
 
-      if (role === "employer" || role === "job_seeker") {
-        localStorage.setItem("bridgepath_user_role", role);
+      const displayName =
+        (u.user_metadata?.full_name as string | undefined) ||
+        (u.user_metadata?.name as string | undefined) ||
+        localStorage.getItem(NAME_KEY) ||
+        u.email?.split("@")[0] ||
+        "User";
+
+      localStorage.setItem(ROLE_KEY, role);
+      if (displayName) localStorage.setItem(NAME_KEY, displayName);
+
+      try {
+        await upsertProfile({
+          id: u.id,
+          role,
+          full_name: displayName,
+        });
+      } catch {
+        /* RLS or network — callback still tries to route user */
       }
 
-      const lsRole = localStorage.getItem("bridgepath_user_role");
-      if (lsRole === "employer" || lsRole === "job_seeker") {
-        await supabase.from("profiles").update({ role: lsRole }).eq("id", session.user.id);
-      }
-
-      const profAfter = await fetchProfile(session.user.id);
-      const finalRole = profAfter?.role || role;
+      const profAfter = await fetchProfile(u.id);
+      const finalRole =
+        profAfter?.role === "employer" || profAfter?.role === "job_seeker" ? profAfter.role : role;
 
       if (profAfter?.onboarding_completed_at) {
         setLocation(finalRole === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
@@ -60,4 +76,3 @@ export default function AuthCallback() {
     </div>
   );
 }
-
