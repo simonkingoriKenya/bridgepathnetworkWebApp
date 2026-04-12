@@ -278,7 +278,7 @@ export default function Home() {
                 <span className="text-2xl md:text-3xl font-semibold text-gray-200">Hubs &amp; partners across Africa</span>
               </h2>
               <p className="text-gray-300 mb-8 leading-relaxed text-base md:text-lg max-w-xl">
-                Headquartered in Ghana with deep operations in Nigeria, Kenya, South Africa, and the U.K. — plus a network spanning 45+ countries for payroll, compliance, and talent.
+                Headquartered in Ghana with deep operations in Nigeria, Kenya, South Africa, Rwanda, Uganda, Tanzania, Senegal, and other African countries — plus a network spanning 45+ countries for payroll, compliance, and talent.
               </p>
               <Link href="/auth/signup">
                 <button className="px-6 py-3 font-semibold text-white rounded-lg border border-white/30 hover:bg-white/10 transition-colors text-sm">

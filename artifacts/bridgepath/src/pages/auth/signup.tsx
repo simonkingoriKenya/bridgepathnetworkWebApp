@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, Briefcase, User as UserIcon, ArrowLeft, CheckCircle2, ArrowRight, Mail } from "lucide-react";
+import { Loader2, Briefcase, User as UserIcon, ArrowLeft, CheckCircle2, ArrowRight, Mail, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GREEN = "#8CC63F";
@@ -16,10 +16,19 @@ export default function Signup() {
   const [selectedRole, setSelectedRole] = useState<"job_seeker" | "employer" | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const { sendSignUpMagicLink, updateRole } = useAuth();
+  const { signUpWithPassword, updateRole } = useAuth();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const role = new URLSearchParams(window.location.search).get("role");
+    if (role === "employer" || role === "job_seeker") {
+      setSelectedRole(role);
+      setStep("details");
+    }
+  }, []);
 
   const handleSendLink = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,22 +40,28 @@ export default function Signup() {
       toast({ variant: "destructive", title: "Invalid email" });
       return;
     }
+    if (password.length < 8) {
+      toast({ variant: "destructive", title: "Password too short", description: "Use at least 8 characters." });
+      return;
+    }
     if (!selectedRole) {
       toast({ variant: "destructive", title: "Choose account type", description: "Go back and pick Professional or Employer." });
       return;
     }
     setIsLoading(true);
     updateRole(selectedRole);
-    const result = await sendSignUpMagicLink(email.trim(), name.trim(), selectedRole);
+    const result = await signUpWithPassword(email.trim(), password, name.trim(), selectedRole);
     setIsLoading(false);
     if (result.error) {
-      toast({ variant: "destructive", title: "Could not send link", description: result.error });
+      toast({ variant: "destructive", title: "Could not create account", description: result.error });
       return;
     }
     setSent(true);
     toast({
-      title: "Check your email",
-      description: "We sent a confirmation link. Open it to finish creating your account.",
+      title: result.needsConfirmation ? "Check your email" : "Account created",
+      description: result.needsConfirmation
+        ? "We sent a confirmation link. Open it, then sign in with your email and password."
+        : "Your account is ready. Continue to your dashboard.",
     });
   };
 
@@ -185,7 +200,11 @@ export default function Signup() {
                 <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
                   <Mail className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
                   <p className="text-sm text-gray-700 mb-1 font-medium">Link sent to {email}</p>
-                  <p className="text-xs text-gray-500 mb-4">Click the link in the email to confirm and sign in.</p>
+                  <p className="text-xs text-gray-500 mb-4">Click the Supabase confirmation link, then sign in with your email and password.</p>
+                  <Link href="/auth/login" className="inline-flex items-center justify-center h-10 px-4 rounded-lg text-white text-sm font-semibold mb-3" style={{ backgroundColor: GREEN }}>
+                    Go to sign in
+                  </Link>
+                  <br />
                   <button type="button" onClick={() => setSent(false)} className="text-sm font-medium underline" style={{ color: GREEN }}>
                     Start over
                   </button>
@@ -214,6 +233,21 @@ export default function Signup() {
                       className="h-12"
                     />
                   </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Create password</label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        placeholder="At least 8 characters"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="h-12 pl-10"
+                        autoComplete="new-password"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1.5">You’ll use this password after confirming your email.</p>
+                  </div>
                   <motion.button
                     type="submit"
                     disabled={isLoading}
@@ -227,7 +261,7 @@ export default function Signup() {
                       </>
                     ) : (
                       <>
-                        Email me a sign-up link <ArrowRight className="h-4 w-4" />
+                        Create account & send confirmation <ArrowRight className="h-4 w-4" />
                       </>
                     )}
                   </motion.button>

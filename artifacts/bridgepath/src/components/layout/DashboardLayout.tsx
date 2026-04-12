@@ -3,8 +3,8 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import {
   LayoutDashboard, Briefcase, FileText, User, LogOut,
-  Send, Settings, ChevronLeft, Menu, Users, PlusCircle, BarChart3,
-  Bell, Search, Home
+  Settings, ChevronLeft, Menu, PlusCircle,
+  Bell, Home
 } from "lucide-react";
 import { motion } from "framer-motion";
 const logoImg = "/logo.svg";
@@ -107,7 +107,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
         <nav className="flex-1 px-2 py-2 space-y-0.5">
           {navItems.map((item, idx) => {
-            const isActive = location === item.href;
+            const isActive = location === item.href || (item.href !== "/" && location.startsWith(`${item.href}/`));
             const Icon = item.icon;
             return (
               <Link
@@ -190,7 +190,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </header>
 
-        <main className="flex-1 p-6 overflow-auto">
+        <main className="flex-1 p-6 overflow-auto" style={{ background: "radial-gradient(circle at top right, rgba(140, 198, 63, 0.12), transparent 32%), #f5f7fb" }}>
           <motion.div
             key={location}
             initial={{ opacity: 0, y: 8 }}

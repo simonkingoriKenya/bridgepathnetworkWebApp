@@ -42,7 +42,7 @@ const pillars = [
 ];
 
 const whyUs = [
-  { title: "Global HR Expertise", desc: "15+ years of global HR experience supporting institutions across the U.S., U.K., and Africa." },
+  { title: "African HR Expertise", desc: "15+ years of HR experience supporting institutions across Ghana, Nigeria, Kenya, South Africa, and other African countries." },
   { title: "Value-Aligned Partnership", desc: "We partner with organizations that prioritize diversity, inclusion, and excellence." },
   { title: "Flexible Service Delivery", desc: "In-person, virtual, and tailored consulting services to meet you where you are." },
   { title: "Proven Results", desc: "90%+ client satisfaction, measurable ROI on services, and significant staff retention improvements." },
@@ -116,7 +116,7 @@ export default function About() {
                 <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>About the Founder</p>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: DARK }}>Meet Pamela Kuma</h2>
                 <p className="text-gray-600 leading-relaxed mb-4 text-base">
-                  Pamela Kuma is a seasoned global HR professional with over 15 years of experience leading workforce development across the U.S. and U.K. — spanning Media, Tech Startups, Fintech, and Gas & Energy sectors.
+                  Pamela Kuma is a seasoned HR professional with over 15 years of experience leading workforce development across African markets — spanning Media, Tech Startups, Fintech, and Gas & Energy sectors.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-4 text-base">
                   Drawing from her global expertise and deep understanding of African talent markets, Pamela founded Bridgepath Network with a singular mission: to help organizations hire better, build strong teams, and create cultures of excellence — using global best practices combined with local insight.

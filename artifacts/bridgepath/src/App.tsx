@@ -22,6 +22,7 @@ import ServiceDetail from "@/pages/services/[slug]";
 import AboutPage from "@/pages/about";
 import BlogIndex from "@/pages/blog/index";
 import BlogPost from "@/pages/blog/[slug]";
+import LegalPage from "@/pages/legal";
 import AuthCallback from "@/pages/auth/callback";
 import ForgotPassword from "@/pages/auth/forgot-password";
 import JobSeekerOnboarding from "@/pages/onboarding/jobseeker";
@@ -81,6 +82,9 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/blog" component={BlogIndex} />
       <Route path="/blog/:slug" component={BlogPost} />
+      <Route path="/privacy">{() => <LegalPage type="privacy" />}</Route>
+      <Route path="/terms">{() => <LegalPage type="terms" />}</Route>
+      <Route path="/cookies">{() => <LegalPage type="cookies" />}</Route>
       <Route path="/services" component={ServicesPage} />
       <Route path="/services/:slug" component={ServiceDetail} />
       <Route path="/jobs" component={JobsList} />

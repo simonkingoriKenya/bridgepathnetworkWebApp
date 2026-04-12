@@ -2,7 +2,7 @@
 
 ## Overview
 
-A premium hiring platform connecting global employers with Africa's best talent. Built as a full-stack React + Vite + Express application with passwordless auth, comprehensive service pages, and interactive dashboards.
+A premium hiring platform connecting global employers with Africa's best talent. Built as a full-stack React + Vite + Express application with Supabase email/password auth, comprehensive service pages, legal pages, and interactive dashboards.
 
 ## Brand Colors
 - **Green** (primary): `#8CC63F`
@@ -42,7 +42,7 @@ A premium hiring platform connecting global employers with Africa's best talent.
 ## Features
 
 1. **Landing page** (`/`) — Hero, services grid, Africa map, testimonials, stats, contact form, news, FAQ
-2. **Passwordless Auth** — Email-only sign-in via `/api/auth/magic` (no password required). New users prompted for name + role.
+2. **Supabase Auth** — Email/password signup and login with confirmation callback, role persistence, and optional magic-link fallback.
 3. **Services overview** (`/services`) — Grid of all 9 HR services with links to detail pages
 4. **Service detail pages** (`/services/:slug`) — Rich pages with hero, stats, benefits, process steps, FAQs for each of 9 services
 5. **About page** (`/about`) — Company story, timeline, team, values
@@ -53,13 +53,15 @@ A premium hiring platform connecting global employers with Africa's best talent.
 10. **Human HR Review** — Paid $20 upgrade via Stripe (Stripe not connected)
 11. **BackToTop** — Global floating button on all pages (triggers at 400px scroll)
 12. **ChatSupport** — Floating chat widget with auto-replies and quick options
+13. **Legal pages** — `/privacy`, `/terms`, and `/cookies` linked from the footer
 
 ## Auth Flow
 
-- `POST /api/auth/magic` — Passwordless: if user exists → log in; if new → create account (requires name + role)
-- `POST /api/auth/login` — Email + optional password (password check skipped for passwordless accounts)
-- `POST /api/auth/register` — Standard registration with optional password
-- Token: base64 encoded `userId:timestamp:random` stored in localStorage
+- Signup uses Supabase `signUp` with email, password, full name, and role metadata.
+- Email confirmation lands on `/auth/callback`, exchanges Supabase auth codes for a session, upserts the profile, and routes by role.
+- Login uses Supabase email/password as the primary flow, with magic-link fallback still available.
+- Role and display name are persisted locally as a fallback for callback routing and dashboard personalization.
+- Supabase environment variables should be set in production as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 
 ## Services (9 slugs)
 
@@ -90,8 +92,8 @@ A premium hiring platform connecting global employers with Africa's best talent.
 
 ## DB Schema Notes
 
-- `passwordHash` is NOT NULL — passwordless accounts use `hashPassword(email + "_magic_" + Date.now())`
-- Token is not stored in DB (stateless, parsed from base64)
+- Supabase `profiles` table should include `id`, `role`, `full_name`, profile/contact fields, company fields, `preferences`, `onboarding_completed_at`, and `updated_at`.
+- API server still contains legacy local auth/database code; the active frontend authentication path is Supabase.
 
 ## Stripe Integration
 

@@ -16,14 +16,19 @@ interface AuthContextType {
   session: Session | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  /** Magic link for existing users only (sign-in). */
   sendSignInMagicLink: (email: string) => Promise<{ error?: string }>;
-  /** Magic link for new accounts; stores role/name in metadata and localStorage for callback. */
   sendSignUpMagicLink: (
     email: string,
     name: string,
     role: "job_seeker" | "employer",
   ) => Promise<{ error?: string }>;
+  signInWithPassword: (email: string, password: string) => Promise<{ error?: string; role?: AppUser["role"] }>;
+  signUpWithPassword: (
+    email: string,
+    password: string,
+    name: string,
+    role: "job_seeker" | "employer",
+  ) => Promise<{ error?: string; needsConfirmation?: boolean }>;
   logout: () => Promise<void>;
   updateRole: (role: string) => void;
   login: (token: string, user: any) => void;
@@ -143,13 +148,66 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {};
   };
 
+  const signUpWithPassword = async (
+    email: string,
+    password: string,
+    name: string,
+    role: "job_seeker" | "employer",
+  ) => {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanName = name.trim();
+    localStorage.setItem(ROLE_KEY, role);
+    localStorage.setItem(NAME_KEY, cleanName);
+
+    const { data, error } = await supabase.auth.signUp({
+      email: cleanEmail,
+      password,
+      options: {
+        emailRedirectTo: magicLinkRedirect(),
+        data: {
+          full_name: cleanName,
+          name: cleanName,
+          role,
+        },
+      },
+    });
+
+    if (error) return { error: error.message };
+
+    if (data.session?.user) {
+      const appUser = await syncProfileToUser(data.session.user).catch(() => buildAppUser(data.session!.user, role, cleanName));
+      setSession(data.session);
+      setUser(appUser);
+    }
+
+    return { needsConfirmation: !data.session };
+  };
+
+  const signInWithPassword = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
+
+    if (error) return { error: error.message };
+
+    if (data.session?.user) {
+      const appUser = await syncProfileToUser(data.session.user).catch(() => buildAppUser(data.session!.user));
+      setSession(data.session);
+      setUser(appUser);
+      return { role: appUser.role };
+    }
+
+    return {};
+  };
+
   const logout = async () => {
     await supabase.auth.signOut();
     localStorage.removeItem(ROLE_KEY);
     localStorage.removeItem(NAME_KEY);
     setUser(null);
     setSession(null);
-    window.location.href = "/auth/login";
+    window.location.href = absoluteAppUrl("auth/login");
   };
 
   const updateRole = (role: string) => {
@@ -172,6 +230,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated: !!user,
         sendSignInMagicLink,
         sendSignUpMagicLink,
+        signInWithPassword,
+        signUpWithPassword,
         logout,
         updateRole,
         login,

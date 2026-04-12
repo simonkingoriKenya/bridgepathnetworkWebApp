@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useGetDashboardStats, useListJobs } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { format } from "date-fns";
-import { PlusCircle, Briefcase, Users, Clock, CheckCircle2, TrendingUp, Lock, BarChart3 } from "lucide-react";
+import { PlusCircle, Briefcase, Users, Clock, CheckCircle2, TrendingUp, Lock, BarChart3, Search } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
 const GREEN = "#8CC63F";
@@ -75,6 +75,28 @@ export default function EmployerDashboard() {
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
+        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-20" style={{ backgroundColor: GREEN }} />
+        <div className="absolute right-12 bottom-0 h-24 w-24 rounded-full opacity-10" style={{ backgroundColor: GREEN }} />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: GREEN }}>Hiring command center</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">Build your Africa hiring pipeline</h1>
+            <p className="text-gray-300 leading-relaxed">
+              Post roles, monitor applicants, and review high-potential candidate matches from one employer workspace.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/jobs/new" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white" style={{ backgroundColor: GREEN }}>
+              <PlusCircle className="h-4 w-4" /> Post a Job
+            </Link>
+            <Link href="/jobs" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border border-white/20 bg-white/10 hover:bg-white/15">
+              <Search className="h-4 w-4" /> View Job Board
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Active Jobs" value={statsLoading ? 4 : (stats?.activeJobs || 4)} icon={<Briefcase className="h-4 w-4" />} color={GREEN} sub="Currently live" />
         <StatCard label="Total Applicants" value={statsLoading ? 47 : (stats?.totalApplicants || 47)} icon={<Users className="h-4 w-4" />} color={DARK} sub="Across all jobs" trend="+8 this week" />

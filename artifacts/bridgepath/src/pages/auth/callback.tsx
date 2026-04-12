@@ -15,6 +15,11 @@ export default function AuthCallback() {
     let cancelled = false;
 
     const run = async () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("code")) {
+        await supabase.auth.exchangeCodeForSession(window.location.href);
+      }
+
       const { data: { session } } = await supabase.auth.getSession();
       if (cancelled) return;
       if (!session?.user) {
@@ -55,12 +60,7 @@ export default function AuthCallback() {
       const finalRole =
         profAfter?.role === "employer" || profAfter?.role === "job_seeker" ? profAfter.role : role;
 
-      if (profAfter?.onboarding_completed_at) {
-        setLocation(finalRole === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
-        return;
-      }
-
-      setLocation(finalRole === "employer" ? "/onboarding/employer" : "/onboarding/jobseeker");
+      setLocation(finalRole === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
     };
 
     void run();

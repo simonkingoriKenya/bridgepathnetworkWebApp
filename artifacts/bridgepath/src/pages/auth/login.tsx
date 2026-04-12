@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, ArrowRight, Mail } from "lucide-react";
+import { Loader2, ArrowRight, Lock, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
 export default function Login() {
-  const { sendSignInMagicLink } = useAuth();
+  const { signInWithPassword, sendSignInMagicLink } = useAuth();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [magicLoading, setMagicLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,9 +25,29 @@ export default function Login() {
       toast({ variant: "destructive", title: "Invalid email" });
       return;
     }
+    if (!password) {
+      toast({ variant: "destructive", title: "Password required" });
+      return;
+    }
     setIsLoading(true);
-    const result = await sendSignInMagicLink(email.trim());
+    const result = await signInWithPassword(email.trim(), password);
     setIsLoading(false);
+    if (result.error) {
+      toast({ variant: "destructive", title: "Could not sign in", description: result.error });
+      return;
+    }
+    toast({ title: "Signed in", description: "Welcome back to Bridgepath Network." });
+    setLocation(result.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
+  };
+
+  const handleMagicLink = async () => {
+    if (!email.trim() || !email.includes("@")) {
+      toast({ variant: "destructive", title: "Enter your email first" });
+      return;
+    }
+    setMagicLoading(true);
+    const result = await sendSignInMagicLink(email.trim());
+    setMagicLoading(false);
     if (result.error) {
       toast({ variant: "destructive", title: "Could not send link", description: result.error });
       return;
@@ -94,7 +117,7 @@ export default function Login() {
             <h1 className="text-3xl font-bold mb-1" style={{ color: DARK }}>
               Welcome back
             </h1>
-            <p className="text-gray-500 text-sm">We&apos;ll email you a one-time link to sign in — no password.</p>
+            <p className="text-gray-500 text-sm">Sign in with the email and password you created after confirming your account.</p>
           </div>
 
           {sent ? (
@@ -125,6 +148,20 @@ export default function Login() {
                   autoFocus
                 />
               </div>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1.5">Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Input
+                    placeholder="Your password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="h-12 text-base pl-10"
+                    autoComplete="current-password"
+                  />
+                </div>
+              </div>
               <motion.button
                 type="submit"
                 disabled={isLoading}
@@ -138,10 +175,18 @@ export default function Login() {
                   </>
                 ) : (
                   <>
-                    Email me a sign-in link <ArrowRight className="h-4 w-4" />
+                    Sign in <ArrowRight className="h-4 w-4" />
                   </>
                 )}
               </motion.button>
+              <button
+                type="button"
+                disabled={magicLoading}
+                onClick={handleMagicLink}
+                className="w-full h-11 font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-60 text-sm border border-gray-200 text-gray-600 bg-white hover:bg-gray-50"
+              >
+                {magicLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending magic link...</> : <><Mail className="h-4 w-4" /> Email me a sign-in link instead</>}
+              </button>
             </form>
           )}
 

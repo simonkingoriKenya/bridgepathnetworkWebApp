@@ -100,9 +100,9 @@ export function Footer() {
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
           <p>© {new Date().getFullYear()} Bridgepath Network. All Rights Reserved.</p>
           <div className="flex gap-6">
-            <span className="cursor-pointer hover:text-gray-400 transition-colors">Privacy Policy</span>
-            <span className="cursor-pointer hover:text-gray-400 transition-colors">Terms of Service</span>
-            <span className="cursor-pointer hover:text-gray-400 transition-colors">Cookie Policy</span>
+            <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+            <Link href="/cookies" className="hover:text-gray-400 transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

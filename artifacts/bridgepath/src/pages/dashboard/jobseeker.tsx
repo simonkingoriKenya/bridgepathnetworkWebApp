@@ -1,7 +1,7 @@
 import { useGetDashboardStats, useGetMyApplications } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { Link } from "wouter";
-import { FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot, ShieldCheck, Lock, TrendingUp, Star } from "lucide-react";
+import { FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot, ShieldCheck, Lock, TrendingUp, Star, Briefcase } from "lucide-react";
 import { format } from "date-fns";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
@@ -87,6 +87,28 @@ export default function JobSeekerDashboard() {
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
+        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-20" style={{ backgroundColor: GREEN }} />
+        <div className="absolute right-12 bottom-0 h-24 w-24 rounded-full opacity-10" style={{ backgroundColor: GREEN }} />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: GREEN }}>Career command center</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">Welcome, {user?.name?.split(" ")[0] || "Professional"}</h1>
+            <p className="text-gray-300 leading-relaxed">
+              Track applications, improve your CV, and discover Africa-focused roles from one dashboard.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/jobs" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white" style={{ backgroundColor: GREEN }}>
+              <Briefcase className="h-4 w-4" /> Browse Jobs
+            </Link>
+            <Link href="/cv-review" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border border-white/20 bg-white/10 hover:bg-white/15">
+              <FileText className="h-4 w-4" /> Review CV
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Applications" value={totalApps} icon={<Send className="h-4 w-4" />} color={DARK} sub="All time" trend="+2 this week" />
         <StatCard label="Shortlisted" value={shortlisted} icon={<CheckCircle2 className="h-4 w-4" />} color={GREEN} sub="Employers interested" />
