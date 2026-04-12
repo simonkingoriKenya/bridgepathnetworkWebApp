@@ -23,11 +23,15 @@ import AboutPage from "@/pages/about";
 import BlogIndex from "@/pages/blog/index";
 import BlogPost from "@/pages/blog/[slug]";
 import LegalPage from "@/pages/legal";
+import EmployersPage from "@/pages/employers";
 import AuthCallback from "@/pages/auth/callback";
 import ForgotPassword from "@/pages/auth/forgot-password";
 import ResetPassword from "@/pages/auth/reset-password";
 import JobSeekerOnboarding from "@/pages/onboarding/jobseeker";
 import EmployerOnboarding from "@/pages/onboarding/employer";
+import CandidatesPage from "@/pages/candidates";
+import CandidateProfilePage from "@/pages/candidates/[id]";
+import MessagesPage from "@/pages/messages";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 
 const queryClient = new QueryClient({
@@ -87,11 +91,12 @@ function Router() {
       <Route path="/privacy">{() => <LegalPage type="privacy" />}</Route>
       <Route path="/terms">{() => <LegalPage type="terms" />}</Route>
       <Route path="/cookies">{() => <LegalPage type="cookies" />}</Route>
+      <Route path="/employers" component={EmployersPage} />
       <Route path="/services" component={ServicesPage} />
       <Route path="/services/:slug" component={ServiceDetail} />
       <Route path="/jobs" component={JobsList} />
       <Route path="/jobs/new">
-        {() => <ProtectedRoute component={PostJob} allowedRoles={["employer"]} useLayout={false} />}
+        {() => <ProtectedRoute component={PostJob} allowedRoles={["employer"]} />}
       </Route>
       <Route path="/jobs/:id" component={JobDetail} />
       <Route path="/dashboard/jobseeker">
@@ -99,6 +104,15 @@ function Router() {
       </Route>
       <Route path="/dashboard/employer">
         {() => <ProtectedRoute component={EmployerDashboard} allowedRoles={["employer"]} />}
+      </Route>
+      <Route path="/candidates">
+        {() => <ProtectedRoute component={CandidatesPage} allowedRoles={["employer"]} />}
+      </Route>
+      <Route path="/candidates/:id">
+        {() => <ProtectedRoute component={CandidateProfilePage} allowedRoles={["employer"]} />}
+      </Route>
+      <Route path="/messages">
+        {() => <ProtectedRoute component={MessagesPage} allowedRoles={["employer"]} />}
       </Route>
       <Route path="/cv-review">
         {() => <ProtectedRoute component={CvReview} allowedRoles={["job_seeker"]} />}

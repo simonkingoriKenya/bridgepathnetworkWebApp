@@ -41,19 +41,21 @@ A premium hiring platform connecting global employers with Africa's best talent.
 
 ## Features
 
-1. **Landing page** (`/`) — Hero, services grid, Africa map, testimonials, stats, contact form, news, FAQ
+1. **Landing page** (`/`) — Ghana/Kenya launch-focused hero, client image assets, focus areas, credibility section, contact form, news, FAQ
 2. **Supabase Auth** — Email/password signup and login with confirmation callback, role persistence, and optional magic-link fallback.
 3. **Services overview** (`/services`) — Grid of all 9 HR services with links to detail pages
 4. **Service detail pages** (`/services/:slug`) — Rich pages with hero, stats, benefits, process steps, FAQs for each of 9 services
 5. **About page** (`/about`) — Company story, timeline, team, values
 6. **Job Seeker Dashboard** (`/dashboard/jobseeker`) — Application tracking, AI CV review CTA, mock data
-7. **Employer Dashboard** (`/dashboard/employer`) — Job postings, applicant funnel, analytics charts
+7. **Employer Dashboard** (`/dashboard/employer`) — Active jobs, applications received, shortlisted candidates, quick actions, candidate previews
 8. **Jobs Listing** (`/jobs`) — Search, filter by location and type, 12 mock jobs
 9. **AI CV Review** (`/cv-review`) — Free AI analysis via OpenAI
 10. **Human HR Review** — Paid $20 upgrade via Stripe (Stripe not connected)
 11. **BackToTop** — Global floating button on all pages (triggers at 400px scroll)
 12. **ChatSupport** — Floating chat widget with auto-replies and quick options
 13. **Legal pages** — `/privacy`, `/terms`, and `/cookies` linked from the footer
+14. **Employer landing page** (`/employers`) — Public employer CTA page with Post a Job and Browse Candidates actions
+15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages for browsing profiles and simple conversations
 
 ## Auth Flow
 
@@ -89,6 +91,7 @@ A premium hiring platform connecting global employers with Africa's best talent.
 - Main nav with Services dropdown (9 services), About, Find Jobs, Contact
 - User avatar dropdown with Dashboard, Profile, Logout when signed in
 - Mobile hamburger menu
+- Employer sidebar navigation uses Dashboard, Jobs, Candidates, Messages
 
 ## DB Schema Notes
 

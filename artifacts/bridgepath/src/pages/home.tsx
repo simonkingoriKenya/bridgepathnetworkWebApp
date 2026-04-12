@@ -9,29 +9,28 @@ import { blogPosts } from "@/pages/blog/index";
 import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
   UserCheck, Calculator, ChevronDown, ChevronUp,
-  TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock
+  TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock,
+  Code2, Landmark, Headphones, Crown
 } from "lucide-react";
+import heroImage from "@assets/unnamed_(9)_1776009115710.jpg";
+import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
 const services = [
-  { icon: <Users className="h-6 w-6" />, label: "Employment of Record", slug: "employment-of-record" },
-  { icon: <UserCheck className="h-6 w-6" />, label: "Secondment Services", slug: "secondment-services" },
-  { icon: <Globe className="h-6 w-6" />, label: "Expatriate Services", slug: "expatriate-services" },
-  { icon: <Briefcase className="h-6 w-6" />, label: "HR Consultancy", slug: "hr-consultancy" },
-  { icon: <Calculator className="h-6 w-6" />, label: "Payroll & Tax Admin", slug: "payroll-tax", comingSoon: true },
-  { icon: <BarChart3 className="h-6 w-6" />, label: "Psychometric Assessments", slug: "psychometric-assessments" },
-  { icon: <FileText className="h-6 w-6" />, label: "Recruitment Services", slug: "recruitment-services" },
-  { icon: <Users className="h-6 w-6" />, label: "Staff Outsourcing", slug: "staff-outsourcing" },
-  { icon: <Award className="h-6 w-6" />, label: "Interim Management", slug: "interim-management" },
+  { icon: <Code2 className="h-6 w-6" />, label: "Technology" },
+  { icon: <Landmark className="h-6 w-6" />, label: "Finance" },
+  { icon: <Briefcase className="h-6 w-6" />, label: "HR & Operations" },
+  { icon: <Headphones className="h-6 w-6" />, label: "Customer Success" },
+  { icon: <Crown className="h-6 w-6" />, label: "Leadership" },
 ];
 
 const whyPartner = [
-  { icon: <TrendingUp className="h-7 w-7" />, title: "Easy expansion and growth", desc: "Extensive network of offices and partnerships across the continent." },
-  { icon: <ShieldCheck className="h-7 w-7" />, title: "Compliance with local laws", desc: "Navigate complex local employment opportunities in Africa." },
-  { icon: <Users className="h-7 w-7" />, title: "Access to top talent", desc: "Vast network of talented and qualified candidates across industries." },
-  { icon: <Star className="h-7 w-7" />, title: "Dedicated team for better value", desc: "Optimize your HR processes, improving results with reduced costs." },
+  { icon: <TrendingUp className="h-7 w-7" />, title: "Global HR leadership", desc: "Guidance shaped by senior hiring experience across African and international markets." },
+  { icon: <ShieldCheck className="h-7 w-7" />, title: "20+ years experience", desc: "Built on practical workforce, recruitment, compliance, and people operations expertise." },
+  { icon: <Users className="h-7 w-7" />, title: "Multiple industries", desc: "Supporting hiring needs across technology, finance, HR, operations, customer success, and leadership." },
+  { icon: <Star className="h-7 w-7" />, title: "Diaspora + local reach", desc: "Connecting employers with both returning diaspora professionals and strong local talent." },
 ];
 
 const africaStats = [
@@ -106,7 +105,7 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-gray-100">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1600&q=90"
+            src={heroImage}
             alt="Diverse African and international professionals in a boardroom meeting"
             className="w-full h-full object-cover object-center"
           />
@@ -116,23 +115,23 @@ export default function Home() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-sm font-medium" style={{ backgroundColor: GREEN + "25", color: GREEN }}>
               <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GREEN }} />
-              Africa's Premier Talent Marketplace
+              Launching in Ghana and Kenya
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-              Work in Africa.<br />
-              Hire in Africa.<br />
-              <span style={{ color: GREEN }}>From Anywhere.</span>
+              Connecting Talent<br />
+              to Opportunity<br />
+              <span style={{ color: GREEN }}>Across Africa</span>
             </h1>
             <p className="text-gray-300 text-xl leading-relaxed mb-10 max-w-xl">
-              BridgePath connects global and local professionals with career opportunities and businesses across Africa.
+              BridgePath is a modern careers and hiring platform designed to connect diaspora and local professionals with high-quality opportunities across Africa — starting with Ghana and Kenya.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/jobs">
                 <button className="px-8 py-4 font-bold text-white rounded-xl text-lg transition-all hover:opacity-90 active:scale-95 shadow-lg" style={{ backgroundColor: GREEN }}>
-                  Find Jobs
+                  Find Opportunities
                 </button>
               </Link>
-              <Link href="/auth/signup?role=employer">
+              <Link href="/employers">
                 <button className="px-8 py-4 font-bold rounded-xl text-lg border-2 border-white text-white hover:bg-white/10 transition-all">
                   Hire Talent
                 </button>
@@ -155,9 +154,9 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-4" style={{ borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb", maxWidth: "1280px", margin: "0 auto" }}>
           <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
             <h2 className="text-lg font-bold mb-3" style={{ color: DARK }}>What is BridgePath</h2>
-            <p className="text-gray-500 text-xs leading-relaxed mb-4">BridgePath is a talent marketplace designed for Africa. We connect:</p>
+            <p className="text-gray-500 text-xs leading-relaxed mb-4">BridgePath is built to support the evolving workforce across Africa by making it easier for professionals and employers to find each other with clarity and trust.</p>
             <ul className="space-y-2">
-              {["Diaspora professionals looking to work in Africa", "Local talent seeking new opportunities", "Businesses looking to hire qualified candidates"].map(item => (
+              {["Diaspora professionals ready to build careers in Africa", "Local talent seeking quality opportunities in Ghana and Kenya", "Businesses looking for qualified, verified candidates"].map(item => (
                 <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
                   <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: GREEN }} /> {item}
                 </li>
@@ -168,7 +167,7 @@ export default function Home() {
 
           <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
             <h3 className="font-bold text-gray-800 mb-3 text-sm">For Professionals</h3>
-            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Find opportunities across Africa. Build your career from anywhere.</p>
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Build a profile, explore career growth, and apply easily to quality opportunities across Ghana, Kenya, and remote African markets.</p>
             <Link href="/auth/signup">
               <span className="text-xs font-semibold underline underline-offset-2 cursor-pointer" style={{ color: GREEN }}>
                 Create Your Profile →
@@ -178,7 +177,7 @@ export default function Home() {
 
           <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
             <h3 className="font-bold text-gray-800 mb-3 text-sm">For Employers</h3>
-            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Hire the right talent, faster. Compliant across 45+ countries.</p>
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Access diaspora and local professionals, review pre-screened talent, and move faster from search to shortlist.</p>
             <Link href="/auth/signup?role=employer">
               <button className="px-4 py-2 text-xs font-semibold text-white rounded-lg" style={{ backgroundColor: DARK }}>
                 Post a Job
@@ -189,7 +188,7 @@ export default function Home() {
           <div className="p-8 md:p-10">
             <h3 className="font-bold text-gray-800 mb-3 text-sm">How It Works</h3>
             <ol className="space-y-3">
-              {["Create Your Profile", "Explore Opportunities", "Connect & Grow"].map((step, i) => (
+              {["Create Profile", "Discover Opportunities or Talent", "Engage and Grow"].map((step, i) => (
                 <li key={step} className="flex items-center gap-2.5 text-xs text-gray-600">
                   <span className="h-5 w-5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 text-white" style={{ backgroundColor: GREEN }}>{i + 1}</span>
                   {step}
@@ -205,9 +204,9 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
-              Tailor-made HR &amp; <span style={{ color: GREEN }}>Executive Recruitment</span> solutions
+              Focus areas for <span style={{ color: GREEN }}>high-quality hiring</span>
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Our HR services are crucial in ensuring that companies remain compliant with work regulations in Africa.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto">BridgePath focuses on roles and talent communities where Africa’s next wave of growth is already happening.</p>
           </div>
           <motion.div
             className="grid grid-cols-2 sm:grid-cols-3 gap-0 max-w-4xl mx-auto border border-gray-100 rounded-2xl overflow-hidden"
@@ -221,7 +220,7 @@ export default function Home() {
                 style={{ borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none", borderBottom: i < services.length - 3 ? "1px solid #e5e7eb" : "none" }}
                 className="relative"
               >
-                {s.comingSoon ? (
+                {"comingSoon" in s && s.comingSoon ? (
                   <div className="flex flex-col items-center text-center p-8 h-full opacity-50 cursor-not-allowed select-none">
                     <div className="h-14 w-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-4 text-gray-300">
                       {s.icon}
@@ -232,14 +231,12 @@ export default function Home() {
                     </span>
                   </div>
                 ) : (
-                  <Link href={`/services/${s.slug}`}>
-                    <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group cursor-pointer h-full">
-                      <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
-                        {s.icon}
-                      </div>
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
+                  <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group h-full">
+                    <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
+                      {s.icon}
                     </div>
-                  </Link>
+                    <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
+                  </div>
                 )}
               </motion.div>
             ))}
@@ -249,7 +246,7 @@ export default function Home() {
               <button className="flex items-center gap-2 mx-auto px-6 py-3 text-sm font-semibold rounded-xl border-2 transition-all hover:text-white hover:shadow-md" style={{ borderColor: GREEN, color: GREEN, backgroundColor: "transparent" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GREEN; (e.currentTarget as HTMLButtonElement).style.color = "white"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GREEN; }}>
-                View all services <ArrowRight className="h-4 w-4" />
+                Explore opportunities <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
           </div>
@@ -261,9 +258,9 @@ export default function Home() {
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
           <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
-              Why <span style={{ color: GREEN }}>partner</span> with us
+              Built on <span style={{ color: GREEN }}>Real Hiring Experience</span>
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-sm">Our services ensure companies remain compliant with work regulations across Africa.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm">BridgePath combines global HR leadership, 20+ years of experience, and practical knowledge across multiple industries.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {whyPartner.map((w, i) => (
@@ -287,23 +284,23 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-6xl mx-auto">
             <div className="flex-1 w-full text-left">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6 text-white">
-                From Accra to the<br /><span style={{ color: GREEN }}>World</span>
+                Launching in Ghana<br />and <span style={{ color: GREEN }}>Kenya</span>
                 <br />
-                <span className="text-2xl md:text-3xl font-semibold text-gray-200">Hubs &amp; partners across Africa</span>
+                <span className="text-2xl md:text-3xl font-semibold text-gray-200">Connecting employers and talent</span>
               </h2>
               <p className="text-gray-300 mb-8 leading-relaxed text-base md:text-lg max-w-xl">
-                Headquartered in Ghana with deep operations in Nigeria, Kenya, South Africa, Rwanda, Uganda, Tanzania, Senegal, and other African countries — plus a network spanning 45+ countries for payroll, compliance, and talent.
+                BridgePath is launching with a clear focus on Ghana and Kenya, while building toward a broader African talent network that connects local and diaspora professionals with serious employers.
               </p>
               <Link href="/auth/signup">
                 <button className="px-6 py-3 font-semibold text-white rounded-lg border border-white/30 hover:bg-white/10 transition-colors text-sm">
-                  Explore country-specific services →
+                  Join early access →
                 </button>
               </Link>
             </div>
             <div className="flex-1 w-full max-w-lg lg:max-w-none">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-[4/3] lg:aspect-[5/4]">
                 <img
-                  src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=85"
+                  src={credibilityImage}
                   alt="African women professionals collaborating over laptops in a bright office"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
@@ -369,8 +366,8 @@ export default function Home() {
       <section id="contact" className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
           <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
-            <h2 className="text-3xl font-bold" style={{ color: DARK }}>Looking for something specific?</h2>
-            <p className="text-gray-500 mt-1 text-sm">Our team will get back to you within 24 hours</p>
+            <h2 className="text-3xl font-bold" style={{ color: DARK }}>Start building your future with BridgePath</h2>
+            <p className="text-gray-500 mt-1 text-sm">Launching in Ghana and Kenya. Tell us whether you want to find opportunities or hire talent.</p>
           </div>
           <div className="px-8 md:px-10 py-12">
           <div className="max-w-2xl mx-auto">

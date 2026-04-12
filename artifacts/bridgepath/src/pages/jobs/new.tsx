@@ -3,32 +3,23 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useCreateJob, CreateJobBodyType } from "@workspace/api-client-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, ArrowLeft } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 import { Link } from "wouter";
 import { getApiErrorMessage } from "@/lib/api-error";
 
 const jobSchema = z.object({
   title: z.string().min(3, "Title is required"),
   description: z.string().min(10, "Description is required"),
-  requirements: z.string().optional(),
-  location: z.string().min(2, "Location is required"),
-  country: z.string().min(2, "Country is required"),
+  requirements: z.string().min(10, "Requirements are required"),
+  location: z.enum(["Ghana", "Kenya", "Remote"] as const),
   type: z.enum(["full_time", "part_time", "contract", "internship", "remote"] as const),
-  salaryMin: z.coerce.number().optional(),
-  salaryMax: z.coerce.number().optional(),
-  currency: z.string().optional(),
-  industry: z.string().optional(),
-  skills: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)),
-  isActive: z.boolean().default(true),
 });
 
 type JobFormValues = z.infer<typeof jobSchema>;
@@ -45,21 +36,27 @@ export default function PostJob() {
       title: "",
       description: "",
       requirements: "",
-      location: "",
-      country: "",
+      location: "Ghana",
       type: "full_time",
-      salaryMin: undefined,
-      salaryMax: undefined,
-      currency: "USD",
-      industry: "",
-      skills: [] as any,
-      isActive: true,
     }
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: JobFormValues) => {
+    const payload = {
+      title: data.title,
+      description: data.description,
+      requirements: data.requirements,
+      location: data.location,
+      country: data.location === "Remote" ? "Remote" : data.location,
+      type: data.type as CreateJobBodyType,
+      currency: "USD",
+      industry: "",
+      skills: [],
+      isActive: true,
+    };
+
     createJobMutation.mutate({
-      data: { ...data, type: data.type as CreateJobBodyType }
+      data: payload
     }, {
       onSuccess: (job) => {
         toast({
@@ -106,6 +103,24 @@ export default function PostJob() {
               )} />
 
               <div className="grid sm:grid-cols-2 gap-4">
+                <FormField control={form.control} name="location" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select location" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Ghana">Ghana</SelectItem>
+                        <SelectItem value="Kenya">Kenya</SelectItem>
+                        <SelectItem value="Remote">Remote</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )} />
                 <FormField control={form.control} name="type" render={({ field }) => (
                   <FormItem>
                     <FormLabel>Job Type</FormLabel>
@@ -123,54 +138,6 @@ export default function PostJob() {
                         <SelectItem value="remote">Remote</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={form.control} name="industry" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Industry</FormLabel>
-                    <FormControl><Input placeholder="e.g. Technology" {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <FormField control={form.control} name="location" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>City / Location</FormLabel>
-                    <FormControl><Input placeholder="e.g. Remote, Lagos" {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={form.control} name="country" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country</FormLabel>
-                    <FormControl><Input placeholder="e.g. Worldwide, Nigeria" {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-              </div>
-
-              <div className="grid sm:grid-cols-3 gap-4">
-                <FormField control={form.control} name="currency" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Currency</FormLabel>
-                    <FormControl><Input placeholder="USD" {...field} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={form.control} name="salaryMin" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Min Salary</FormLabel>
-                    <FormControl><Input type="number" placeholder="50000" {...field} value={field.value || ''} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                <FormField control={form.control} name="salaryMax" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Max Salary</FormLabel>
-                    <FormControl><Input type="number" placeholder="120000" {...field} value={field.value || ''} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -196,27 +163,6 @@ export default function PostJob() {
                 </FormItem>
               )} />
 
-              <FormField control={form.control} name="skills" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Required Skills (comma separated)</FormLabel>
-                  <FormControl><Input placeholder="React, Node.js, AWS" {...field} value={Array.isArray(field.value) ? field.value.join(', ') : field.value} /></FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="isActive" render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Active Listing</FormLabel>
-                    <div className="text-sm text-muted-foreground">
-                      Make this job visible to candidates immediately.
-                    </div>
-                  </div>
-                  <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                </FormItem>
-              )} />
             </CardContent>
             <CardFooter className="border-t bg-muted/20 px-6 py-4 justify-between">
               <Button type="button" variant="outline" asChild>

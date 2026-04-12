@@ -112,7 +112,7 @@ export function Navbar() {
             </div>
 
             {!isAuthenticated && (
-              <Link href="/auth/signup?role=employer">
+              <Link href="/employers">
                 <button className="px-4 py-2 text-sm font-medium rounded transition-colors hover:text-green-600" style={{ color: "#444444" }}>Hire Talent</button>
               </Link>
             )}
@@ -180,6 +180,7 @@ export function Navbar() {
           <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-1 shadow-lg">
             <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">Home</Link>
             <Link href="/jobs" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">Find Jobs</Link>
+            <Link href="/employers" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">Hire Talent</Link>
             <Link href="/services" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">Services</Link>
             <Link href="/about" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">About</Link>
             <Link href="/blog" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-medium text-gray-700">Insights</Link>

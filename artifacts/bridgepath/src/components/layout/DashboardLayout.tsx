@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import {
   LayoutDashboard, Briefcase, FileText, User, LogOut,
-  Settings, ChevronLeft, Menu, PlusCircle, Bell, Home, X,
+  Settings, ChevronLeft, Menu, PlusCircle, Bell, Home, X, Users, MessageSquare,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -180,10 +180,10 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
 
   const navItems: NavItem[] = isEmployer
     ? [
-        { href: "/dashboard/employer", label: "Overview", icon: LayoutDashboard },
-        { href: "/jobs/new", label: "Post a Job", icon: PlusCircle },
-        { href: "/jobs", label: "Job Board", icon: Briefcase },
-        { href: "/profile", label: "Company Profile", icon: User },
+        { href: "/dashboard/employer", label: "Dashboard", icon: LayoutDashboard },
+        { href: "/jobs/new", label: "Jobs", icon: Briefcase },
+        { href: "/candidates", label: "Candidates", icon: Users },
+        { href: "/messages", label: "Messages", icon: MessageSquare },
       ]
     : [
         { href: "/dashboard/jobseeker", label: "Overview", icon: LayoutDashboard },
@@ -197,6 +197,9 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
     if (location === "/dashboard/employer") return "Employer Dashboard";
     if (location === "/jobs") return "Job Board";
     if (location === "/jobs/new") return "Post a Job";
+    if (location === "/candidates") return "Candidates";
+    if (location.startsWith("/candidates/")) return "Candidate Profile";
+    if (location === "/messages") return "Messages";
     if (location === "/cv-review") return "AI CV Review";
     if (location === "/profile") return isEmployer ? "Company Profile" : "My Profile";
     return isEmployer ? "Employer Dashboard" : "Professional Dashboard";

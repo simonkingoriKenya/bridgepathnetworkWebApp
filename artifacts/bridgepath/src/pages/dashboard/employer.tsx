@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useGetDashboardStats, useListJobs } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { format } from "date-fns";
-import { PlusCircle, Briefcase, Users, Clock, CheckCircle2, TrendingUp, Lock, BarChart3, Search } from "lucide-react";
+import { PlusCircle, Briefcase, Users, Clock, CheckCircle2, TrendingUp, BarChart3, Search, MessageSquare } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
 const GREEN = "#8CC63F";
@@ -34,11 +34,11 @@ const mockJobs = [
   { id: 204, title: "Data Analyst", location: "Accra, GH", applicantCount: 8, isActive: false, createdAt: new Date(Date.now() - 21 * 86400000).toISOString() },
 ];
 
-const blurredCandidates = [
-  { initials: "A.M.", title: "Senior Software Engineer", location: "Nairobi, KE", exp: "6 yrs", skills: ["React", "Node.js", "AWS"], score: 92 },
-  { initials: "P.R.", title: "Product Manager", location: "Lagos, NG", exp: "4 yrs", skills: ["Agile", "Roadmapping", "Analytics"], score: 88 },
-  { initials: "L.O.", title: "UX Designer", location: "Accra, GH", exp: "5 yrs", skills: ["Figma", "User Research", "Systems"], score: 85 },
-  { initials: "S.N.", title: "Data Analyst", location: "Cape Town, ZA", exp: "3 yrs", skills: ["SQL", "Python", "Tableau"], score: 81 },
+const candidateProfiles = [
+  { id: 1, initials: "A.M.", name: "Amina Mensah", title: "Senior Software Engineer", location: "Nairobi, Kenya", exp: "6 yrs", skills: ["React", "Node.js", "AWS"], score: 92 },
+  { id: 2, initials: "P.R.", name: "Peter Rono", title: "Product Manager", location: "Accra, Ghana", exp: "4 yrs", skills: ["Agile", "Roadmapping", "Analytics"], score: 88 },
+  { id: 3, initials: "L.O.", name: "Lydia Osei", title: "HR Operations Lead", location: "Remote", exp: "5 yrs", skills: ["HRIS", "People Ops", "Compliance"], score: 85 },
+  { id: 4, initials: "S.N.", name: "Samuel Njoroge", title: "Data Analyst", location: "Nairobi, Kenya", exp: "3 yrs", skills: ["SQL", "Python", "Tableau"], score: 81 },
 ];
 
 const recentActivity = [
@@ -80,18 +80,18 @@ export default function EmployerDashboard() {
         <div className="absolute right-12 bottom-0 h-24 w-24 rounded-full opacity-10" style={{ backgroundColor: GREEN }} />
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: GREEN }}>Hiring command center</p>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">Build your Africa hiring pipeline</h1>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ color: GREEN }}>Employer Dashboard</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">Hire the right talent across Africa</h1>
             <p className="text-gray-300 leading-relaxed">
-              Post roles, monitor applicants, and review high-potential candidate matches from one employer workspace.
+              Post roles, review applications, shortlist candidates, and start conversations from one simple employer workspace.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/jobs/new" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white" style={{ backgroundColor: GREEN }}>
               <PlusCircle className="h-4 w-4" /> Post a Job
             </Link>
-            <Link href="/jobs" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border border-white/20 bg-white/10 hover:bg-white/15">
-              <Search className="h-4 w-4" /> View Job Board
+            <Link href="/candidates" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold border border-white/20 bg-white/10 hover:bg-white/15">
+              <Search className="h-4 w-4" /> Search Candidates
             </Link>
           </div>
         </div>
@@ -99,9 +99,27 @@ export default function EmployerDashboard() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Active Jobs" value={statsLoading ? 4 : (stats?.activeJobs || 4)} icon={<Briefcase className="h-4 w-4" />} color={GREEN} sub="Currently live" />
-        <StatCard label="Total Applicants" value={statsLoading ? 47 : (stats?.totalApplicants || 47)} icon={<Users className="h-4 w-4" />} color={DARK} sub="Across all jobs" trend="+8 this week" />
-        <StatCard label="Shortlisted" value="12" icon={<CheckCircle2 className="h-4 w-4" />} color={PURPLE} sub="Ready to interview" />
-        <StatCard label="Avg. Time to Hire" value="18d" icon={<Clock className="h-4 w-4" />} color={GOLD} sub="Industry avg: 24d" />
+        <StatCard label="Applications Received" value={statsLoading ? 47 : (stats?.totalApplicants || 47)} icon={<Users className="h-4 w-4" />} color={DARK} sub="Across all jobs" trend="+8 this week" />
+        <StatCard label="Shortlisted Candidates" value="12" icon={<CheckCircle2 className="h-4 w-4" />} color={PURPLE} sub="Ready to interview" />
+        <StatCard label="Messages" value="3" icon={<MessageSquare className="h-4 w-4" />} color={GOLD} sub="Open conversations" />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Link href="/jobs/new" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <PlusCircle className="h-5 w-5 mb-3" style={{ color: GREEN }} />
+          <p className="font-semibold text-sm" style={{ color: DARK }}>Post New Job</p>
+          <p className="text-xs text-gray-500 mt-1">Create a focused role for Ghana, Kenya, or remote hiring.</p>
+        </Link>
+        <Link href="/candidates" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <Search className="h-5 w-5 mb-3" style={{ color: GREEN }} />
+          <p className="font-semibold text-sm" style={{ color: DARK }}>Search Candidates</p>
+          <p className="text-xs text-gray-500 mt-1">Review professionals by role, location, skills, and experience.</p>
+        </Link>
+        <Link href="/messages" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <MessageSquare className="h-5 w-5 mb-3" style={{ color: GREEN }} />
+          <p className="font-semibold text-sm" style={{ color: DARK }}>View Messages</p>
+          <p className="text-xs text-gray-500 mt-1">Continue conversations with shortlisted candidates.</p>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -182,34 +200,33 @@ export default function EmployerDashboard() {
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
               <h2 className="font-semibold text-gray-900 text-sm">Candidate Profiles</h2>
-              <Lock className="h-4 w-4 text-gray-300" />
+              <Link href="/candidates" className="text-xs font-semibold" style={{ color: GREEN }}>View all</Link>
             </div>
             <div className="divide-y divide-gray-50">
-              {blurredCandidates.map((c, i) => (
-                <div key={i} className="relative px-4 py-3 overflow-hidden">
-                  <div className="filter blur-[3px] pointer-events-none select-none">
-                    <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: DARK + "15", color: DARK }}>
-                        {c.initials}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-gray-800">{c.title}</p>
-                        <p className="text-xs text-gray-500">{c.location} · {c.exp}</p>
-                      </div>
-                      <div className="ml-auto text-sm font-bold" style={{ color: GREEN }}>{c.score}</div>
+              {candidateProfiles.map((c) => (
+                <div key={c.id} className="relative px-4 py-3 overflow-hidden">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: DARK + "15", color: DARK }}>
+                      {c.initials}
                     </div>
-                    <div className="flex gap-1 flex-wrap mt-1.5">
-                      {c.skills.map(s => <span key={s} className="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded">{s}</span>)}
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-gray-800 truncate">{c.name}</p>
+                      <p className="text-xs text-gray-500">{c.title} · {c.location}</p>
                     </div>
+                    <Link href={`/candidates/${c.id}`} className="ml-auto text-xs font-semibold shrink-0" style={{ color: GREEN }}>View</Link>
+                  </div>
+                  <div className="flex gap-1 flex-wrap mt-2">
+                    {c.skills.map(s => <span key={s} className="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded">{s}</span>)}
                   </div>
                 </div>
               ))}
             </div>
             <div className="px-4 py-3">
-              <p className="text-xs text-gray-500 text-center mb-2.5">Unlock to view profiles & contact details</p>
-              <button className="w-full text-sm font-semibold py-2.5 rounded-xl text-white transition-opacity hover:opacity-90" style={{ backgroundColor: DARK }}>
-                Unlock Talent Pool
-              </button>
+              <Link href="/candidates">
+                <button className="w-full text-sm font-semibold py-2.5 rounded-xl text-white transition-opacity hover:opacity-90" style={{ backgroundColor: DARK }}>
+                  Browse Candidates
+                </button>
+              </Link>
             </div>
           </div>
 
