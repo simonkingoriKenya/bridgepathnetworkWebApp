@@ -1,0 +1,363 @@
+You are a senior full-stack engineer, product designer, and AI systems architect.
+
+Your task is to build a production-ready web platform called:
+
+Bridgepath Network
+
+Bridgepath Network is a modern hiring platform that connects:
+
+• Employers and organizations around the world  
+• Skilled African professionals looking for jobs
+
+The platform should feel like a premium modern startup product similar to:
+
+LinkedIn  
+Wellfound (AngelList Talent)  
+Stripe  
+Linear  
+Vercel  
+
+The UI must be sleek, modern, responsive, and professional.
+
+--------------------------------
+
+TECH STACK (REPLIT FRIENDLY)
+
+Use the following stack:
+
+Frontend
+• Next.js 14 (App Router)
+• React
+• TypeScript
+• TailwindCSS
+• ShadCN UI components
+• Framer Motion animations
+
+Backend
+• Supabase (authentication + database)
+• Supabase storage for CV uploads
+
+AI
+• OpenAI API integration
+
+Payments
+• Stripe
+
+Other
+• Mobile-first responsive design
+• Modular component architecture
+• SEO friendly pages
+
+--------------------------------
+
+CORE PRODUCT IDEA
+
+Bridgepath Network helps global employers discover and hire African talent.
+
+The platform will support two main user types:
+
+1) Job Seekers  
+2) Employers / Organizations  
+
+Each user type must have its own dashboard.
+
+--------------------------------
+
+AUTHENTICATION SYSTEM
+
+Use Supabase authentication.
+
+Users should be able to:
+
+Sign Up  
+Sign In  
+
+Authentication options:
+
+• Email and password  
+• Google OAuth
+
+During signup, users must select their role:
+
+• Job Seeker  
+• Employer / Organization  
+• Admin  
+
+After login they should automatically be redirected to their dashboard.
+
+--------------------------------
+
+LANDING PAGE DESIGN
+
+Create a premium landing page.
+
+Hero Section
+
+Use a large hero image showing:
+
+A diverse HR environment with people of different races and genders working in a bright modern office.
+
+Overlay headline:
+
+"Connecting Global Employers with Africa’s Best Talent"
+
+Subheadline:
+
+"Discover exceptional African professionals or unlock global career opportunities."
+
+Primary CTAs:
+
+Find Jobs  
+Hire Talent
+
+--------------------------------
+
+NAVIGATION
+
+Navbar must include:
+
+Logo: Bridgepath Network
+
+Menu items:
+
+Home  
+Jobs  
+For Employers  
+For Talent  
+Pricing  
+Login  
+Sign Up  
+
+The logo must be clickable and return to the homepage.
+
+--------------------------------
+
+LANDING PAGE SECTIONS
+
+Create these sections:
+
+Hero Section
+
+Social Proof
+
+Features Section highlighting:
+
+AI CV Analysis  
+Smart Talent Matching  
+Global Talent Marketplace  
+Employer Hiring Tools
+
+Benefits Section
+
+Testimonials
+
+Call To Action
+
+Footer
+
+--------------------------------
+
+JOB SEEKER DASHBOARD
+
+Job seekers must be able to:
+
+• Upload their CV
+• View job listings
+• Apply for jobs
+• Track applications
+
+--------------------------------
+
+AI CV ANALYSIS FEATURE
+
+Job seekers can upload their CV.
+
+The system sends the CV to OpenAI for analysis.
+
+The AI should evaluate:
+
+• Skills
+• Experience
+• CV formatting
+• Job readiness
+• Job match potential
+
+The AI returns:
+
+• CV improvement suggestions
+• Skills breakdown
+• Match score
+
+--------------------------------
+
+MONETIZATION
+
+Users must pay $20 to unlock the AI CV review.
+
+Payment flow:
+
+Upload CV  
+Prompt payment  
+After payment unlock AI results
+
+Users then choose:
+
+1) Accept automated AI review  
+2) Request human HR review
+
+--------------------------------
+
+EMPLOYER DASHBOARD
+
+Employers should be able to:
+
+• Post jobs
+• Edit job listings
+• View applicants
+• Download CVs
+
+--------------------------------
+
+EMPLOYER AI FEATURE
+
+Employers can upload multiple CVs.
+
+The AI analyzes and compares CVs against a job description.
+
+Return results:
+
+• Candidate ranking
+• Match score
+• Skill comparison
+
+--------------------------------
+
+DATABASE STRUCTURE (SUPABASE)
+
+Create tables:
+
+users  
+profiles  
+jobs  
+applications  
+cv_reviews  
+payments  
+
+Profiles should include:
+
+role  
+skills  
+location  
+experience  
+resume_url  
+
+--------------------------------
+
+UI / UX DESIGN SYSTEM
+
+Create a professional design system.
+
+Use:
+
+• modern typography pairings  
+• clean spacing scale  
+• cohesive color palette  
+• rounded cards  
+• soft shadows  
+• accessible color contrast  
+
+The design quality should feel comparable to:
+
+Stripe  
+Linear  
+Apple  
+
+--------------------------------
+
+ANIMATIONS
+
+Use Framer Motion.
+
+Add:
+
+• page transitions
+• scroll reveal animations
+• hover effects
+• animated cards
+• staggered content loading
+
+Animations must feel subtle and premium.
+
+--------------------------------
+
+COMPONENT STRUCTURE
+
+Create reusable components:
+
+/components
+
+Navbar  
+Hero  
+FeatureGrid  
+JobCard  
+UploadCV  
+JobSeekerDashboard  
+EmployerDashboard  
+Testimonials  
+PricingSection  
+CTASection  
+Footer  
+AnimatedCard  
+
+--------------------------------
+
+PAGE STRUCTURE
+
+Create these pages:
+
+/
+
+Landing Page
+
+/jobs
+
+Job listings
+
+/dashboard/jobseeker
+
+/dashboard/employer
+
+/auth/login
+
+/auth/signup
+
+--------------------------------
+
+OUTPUT
+
+Generate:
+
+1. Project folder structure  
+2. Installation commands  
+3. Supabase setup instructions  
+4. Stripe payment integration  
+5. OpenAI integration  
+6. Landing page UI  
+7. Dashboard UI  
+8. AI CV scanning logic  
+9. Database schema  
+10. Instructions to run the platform in Replit  
+
+--------------------------------
+
+GOAL
+
+The final result must feel like a polished modern hiring platform startup.
+
+Prioritize:
+
+excellent UX  
+clean architecture  
+premium UI  
+scalable backend  
+AI-powered hiring tools

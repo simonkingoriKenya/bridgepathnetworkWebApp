@@ -1,0 +1,21 @@
+# Monorepo: install at repo root, build the Vite app, publish its output.
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-api-server.example.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  base = ""
+  publish = "artifacts/bridgepath/dist/public"
+  command = "pnpm install --frozen-lockfile && pnpm --filter @workspace/bridgepath run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "10"
+  BASE_PATH = "/"
