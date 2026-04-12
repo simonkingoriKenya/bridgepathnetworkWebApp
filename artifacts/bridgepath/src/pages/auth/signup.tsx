@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, Briefcase, User as UserIcon, ArrowLeft, CheckCircle2, ArrowRight, Mail, Lock } from "lucide-react";
+import { Loader2, Briefcase, User as UserIcon, ArrowLeft, CheckCircle2, ArrowRight, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GREEN = "#8CC63F";
@@ -17,8 +17,9 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [registered, setRegistered] = useState(false);
   const { signUpWithPassword, updateRole } = useAuth();
   const { toast } = useToast();
 
@@ -30,7 +31,7 @@ export default function Signup() {
     }
   }, []);
 
-  const handleSendLink = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
       toast({ variant: "destructive", title: "Name required" });
@@ -56,13 +57,7 @@ export default function Signup() {
       toast({ variant: "destructive", title: "Could not create account", description: result.error });
       return;
     }
-    setSent(true);
-    toast({
-      title: result.needsConfirmation ? "Check your email" : "Account created",
-      description: result.needsConfirmation
-        ? "We sent a confirmation link. Open it, then sign in with your email and password."
-        : "Your account is ready. Continue to your dashboard.",
-    });
+    setRegistered(true);
   };
 
   return (
@@ -176,41 +171,60 @@ export default function Signup() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  setStep("role");
-                  setSelectedRole(null);
-                  setSent(false);
-                }}
-                className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-8 transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" /> Back
-              </button>
+              {!registered && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep("role");
+                    setSelectedRole(null);
+                    setRegistered(false);
+                  }}
+                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-8 transition-colors"
+                >
+                  <ArrowLeft className="h-4 w-4" /> Back
+                </button>
+              )}
+
               <div className="mb-6">
                 <h1 className="text-2xl font-bold" style={{ color: DARK }}>
-                  Create your account
+                  {registered ? "Check your inbox" : "Create your account"}
                 </h1>
-                <p className="text-gray-500 mt-1 text-sm">
-                  {selectedRole === "employer" ? "Employer account" : "Professional account"} · We&apos;ll email you a confirmation link
-                </p>
+                {!registered && (
+                  <p className="text-gray-500 mt-1 text-sm">
+                    {selectedRole === "employer" ? "Employer account" : "Professional account"} · You&apos;ll confirm your email before signing in
+                  </p>
+                )}
               </div>
 
-              {sent ? (
+              {registered ? (
                 <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-                  <Mail className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-                  <p className="text-sm text-gray-700 mb-1 font-medium">Link sent to {email}</p>
-                  <p className="text-xs text-gray-500 mb-4">Click the Supabase confirmation link, then sign in with your email and password.</p>
-                  <Link href="/auth/login" className="inline-flex items-center justify-center h-10 px-4 rounded-lg text-white text-sm font-semibold mb-3" style={{ backgroundColor: GREEN }}>
+                  <div
+                    className="h-14 w-14 rounded-full flex items-center justify-center mx-auto mb-4"
+                    style={{ backgroundColor: `${GREEN}15` }}
+                  >
+                    <Mail className="h-7 w-7" style={{ color: GREEN }} />
+                  </div>
+                  <h2 className="text-base font-semibold text-gray-800 mb-1">Confirm your email</h2>
+                  <p className="text-sm text-gray-500 mb-1">
+                    We sent a confirmation email to
+                  </p>
+                  <p className="text-sm font-medium text-gray-800 mb-4">{email}</p>
+                  <p className="text-xs text-gray-400 mb-5 leading-relaxed">
+                    Click the link in the email to verify your account. Once confirmed, your profile will be saved and you can sign in with your email and password.
+                  </p>
+                  <Link
+                    href="/auth/login"
+                    className="inline-flex items-center justify-center h-10 px-5 rounded-lg text-white text-sm font-semibold"
+                    style={{ backgroundColor: GREEN }}
+                  >
                     Go to sign in
                   </Link>
-                  <br />
-                  <button type="button" onClick={() => setSent(false)} className="text-sm font-medium underline" style={{ color: GREEN }}>
-                    Start over
-                  </button>
+                  <p className="text-xs text-gray-400 mt-4">
+                    Didn&apos;t receive it? Check your spam folder.
+                  </p>
                 </div>
               ) : (
-                <form onSubmit={handleSendLink} className="space-y-4">
+                <form onSubmit={handleSignUp} className="space-y-4">
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">
                       {selectedRole === "employer" ? "Company / Full Name" : "Full Name"}
@@ -225,28 +239,39 @@ export default function Signup() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Email address</label>
-                    <Input
-                      placeholder="name@example.com"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="h-12"
-                    />
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        placeholder="name@example.com"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="h-12 pl-10"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Create password</label>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Password</label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                       <Input
                         placeholder="At least 8 characters"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="h-12 pl-10"
+                        className="h-12 pl-10 pr-10"
                         autoComplete="new-password"
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
-                    <p className="text-xs text-gray-400 mt-1.5">You’ll use this password after confirming your email.</p>
+                    <p className="text-xs text-gray-400 mt-1.5">Minimum 8 characters</p>
                   </div>
                   <motion.button
                     type="submit"
@@ -257,11 +282,11 @@ export default function Signup() {
                   >
                     {isLoading ? (
                       <>
-                        <Loader2 className="h-4 w-4 animate-spin" /> Sending link...
+                        <Loader2 className="h-4 w-4 animate-spin" /> Creating account...
                       </>
                     ) : (
                       <>
-                        Create account & send confirmation <ArrowRight className="h-4 w-4" />
+                        Create account <ArrowRight className="h-4 w-4" />
                       </>
                     )}
                   </motion.button>

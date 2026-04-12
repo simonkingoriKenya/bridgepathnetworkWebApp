@@ -16,12 +16,6 @@ interface AuthContextType {
   session: Session | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  sendSignInMagicLink: (email: string) => Promise<{ error?: string }>;
-  sendSignUpMagicLink: (
-    email: string,
-    name: string,
-    role: "job_seeker" | "employer",
-  ) => Promise<{ error?: string }>;
   signInWithPassword: (email: string, password: string) => Promise<{ error?: string; role?: AppUser["role"] }>;
   signUpWithPassword: (
     email: string,
@@ -65,7 +59,7 @@ async function syncProfileToUser(user: User): Promise<AppUser> {
   return buildAppUser(user, role, name);
 }
 
-const magicLinkRedirect = () => absoluteAppUrl("auth/callback");
+const confirmationRedirect = () => absoluteAppUrl("auth/callback");
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AppUser | null>(null);
@@ -113,41 +107,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const sendSignInMagicLink = async (email: string) => {
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: magicLinkRedirect(),
-        shouldCreateUser: false,
-      },
-    });
-    if (error) return { error: error.message };
-    return {};
-  };
-
-  const sendSignUpMagicLink = async (
-    email: string,
-    name: string,
-    role: "job_seeker" | "employer",
-  ) => {
-    localStorage.setItem(ROLE_KEY, role);
-    localStorage.setItem(NAME_KEY, name.trim());
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: magicLinkRedirect(),
-        shouldCreateUser: true,
-        data: {
-          full_name: name.trim(),
-          name: name.trim(),
-          role,
-        },
-      },
-    });
-    if (error) return { error: error.message };
-    return {};
-  };
-
   const signUpWithPassword = async (
     email: string,
     password: string,
@@ -163,7 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       email: cleanEmail,
       password,
       options: {
-        emailRedirectTo: magicLinkRedirect(),
+        emailRedirectTo: confirmationRedirect(),
         data: {
           full_name: cleanName,
           name: cleanName,
@@ -175,7 +134,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) return { error: error.message };
 
     if (data.session?.user) {
-      const appUser = await syncProfileToUser(data.session.user).catch(() => buildAppUser(data.session!.user, role, cleanName));
+      const appUser = await syncProfileToUser(data.session.user).catch(() =>
+        buildAppUser(data.session!.user, role, cleanName)
+      );
       setSession(data.session);
       setUser(appUser);
     }
@@ -192,7 +153,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) return { error: error.message };
 
     if (data.session?.user) {
-      const appUser = await syncProfileToUser(data.session.user).catch(() => buildAppUser(data.session!.user));
+      const appUser = await syncProfileToUser(data.session.user).catch(() =>
+        buildAppUser(data.session!.user)
+      );
       setSession(data.session);
       setUser(appUser);
       return { role: appUser.role };
@@ -228,8 +191,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         session,
         isLoading,
         isAuthenticated: !!user,
-        sendSignInMagicLink,
-        sendSignUpMagicLink,
         signInWithPassword,
         signUpWithPassword,
         logout,

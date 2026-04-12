@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { Loader2, ArrowLeft, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
+import { absoluteAppUrl } from "@/lib/utils";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
-/** Same as sign-in: resend a magic link for existing accounts. */
 export default function ForgotPassword() {
-  const { sendSignInMagicLink } = useAuth();
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,14 +23,15 @@ export default function ForgotPassword() {
       return;
     }
     setLoading(true);
-    const res = await sendSignInMagicLink(email.trim());
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: absoluteAppUrl("auth/reset-password"),
+    });
     setLoading(false);
-    if (res.error) {
-      toast({ variant: "destructive", title: "Request failed", description: res.error });
+    if (error) {
+      toast({ variant: "destructive", title: "Request failed", description: error.message });
       return;
     }
     setSent(true);
-    toast({ title: "Check your email", description: "If this address is registered, we sent a new sign-in link." });
   };
 
   return (
@@ -45,40 +45,52 @@ export default function ForgotPassword() {
           <ArrowLeft className="h-4 w-4" /> Back to sign in
         </Link>
         <h1 className="text-2xl font-bold mb-1" style={{ color: DARK }}>
-          Resend sign-in link
+          Reset your password
         </h1>
         <p className="text-gray-500 text-sm mb-8">
-          Enter the email you use with Bridgepath. We&apos;ll send another magic link (existing accounts only).
+          Enter your registered email address. We&apos;ll send you a link to set a new password.
         </p>
 
         {sent ? (
-          <p className="text-sm text-gray-600 leading-relaxed">
-            If an account exists for <strong>{email}</strong>, you will receive an email shortly. You can close this tab or{" "}
-            <Link href="/auth/login" className="font-semibold underline" style={{ color: GREEN }}>
-              return to sign in
+          <div className="text-center py-4">
+            <div
+              className="h-14 w-14 rounded-full flex items-center justify-center mx-auto mb-4"
+              style={{ backgroundColor: `${GREEN}15` }}
+            >
+              <Mail className="h-7 w-7" style={{ color: GREEN }} />
+            </div>
+            <p className="text-sm text-gray-700 font-medium mb-1">Check your inbox</p>
+            <p className="text-sm text-gray-500 leading-relaxed mb-4">
+              If an account exists for <strong>{email}</strong>, you&apos;ll receive a password reset link shortly.
+            </p>
+            <Link href="/auth/login" className="text-sm font-semibold underline" style={{ color: GREEN }}>
+              Return to sign in
             </Link>
-            .
-          </p>
+          </div>
         ) : (
           <form onSubmit={onSubmit} className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-700 block mb-1.5">Email</label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-11"
-                placeholder="you@company.com"
-                autoComplete="email"
-              />
+              <label className="text-sm font-medium text-gray-700 block mb-1.5">Email address</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-11 pl-10"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  autoFocus
+                />
+              </div>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-11 font-semibold text-white rounded-xl flex items-center justify-center gap-2 disabled:opacity-60"
+              className="w-full h-11 font-semibold text-white rounded-xl flex items-center justify-center gap-2 disabled:opacity-60 hover:opacity-90 transition-opacity"
               style={{ backgroundColor: GREEN }}
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send sign-in link"}
+              {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</> : "Send reset link"}
             </button>
           </form>
         )}

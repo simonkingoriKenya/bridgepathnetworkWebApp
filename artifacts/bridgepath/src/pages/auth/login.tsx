@@ -3,21 +3,20 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, ArrowRight, Lock, Mail } from "lucide-react";
+import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
 export default function Login() {
-  const { signInWithPassword, sendSignInMagicLink } = useAuth();
+  const { signInWithPassword } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [magicLoading, setMagicLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,25 +37,6 @@ export default function Login() {
     }
     toast({ title: "Signed in", description: "Welcome back to Bridgepath Network." });
     setLocation(result.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
-  };
-
-  const handleMagicLink = async () => {
-    if (!email.trim() || !email.includes("@")) {
-      toast({ variant: "destructive", title: "Enter your email first" });
-      return;
-    }
-    setMagicLoading(true);
-    const result = await sendSignInMagicLink(email.trim());
-    setMagicLoading(false);
-    if (result.error) {
-      toast({ variant: "destructive", title: "Could not send link", description: result.error });
-      return;
-    }
-    setSent(true);
-    toast({
-      title: "Check your email",
-      description: "We sent you a sign-in link. It expires after a short time.",
-    });
   };
 
   return (
@@ -117,90 +97,76 @@ export default function Login() {
             <h1 className="text-3xl font-bold mb-1" style={{ color: DARK }}>
               Welcome back
             </h1>
-            <p className="text-gray-500 text-sm">Sign in with the email and password you created after confirming your account.</p>
+            <p className="text-gray-500 text-sm">Sign in with your email and password.</p>
           </div>
 
-          {sent ? (
-            <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-              <Mail className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-              <p className="text-sm text-gray-700 mb-1 font-medium">Link sent to {email}</p>
-              <p className="text-xs text-gray-500 mb-4">Open the email and tap &quot;Log In&quot; to continue.</p>
-              <button
-                type="button"
-                onClick={() => setSent(false)}
-                className="text-sm font-medium underline"
-                style={{ color: GREEN }}
-              >
-                Use a different email
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1.5">Email address</label>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-700 block mb-1.5">Email address</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="name@example.com"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 text-base"
+                  className="h-12 text-base pl-10"
                   autoComplete="email"
                   autoFocus
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1.5">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="Your password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="h-12 text-base pl-10"
-                    autoComplete="current-password"
-                  />
-                </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 block mb-1.5">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder="Your password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-12 text-base pl-10 pr-10"
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
-              <motion.button
-                type="submit"
-                disabled={isLoading}
-                whileTap={{ scale: 0.98 }}
-                className="w-full h-12 font-semibold text-white rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60 text-base shadow-md"
-                style={{ backgroundColor: GREEN }}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Sending link...
-                  </>
-                ) : (
-                  <>
-                    Sign in <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
-              </motion.button>
-              <button
-                type="button"
-                disabled={magicLoading}
-                onClick={handleMagicLink}
-                className="w-full h-11 font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-60 text-sm border border-gray-200 text-gray-600 bg-white hover:bg-gray-50"
-              >
-                {magicLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending magic link...</> : <><Mail className="h-4 w-4" /> Email me a sign-in link instead</>}
-              </button>
-            </form>
-          )}
+            </div>
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              whileTap={{ scale: 0.98 }}
+              className="w-full h-12 font-semibold text-white rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60 text-base shadow-md"
+              style={{ backgroundColor: GREEN }}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" /> Signing in...
+                </>
+              ) : (
+                <>
+                  Sign in <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </motion.button>
+          </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            Didn&apos;t get a link?{" "}
             <Link href="/auth/forgot-password" className="font-semibold hover:underline" style={{ color: GREEN }}>
-              Resend help
+              Forgot your password?
             </Link>
           </p>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-gray-500 mt-3">
             New to Bridgepath?{" "}
             <Link href="/auth/signup" className="font-semibold hover:underline" style={{ color: GREEN }}>
-              Create account
+              Create an account
             </Link>
           </p>
         </motion.div>
