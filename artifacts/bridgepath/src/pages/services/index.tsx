@@ -55,7 +55,7 @@ export const services: {
     slug: "payroll-tax",
     icon: <Calculator className="h-6 w-6" />,
     label: "Payroll & Tax Admin",
-    shortDesc: "Accurate, compliant payroll across 45+ African countries.",
+    shortDesc: "Accurate, compliant payroll support for African expansion.",
     highlights: ["Multi-currency payroll", "Tax filings", "Social security compliance"],
     tag: "Essential",
     comingSoon: true,
@@ -106,7 +106,7 @@ const cardVariants = {
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
       <section className="py-20 text-white" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>

@@ -21,7 +21,7 @@ const QUICK_OPTIONS = [
 const AUTO_REPLIES: Record<string, string> = {
   "How do I post a job?": "To post a job, sign up as an employer, go to your dashboard, and click 'Post a Job'. It's free and takes under 5 minutes!",
   "How does AI CV Review work?": "Upload your CV in the 'AI CV Review' section. Our AI analyzes it in seconds and gives you a detailed score, strengths, improvements, and recommended roles.",
-  "Which countries do you operate in?": "BridgePath operates across 45+ African countries including Kenya, Nigeria, Ghana, South Africa, Uganda, Tanzania, Rwanda, and many more!",
+  "Which countries do you operate in?": "BridgePath is launching platform access in Ghana and Kenya first, while our HR advisory experience supports organizations planning wider African expansion.",
   "How do I apply for a job?": "Create a free account, browse jobs, and click 'Apply Now'. Your application is tracked in your dashboard.",
 };
 

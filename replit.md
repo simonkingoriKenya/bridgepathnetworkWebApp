@@ -41,7 +41,7 @@ A premium hiring platform connecting global employers with Africa's best talent.
 
 ## Features
 
-1. **Landing page** (`/`) — Ghana/Kenya launch-focused hero, client image assets, focus areas, credibility section, contact form, news, FAQ
+1. **Landing page** (`/`) — Ghana/Kenya launch-focused hero, client image assets, animated focus-area cards, credibility section, contact form, news, FAQ
 2. **Supabase Auth** — Email/password signup and login with confirmation callback, role persistence, and optional magic-link fallback.
 3. **Services overview** (`/services`) — Grid of all 9 HR services with links to detail pages
 4. **Service detail pages** (`/services/:slug`) — Rich pages with hero, stats, benefits, process steps, FAQs for each of 9 services
@@ -57,6 +57,7 @@ A premium hiring platform connecting global employers with Africa's best talent.
 14. **Employer landing page** (`/employers`) — Public employer CTA page with Post a Job and Browse Candidates actions
 15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages for browsing profiles and simple conversations
 16. **Blog imagery** — Blog cards, author avatars, article heroes, and login hero use local African professional photos from `attached_assets/unnamed_*.jpg`; article heroes use a taller `50vh` layout to avoid cramped cropping.
+17. **Premium visual system** — Global typography uses Plus Jakarta Sans with DM Serif Display for major headings. Public pages, article pages, service pages, and dashboards use subtle geometric grid backgrounds. MVP stats are framed honestly around Ghana/Kenya launch access, early access, 2026 launch, and 15+ years of HR experience.
 
 ## Auth Flow
 

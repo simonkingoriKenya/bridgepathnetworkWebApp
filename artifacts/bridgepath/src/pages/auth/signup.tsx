@@ -144,7 +144,7 @@ export default function Signup() {
                     Post jobs, discover Africa&apos;s top talent, manage applications, and build your remote team.
                   </p>
                   <ul className="space-y-2">
-                    {["Post unlimited job listings", "Access verified candidate profiles", "Hire from 45+ African countries"].map((item) => (
+                    {["Post unlimited job listings", "Access verified candidate profiles", "Start in Ghana and Kenya, then expand across Africa"].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-sm text-gray-600">
                         <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: DARK }} /> {item}
                       </li>

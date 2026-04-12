@@ -26,7 +26,7 @@ const serviceData: Record<string, {
     tagline: "Hire anyone in Africa — without a local entity",
     description: "Our Employment of Record (EoR) service allows businesses to legally employ workers in African countries without establishing a local legal entity. BridgePath becomes the employer of record on paper, handling all local legal obligations including employment contracts, payroll, tax compliance, and statutory benefits — while your team member works exclusively for you.",
     benefits: [
-      "Legally compliant employment in 45+ African countries",
+      "Legally compliant employment guidance for African expansion",
       "No need to set up a local subsidiary or entity",
       "Full payroll processing in local currency",
       "Tax filings and statutory deductions handled",
@@ -43,13 +43,13 @@ const serviceData: Record<string, {
     ],
     faqs: [
       { q: "How fast can I hire?", a: "Typically within 5–10 business days from agreement sign-off." },
-      { q: "Which countries are covered?", a: "We operate across 45+ African countries including Kenya, Nigeria, Ghana, South Africa, Uganda, Tanzania, Ethiopia, and more." },
+      { q: "Which countries are covered?", a: "Platform access is launching in Ghana and Kenya first, with advisory support for employers planning broader African expansion." },
       { q: "What happens if I want to end employment?", a: "We manage the offboarding process in compliance with local labor regulations, including severance where applicable." },
     ],
     stats: [
-      { v: "45+", l: "Countries" },
+      { v: "Ghana", l: "Launch market" },
       { v: "5–10", l: "Days to hire" },
-      { v: "10k+", l: "Employees managed" },
+      { v: "Kenya", l: "Launch market" },
       { v: "15+", l: "Years experience" },
     ],
   },
@@ -81,10 +81,10 @@ const serviceData: Record<string, {
       { q: "Does the employee keep their original benefits?", a: "Yes, the employee retains their original employment benefits and status." },
     ],
     stats: [
-      { v: "200+", l: "Secondments managed" },
+      { v: "Flexible", l: "Engagements" },
       { v: "12+", l: "Industries served" },
-      { v: "30+", l: "Countries" },
-      { v: "98%", l: "Completion rate" },
+      { v: "Ghana", l: "Launch market" },
+      { v: "Kenya", l: "Launch market" },
     ],
   },
   "expatriate-services": {
@@ -115,10 +115,10 @@ const serviceData: Record<string, {
       { q: "What is tax equalization?", a: "It ensures expatriates pay no more (or less) tax than they would at home, maintaining equity across international assignments." },
     ],
     stats: [
-      { v: "500+", l: "Expats supported" },
-      { v: "25+", l: "Countries" },
+      { v: "End-to-end", l: "Relocation support" },
+      { v: "Africa", l: "Market guidance" },
       { v: "4–12", l: "Weeks avg. permit time" },
-      { v: "100%", l: "Compliance record" },
+      { v: "Local", l: "Compliance guidance" },
     ],
   },
   "hr-consultancy": {
@@ -149,7 +149,7 @@ const serviceData: Record<string, {
       { q: "How long does a consulting engagement last?", a: "From a few weeks for a targeted project to ongoing retainer engagements spanning years." },
     ],
     stats: [
-      { v: "150+", l: "Clients served" },
+      { v: "90%+", l: "Client satisfaction" },
       { v: "20+", l: "Industries" },
       { v: "15+", l: "Years experience" },
       { v: "4.9/5", l: "Client satisfaction" },
@@ -183,9 +183,9 @@ const serviceData: Record<string, {
       { q: "Can you integrate with our HRIS?", a: "Yes — we integrate with major HR systems including SAP, Workday, BambooHR, and others." },
     ],
     stats: [
-      { v: "10k+", l: "Payslips monthly" },
+      { v: "2026", l: "Launch roadmap" },
       { v: "30+", l: "Currencies supported" },
-      { v: "45+", l: "Countries" },
+      { v: "Ghana", l: "Launch market" },
       { v: "99.9%", l: "Accuracy rate" },
     ],
   },
@@ -217,9 +217,9 @@ const serviceData: Record<string, {
       { q: "Can assessments be used for internal promotions?", a: "Absolutely — psychometrics are equally powerful for succession planning and leadership development." },
     ],
     stats: [
-      { v: "5k+", l: "Assessments conducted" },
-      { v: "35+", l: "Validated tools" },
-      { v: "92%", l: "Hiring accuracy" },
+      { v: "Role-fit", l: "Assessment focus" },
+      { v: "Validated", l: "Tool approach" },
+      { v: "Insight", l: "Hiring support" },
       { v: "60–90", l: "Minutes per test" },
     ],
   },
@@ -251,9 +251,9 @@ const serviceData: Record<string, {
       { q: "What is your placement guarantee?", a: "We offer a 3–6 month replacement guarantee on all permanent placements." },
     ],
     stats: [
-      { v: "2k+", l: "Placements made" },
+      { v: "Executive", l: "Search focus" },
       { v: "4–8", l: "Weeks avg. search" },
-      { v: "95%", l: "Offer acceptance rate" },
+      { v: "Sector", l: "Specialist matching" },
       { v: "6mo", l: "Replacement guarantee" },
     ],
   },
@@ -285,10 +285,10 @@ const serviceData: Record<string, {
       { q: "What sectors do you outsource in?", a: "Banking, FMCG, retail, logistics, hospitality, telecoms, and many others." },
     ],
     stats: [
-      { v: "5k+", l: "Outsourced staff" },
+      { v: "Managed", l: "HR operations" },
       { v: "20+", l: "Sectors" },
       { v: "30%", l: "Avg. cost saving" },
-      { v: "45+", l: "Countries" },
+      { v: "Kenya", l: "Launch market" },
     ],
   },
   "interim-management": {
@@ -319,10 +319,10 @@ const serviceData: Record<string, {
       { q: "Can an interim become permanent?", a: "Yes — many of our interim assignments convert to permanent appointments after a successful engagement." },
     ],
     stats: [
-      { v: "100+", l: "Interim executives" },
+      { v: "Senior", l: "Leadership bench" },
       { v: "2–4", l: "Weeks to deploy" },
       { v: "C-suite", l: "Level coverage" },
-      { v: "40+", l: "Industries" },
+      { v: "Project", l: "Delivery focus" },
     ],
   },
 };
@@ -385,10 +385,10 @@ export default function ServiceDetail() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
-      <section className="relative min-h-[420px] flex items-end overflow-hidden">
+      <section className="relative min-h-[420px] flex items-end overflow-hidden premium-grid-bg-dark">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${service.heroImg}')` }}

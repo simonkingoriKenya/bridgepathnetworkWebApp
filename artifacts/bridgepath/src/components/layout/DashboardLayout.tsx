@@ -309,8 +309,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
 
         {/* Page content */}
         <main
-          className="flex-1 p-4 md:p-6 overflow-auto"
-          style={{ background: "radial-gradient(circle at top right, rgba(140,198,63,0.10), transparent 34%), #f5f7fb" }}
+          className="flex-1 p-4 md:p-6 overflow-auto dashboard-grid-surface"
         >
           <motion.div
             key={location}

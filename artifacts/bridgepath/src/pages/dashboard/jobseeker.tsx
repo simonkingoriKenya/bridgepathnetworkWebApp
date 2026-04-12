@@ -49,7 +49,7 @@ const recommendedJobs = [
 
 function StatCard({ label, value, icon, color, sub, trend }: { label: string; value: string | number; icon: React.ReactNode; color: string; sub?: string; trend?: string }) {
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+    <div className="dashboard-card rounded-2xl p-5 border border-white/80">
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</span>
         <div className="h-8 w-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: color + "18" }}>
@@ -87,7 +87,7 @@ export default function JobSeekerDashboard() {
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
-      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm premium-grid-bg-dark" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
         <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-20" style={{ backgroundColor: GREEN }} />
         <div className="absolute right-12 bottom-0 h-24 w-24 rounded-full opacity-10" style={{ backgroundColor: GREEN }} />
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -117,7 +117,7 @@ export default function JobSeekerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div className="lg:col-span-2 bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+        <div className="lg:col-span-2 dashboard-card rounded-2xl p-5 border border-white/80">
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="font-semibold text-gray-900 text-sm">Activity Overview</h2>
@@ -147,7 +147,7 @@ export default function JobSeekerDashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+        <div className="dashboard-card rounded-2xl p-5 border border-white/80">
           <h2 className="font-semibold text-gray-900 text-sm mb-1">Application Status</h2>
           <p className="text-xs text-gray-400 mb-3">Breakdown of your {totalApps} applications</p>
           <div className="flex justify-center">
@@ -172,7 +172,7 @@ export default function JobSeekerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="lg:col-span-2 dashboard-card rounded-2xl border border-white/80 overflow-hidden">
           <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
             <h2 className="font-semibold text-gray-900 text-sm">Recent Applications</h2>
             <Link href="/jobs">
@@ -202,7 +202,7 @@ export default function JobSeekerDashboard() {
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+          <div className="dashboard-card rounded-2xl p-5 border border-white/80">
             <h2 className="font-semibold text-gray-900 text-sm mb-3">Career Tools</h2>
             <div className="space-y-2.5">
               <Link href="/cv-review">
@@ -243,7 +243,7 @@ export default function JobSeekerDashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+          <div className="dashboard-card rounded-2xl p-5 border border-white/80">
             <h2 className="font-semibold text-gray-900 text-sm mb-3">Recommended Jobs</h2>
             <div className="space-y-2.5">
               {recommendedJobs.map((job, i) => (

@@ -39,14 +39,14 @@ const africaStats = [
   { value: "$3T+", label: "Africa's combined GDP by 2030", context: "A continent-sized opportunity that forward-looking companies are already capitalising on." },
   { value: "11M", label: "New professionals annually", context: "Africa adds more young workers to the global economy than any other region each year." },
   { value: "54", label: "Countries, one talent pool", context: "With the right HR partner, pan-African hiring is no longer complex — it's your advantage." },
-  { value: "45+", label: "Countries BridgePath covers", context: "From Accra to Nairobi to Lagos — we make compliant hiring simple across the continent." },
+  { value: "2", label: "Launch markets", context: "Starting with Ghana and Kenya, then growing carefully into a broader African talent network." },
 ];
 
 const stats = [
-  { value: "45+", label: "African Countries" },
-  { value: "20,000+", label: "People Impacted" },
-  { value: "10,000+", label: "Staff Managed" },
-  { value: "150+", label: "Businesses Served" },
+  { value: "Ghana", label: "Launch Market" },
+  { value: "Kenya", label: "Launch Market" },
+  { value: "2026", label: "MVP Launch" },
+  { value: "Early", label: "Access Open" },
   { value: "15+", label: "Years of Experience" },
 ];
 
@@ -62,7 +62,7 @@ const newsArticles = blogPosts.slice(0, 4).map((p) => ({
 const faqs = [
   { q: "What does Bridgepath Network do?", a: "Bridgepath Network is a Human Resources Management Solutions and Executive Recruitment company headquartered in Accra, Ghana. With over 15 years of experience, we have established ourselves as a leader in providing comprehensive outsourced HR services across Africa." },
   { q: "What services does Bridgepath Network offer beyond recruitment?", a: "We offer employment of record, HR consultancy, payroll & tax administration, psychometric assessments, staff outsourcing, interim management, and secondment services." },
-  { q: "How many countries does Bridgepath Network operate in?", a: "Bridgepath Network operates across 45+ African countries, with a dedicated team that understands local employment laws and market conditions." },
+  { q: "Which countries is Bridgepath Network launching in?", a: "Bridgepath Network is launching platform access in Ghana and Kenya first, with a roadmap to expand across Africa as the network grows." },
   { q: "What industries does Bridgepath Network serve?", a: "We serve clients across technology, FMCG, manufacturing, financial services, healthcare, logistics, hospitality, and NGO sectors." },
   { q: "How can I get in touch with Bridgepath Network?", a: "You can reach us via email at info@bridgepathnetwork.com or by submitting an enquiry through the contact form below. Our headquarters is in Accra, Ghana." },
 ];
@@ -98,7 +98,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
       {/* Hero — Full-page vibrant */}
@@ -138,7 +138,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex items-center gap-6 mt-12">
-              {[{ v: "45+", l: "Countries" }, { v: "20k+", l: "Professionals" }, { v: "150+", l: "Companies" }].map(s => (
+              {[{ v: "Ghana", l: "Launch" }, { v: "Kenya", l: "Launch" }, { v: "Early", l: "Access" }].map(s => (
                 <div key={s.l}>
                   <div className="text-2xl font-bold text-white">{s.v}</div>
                   <div className="text-xs text-gray-400">{s.l}</div>
@@ -150,7 +150,7 @@ export default function Home() {
       </section>
 
       {/* What is BridgePath — 4 columns grid panels */}
-      <section id="about" className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      <section id="about" className="bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div className="grid grid-cols-1 md:grid-cols-4" style={{ borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb", maxWidth: "1280px", margin: "0 auto" }}>
           <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
             <h2 className="text-lg font-bold mb-3" style={{ color: DARK }}>What is BridgePath</h2>
@@ -200,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section className="py-20 bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      <section className="py-20 bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
@@ -209,7 +209,7 @@ export default function Home() {
             <p className="text-gray-500 max-w-2xl mx-auto">BridgePath focuses on roles and talent communities where Africa’s next wave of growth is already happening.</p>
           </div>
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 gap-0 max-w-4xl mx-auto border border-gray-100 rounded-2xl overflow-hidden"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.12 }}
@@ -217,8 +217,9 @@ export default function Home() {
           >
             {services.map((s, i) => (
               <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
-                style={{ borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none", borderBottom: i < services.length - 3 ? "1px solid #e5e7eb" : "none" }}
-                className="relative"
+                whileHover={{ y: -10, scale: 1.035, rotateX: -4, rotateY: i % 2 === 0 ? 4 : -4 }}
+                transition={{ type: "spring", stiffness: 320, damping: 24 }}
+                className="relative rounded-3xl border border-white/80 bg-white/90 shadow-sm overflow-hidden focus-card-glow"
               >
                 {"comingSoon" in s && s.comingSoon ? (
                   <div className="flex flex-col items-center text-center p-8 h-full opacity-50 cursor-not-allowed select-none">
@@ -231,11 +232,13 @@ export default function Home() {
                     </span>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center text-center p-8 hover:bg-green-50/40 transition-all group h-full">
-                    <div className="h-14 w-14 rounded-full border-2 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-50" style={{ borderColor: GREEN, color: GREEN }}>
+                  <div className="relative flex flex-col items-center justify-between text-center p-7 min-h-48 hover:bg-white transition-all group h-full">
+                    <div className="absolute inset-x-8 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${GREEN}, transparent)` }} />
+                    <div className="h-16 w-16 rounded-2xl border flex items-center justify-center mb-5 transition-all group-hover:scale-110 group-hover:rotate-3" style={{ borderColor: GREEN + "55", color: GREEN, background: `linear-gradient(135deg, ${GREEN}14, white)` }}>
                       {s.icon}
                     </div>
-                    <p className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">{s.label}</p>
+                    <p className="text-sm font-bold text-gray-800 group-hover:text-green-700 transition-colors">{s.label}</p>
+                    <span className="mt-4 h-1 w-8 rounded-full opacity-40 group-hover:opacity-100 group-hover:w-12 transition-all" style={{ backgroundColor: GREEN }} />
                   </div>
                 )}
               </motion.div>
@@ -254,7 +257,7 @@ export default function Home() {
       </section>
 
       {/* Why Partner */}
-      <section className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      <section className="bg-gray-50 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
           <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
@@ -279,7 +282,7 @@ export default function Home() {
       </section>
 
       {/* Regional presence */}
-      <section className="py-20" style={{ backgroundColor: "#2d3e2a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <section className="py-20 premium-grid-bg-dark" style={{ backgroundColor: "#2d3e2a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-6xl mx-auto">
             <div className="flex-1 w-full text-left">
@@ -313,7 +316,7 @@ export default function Home() {
       </section>
 
       {/* Africa Opportunity — replaces fake testimonials */}
-      <section className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      <section className="bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
           <div className="px-8 md:px-10 py-12 border-b border-gray-200">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">

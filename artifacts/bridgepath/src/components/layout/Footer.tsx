@@ -65,7 +65,7 @@ export function Footer() {
           </Link>
 
           <p className="text-xs leading-relaxed text-gray-500 max-w-[200px]">
-            Africa's premier HR solutions and talent marketplace — connecting people and businesses across 45+ countries since 2008.
+            A people-first HR and talent platform launching from Ghana and Kenya, built on 15+ years of African workforce experience.
           </p>
 
           <div className="flex items-center gap-3 pt-1">
@@ -180,7 +180,7 @@ export function Footer() {
           <div className="relative z-10">
             <h3 className="text-white font-bold text-lg mb-3">The Bottom Line</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              With BridgePath, you get access to Africa's largest HR network, compliant hiring in 45+ countries, and a dedicated team — all in one platform.
+              With BridgePath, you get focused launch access in Ghana and Kenya, practical HR guidance, and a dedicated team building toward pan-African reach.
             </p>
           </div>
           <Link href="/auth/signup" className="relative z-10">

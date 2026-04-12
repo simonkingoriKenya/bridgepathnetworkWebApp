@@ -75,7 +75,7 @@ A PEO like Bridgepath Network handles this complexity. An employment agency typi
 
 - **Choose a PEO** if you want to hire and retain employees in Africa without setting up a local entity, and you need full compliance, payroll, and HR administration.
 - **Choose an employment agency** if you have an existing legal entity in a country and need help sourcing and placing candidates.
-- **Choose Bridgepath Network** if you want both — we provide end-to-end recruitment AND employment of record services across 45+ African countries.
+- **Choose Bridgepath Network** if you want both — we combine recruitment, HR advisory, and employment-of-record guidance for teams starting in Ghana and Kenya and planning wider African expansion.
 
 Ready to expand in Africa? [Get in touch](/#contact) with our team today.
     `.trim(),
@@ -223,7 +223,7 @@ Platforms like Bridgepath Network aggregate African talent and connect them with
 - Coaching resources to help navigate international hiring processes
 
 **For employers**, the key benefits are:
-- A pre-screened, verified talent pool across 45+ African countries
+- Early access to a verified talent pool beginning in Ghana and Kenya, with a roadmap toward broader African coverage
 - Employment of Record services that handle local compliance — no need to set up entities country by country
 - Payroll and benefits managed in local currency
 - Dramatically reduced time-to-hire compared to traditional international search

@@ -118,10 +118,10 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
-      <div className="relative h-[50vh] min-h-[340px] md:min-h-[460px] overflow-hidden">
+      <div className="relative h-[50vh] min-h-[340px] md:min-h-[460px] overflow-hidden premium-grid-bg-dark">
         <img src={post.image} alt={post.title} className="w-full h-full object-cover object-top" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.94) 0%, rgba(26,35,64,0.62) 48%, rgba(26,35,64,0.18) 100%)" }} />
         <div className="absolute bottom-0 left-0 right-0 px-4 py-8 md:p-10">
@@ -163,7 +163,7 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-gray-100">
           <div className="p-6 rounded-2xl" style={{ backgroundColor: GREEN + "10", border: `1px solid ${GREEN}30` }}>
             <h3 className="font-bold mb-2" style={{ color: DARK }}>Need HR or Recruitment Support in Africa?</h3>
-            <p className="text-sm text-gray-600 mb-4">Bridgepath Network operates across 45+ African countries. Get in touch with our team.</p>
+            <p className="text-sm text-gray-600 mb-4">Bridgepath Network is launching platform access in Ghana and Kenya, with HR advisory support for teams expanding across Africa.</p>
             <Link href="/#contact">
               <button className="px-5 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-opacity" style={{ backgroundColor: GREEN }}>
                 Contact Our Team
@@ -174,7 +174,7 @@ export default function BlogPost() {
       </div>
 
       {otherPosts.length > 0 && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 premium-grid-bg">
           <div className="container mx-auto px-4 md:px-8 max-w-3xl">
             <h2 className="text-xl font-bold mb-8" style={{ color: DARK }}>More Insights</h2>
             <div className="grid md:grid-cols-2 gap-6">

@@ -28,10 +28,10 @@ const timeline = [
   { year: "2008", event: "Bridgepath Network founded in Accra, Ghana with a focus on HR outsourcing." },
   { year: "2012", event: "Expanded into East Africa — launching operations in Kenya, Uganda, and Tanzania." },
   { year: "2015", event: "Launched our psychometric and talent assessment practice across 12 countries." },
-  { year: "2018", event: "Reached 10,000 professionals placed and 100+ client companies." },
+  { year: "2018", event: "Deepened institutional HR consulting across education, energy, technology, and professional services." },
   { year: "2021", event: "Launched digital talent platform and AI-powered CV review tool." },
-  { year: "2024", event: "Expanded to 45+ African countries with offices in 8 regional hubs." },
-  { year: "2026", event: "Serving 150+ businesses and 20,000+ professionals across Africa and the diaspora." },
+  { year: "2024", event: "Designed the Bridgepath Network platform for diaspora and local talent communities." },
+  { year: "2026", event: "Launching MVP access in Ghana and Kenya, with a growing pan-African roadmap." },
 ];
 
 const pillars = [
@@ -50,18 +50,18 @@ const whyUs = [
 
 const stats = [
   { value: "15+", label: "Years of Experience" },
-  { value: "45+", label: "African Countries" },
-  { value: "20k+", label: "People Impacted" },
+  { value: "Ghana", label: "Launch Market" },
+  { value: "Kenya", label: "Launch Market" },
   { value: "90%+", label: "Client Satisfaction" },
 ];
 
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
+      <section className="relative py-28 overflow-hidden premium-grid-bg-dark" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
         <div className="absolute inset-0 opacity-15"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1606857521015-7f9fcf423740?w=1600&q=80')", backgroundSize: "cover", backgroundPosition: "center" }} />
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
@@ -79,7 +79,7 @@ export default function About() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-10" style={{ backgroundColor: GREEN }}>
+      <section className="py-10 premium-grid-bg-dark" style={{ backgroundColor: GREEN }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
@@ -93,7 +93,7 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white/95 premium-grid-bg">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col md:flex-row gap-14 items-start">
@@ -122,7 +122,7 @@ export default function About() {
                   Drawing from her global expertise and deep understanding of African talent markets, Pamela founded Bridgepath Network with a singular mission: to help organizations hire better, build strong teams, and create cultures of excellence — using global best practices combined with local insight.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-6 text-base">
-                  Her work spans institutional HR transformation, executive recruitment, and capacity building for businesses and organizations across 45+ African countries.
+                  Her work spans institutional HR transformation, executive recruitment, and capacity building for businesses and organizations across African markets, with the platform launching first in Ghana and Kenya.
                 </p>
 
                 <div className="flex items-start gap-3 p-5 rounded-xl" style={{ backgroundColor: DARK + "06", border: `1px solid ${GREEN}35` }}>
@@ -138,7 +138,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20" style={{ backgroundColor: "#f8faf5" }}>
+      <section className="py-20 premium-grid-bg" style={{ backgroundColor: "#f8faf5" }}>
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-14">
             <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Purpose</p>
@@ -170,7 +170,7 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white/95 premium-grid-bg">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="text-center mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Journey</p>
@@ -197,7 +197,7 @@ export default function About() {
       </section>
 
       {/* Pillars */}
-      <section className="py-20" style={{ backgroundColor: "#f8faf5" }}>
+      <section className="py-20 premium-grid-bg" style={{ backgroundColor: "#f8faf5" }}>
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Framework</p>

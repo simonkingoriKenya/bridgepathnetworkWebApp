@@ -50,7 +50,7 @@ const recentActivity = [
 
 function StatCard({ label, value, icon, color, sub, trend }: any) {
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+    <div className="dashboard-card rounded-2xl p-5 border border-white/80">
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</span>
         <div className="h-8 w-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: color + "18" }}>
@@ -75,7 +75,7 @@ export default function EmployerDashboard() {
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
-      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-sm premium-grid-bg-dark" style={{ background: `linear-gradient(135deg, ${DARK}, #27375f)` }}>
         <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-20" style={{ backgroundColor: GREEN }} />
         <div className="absolute right-12 bottom-0 h-24 w-24 rounded-full opacity-10" style={{ backgroundColor: GREEN }} />
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -105,17 +105,17 @@ export default function EmployerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Link href="/jobs/new" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <Link href="/jobs/new" className="dashboard-card rounded-2xl p-5 border border-white/80 hover:shadow-md transition-shadow">
           <PlusCircle className="h-5 w-5 mb-3" style={{ color: GREEN }} />
           <p className="font-semibold text-sm" style={{ color: DARK }}>Post New Job</p>
           <p className="text-xs text-gray-500 mt-1">Create a focused role for Ghana, Kenya, or remote hiring.</p>
         </Link>
-        <Link href="/candidates" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <Link href="/candidates" className="dashboard-card rounded-2xl p-5 border border-white/80 hover:shadow-md transition-shadow">
           <Search className="h-5 w-5 mb-3" style={{ color: GREEN }} />
           <p className="font-semibold text-sm" style={{ color: DARK }}>Search Candidates</p>
           <p className="text-xs text-gray-500 mt-1">Review professionals by role, location, skills, and experience.</p>
         </Link>
-        <Link href="/messages" className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <Link href="/messages" className="dashboard-card rounded-2xl p-5 border border-white/80 hover:shadow-md transition-shadow">
           <MessageSquare className="h-5 w-5 mb-3" style={{ color: GREEN }} />
           <p className="font-semibold text-sm" style={{ color: DARK }}>View Messages</p>
           <p className="text-xs text-gray-500 mt-1">Continue conversations with shortlisted candidates.</p>
@@ -123,7 +123,7 @@ export default function EmployerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div className="lg:col-span-2 bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+        <div className="lg:col-span-2 dashboard-card rounded-2xl p-5 border border-white/80">
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="font-semibold text-gray-900 text-sm">Application Trend</h2>
@@ -142,7 +142,7 @@ export default function EmployerDashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+        <div className="dashboard-card rounded-2xl p-5 border border-white/80">
           <h2 className="font-semibold text-gray-900 text-sm mb-1">Hiring Funnel</h2>
           <p className="text-xs text-gray-400 mb-4">All open positions</p>
           <ResponsiveContainer width="100%" height={180}>
@@ -158,7 +158,7 @@ export default function EmployerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="lg:col-span-2 dashboard-card rounded-2xl border border-white/80 overflow-hidden">
           <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
             <h2 className="font-semibold text-gray-900 text-sm">Active Job Listings</h2>
             <Link href="/jobs/new">
@@ -197,7 +197,7 @@ export default function EmployerDashboard() {
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="dashboard-card rounded-2xl border border-white/80 overflow-hidden">
             <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
               <h2 className="font-semibold text-gray-900 text-sm">Candidate Profiles</h2>
               <Link href="/candidates" className="text-xs font-semibold" style={{ color: GREEN }}>View all</Link>
@@ -230,7 +230,7 @@ export default function EmployerDashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+          <div className="dashboard-card rounded-2xl p-5 border border-white/80">
             <h2 className="font-semibold text-gray-900 text-sm mb-3 flex items-center gap-2">
               <BarChart3 className="h-4 w-4" style={{ color: GREEN }} />
               Recent Activity

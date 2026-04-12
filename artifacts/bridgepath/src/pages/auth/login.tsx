@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "#f8f9fc" }}>
+    <div className="min-h-screen flex premium-grid-bg" style={{ backgroundColor: "#f8f9fc" }}>
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ backgroundColor: DARK }}>
         <div
           className="absolute inset-0 bg-cover bg-center opacity-55"
@@ -64,9 +64,9 @@ export default function Login() {
           <div>
             <div className="flex gap-3 mb-6">
               {[
-                { v: "45+", l: "Countries" },
-                { v: "20k+", l: "Professionals" },
-                { v: "150+", l: "Companies" },
+                { v: "Ghana", l: "Launch" },
+                { v: "Kenya", l: "Launch" },
+                { v: "15+", l: "Years HR" },
               ].map((s) => (
                 <div key={s.l} className="text-center px-4 py-3 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.08)" }}>
                   <div className="text-xl font-bold text-white">{s.v}</div>
@@ -74,7 +74,7 @@ export default function Login() {
                 </div>
               ))}
             </div>
-            <h2 className="text-4xl font-bold text-white leading-tight mb-4">Africa&apos;s premier talent marketplace</h2>
+            <h2 className="text-4xl font-bold text-white leading-tight mb-4">A focused talent marketplace for Africa&apos;s next chapter</h2>
             <p className="text-gray-400 text-lg">Your next opportunity — or your next great hire — is waiting.</p>
           </div>
         </div>
