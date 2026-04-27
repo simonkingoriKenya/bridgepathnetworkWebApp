@@ -1,4 +1,6 @@
 import { useGetDashboardStats, useGetMyApplications } from "@workspace/api-client-react";
+import { isDemoEmail, getDemoApplications } from "@/lib/demoAuth";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { Link } from "wouter";
 import { FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot, ShieldCheck, Lock, TrendingUp, Briefcase } from "lucide-react";
@@ -77,13 +79,39 @@ function getStatusStyle(status: string) {
 
 export default function JobSeekerDashboard() {
   const { user } = useAuth();
-  const { data: stats, isLoading: statsLoading } = useGetDashboardStats({ query: { queryKey: ["dashboardStats"] } });
-  const { data: apiApplications } = useGetMyApplications({ query: { queryKey: ["myApplications"] } });
+  const isDemo = isDemoEmail(user?.email);
+  const { data: stats, isLoading: statsLoading } = useGetDashboardStats({
+    query: { queryKey: ["dashboardStats"], enabled: !isDemo }
+  });
+  const { data: apiApplications } = useGetMyApplications({
+    query: { queryKey: ["myApplications"], enabled: !isDemo }
+  });
 
-  const applications = (apiApplications && apiApplications.length > 0) ? apiApplications : mockApplications;
-  const totalApps = statsLoading ? 15 : (stats?.totalApplications || 15);
-  const shortlisted = statsLoading ? 3 : (stats?.shortlistedApplications || 3);
-  const pending = statsLoading ? 6 : (stats?.pendingApplications || 6);
+  const [demoApps, setDemoApps] = useState(() => isDemo ? getDemoApplications() : []);
+  useEffect(() => {
+    if (!isDemo) return;
+    setDemoApps(getDemoApplications());
+    const handler = () => setDemoApps(getDemoApplications());
+    window.addEventListener("storage", handler);
+    window.addEventListener("focus", handler);
+    return () => {
+      window.removeEventListener("storage", handler);
+      window.removeEventListener("focus", handler);
+    };
+  }, [isDemo]);
+
+  const applications = isDemo
+    ? [...demoApps, ...mockApplications]
+    : (apiApplications && apiApplications.length > 0) ? apiApplications : mockApplications;
+  const totalApps = isDemo
+    ? applications.length
+    : statsLoading ? 15 : (stats?.totalApplications || 15);
+  const shortlisted = isDemo
+    ? applications.filter((a: any) => a.status === "shortlisted").length
+    : statsLoading ? 3 : (stats?.shortlistedApplications || 3);
+  const pending = isDemo
+    ? applications.filter((a: any) => a.status === "applied" || a.status === "reviewing").length
+    : statsLoading ? 6 : (stats?.pendingApplications || 6);
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
@@ -232,7 +260,7 @@ export default function JobSeekerDashboard() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-semibold text-gray-800">Human HR Review</p>
-                        <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-600">$20</span>
+                        <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-600">$15</span>
                       </div>
                       <p className="text-xs text-gray-500 mt-0.5">Expert recruiter gives personalized feedback</p>
                     </div>

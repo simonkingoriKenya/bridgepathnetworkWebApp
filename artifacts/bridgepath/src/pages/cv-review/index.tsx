@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetMyCvReviews, useCreateCvReview } from "@workspace/api-client-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,18 +10,61 @@ import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { getApiErrorMessage } from "@/lib/api-error";
+import { useAuth } from "@/lib/auth";
+import { isDemoEmail, getDemoCv, setDemoCv } from "@/lib/demoAuth";
+
+function buildDemoReview(fileName: string, text: string) {
+  return {
+    cvFileName: fileName,
+    status: "completed" as const,
+    paymentStatus: "free" as const,
+    aiReview: {
+      overallScore: 82,
+      summary:
+        "Strong all-round profile with proven leadership experience and African market expertise. Quantify outcomes more boldly and tailor the summary to each role to push the score higher.",
+      strengths: [
+        "Clear progression of leadership responsibility across recent roles",
+        "Strong cross-functional skill set spanning HR, operations and stakeholder management",
+        "Demonstrated impact in African markets, with measurable team outcomes",
+      ],
+      improvements: [
+        "Add specific KPIs and percentages to each accomplishment bullet",
+        "Move the most recent role and key wins into the top third of page one",
+        "Tighten the professional summary to 3 lines and align it to your target role",
+      ],
+      recommendedRoles: ["HR Business Partner", "Talent Acquisition Lead", "People Operations Manager", "L&D Specialist"],
+      jobReadinessScore: 84,
+      formattingScore: 78,
+      skillsScore: 86,
+      experienceScore: 88,
+      industryAlignmentScore: 80,
+    },
+  };
+}
 
 export default function CvReview() {
   const [cvText, setCvText] = useState("");
   const [cvFileName, setCvFileName] = useState("");
-  
+
+  const { user } = useAuth();
+  const isDemo = isDemoEmail(user?.email);
+
   const { toast } = useToast();
-  
+
   const { data: reviews, isLoading, refetch } = useGetMyCvReviews({
-    query: { queryKey: ["myCvReviews"] }
+    query: { queryKey: ["myCvReviews"], enabled: !isDemo }
   });
 
   const createReviewMutation = useCreateCvReview();
+
+  const [demoReviewData, setDemoReviewData] = useState<ReturnType<typeof buildDemoReview> | null>(null);
+  useEffect(() => {
+    if (!isDemo) return;
+    const stored = getDemoCv();
+    if (stored) {
+      setDemoReviewData(buildDemoReview(stored.fileName, stored.text || ""));
+    }
+  }, [isDemo]);
 
   const handleSubmit = () => {
     if (!cvText.trim()) {
@@ -30,6 +73,26 @@ export default function CvReview() {
         title: "Missing content",
         description: "Please paste your CV content to proceed.",
       });
+      return;
+    }
+
+    if (isDemo) {
+      const fileName = cvFileName || "Resume.txt";
+      const review = buildDemoReview(fileName, cvText);
+      setDemoCv({
+        fileName,
+        text: cvText,
+        uploadedAt: new Date().toISOString(),
+        aiScore: review.aiReview.overallScore,
+        summary: review.aiReview.summary,
+      });
+      setDemoReviewData(review);
+      toast({
+        title: "CV Analyzed!",
+        description: "Your AI review is ready below.",
+      });
+      setCvText("");
+      setCvFileName("");
       return;
     }
 
@@ -58,7 +121,9 @@ export default function CvReview() {
     });
   };
 
-  const latestReview = reviews && reviews.length > 0 ? reviews[0] : null;
+  const latestReview: any = isDemo
+    ? demoReviewData
+    : (reviews && reviews.length > 0 ? reviews[0] : null);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
@@ -238,7 +303,7 @@ export default function CvReview() {
                       Upgrade to a human HR review to get personalized, actionable feedback from seasoned global recruiters.
                     </p>
                     <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" size="lg">
-                      Upgrade for $20
+                      Upgrade for $15
                     </Button>
                   </CardContent>
                 </Card>
@@ -247,7 +312,7 @@ export default function CvReview() {
           </div>
           
           <div className="flex justify-end">
-            <Button variant="outline" onClick={() => { setCvText(""); setCvFileName(""); }}>Submit Another CV</Button>
+            <Button variant="outline" onClick={() => { setCvText(""); setCvFileName(""); if (isDemo) setDemoReviewData(null); }}>Submit Another CV</Button>
           </div>
         </div>
       ) : null}

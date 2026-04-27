@@ -3,6 +3,15 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, Users, FileText, Briefcase, Globe, Award, BarChart3, UserCheck, Calculator, ArrowRight, Phone, Mail, TrendingUp, Shield, Clock, Star } from "lucide-react";
+import heroEor from "@assets/unnamed_(1)_1776009115714.jpg";
+import heroSecondment from "@assets/unnamed_(2)_1776009115713.jpg";
+import heroExpat from "@assets/unnamed_(3)_1776009115713.jpg";
+import heroHr from "@assets/unnamed_(4)_1776009115713.jpg";
+import heroPayroll from "@assets/unnamed_(5)_1776009115712.jpg";
+import heroPsych from "@assets/unnamed_(7)_1776009115711.jpg";
+import heroRecruit from "@assets/unnamed_(8)_1776009115711.jpg";
+import heroOutsource from "@assets/unnamed_(6)_1776009115712.jpg";
+import heroInterim from "@assets/unnamed_(9)_1776009115710.jpg";
 
 
 const GREEN = "#8CC63F";
@@ -22,7 +31,7 @@ const serviceData: Record<string, {
   "employment-of-record": {
     icon: <Users className="h-8 w-8" />,
     label: "Employment of Record",
-    heroImg: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85",
+    heroImg: heroEor,
     tagline: "Hire anyone in Africa — without a local entity",
     description: "Our Employment of Record (EoR) service allows businesses to legally employ workers in African countries without establishing a local legal entity. BridgePath becomes the employer of record on paper, handling all local legal obligations including employment contracts, payroll, tax compliance, and statutory benefits — while your team member works exclusively for you.",
     benefits: [
@@ -56,7 +65,7 @@ const serviceData: Record<string, {
   "secondment-services": {
     icon: <UserCheck className="h-8 w-8" />,
     label: "Secondment Services",
-    heroImg: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=85",
+    heroImg: heroSecondment,
     tagline: "Flexible workforce deployment across borders",
     description: "Our Secondment Services facilitate the temporary transfer of employees from one organization to another while maintaining their original employment relationship. This is ideal for project-based assignments, knowledge transfer, or cross-company collaboration while ensuring full legal compliance.",
     benefits: [
@@ -90,7 +99,7 @@ const serviceData: Record<string, {
   "expatriate-services": {
     icon: <Globe className="h-8 w-8" />,
     label: "Expatriate Services",
-    heroImg: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=85",
+    heroImg: heroExpat,
     tagline: "Moving talent into Africa — done right",
     description: "BridgePath provides comprehensive support for companies relocating international employees to Africa, or moving African talent globally. Our expatriate services cover every aspect of the relocation lifecycle — from immigration and work permits to housing, schooling, and ongoing HR support.",
     benefits: [
@@ -124,7 +133,7 @@ const serviceData: Record<string, {
   "hr-consultancy": {
     icon: <Briefcase className="h-8 w-8" />,
     label: "HR Consultancy",
-    heroImg: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=85",
+    heroImg: heroHr,
     tagline: "Strategic HR guidance for Africa's dynamic market",
     description: "Our HR Consultancy service delivers expert human resources advisory to organizations operating or expanding in Africa. Whether you need to design HR policies, restructure your people operations, or build a high-performance culture, our experienced consultants bring deep regional knowledge to every engagement.",
     benefits: [
@@ -158,7 +167,7 @@ const serviceData: Record<string, {
   "payroll-tax": {
     icon: <Calculator className="h-8 w-8" />,
     label: "Payroll & Tax Administration",
-    heroImg: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=1200&q=85",
+    heroImg: heroPayroll,
     tagline: "Accurate, compliant payroll across Africa",
     description: "Managing payroll across multiple African countries is complex. Each country has its own tax codes, statutory deductions, and filing deadlines. BridgePath's Payroll & Tax Administration service handles all of this seamlessly — ensuring your employees are paid accurately and on time while you remain fully compliant.",
     benefits: [
@@ -192,7 +201,7 @@ const serviceData: Record<string, {
   "psychometric-assessments": {
     icon: <BarChart3 className="h-8 w-8" />,
     label: "Psychometric Assessments",
-    heroImg: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=85",
+    heroImg: heroPsych,
     tagline: "Hire the right people, every time",
     description: "Our psychometric assessment services use scientifically validated tools to evaluate candidates' cognitive abilities, personality traits, and leadership potential. These insights help employers make informed, objective hiring decisions — reducing turnover and improving team performance.",
     benefits: [
@@ -226,7 +235,7 @@ const serviceData: Record<string, {
   "recruitment-services": {
     icon: <FileText className="h-8 w-8" />,
     label: "Recruitment Services",
-    heroImg: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=85",
+    heroImg: heroRecruit,
     tagline: "Africa's top talent, delivered to your door",
     description: "BridgePath's Recruitment Services offer end-to-end talent acquisition — from executive search for C-suite roles to high-volume recruitment for operational positions. Our sector specialists and continent-wide networks ensure we find the best candidates faster than any traditional agency.",
     benefits: [
@@ -260,7 +269,7 @@ const serviceData: Record<string, {
   "staff-outsourcing": {
     icon: <Users className="h-8 w-8" />,
     label: "Staff Outsourcing",
-    heroImg: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1200&q=85",
+    heroImg: heroOutsource,
     tagline: "Your workforce, our responsibility",
     description: "Staff Outsourcing allows you to delegate the management of specific workforce functions to BridgePath. We become the employer of your outsourced staff, handling all HR, payroll, compliance, and benefits — while your team focuses on their day-to-day output for your business.",
     benefits: [
@@ -294,7 +303,7 @@ const serviceData: Record<string, {
   "interim-management": {
     icon: <Award className="h-8 w-8" />,
     label: "Interim Management",
-    heroImg: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=85",
+    heroImg: heroInterim,
     tagline: "Senior leadership, when you need it most",
     description: "Interim Management provides organizations with experienced senior executives on a temporary basis — for crisis management, leadership gaps, major transitions, or strategic projects. BridgePath's network of battle-tested African executives can step in and deliver results quickly.",
     benefits: [

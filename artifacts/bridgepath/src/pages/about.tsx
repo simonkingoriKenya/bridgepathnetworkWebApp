@@ -4,12 +4,13 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Handshake, ArrowRight } from "lucide-react";
+import founderFallback from "@assets/unnamed_(7)_1776009115711.jpg";
+import aboutHeroBg from "@assets/unnamed_(4)_1776009115713.jpg";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
-const PAMELA_FALLBACK =
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85";
+const PAMELA_FALLBACK = founderFallback;
 
 function FounderPhoto() {
   const [src, setSrc] = useState("/pamela.png");
@@ -63,7 +64,7 @@ export default function About() {
       {/* Hero */}
       <section className="relative py-28 overflow-hidden premium-grid-bg-dark" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
         <div className="absolute inset-0 opacity-15"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1606857521015-7f9fcf423740?w=1600&q=80')", backgroundSize: "cover", backgroundPosition: "center" }} />
+          style={{ backgroundImage: `url('${aboutHeroBg}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: GREEN }}>About Bridgepath Network</p>
@@ -152,7 +153,7 @@ export default function About() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="text-gray-300 leading-relaxed text-base">
-                To be a trusted HR partner that helps people grow and workplaces improve — empowering organizations to hire better, build strong teams, and create cultures of excellence using global experience and local know-how.
+                To shape Africa's workforce by connecting talented professionals — whether at home or in the diaspora — with employers who value them, while equipping institutions with the HR systems, leadership, and culture they need to grow with confidence.
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
@@ -162,7 +163,7 @@ export default function About() {
               </div>
               <h3 className="text-2xl font-bold mb-4" style={{ color: DARK }}>Our Vision</h3>
               <p className="text-gray-600 leading-relaxed text-base">
-                To be Africa's most trusted HR partner — connecting the continent's extraordinary talent with the world's best opportunities, while strengthening the institutions that shape Africa's future.
+                To become Africa's most trusted bridge between people and opportunity — a continent-wide network where every professional finds work that fits their potential, and every institution finds the people who will define its future.
               </p>
             </motion.div>
           </div>

@@ -2,6 +2,12 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import { absoluteAppUrl } from "./utils";
 import type { Session, User } from "@supabase/supabase-js";
+import {
+  findDemoAccount,
+  getStoredDemoUser,
+  setStoredDemoUser,
+  clearDemoStorage,
+} from "./demoAuth";
 
 export type AppUser = {
   id: string;
@@ -70,6 +76,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     let cancelled = false;
 
     const init = async () => {
+      const demoUser = getStoredDemoUser();
+      if (demoUser) {
+        if (!cancelled) {
+          setUser(demoUser);
+          setIsLoading(false);
+        }
+        return;
+      }
+
       const { data: { session } } = await supabase.auth.getSession();
       if (cancelled) return;
       setSession(session);
@@ -88,6 +103,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     void init();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      // Don't let supabase's session events override an active demo session
+      if (getStoredDemoUser()) return;
+
       setSession(session);
       if (session?.user) {
         try {
@@ -145,6 +163,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signInWithPassword = async (email: string, password: string) => {
+    // Demo accounts: bypass Supabase entirely
+    const demoUser = findDemoAccount(email, password);
+    if (demoUser) {
+      setStoredDemoUser(demoUser);
+      localStorage.setItem(ROLE_KEY, demoUser.role);
+      localStorage.setItem(NAME_KEY, demoUser.name);
+      setSession(null);
+      setUser(demoUser);
+      return { role: demoUser.role };
+    }
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
       password,
@@ -165,7 +194,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    const wasDemo = !!getStoredDemoUser();
+    clearDemoStorage();
+    if (!wasDemo) {
+      await supabase.auth.signOut();
+    }
     localStorage.removeItem(ROLE_KEY);
     localStorage.removeItem(NAME_KEY);
     setUser(null);

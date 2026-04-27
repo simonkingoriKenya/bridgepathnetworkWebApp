@@ -3,9 +3,10 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff } from "lucide-react";
+import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles, Briefcase, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import loginHero from "@assets/unnamed_1776009115714.jpg";
+import { DEMO_JOBSEEKER, DEMO_EMPLOYER } from "@/lib/demoAuth";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -170,6 +171,56 @@ export default function Login() {
               Create an account
             </Link>
           </p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
+            className="mt-8 rounded-2xl border border-dashed p-4"
+            style={{ borderColor: GREEN + "60", backgroundColor: GREEN + "08" }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="h-4 w-4" style={{ color: GREEN }} />
+              <p className="text-xs font-bold uppercase tracking-wider" style={{ color: DARK }}>
+                Try the demo accounts
+              </p>
+            </div>
+            <p className="text-xs text-gray-500 mb-3 leading-relaxed">
+              Explore the platform end-to-end without signing up. Click a card to autofill the form.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail(DEMO_JOBSEEKER.email);
+                  setPassword(DEMO_JOBSEEKER.password);
+                }}
+                className="text-left rounded-xl p-3 bg-white border border-gray-200 hover:border-green-400 hover:shadow-sm transition-all group"
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Briefcase className="h-3.5 w-3.5" style={{ color: GREEN }} />
+                  <span className="text-xs font-bold" style={{ color: DARK }}>Job Seeker</span>
+                </div>
+                <p className="text-[11px] text-gray-500 font-mono break-all">{DEMO_JOBSEEKER.email}</p>
+                <p className="text-[11px] text-gray-400 font-mono mt-0.5">Password: {DEMO_JOBSEEKER.password}</p>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail(DEMO_EMPLOYER.email);
+                  setPassword(DEMO_EMPLOYER.password);
+                }}
+                className="text-left rounded-xl p-3 bg-white border border-gray-200 hover:border-green-400 hover:shadow-sm transition-all group"
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Users className="h-3.5 w-3.5" style={{ color: GREEN }} />
+                  <span className="text-xs font-bold" style={{ color: DARK }}>Employer</span>
+                </div>
+                <p className="text-[11px] text-gray-500 font-mono break-all">{DEMO_EMPLOYER.email}</p>
+                <p className="text-[11px] text-gray-400 font-mono mt-0.5">Password: {DEMO_EMPLOYER.password}</p>
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </div>

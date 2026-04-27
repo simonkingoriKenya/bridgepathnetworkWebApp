@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRoute, Link, useLocation } from "wouter";
 import { useGetJob, useCreateApplication, useGetMyApplications } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { MapPin, Briefcase, Globe, Calendar, DollarSign, Send, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { isDemoEmail, addDemoApplication, getDemoApplications } from "@/lib/demoAuth";
 
 export default function JobDetail() {
   const [match, params] = useRoute("/jobs/:id");
@@ -20,28 +21,56 @@ export default function JobDetail() {
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
   const { toast } = useToast();
-  
+
+  const isDemo = isDemoEmail(user?.email);
+
   const { data: job, isLoading, error } = useGetJob(jobId, {
     query: {
-      enabled: !!jobId,
+      enabled: !!jobId && !isDemo,
       queryKey: ["job", jobId]
     }
   });
 
   const { data: myApps } = useGetMyApplications({
     query: {
-      enabled: isAuthenticated && user?.role === 'job_seeker',
+      enabled: isAuthenticated && !isDemo && user?.role === 'job_seeker',
       queryKey: ["myApplications"]
     }
   });
 
   const applyMutation = useCreateApplication();
 
-  const hasApplied = myApps?.some(app => app.jobId === jobId);
+  const [demoApplied, setDemoApplied] = useState(false);
+  useEffect(() => {
+    if (isDemo) {
+      setDemoApplied(getDemoApplications().some((a) => a.id === jobId));
+    }
+  }, [isDemo, jobId]);
+
+  const hasApplied = isDemo
+    ? demoApplied
+    : myApps?.some(app => app.jobId === jobId);
 
   const handleApply = () => {
     if (!isAuthenticated) {
       navigate(`/auth/login?redirect=/jobs/${jobId}`);
+      return;
+    }
+
+    if (isDemo) {
+      const title = (job as any)?.title || "Position";
+      const employerName = (job as any)?.employer?.name || (job as any)?.employerProfile?.companyName || "Company";
+      addDemoApplication({
+        id: jobId,
+        job: { title, employer: { name: employerName } },
+        status: "applied",
+        createdAt: new Date().toISOString(),
+      });
+      setDemoApplied(true);
+      toast({
+        title: "Application Submitted!",
+        description: `Your application for ${title} has been recorded.`,
+      });
       return;
     }
 

@@ -12,7 +12,7 @@ import {
   TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock,
   Code2, Landmark, Headphones, Crown
 } from "lucide-react";
-import heroImage from "@assets/unnamed_(9)_1776009115710.jpg";
+const heroImage = "/hero-boardroom.png";
 import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
 
 const GREEN = "#8CC63F";
@@ -106,10 +106,10 @@ export default function Home() {
         <div className="absolute inset-0">
           <img
             src={heroImage}
-            alt="Diverse African and international professionals in a boardroom meeting"
+            alt="African professionals collaborating in a modern boardroom meeting"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.88) 50%, rgba(26,35,64,0.3) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.92) 35%, rgba(26,35,64,0.78) 100%)" }} />
         </div>
         <div className="container mx-auto px-4 md:px-8 relative z-10 py-24">
           <div className="max-w-2xl">
