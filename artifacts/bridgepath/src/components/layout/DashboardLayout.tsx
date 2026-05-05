@@ -181,9 +181,10 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const navItems: NavItem[] = isEmployer
     ? [
         { href: "/dashboard/employer", label: "Dashboard", icon: LayoutDashboard },
-        { href: "/dashboard/employer", label: "Jobs", icon: Briefcase },
+        { href: "/jobs", label: "Job Board", icon: Briefcase },
         { href: "/candidates", label: "Candidates", icon: Users },
         { href: "/messages", label: "Messages", icon: MessageSquare },
+        { href: "/profile", label: "Company Profile", icon: User },
       ]
     : [
         { href: "/dashboard/jobseeker", label: "Overview", icon: LayoutDashboard },

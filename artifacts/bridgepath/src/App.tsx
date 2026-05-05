@@ -5,6 +5,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { ChatSupport } from "@/components/ui/ChatSupport";
+import { setAuthTokenGetter } from "@workspace/api-client-react";
+
+setAuthTokenGetter(() => localStorage.getItem("bridgepath_token"));
 
 import Home from "@/pages/home";
 import Login from "@/pages/auth/login";
