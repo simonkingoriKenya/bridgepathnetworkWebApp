@@ -35,6 +35,7 @@ import EmployerOnboarding from "@/pages/onboarding/employer";
 import CandidatesPage from "@/pages/candidates";
 import CandidateProfilePage from "@/pages/candidates/[id]";
 import MessagesPage from "@/pages/messages";
+import DashboardJobs from "@/pages/dashboard/jobs";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 
 const queryClient = new QueryClient({

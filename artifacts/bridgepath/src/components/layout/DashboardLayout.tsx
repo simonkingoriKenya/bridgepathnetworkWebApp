@@ -226,14 +226,14 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const navItems: NavItem[] = isEmployer
     ? [
         { href: "/dashboard/employer", label: "Dashboard", icon: LayoutDashboard },
-        { href: "/jobs", label: "Job Board", icon: Briefcase },
+        { href: "/dashboard/jobs", label: "Job Board", icon: Briefcase },
         { href: "/candidates", label: "Candidates", icon: Users },
         { href: "/messages", label: "Messages", icon: MessageSquare },
         { href: "/profile", label: "Company Profile", icon: User },
       ]
     : [
         { href: "/dashboard/jobseeker", label: "Overview", icon: LayoutDashboard },
-        { href: "/jobs", label: "Find Jobs", icon: Briefcase },
+        { href: "/dashboard/jobs", label: "Find Jobs", icon: Briefcase },
         { href: "/cv-review", label: "AI CV Review", icon: FileText },
         { href: "/profile", label: "My Profile", icon: User },
       ];
