@@ -106,76 +106,73 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative h-screen min-h-[640px] max-h-[900px] flex items-end overflow-hidden">
+        {/* Full-bleed image — let it breathe */}
         <div className="absolute inset-0">
           <img
             src={heroImage}
             alt="African professionals collaborating in a modern boardroom"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.94) 40%, rgba(26,35,64,0.75) 100%)" }} />
+          {/* Very light vignette — image is the star */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,18,40,0.82) 0%, rgba(10,18,40,0.35) 45%, rgba(10,18,40,0.08) 100%)" }} />
+          {/* Subtle left edge fade for text legibility */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(10,18,40,0.55) 0%, transparent 55%)" }} />
         </div>
-        <div className="container mx-auto px-4 md:px-8 relative z-10 py-24">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-sm font-medium" style={{ backgroundColor: GREEN + "25", color: GREEN }}>
-              <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GREEN }} />
-              Now accepting early access — Ghana &amp; Kenya
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-              Your Career.<br />
-              Your Talent.<br />
-              <span style={{ color: GREEN }}>Your Africa.</span>
-            </h1>
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-4 max-w-xl">
-              BridgePath connects Africa's best professionals with ambitious employers — whether you're building your career or building your team.
-            </p>
 
-            {/* Dual CTA — crystal-clear user journeys */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
-              {/* Job Seeker path */}
-              <Link href="/jobs">
-                <div className="group rounded-2xl p-5 border-2 cursor-pointer transition-all hover:scale-[1.02]" style={{ backgroundColor: GREEN, borderColor: GREEN }}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Search className="h-5 w-5 text-white" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-white/80">For Professionals</span>
-                  </div>
-                  <p className="text-white font-bold text-lg leading-snug">Find Your Next Opportunity</p>
-                  <p className="text-white/70 text-xs mt-1">Browse roles across Ghana, Kenya &amp; remote</p>
-                  <div className="flex items-center gap-1 mt-3 text-white text-sm font-semibold">
-                    Browse Jobs <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
+        {/* Text anchored to bottom-left — SaaS premium layout */}
+        <div className="relative z-10 w-full pb-12 md:pb-16">
+          <div className="container mx-auto px-6 md:px-10">
+            <div className="max-w-3xl">
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 backdrop-blur-sm" style={{ backgroundColor: "rgba(140,198,63,0.18)", border: "1px solid rgba(140,198,63,0.35)" }}>
+                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: GREEN }} />
+                <span className="text-xs font-semibold tracking-wide" style={{ color: GREEN }}>Early access open · Ghana &amp; Kenya</span>
+              </div>
 
-              {/* Employer path */}
-              <Link href="/employers">
-                <div className="group rounded-2xl p-5 border-2 cursor-pointer transition-all hover:scale-[1.02]" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.3)" }}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building2 className="h-5 w-5 text-white" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-white/80">For Employers</span>
-                  </div>
-                  <p className="text-white font-bold text-lg leading-snug">Hire Top African Talent</p>
-                  <p className="text-white/70 text-xs mt-1">Access pre-screened diaspora &amp; local professionals</p>
-                  <div className="flex items-center gap-1 mt-3 text-white text-sm font-semibold">
-                    Post a Job <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            </div>
+              {/* Headline — confident, concise */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-4">
+                Africa's talent.<br />
+                <span style={{ color: GREEN }}>Placed with purpose.</span>
+              </h1>
 
-            {/* Micro stats */}
-            <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-white/10">
-              {[
-                { v: "Ghana", l: "Launch Market" },
-                { v: "Kenya", l: "Launch Market" },
-                { v: "15+", l: "Years Experience" },
-                { v: "Early", l: "Access Open" },
-              ].map((s, i) => (
-                <div key={i}>
-                  <div className="text-xl font-bold text-white">{s.v}</div>
-                  <div className="text-xs text-gray-400">{s.l}</div>
-                </div>
-              ))}
+              <p className="text-white/70 text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+                The premium careers and hiring platform connecting Africa's brightest professionals with ambitious employers — starting in Ghana and Kenya.
+              </p>
+
+              {/* Two clean CTAs */}
+              <div className="flex flex-wrap gap-3">
+                <Link href="/jobs">
+                  <button className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg transition-all hover:scale-[1.03] active:scale-[0.98]" style={{ backgroundColor: GREEN }}>
+                    <Search className="h-4 w-4" />
+                    Find Opportunities
+                  </button>
+                </Link>
+                <Link href="/employers">
+                  <button className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white border border-white/30 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-[1.03] active:scale-[0.98]">
+                    <Building2 className="h-4 w-4" />
+                    Hire Talent
+                  </button>
+                </Link>
+              </div>
+
+              {/* Minimal trust line */}
+              <div className="flex items-center gap-5 mt-8">
+                <div className="h-px flex-1 max-w-[60px] bg-white/20" />
+                {[
+                  { v: "Ghana", l: "Launch" },
+                  { v: "Kenya", l: "Launch" },
+                  { v: "15+yrs", l: "Experience" },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="text-center">
+                      <div className="text-sm font-bold text-white leading-none">{s.v}</div>
+                      <div className="text-[10px] text-white/40 mt-0.5 uppercase tracking-wider">{s.l}</div>
+                    </div>
+                    {i < 2 && <div className="h-6 w-px bg-white/15" />}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
