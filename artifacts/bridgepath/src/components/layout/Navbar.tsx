@@ -66,12 +66,12 @@ export function Navbar() {
       <nav className={`sticky top-0 z-50 w-full bg-white transition-shadow duration-300 ${scrolled ? "shadow-md border-b border-gray-100" : "border-b border-gray-100"}`}>
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <img src="/logo.svg" alt="Bridgepath Network" className="h-9 w-9 object-contain shrink-0" />
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <img src="/logo-brand.png" alt="Bridgepath Network" className="h-10 w-10 object-contain shrink-0 rounded-xl" />
             <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-2xl tracking-tight" style={{ color: DARK }}>
-                Bridgepath<span style={{ color: GREEN }}>Network</span>
-              </span>
+              <div className="font-extrabold text-xl tracking-tight leading-none">
+                <span style={{ color: "#1e3d3a" }}>Bridge</span><span style={{ color: "#1e3d3a" }}>Path</span><span style={{ color: GREEN }}>Network</span>
+              </div>
               <span className="text-[9px] sm:text-[10px] italic text-gray-400 font-light tracking-tight mt-0.5">
                 Shaping People. Strengthening Institutions.
               </span>

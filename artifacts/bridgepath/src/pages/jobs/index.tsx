@@ -3,14 +3,35 @@ import { Link, useLocation } from "wouter";
 import { useListJobs } from "@workspace/api-client-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Briefcase, DollarSign, Clock, X } from "lucide-react";
+import { Search, MapPin, Briefcase, DollarSign, Clock, X, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { format } from "date-fns";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useAuth } from "@/lib/auth";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+
+const INDUSTRIES = [
+  "All Industries",
+  "Technology",
+  "Banking & Finance",
+  "FinTech",
+  "Healthcare",
+  "Engineering",
+  "Telecommunications",
+  "E-Commerce",
+  "Manufacturing",
+  "Advertising",
+  "NGO / Development",
+];
+
+const SALARY_RANGES = [
+  { label: "Any Salary", min: 0, max: Infinity },
+  { label: "Under $30k", min: 0, max: 30000 },
+  { label: "$30k – $60k", min: 30000, max: 60000 },
+  { label: "$60k – $100k", min: 60000, max: 100000 },
+  { label: "$100k+", min: 100000, max: Infinity },
+];
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -77,13 +98,16 @@ function ApplyModal({ open, onClose, jobTitle }: { open: boolean; onClose: () =>
 export default function JobsList() {
   const [, navigate] = useLocation();
   const [search, setSearch] = useState("");
-  const [location, setLocation] = useState("");
+  const [locationVal, setLocationVal] = useState("");
   const [type, setType] = useState<string>("all");
+  const [industry, setIndustry] = useState("All Industries");
+  const [salaryIdx, setSalaryIdx] = useState(0);
+  const [sortBy, setSortBy] = useState<"recent" | "salary">("recent");
   const [applyJob, setApplyJob] = useState<{ id: number; title: string } | null>(null);
 
   const { isAuthenticated } = useAuth();
   const debouncedSearch = useDebounce(search, 400);
-  const debouncedLocation = useDebounce(location, 400);
+  const debouncedLocation = useDebounce(locationVal, 400);
 
   const { data: apiData, isLoading } = useListJobs({
     search: debouncedSearch || undefined,
@@ -93,145 +117,292 @@ export default function JobsList() {
   }, { query: { queryKey: ["jobs", debouncedSearch, debouncedLocation, type] } });
 
   const apiJobs = apiData?.jobs || [];
+  const salaryRange = SALARY_RANGES[salaryIdx];
 
   const filteredMock = mockJobs.filter(j => {
     const matchSearch = !debouncedSearch || j.title.toLowerCase().includes(debouncedSearch.toLowerCase()) || j.employer.name.toLowerCase().includes(debouncedSearch.toLowerCase()) || j.skills.some(s => s.toLowerCase().includes(debouncedSearch.toLowerCase()));
     const matchLocation = !debouncedLocation || j.location.toLowerCase().includes(debouncedLocation.toLowerCase()) || j.country.toLowerCase().includes(debouncedLocation.toLowerCase());
     const matchType = type === "all" || j.type === type;
-    return matchSearch && matchLocation && matchType;
+    const matchIndustry = industry === "All Industries" || j.industry === industry;
+    const matchSalary = j.salaryMin >= salaryRange.min && j.salaryMin <= salaryRange.max;
+    return matchSearch && matchLocation && matchType && matchIndustry && matchSalary;
   });
 
-  const allJobs = [...apiJobs, ...filteredMock];
+  let allJobs = [...apiJobs, ...filteredMock];
+  if (sortBy === "salary") {
+    allJobs = allJobs.sort((a, b) => ((b as any).salaryMax || 0) - ((a as any).salaryMax || 0));
+  }
   const totalCount = allJobs.length;
 
+  const activeFilters = [
+    type !== "all" && { key: "type", label: type.replace("_", "-") },
+    industry !== "All Industries" && { key: "industry", label: industry },
+    salaryIdx > 0 && { key: "salary", label: SALARY_RANGES[salaryIdx].label },
+  ].filter(Boolean) as { key: string; label: string }[];
+
+  const clearFilter = (key: string) => {
+    if (key === "type") setType("all");
+    if (key === "industry") setIndustry("All Industries");
+    if (key === "salary") setSalaryIdx(0);
+  };
+
   const handleApply = (job: { id: number; title: string }) => {
-    if (!isAuthenticated) {
-      setApplyJob(job);
-    } else {
-      navigate(`/jobs/${job.id}`);
-    }
+    if (!isAuthenticated) setApplyJob(job);
+    else navigate(`/jobs/${job.id}`);
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
 
-      <div className="py-16" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2d4a7a 100%)` }}>
+      {/* ── HERO SEARCH BAR ── */}
+      <div className="py-14" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #1e3d3a 100%)` }}>
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-10">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#8CC63F" }}>Open Roles</p>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Find Jobs Across Africa</h1>
-            <p className="text-gray-300 text-lg">Discover opportunities at leading companies on the continent and globally</p>
+            <p className="text-gray-400 text-base">Discover roles at leading companies in Ghana, Kenya, and globally</p>
           </div>
 
+          {/* Main search row */}
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-3 bg-white p-3 rounded-2xl shadow-xl">
+            <div className="flex flex-col md:flex-row gap-2 bg-white p-2.5 rounded-2xl shadow-2xl">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <Input
-                  placeholder="Job title, skills, or company"
-                  className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-0 rounded-xl"
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Job title, skills, or company…"
+                  className="w-full pl-10 pr-3 h-12 text-sm bg-gray-50 rounded-xl border-0 outline-none focus:ring-2 focus:ring-green-300"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={e => setSearch(e.target.value)}
                 />
               </div>
-              <div className="relative flex-1 md:max-w-xs">
-                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 z-10" />
-                <Input
+              <div className="h-12 w-px bg-gray-100 hidden md:block self-center" />
+              <div className="relative flex-1 md:max-w-[220px]">
+                <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-gray-400" />
+                <input
+                  type="text"
                   placeholder="City, country, or Remote"
-                  className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-0 rounded-xl"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-full pl-10 pr-3 h-12 text-sm bg-gray-50 rounded-xl border-0 outline-none focus:ring-2 focus:ring-green-300"
+                  value={locationVal}
+                  onChange={e => setLocationVal(e.target.value)}
                 />
               </div>
-              <Select value={type} onValueChange={setType}>
-                <SelectTrigger className="h-12 w-full md:w-44 border-0 bg-gray-50 rounded-xl focus:ring-0">
-                  <SelectValue placeholder="Job Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
-                  <SelectItem value="full_time">Full-time</SelectItem>
-                  <SelectItem value="part_time">Part-time</SelectItem>
-                  <SelectItem value="contract">Contract</SelectItem>
-                  <SelectItem value="remote">Remote</SelectItem>
-                </SelectContent>
-              </Select>
-              <button className="h-12 px-8 font-semibold text-white rounded-xl shrink-0 hover:opacity-90 transition-opacity" style={{ backgroundColor: GREEN }}>
-                Search
+              <button className="h-12 px-7 font-semibold text-white rounded-xl shrink-0 hover:opacity-90 transition-opacity text-sm" style={{ backgroundColor: GREEN }}>
+                Search Jobs
               </button>
+            </div>
+
+            {/* Quick filter pills row */}
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              {/* Job type pills */}
+              {[{ v: "all", l: "All Types" }, { v: "full_time", l: "Full-time" }, { v: "remote", l: "Remote" }, { v: "contract", l: "Contract" }].map(t => (
+                <button
+                  key={t.v}
+                  onClick={() => setType(t.v)}
+                  className="px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all"
+                  style={type === t.v
+                    ? { backgroundColor: GREEN, borderColor: GREEN, color: "white" }
+                    : { backgroundColor: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.75)" }}
+                >
+                  {t.l}
+                </button>
+              ))}
+              <div className="h-5 w-px bg-white/20 mx-1 hidden sm:block" />
+              {/* Industry quick pills */}
+              {["Technology", "Finance", "FinTech", "Healthcare"].map(ind => (
+                <button
+                  key={ind}
+                  onClick={() => setIndustry(industry === ind ? "All Industries" : ind)}
+                  className="px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all"
+                  style={industry === ind
+                    ? { backgroundColor: "#1e3d3a", borderColor: "#1e3d3a", color: GREEN }
+                    : { backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)" }}
+                >
+                  {ind}
+                </button>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      <main className="flex-1 container mx-auto px-4 md:px-8 py-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-gray-800">
-            {isLoading ? "Loading..." : <><span style={{ color: GREEN }} className="font-bold">{totalCount}</span> Jobs Found</>}
-          </h2>
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <span>Sort by:</span>
-            <select className="text-sm border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1">
-              <option>Most Recent</option>
-              <option>Salary (High–Low)</option>
-            </select>
-          </div>
-        </div>
+      <main className="flex-1 container mx-auto px-4 md:px-8 py-8">
+        <div className="flex flex-col lg:flex-row gap-6">
 
-        <div className="space-y-4">
-          {isLoading ? (
-            Array(5).fill(0).map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 animate-pulse h-28" />
-            ))
-          ) : allJobs.length === 0 ? (
-            <div className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100">
-              <Briefcase className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">No jobs found</h3>
-              <p className="text-gray-500">Try different keywords or broaden your search filters</p>
-            </div>
-          ) : (
-            allJobs.map((job) => (
-              <div key={job.id} className="bg-white rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-md transition-all p-6 group">
-                <div className="flex flex-col md:flex-row md:items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl shrink-0 flex items-center justify-center font-bold text-lg" style={{ backgroundColor: DARK + "10", color: DARK }}>
-                    {job.employer?.name?.[0] || "C"}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <Link href={`/jobs/${job.id}`}>
-                      <h3 className="font-bold text-gray-900 text-lg group-hover:text-green-700 transition-colors cursor-pointer">{job.title}</h3>
-                    </Link>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm text-gray-500">
-                      <span className="font-medium text-gray-700">{job.employer?.name}</span>
-                      <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{job.location}</span>
-                      <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{job.type.replace('_', ' ')}</span>
-                      {job.salaryMin && job.salaryMax && (
-                        <span className="flex items-center gap-1"><DollarSign className="h-3.5 w-3.5" />{job.currency} {(job.salaryMin / 1000).toFixed(0)}k–{(job.salaryMax / 1000).toFixed(0)}k</span>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {job.skills?.slice(0, 4).map(skill => (
-                        <span key={skill} className="text-xs px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-600 bg-gray-50">{skill}</span>
-                      ))}
-                      {job.skills && job.skills.length > 4 && (
-                        <span className="text-xs px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-400">+{job.skills.length - 4}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-3 shrink-0">
-                    <span className="text-xs text-gray-400 flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {format(new Date(job.createdAt), 'MMM d')}
-                    </span>
+          {/* ── SIDEBAR FILTERS ── */}
+          <aside className="lg:w-64 shrink-0 space-y-4">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-sm flex items-center gap-2" style={{ color: DARK }}>
+                  <SlidersHorizontal className="h-4 w-4" style={{ color: GREEN }} /> Filters
+                </h3>
+                {activeFilters.length > 0 && (
+                  <button onClick={() => { setType("all"); setIndustry("All Industries"); setSalaryIdx(0); }} className="text-xs text-gray-400 hover:text-red-500 transition-colors">
+                    Clear all
+                  </button>
+                )}
+              </div>
+
+              {/* Industry */}
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Industry</p>
+                <div className="space-y-1">
+                  {INDUSTRIES.map(ind => (
                     <button
-                      onClick={() => handleApply({ id: job.id, title: job.title })}
-                      className="px-5 py-2 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-opacity"
-                      style={{ backgroundColor: GREEN }}
+                      key={ind}
+                      onClick={() => setIndustry(ind)}
+                      className="w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={industry === ind
+                        ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 }
+                        : { color: "#6b7280" }}
                     >
-                      Apply Now
+                      {ind}
                     </button>
-                  </div>
+                  ))}
                 </div>
               </div>
-            ))
-          )}
+
+              {/* Salary range */}
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Salary Range</p>
+                <div className="space-y-1">
+                  {SALARY_RANGES.map((r, i) => (
+                    <button
+                      key={r.label}
+                      onClick={() => setSalaryIdx(i)}
+                      className="w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={salaryIdx === i
+                        ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 }
+                        : { color: "#6b7280" }}
+                    >
+                      {r.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Job type */}
+              <div>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Job Type</p>
+                <div className="space-y-1">
+                  {[{ v: "all", l: "All Types" }, { v: "full_time", l: "Full-time" }, { v: "part_time", l: "Part-time" }, { v: "contract", l: "Contract" }, { v: "remote", l: "Remote" }].map(t => (
+                    <button
+                      key={t.v}
+                      onClick={() => setType(t.v)}
+                      className="w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={type === t.v
+                        ? { backgroundColor: DARK + "12", color: DARK, fontWeight: 600 }
+                        : { color: "#6b7280" }}
+                    >
+                      {t.l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Employer CTA */}
+            <div className="rounded-2xl p-5 text-white" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #1e3d3a 100%)` }}>
+              <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: GREEN }}>Hiring?</p>
+              <p className="font-semibold text-sm mb-3">Post a role and reach top African talent</p>
+              <Link href="/employers">
+                <button className="w-full py-2 text-xs font-bold rounded-xl text-white border border-white/20 hover:bg-white/10 transition-colors">
+                  Post a Job →
+                </button>
+              </Link>
+            </div>
+          </aside>
+
+          {/* ── JOBS LIST ── */}
+          <div className="flex-1 min-w-0">
+            {/* Results header */}
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-3 flex-wrap">
+                <h2 className="text-sm font-semibold text-gray-700">
+                  {isLoading ? "Loading…" : <><span className="font-bold text-lg" style={{ color: GREEN }}>{totalCount}</span> {totalCount === 1 ? "job" : "jobs"} found</>}
+                </h2>
+                {activeFilters.map(f => (
+                  <span key={f.key} className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full" style={{ backgroundColor: GREEN + "15", color: GREEN }}>
+                    {f.label}
+                    <button onClick={() => clearFilter(f.key)} className="hover:text-red-500 transition-colors">
+                      <X className="h-3 w-3" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-xs text-gray-500 hidden sm:block">Sort:</span>
+                <select
+                  value={sortBy}
+                  onChange={e => setSortBy(e.target.value as "recent" | "salary")}
+                  className="text-xs border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-green-300 bg-white"
+                >
+                  <option value="recent">Most Recent</option>
+                  <option value="salary">Salary (High–Low)</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {isLoading ? (
+                Array(4).fill(0).map((_, i) => (
+                  <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 animate-pulse h-28" />
+                ))
+              ) : allJobs.length === 0 ? (
+                <div className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                  <Briefcase className="h-10 w-10 text-gray-200 mx-auto mb-3" />
+                  <h3 className="text-base font-semibold text-gray-600 mb-1">No jobs match your filters</h3>
+                  <p className="text-sm text-gray-400 mb-4">Try broadening your search or clearing a filter</p>
+                  <button onClick={() => { setSearch(""); setLocationVal(""); setType("all"); setIndustry("All Industries"); setSalaryIdx(0); }}
+                    className="px-4 py-2 text-sm font-semibold rounded-xl text-white" style={{ backgroundColor: GREEN }}>
+                    Clear All Filters
+                  </button>
+                </div>
+              ) : allJobs.map((job) => (
+                <div key={job.id} className="bg-white rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-md transition-all p-5 group cursor-pointer" onClick={() => handleApply({ id: job.id, title: job.title })}>
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <div className="h-11 w-11 rounded-xl shrink-0 flex items-center justify-center font-bold text-base" style={{ backgroundColor: DARK + "10", color: DARK }}>
+                      {job.employer?.name?.[0] || "C"}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="font-bold text-gray-900 text-base group-hover:text-green-700 transition-colors leading-snug">{job.title}</h3>
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-gray-500">
+                            <span className="font-semibold text-gray-700">{job.employer?.name}</span>
+                            <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{job.location}</span>
+                            <span className="flex items-center gap-1 capitalize"><Briefcase className="h-3 w-3" />{(job.type as string).replace("_", "-")}</span>
+                            {(job as any).salaryMin && (job as any).salaryMax && (
+                              <span className="flex items-center gap-1 font-semibold" style={{ color: GREEN }}>
+                                <DollarSign className="h-3 w-3" />{(job as any).currency} {((job as any).salaryMin / 1000).toFixed(0)}k–{((job as any).salaryMax / 1000).toFixed(0)}k
+                              </span>
+                            )}
+                            <span className="flex items-center gap-1 text-gray-300"><Clock className="h-3 w-3" />{format(new Date(job.createdAt), "MMM d")}</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={e => { e.stopPropagation(); handleApply({ id: job.id, title: job.title }); }}
+                          className="shrink-0 px-4 py-2 text-xs font-bold text-white rounded-xl hover:opacity-90 transition-opacity"
+                          style={{ backgroundColor: GREEN }}
+                        >
+                          Apply
+                        </button>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {(job as any).skills?.slice(0, 5).map((skill: string) => (
+                          <span key={skill} className="text-[11px] px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-500 bg-gray-50">{skill}</span>
+                        ))}
+                        {(job as any).skills && (job as any).skills.length > 5 && (
+                          <span className="text-[11px] px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-400">+{(job as any).skills.length - 5}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
 

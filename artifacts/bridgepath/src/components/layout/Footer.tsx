@@ -58,10 +58,12 @@ export function Footer() {
           style={{ borderRight: `1px solid ${BORDER}` }}
         >
           <Link href="/" className="flex items-center gap-2.5">
-            <img src="/logo.svg" alt="Bridgepath Network" className="h-8 w-8 object-contain" />
-            <span className="font-bold text-lg text-white tracking-tight">
-              Bridgepath<span style={{ color: GREEN }}>Network</span>
-            </span>
+            <img src="/logo-brand.png" alt="Bridgepath Network" className="h-9 w-9 object-contain rounded-xl" />
+            <div className="flex flex-col leading-none">
+              <span className="font-bold text-base tracking-tight text-white">
+                BridgePath<span style={{ color: GREEN }}>Network</span>
+              </span>
+            </div>
           </Link>
 
           <p className="text-xs leading-relaxed text-gray-500 max-w-[200px]">
