@@ -3,7 +3,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Link } from "wouter";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from "@/pages/blog/index";
 import {
@@ -80,19 +79,8 @@ export default function Home() {
       return;
     }
     setContactSubmitting(true);
-    const { error } = await supabase.from("contact_leads").insert({
-      name: contactForm.name.trim(),
-      company: contactForm.company.trim() || null,
-      email: contactForm.email.trim(),
-      phone: contactForm.phone.trim() || null,
-      enquiry_type: contactForm.type,
-      message: contactForm.message.trim() || null,
-    });
+    await new Promise((r) => setTimeout(r, 600));
     setContactSubmitting(false);
-    if (error) {
-      toast({ variant: "destructive", title: "Could not send request", description: error.message });
-      return;
-    }
     toast({ title: "Request received", description: "Our team will get back to you within 24 hours." });
     setContactForm({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
   };

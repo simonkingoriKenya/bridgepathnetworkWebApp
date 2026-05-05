@@ -1,7 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from "./supabase";
-import { absoluteAppUrl } from "./utils";
-import type { Session, User } from "@supabase/supabase-js";
 import {
   findDemoAccount,
   getStoredDemoUser,
@@ -19,7 +16,7 @@ export type AppUser = {
 
 interface AuthContextType {
   user: AppUser | null;
-  session: Session | null;
+  session: null;
   isLoading: boolean;
   isAuthenticated: boolean;
   signInWithPassword: (email: string, password: string) => Promise<{ error?: string; role?: AppUser["role"] }>;
@@ -38,92 +35,78 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const ROLE_KEY = "bridgepath_user_role";
 const NAME_KEY = "bridgepath_user_name";
+const TOKEN_KEY = "bridgepath_token";
+const USER_KEY = "bridgepath_user";
+const API_BASE = "/api";
 
-function buildAppUser(user: User, roleOverride?: string, nameOverride?: string): AppUser {
-  const meta = user.user_metadata || {};
-  const role = roleOverride || meta.role || localStorage.getItem(ROLE_KEY) || "job_seeker";
-  const name = nameOverride || meta.full_name || meta.name || user.email?.split("@")[0] || "User";
-  return {
-    id: user.id,
-    email: user.email || "",
-    name,
-    role: role as AppUser["role"],
-    avatarUrl: meta.avatar_url,
-  };
+function getStoredUser(): AppUser | null {
+  try {
+    const raw = localStorage.getItem(USER_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as AppUser;
+  } catch {
+    return null;
+  }
 }
 
-async function syncProfileToUser(user: User): Promise<AppUser> {
-  const { data: prof } = await supabase
-    .from("profiles")
-    .select("role, full_name")
-    .eq("id", user.id)
-    .maybeSingle();
-  const role = prof?.role || user.user_metadata?.role || localStorage.getItem(ROLE_KEY) || "job_seeker";
-  const name = prof?.full_name || user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "User";
-  if (prof?.role) localStorage.setItem(ROLE_KEY, prof.role);
-  if (prof?.full_name) localStorage.setItem(NAME_KEY, prof.full_name);
-  return buildAppUser(user, role, name);
+function setStoredUser(user: AppUser) {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
-
-const confirmationRedirect = () => absoluteAppUrl("auth/callback");
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AppUser | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let cancelled = false;
-
-    const init = async () => {
-      const demoUser = getStoredDemoUser();
-      if (demoUser) {
-        if (!cancelled) {
-          setUser(demoUser);
-          setIsLoading(false);
-        }
-        return;
-      }
-
-      const { data: { session } } = await supabase.auth.getSession();
-      if (cancelled) return;
-      setSession(session);
-      if (session?.user) {
-        try {
-          setUser(await syncProfileToUser(session.user));
-        } catch {
-          setUser(buildAppUser(session.user));
-        }
-      } else {
-        setUser(null);
-      }
+    const demoUser = getStoredDemoUser();
+    if (demoUser) {
+      setUser(demoUser);
       setIsLoading(false);
-    };
-
-    void init();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      // Don't let supabase's session events override an active demo session
-      if (getStoredDemoUser()) return;
-
-      setSession(session);
-      if (session?.user) {
-        try {
-          setUser(await syncProfileToUser(session.user));
-        } catch {
-          setUser(buildAppUser(session.user));
-        }
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
-
-    return () => {
-      cancelled = true;
-      subscription.unsubscribe();
-    };
+      return;
+    }
+    const stored = getStoredUser();
+    if (stored && localStorage.getItem(TOKEN_KEY)) {
+      setUser(stored);
+    }
+    setIsLoading(false);
   }, []);
+
+  const signInWithPassword = async (email: string, password: string) => {
+    const demoUser = findDemoAccount(email, password);
+    if (demoUser) {
+      setStoredDemoUser(demoUser);
+      localStorage.setItem(ROLE_KEY, demoUser.role);
+      localStorage.setItem(NAME_KEY, demoUser.name);
+      setUser(demoUser);
+      return { role: demoUser.role };
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { error: data.message ?? "Login failed" };
+      }
+      const appUser: AppUser = {
+        id: String(data.user.id),
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role as AppUser["role"],
+      };
+      localStorage.setItem(TOKEN_KEY, data.token);
+      localStorage.setItem(ROLE_KEY, appUser.role);
+      localStorage.setItem(NAME_KEY, appUser.name);
+      setStoredUser(appUser);
+      setUser(appUser);
+      return { role: appUser.role };
+    } catch {
+      return { error: "Network error. Please try again." };
+    }
+  };
 
   const signUpWithPassword = async (
     email: string,
@@ -131,84 +114,53 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     name: string,
     role: "job_seeker" | "employer",
   ) => {
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanName = name.trim();
-    localStorage.setItem(ROLE_KEY, role);
-    localStorage.setItem(NAME_KEY, cleanName);
-
-    const { data, error } = await supabase.auth.signUp({
-      email: cleanEmail,
-      password,
-      options: {
-        emailRedirectTo: confirmationRedirect(),
-        data: {
-          full_name: cleanName,
-          name: cleanName,
-          role,
-        },
-      },
-    });
-
-    if (error) return { error: error.message };
-
-    if (data.session?.user) {
-      const appUser = await syncProfileToUser(data.session.user).catch(() =>
-        buildAppUser(data.session!.user, role, cleanName)
-      );
-      setSession(data.session);
+    try {
+      const res = await fetch(`${API_BASE}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), password, name: name.trim(), role }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { error: data.message ?? "Registration failed" };
+      }
+      const appUser: AppUser = {
+        id: String(data.user.id),
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role as AppUser["role"],
+      };
+      localStorage.setItem(TOKEN_KEY, data.token);
+      localStorage.setItem(ROLE_KEY, appUser.role);
+      localStorage.setItem(NAME_KEY, appUser.name);
+      setStoredUser(appUser);
       setUser(appUser);
+      return {};
+    } catch {
+      return { error: "Network error. Please try again." };
     }
-
-    return { needsConfirmation: !data.session };
-  };
-
-  const signInWithPassword = async (email: string, password: string) => {
-    // Demo accounts: bypass Supabase entirely
-    const demoUser = findDemoAccount(email, password);
-    if (demoUser) {
-      setStoredDemoUser(demoUser);
-      localStorage.setItem(ROLE_KEY, demoUser.role);
-      localStorage.setItem(NAME_KEY, demoUser.name);
-      setSession(null);
-      setUser(demoUser);
-      return { role: demoUser.role };
-    }
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email.trim().toLowerCase(),
-      password,
-    });
-
-    if (error) return { error: error.message };
-
-    if (data.session?.user) {
-      const appUser = await syncProfileToUser(data.session.user).catch(() =>
-        buildAppUser(data.session!.user)
-      );
-      setSession(data.session);
-      setUser(appUser);
-      return { role: appUser.role };
-    }
-
-    return {};
   };
 
   const logout = async () => {
     const wasDemo = !!getStoredDemoUser();
     clearDemoStorage();
     if (!wasDemo) {
-      await supabase.auth.signOut();
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
     }
     localStorage.removeItem(ROLE_KEY);
     localStorage.removeItem(NAME_KEY);
     setUser(null);
-    setSession(null);
-    window.location.href = absoluteAppUrl("auth/login");
+    window.location.href = "/auth/login";
   };
 
   const updateRole = (role: string) => {
     localStorage.setItem(ROLE_KEY, role);
-    if (user) setUser({ ...user, role: role as AppUser["role"] });
+    if (user) {
+      const updated = { ...user, role: role as AppUser["role"] };
+      setUser(updated);
+      setStoredUser(updated);
+    }
   };
 
   const login = (_token: string, backendUser: any) => {
@@ -221,7 +173,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
-        session,
+        session: null,
         isLoading,
         isAuthenticated: !!user,
         signInWithPassword,

@@ -61,11 +61,11 @@ A premium hiring platform connecting global employers with Africa's best talent.
 
 ## Auth Flow
 
-- Signup uses Supabase `signUp` with email, password, full name, and role metadata.
-- Email confirmation lands on `/auth/callback`, exchanges Supabase auth codes for a session, upserts the profile, and routes by role.
-- Login uses Supabase email/password as the primary flow, with magic-link fallback still available.
-- Role and display name are persisted locally as a fallback for callback routing and dashboard personalization.
-- Supabase environment variables should be set in production as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+- Auth is handled entirely by the backend (`POST /api/auth/login`, `POST /api/auth/register`).
+- Login/signup stores the user and token in localStorage (`bridgepath_token`, `bridgepath_user`).
+- Demo accounts (jobseeker@demo.bridgepath.network / Demo123!, employer@demo.bridgepath.network / Demo123!) bypass the backend and use localStorage only.
+- Role and display name are persisted locally for routing and dashboard personalization.
+- No external auth provider is required — all auth is self-contained.
 
 ## Services (9 slugs)
 
