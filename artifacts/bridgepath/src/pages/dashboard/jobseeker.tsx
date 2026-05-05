@@ -6,15 +6,18 @@ import { Link } from "wouter";
 import {
   FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot,
   ShieldCheck, TrendingUp, Briefcase, Sparkles, ChevronRight,
-  Search, Bell, LayoutDashboard, X, UserPlus
+  Search, Bell, LayoutDashboard, X, UserPlus, MessageSquare,
+  Star, Quote
 } from "lucide-react";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 const AMBER = "#f59e0b";
 const BLUE = "#3b82f6";
+const PURPLE = "#8b5cf6";
 
 const activityData = [
   { week: "Wk 1", applications: 2, views: 7 },
@@ -26,12 +29,17 @@ const activityData = [
 ];
 
 const mockApplications = [
-  { id: 1, job: { title: "Software Engineer (Full Stack)", employer: { name: "Andela" } }, status: "shortlisted", createdAt: new Date(Date.now() - 2 * 86400000).toISOString() },
-  { id: 2, job: { title: "Backend Engineer (Python)", employer: { name: "Flutterwave" } }, status: "reviewing", createdAt: new Date(Date.now() - 4 * 86400000).toISOString() },
-  { id: 3, job: { title: "Mobile App Developer (Android)", employer: { name: "M-KOPA" } }, status: "applied", createdAt: new Date(Date.now() - 6 * 86400000).toISOString() },
-  { id: 4, job: { title: "HR Business Partner", employer: { name: "Safaricom" } }, status: "shortlisted", createdAt: new Date(Date.now() - 9 * 86400000).toISOString() },
-  { id: 5, job: { title: "Digital Marketing Specialist", employer: { name: "Jumia" } }, status: "rejected", createdAt: new Date(Date.now() - 14 * 86400000).toISOString() },
-  { id: 6, job: { title: "Sales Director – East Africa", employer: { name: "SAP Africa" } }, status: "applied", createdAt: new Date(Date.now() - 18 * 86400000).toISOString() },
+  { id: 1, job: { title: "Software Engineer (Full Stack)", employer: { name: "Andela" } }, status: "shortlisted", viewedAt: new Date(Date.now() - 3600000).toISOString(), createdAt: new Date(Date.now() - 2 * 86400000).toISOString() },
+  { id: 2, job: { title: "Backend Engineer (Python)", employer: { name: "Flutterwave" } }, status: "reviewing", viewedAt: new Date(Date.now() - 7200000).toISOString(), createdAt: new Date(Date.now() - 4 * 86400000).toISOString() },
+  { id: 3, job: { title: "Mobile App Developer (Android)", employer: { name: "M-KOPA" } }, status: "applied", viewedAt: null, createdAt: new Date(Date.now() - 6 * 86400000).toISOString() },
+  { id: 4, job: { title: "HR Business Partner", employer: { name: "Safaricom" } }, status: "shortlisted", viewedAt: new Date(Date.now() - 86400000).toISOString(), createdAt: new Date(Date.now() - 9 * 86400000).toISOString() },
+  { id: 5, job: { title: "Digital Marketing Specialist", employer: { name: "Jumia" } }, status: "rejected", viewedAt: new Date(Date.now() - 2 * 86400000).toISOString(), createdAt: new Date(Date.now() - 14 * 86400000).toISOString() },
+  { id: 6, job: { title: "Sales Director – East Africa", employer: { name: "SAP Africa" } }, status: "applied", viewedAt: null, createdAt: new Date(Date.now() - 18 * 86400000).toISOString() },
+];
+
+const demoFeedback = [
+  { id: 1, content: "Strong technical skills and a well-structured CV. We'd recommend gaining more experience with cloud infrastructure before reapplying for senior roles.", isAnonymous: false, employerName: "TechBridge Africa", jobTitle: "Senior Software Engineer", createdAt: new Date(Date.now() - 2 * 86400000).toISOString() },
+  { id: 2, content: "Your communication and leadership examples were compelling. Consider quantifying your impact more clearly — numbers make a real difference to hiring managers.", isAnonymous: true, employerName: null, jobTitle: "Product Manager", createdAt: new Date(Date.now() - 5 * 86400000).toISOString() },
 ];
 
 const recommendedJobs = [
@@ -46,6 +54,10 @@ const statusConfig: Record<string, { label: string; bg: string; color: string; d
   shortlisted:{ label: "Shortlisted", bg: "#dbeafe", color: "#2563eb", dot: "#2563eb" },
   reviewing:  { label: "In Review",   bg: "#fef3c7", color: "#d97706", dot: "#d97706" },
   applied:    { label: "Applied",     bg: "#f3f4f6", color: "#6b7280", dot: "#9ca3af" },
+  pending:    { label: "Applied",     bg: "#f3f4f6", color: "#6b7280", dot: "#9ca3af" },
+  interview:  { label: "Interview",   bg: "#ede9fe", color: "#7c3aed", dot: "#7c3aed" },
+  offer:      { label: "Offer",       bg: "#d1fae5", color: "#059669", dot: "#059669" },
+  hired:      { label: "Hired",       bg: "#dcfce7", color: "#16a34a", dot: "#16a34a" },
 };
 
 function KPICard({ label, value, sub, icon, accent, trend }: {
@@ -82,6 +94,19 @@ export default function JobSeekerDashboard() {
     query: { queryKey: ["myApplications"], enabled: !isDemo }
   });
 
+  const { data: realFeedback } = useQuery({
+    queryKey: ["my-feedback", user?.id],
+    queryFn: async () => {
+      const token = localStorage.getItem("bridgepath_token");
+      const res = await fetch(`/api/candidates/${user!.id}/feedback`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!res.ok) return [];
+      return res.json() as Promise<any[]>;
+    },
+    enabled: !isDemo && !!user?.id,
+  });
+
   const [demoApps, setDemoApps] = useState(() => isDemo ? getDemoApplications() : []);
   useEffect(() => {
     if (!isDemo) return;
@@ -96,13 +121,16 @@ export default function JobSeekerDashboard() {
     ? [...demoApps, ...mockApplications]
     : (apiApplications && apiApplications.length > 0) ? apiApplications : mockApplications;
 
+  const feedback = isDemo ? demoFeedback : (realFeedback ?? []);
+
   const totalApps = isDemo ? applications.length : (statsLoading ? 15 : (stats?.totalApplications || 15));
   const shortlisted = isDemo
     ? applications.filter((a: any) => a.status === "shortlisted").length
     : (statsLoading ? 3 : (stats?.shortlistedApplications || 3));
   const pending = isDemo
-    ? applications.filter((a: any) => a.status === "applied" || a.status === "reviewing").length
+    ? applications.filter((a: any) => a.status === "applied" || a.status === "reviewing" || a.status === "pending").length
     : (statsLoading ? 6 : (stats?.pendingApplications || 6));
+  const viewedCount = applications.filter((a: any) => a.viewedAt).length;
 
   const firstName = user?.name?.split(" ")[0] || "Professional";
 
@@ -155,7 +183,24 @@ export default function JobSeekerDashboard() {
         </div>
       </div>
 
-      {/* ── NEXT ACTION BANNER (contextual) ── */}
+      {/* ── NOTIFICATION BANNERS ── */}
+      {feedback.length > 0 && (
+        <div className="flex items-center justify-between rounded-2xl px-5 py-4 border" style={{ backgroundColor: "#f5f3ff", borderColor: "#ddd6fe" }}>
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl flex items-center justify-center bg-violet-100">
+              <MessageSquare className="h-4 w-4 text-violet-600" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-violet-900">{feedback.length} employer{feedback.length > 1 ? "s" : ""} left you career feedback</p>
+              <p className="text-xs text-violet-600">Professional growth insights to help you stand out</p>
+            </div>
+          </div>
+          <a href="#feedback-section" className="text-xs font-semibold text-violet-600 flex items-center gap-1 hover:gap-2 transition-all">
+            Read <ChevronRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      )}
+
       {shortlisted > 0 && (
         <div className="flex items-center justify-between rounded-2xl px-5 py-4 border" style={{ backgroundColor: "#eff6ff", borderColor: "#bfdbfe" }}>
           <div className="flex items-center gap-3">
@@ -200,16 +245,16 @@ export default function JobSeekerDashboard() {
           accent={AMBER}
         />
         <KPICard
-          label="Profile Views"
-          value="47"
-          sub="Last 30 days"
+          label="Profile Viewed"
+          value={viewedCount}
+          sub="Applications viewed"
           icon={<Eye className="h-4.5 w-4.5" />}
           accent={BLUE}
-          trend="+12%"
+          trend={viewedCount > 0 ? `${viewedCount} viewed` : undefined}
         />
       </div>
 
-      {/* ── MAIN CONTENT: Chart + Applications ── */}
+      {/* ── MAIN CONTENT: Chart + Career Tools ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Activity chart */}
         <div className="lg:col-span-2 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
@@ -238,10 +283,7 @@ export default function JobSeekerDashboard() {
               <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
               <XAxis dataKey="week" tick={{ fontSize: 11, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
-              <Tooltip
-                contentStyle={{ borderRadius: 10, border: "1px solid #e5e7eb", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", fontSize: 12 }}
-                cursor={{ stroke: "#e5e7eb", strokeWidth: 1 }}
-              />
+              <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid #e5e7eb", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", fontSize: 12 }} cursor={{ stroke: "#e5e7eb", strokeWidth: 1 }} />
               <Area type="monotone" dataKey="applications" stroke={GREEN} strokeWidth={2} fill="url(#appGrad)" name="Applications" dot={false} />
               <Area type="monotone" dataKey="views" stroke={BLUE} strokeWidth={2} fill="url(#viewGrad)" name="Profile Views" dot={false} />
             </AreaChart>
@@ -312,14 +354,14 @@ export default function JobSeekerDashboard() {
         </div>
       </div>
 
-      {/* ── APPLICATIONS TABLE + RECOMMENDED JOBS ── */}
+      {/* ── APPLICATIONS + RECOMMENDED JOBS ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Applications list */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
             <div>
               <h2 className="font-semibold text-gray-900 text-sm">Recent Applications</h2>
-              <p className="text-xs text-gray-400 mt-0.5">{applications.length} applications total</p>
+              <p className="text-xs text-gray-400 mt-0.5">{applications.length} applications total · {viewedCount} viewed by employers</p>
             </div>
             <Link href="/jobs">
               <button className="text-xs font-semibold flex items-center gap-1 hover:gap-1.5 transition-all" style={{ color: GREEN }}>
@@ -347,7 +389,14 @@ export default function JobSeekerDashboard() {
                     </div>
                     <div className="min-w-0">
                       <p className="font-medium text-gray-900 text-sm truncate">{app.job?.title || "Position"}</p>
-                      <p className="text-xs text-gray-400">{app.job?.employer?.name || "Company"} · {format(new Date(app.createdAt), "MMM d")}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <p className="text-xs text-gray-400">{app.job?.employer?.name || "Company"} · {format(new Date(app.createdAt), "MMM d")}</p>
+                        {app.viewedAt && (
+                          <span className="flex items-center gap-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-full" style={{ backgroundColor: BLUE + "15", color: BLUE }}>
+                            <Eye className="h-2.5 w-2.5" /> Viewed {formatDistanceToNow(new Date(app.viewedAt), { addSuffix: true })}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
@@ -388,15 +437,66 @@ export default function JobSeekerDashboard() {
           </div>
           <div className="px-5 py-4 border-t border-gray-50">
             <Link href="/jobs">
-              <button className="w-full py-2.5 text-xs font-semibold rounded-xl border-2 transition-all hover:text-white hover:shadow-sm" style={{ borderColor: GREEN, color: GREEN }}
+              <button
+                className="w-full py-2.5 text-xs font-semibold rounded-xl border-2 transition-all hover:text-white hover:shadow-sm"
+                style={{ borderColor: GREEN, color: GREEN }}
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GREEN; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GREEN; }}>
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GREEN; }}
+              >
                 View All Open Roles →
               </button>
             </Link>
           </div>
         </div>
       </div>
+
+      {/* ── GROWTH FEEDBACK FROM EMPLOYERS ── */}
+      {feedback.length > 0 && (
+        <div id="feedback-section" className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-gray-50 flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl flex items-center justify-center" style={{ backgroundColor: PURPLE + "15" }}>
+              <Star className="h-4 w-4" style={{ color: PURPLE }} />
+            </div>
+            <div>
+              <h2 className="font-semibold text-gray-900 text-sm">Employer Growth Feedback</h2>
+              <p className="text-xs text-gray-400 mt-0.5">Professional insights to help you grow — shared directly from employers</p>
+            </div>
+          </div>
+          <div className="divide-y divide-gray-50">
+            {feedback.map((item: any) => (
+              <div key={item.id} className="px-5 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold text-white mt-0.5" style={{ backgroundColor: item.isAnonymous ? "#94a3b8" : PURPLE }}>
+                    {item.isAnonymous ? "?" : (item.employerName?.[0] ?? "E")}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-sm font-semibold text-gray-800">
+                        {item.isAnonymous ? "Anonymous Employer" : (item.employerName ?? "Employer")}
+                      </span>
+                      {item.isAnonymous && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-gray-100 text-gray-500">Anonymous</span>
+                      )}
+                      {item.jobTitle && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium" style={{ backgroundColor: PURPLE + "15", color: PURPLE }}>
+                          {item.jobTitle}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-start gap-2 p-3.5 rounded-xl" style={{ backgroundColor: "#f8f5ff" }}>
+                      <Quote className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: PURPLE }} />
+                      <p className="text-sm text-gray-700 leading-relaxed">{item.content}</p>
+                    </div>
+                    <p className="text-[11px] text-gray-400 mt-2">
+                      {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

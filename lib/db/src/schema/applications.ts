@@ -8,6 +8,7 @@ export const applicationsTable = pgTable("applications", {
   applicantId: integer("applicant_id").notNull(),
   coverLetter: text("cover_letter"),
   status: text("status").notNull().default("pending"),
+  viewedAt: timestamp("viewed_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

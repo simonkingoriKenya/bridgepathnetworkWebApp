@@ -6,6 +6,7 @@ import { paramInt } from "../lib/routeParams";
 import { serializeProfile } from "./auth";
 import { serializeJob } from "./jobs";
 import { count } from "drizzle-orm";
+import { sendEmail, newApplicationEmail } from "../lib/email";
 
 const router = Router();
 
@@ -28,6 +29,7 @@ async function serializeApplication(app: typeof applicationsTable.$inferSelect) 
     applicantId: app.applicantId,
     coverLetter: app.coverLetter ?? null,
     status: app.status,
+    viewedAt: app.viewedAt?.toISOString() ?? null,
     job: serializedJob,
     applicant: applicant ? {
       id: applicant.id,
@@ -68,7 +70,23 @@ router.post("/applications", requireAuth, async (req: AuthenticatedRequest, res)
       status: "pending",
     }).returning();
 
-    res.status(201).json(await serializeApplication(application));
+    const serialized = await serializeApplication(application);
+
+    const job = await db.select().from(jobsTable).where(eq(jobsTable.id, jobId)).limit(1).then(r => r[0]);
+    if (job) {
+      const employer = await db.select().from(usersTable).where(eq(usersTable.id, job.employerId)).limit(1).then(r => r[0]);
+      const candidate = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1).then(r => r[0]);
+      if (employer && candidate) {
+        sendEmail(newApplicationEmail({
+          employerName: employer.name,
+          employerEmail: employer.email,
+          candidateName: candidate.name,
+          jobTitle: job.title,
+        })).catch(() => {});
+      }
+    }
+
+    res.status(201).json(serialized);
   } catch (err) {
     req.log.error({ err }, "Error creating application");
     res.status(500).json({ error: "Internal Server Error" });

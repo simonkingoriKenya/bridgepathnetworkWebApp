@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { isDemoEmail } from "@/lib/demoAuth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Users, ChevronRight, ChevronLeft, Clock, Briefcase,
-  Sparkles, Filter, X, Check, Loader2, AlertCircle,
+  Sparkles, Filter, X, Check, Loader2, AlertCircle, MessageSquare,
+  Eye, EyeOff, Send,
 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
@@ -66,14 +67,108 @@ function getStageIndex(key: StageKey): number {
   return PIPELINE_STAGES.findIndex((s) => s.key === key);
 }
 
+interface FeedbackModalProps {
+  candidate: PipelineCandidate;
+  onClose: () => void;
+  onSubmit: (content: string, isAnonymous: boolean) => void;
+  submitting: boolean;
+}
+
+function FeedbackModal({ candidate, onClose, onSubmit, submitting }: FeedbackModalProps) {
+  const [content, setContent] = useState("");
+  const [isAnonymous, setIsAnonymous] = useState(false);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.5)" }} onClick={onClose}>
+      <div
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-5">
+          <div>
+            <h3 className="font-bold text-gray-900">Leave Growth Feedback</h3>
+            <p className="text-xs text-gray-500 mt-0.5">For <span className="font-semibold">{candidate.name}</span> · {candidate.appliedFor}</p>
+          </div>
+          <button onClick={onClose} className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-xs font-semibold text-gray-700 mb-2">Your feedback</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Share constructive insights — what went well, what could improve, skills to develop..."
+            rows={5}
+            className="w-full text-sm text-gray-700 border border-gray-200 rounded-xl px-3.5 py-3 resize-none outline-none focus:ring-2 focus:border-transparent transition-all leading-relaxed"
+            style={{ focusRingColor: "#8CC63F" } as any}
+            onFocus={e => e.target.style.boxShadow = `0 0 0 2px ${GREEN}40`}
+            onBlur={e => e.target.style.boxShadow = "none"}
+          />
+          <p className="text-[11px] text-gray-400 mt-1.5">{content.length}/500 characters</p>
+        </div>
+
+        <button
+          onClick={() => setIsAnonymous(!isAnonymous)}
+          className="w-full flex items-center gap-3 p-3.5 rounded-xl border mb-4 transition-all"
+          style={isAnonymous
+            ? { borderColor: DARK, backgroundColor: DARK + "08" }
+            : { borderColor: "#e5e7eb", backgroundColor: "#f9fafb" }}
+        >
+          <div
+            className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-colors"
+            style={{ backgroundColor: isAnonymous ? DARK + "15" : "#f3f4f6" }}
+          >
+            {isAnonymous
+              ? <EyeOff className="h-4 w-4" style={{ color: DARK }} />
+              : <Eye className="h-4 w-4 text-gray-400" />}
+          </div>
+          <div className="text-left flex-1">
+            <p className="text-sm font-semibold text-gray-800">
+              {isAnonymous ? "Anonymous feedback" : "Send as yourself"}
+            </p>
+            <p className="text-xs text-gray-500">
+              {isAnonymous ? "Candidate won't see your name or company" : "Candidate will see your name and company"}
+            </p>
+          </div>
+          <div
+            className="h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all"
+            style={isAnonymous ? { borderColor: DARK, backgroundColor: DARK } : { borderColor: "#d1d5db" }}
+          >
+            {isAnonymous && <Check className="h-3 w-3 text-white" />}
+          </div>
+        </button>
+
+        <div className="flex gap-2">
+          <button onClick={onClose} className="flex-1 py-2.5 text-sm font-semibold text-gray-600 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
+            Cancel
+          </button>
+          <button
+            disabled={!content.trim() || submitting}
+            onClick={() => onSubmit(content, isAnonymous)}
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-white rounded-xl transition-all hover:opacity-90 disabled:opacity-40"
+            style={{ backgroundColor: GREEN }}
+          >
+            {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+            {submitting ? "Sending..." : "Send Feedback"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CandidateCard({
   candidate,
   onMove,
+  onFeedback,
   moving,
   totalStages,
 }: {
   candidate: PipelineCandidate;
   onMove: (id: number, newStage: StageKey) => void;
+  onFeedback: (candidate: PipelineCandidate) => void;
   moving: boolean;
   totalStages: number;
 }) {
@@ -113,6 +208,13 @@ function CandidateCard({
         </div>
 
         <div className="flex items-center gap-1">
+          <button
+            onClick={() => onFeedback(candidate)}
+            title="Leave growth feedback"
+            className="h-6 w-6 rounded-md flex items-center justify-center text-gray-300 hover:text-purple-500 hover:bg-purple-50 transition-colors"
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+          </button>
           {canGoBack && (
             <button
               disabled={moving}
@@ -151,6 +253,8 @@ export default function PipelinePage() {
   const queryClient = useQueryClient();
   const [movingId, setMovingId] = useState<number | null>(null);
   const [filterJob, setFilterJob] = useState<string>("all");
+  const [feedbackTarget, setFeedbackTarget] = useState<PipelineCandidate | null>(null);
+  const [feedbackSuccess, setFeedbackSuccess] = useState<string | null>(null);
 
   const [demoCandidates, setDemoCandidates] = useState<PipelineCandidate[]>(() => loadDemoPipeline());
 
@@ -186,6 +290,27 @@ export default function PipelinePage() {
     },
   });
 
+  const feedbackMutation = useMutation({
+    mutationFn: async ({ applicationId, content, isAnonymous }: { applicationId: number; content: string; isAnonymous: boolean }) => {
+      const token = localStorage.getItem("bridgepath_token");
+      const res = await fetch(`/api/applications/${applicationId}/feedback`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ content, isAnonymous }),
+      });
+      if (!res.ok) throw new Error("Failed to send feedback");
+      return res.json();
+    },
+    onSuccess: (_, vars) => {
+      setFeedbackTarget(null);
+      setFeedbackSuccess(`Feedback sent to ${feedbackTarget?.name ?? "candidate"}`);
+      setTimeout(() => setFeedbackSuccess(null), 4000);
+    },
+  });
+
   const handleMove = (id: number, newStage: StageKey) => {
     if (isDemo) {
       const updated = demoCandidates.map((c) =>
@@ -199,6 +324,17 @@ export default function PipelinePage() {
     mutation.mutate({ id, status: newStage }, {
       onSettled: () => setMovingId(null),
     });
+  };
+
+  const handleFeedbackSubmit = (content: string, isAnonymous: boolean) => {
+    if (!feedbackTarget) return;
+    if (isDemo) {
+      setFeedbackTarget(null);
+      setFeedbackSuccess(`Feedback sent to ${feedbackTarget.name} (demo — not saved)`);
+      setTimeout(() => setFeedbackSuccess(null), 4000);
+      return;
+    }
+    feedbackMutation.mutate({ applicationId: feedbackTarget.id, content, isAnonymous });
   };
 
   const candidates: PipelineCandidate[] = isDemo
@@ -229,6 +365,23 @@ export default function PipelinePage() {
 
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
+
+      {/* Feedback modal */}
+      {feedbackTarget && (
+        <FeedbackModal
+          candidate={feedbackTarget}
+          onClose={() => setFeedbackTarget(null)}
+          onSubmit={handleFeedbackSubmit}
+          submitting={feedbackMutation.isPending}
+        />
+      )}
+
+      {/* Success toast */}
+      {feedbackSuccess && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-5 py-3 rounded-xl text-white text-sm font-semibold shadow-xl" style={{ backgroundColor: "#10b981" }}>
+          <Check className="h-4 w-4" /> {feedbackSuccess}
+        </div>
+      )}
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -316,6 +469,7 @@ export default function PipelinePage() {
                         key={candidate.id}
                         candidate={candidate}
                         onMove={handleMove}
+                        onFeedback={setFeedbackTarget}
                         moving={movingId === candidate.id}
                         totalStages={PIPELINE_STAGES.length}
                       />

@@ -8,6 +8,7 @@ import cvReviewsRouter from "./cv-reviews";
 import paymentsRouter from "./payments";
 import statsRouter from "./stats";
 import contactRouter from "./contact";
+import feedbackRouter from "./feedback";
 
 const router: IRouter = Router();
 
@@ -16,6 +17,7 @@ router.use(authRouter);
 router.use(profilesRouter);
 router.use(jobsRouter);
 router.use(applicationsRouter);
+router.use(feedbackRouter);
 router.use(cvReviewsRouter);
 router.use(paymentsRouter);
 router.use(statsRouter);
