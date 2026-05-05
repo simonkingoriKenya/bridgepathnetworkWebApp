@@ -9,7 +9,8 @@ import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
   UserCheck, Calculator, ChevronDown, ChevronUp,
   TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock,
-  Code2, Landmark, Headphones, Crown
+  Code2, Landmark, Headphones, Crown, Search, Sparkles,
+  Building2, MapPin, Zap, Target
 } from "lucide-react";
 import heroImage from "@assets/Hero_1778003129768.png";
 import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
@@ -17,7 +18,7 @@ import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
 
-const services = [
+const focusAreas = [
   { icon: <Code2 className="h-6 w-6" />, label: "Technology" },
   { icon: <Landmark className="h-6 w-6" />, label: "Finance" },
   { icon: <Briefcase className="h-6 w-6" />, label: "HR & Operations" },
@@ -26,10 +27,10 @@ const services = [
 ];
 
 const whyPartner = [
-  { icon: <TrendingUp className="h-7 w-7" />, title: "Global HR leadership", desc: "Guidance shaped by senior hiring experience across African and international markets." },
-  { icon: <ShieldCheck className="h-7 w-7" />, title: "20+ years experience", desc: "Built on practical workforce, recruitment, compliance, and people operations expertise." },
-  { icon: <Users className="h-7 w-7" />, title: "Multiple industries", desc: "Supporting hiring needs across technology, finance, HR, operations, customer success, and leadership." },
-  { icon: <Star className="h-7 w-7" />, title: "Diaspora + local reach", desc: "Connecting employers with both returning diaspora professionals and strong local talent." },
+  { icon: <TrendingUp className="h-7 w-7" />, title: "Global HR Leadership", desc: "Guidance shaped by senior hiring experience across African and international markets." },
+  { icon: <ShieldCheck className="h-7 w-7" />, title: "15+ Years Experience", desc: "Built on practical workforce, recruitment, compliance, and people operations expertise." },
+  { icon: <Users className="h-7 w-7" />, title: "Multi-Industry Reach", desc: "Supporting hiring across technology, finance, HR, operations, customer success, and leadership." },
+  { icon: <Star className="h-7 w-7" />, title: "Diaspora + Local Talent", desc: "Connecting employers with returning diaspora professionals and strong local talent pools." },
 ];
 
 const africaStats = [
@@ -38,15 +39,29 @@ const africaStats = [
   { value: "$3T+", label: "Africa's combined GDP by 2030", context: "A continent-sized opportunity that forward-looking companies are already capitalising on." },
   { value: "11M", label: "New professionals annually", context: "Africa adds more young workers to the global economy than any other region each year." },
   { value: "54", label: "Countries, one talent pool", context: "With the right HR partner, pan-African hiring is no longer complex — it's your advantage." },
-  { value: "2", label: "Launch markets", context: "Starting with Ghana and Kenya, then growing carefully into a broader African talent network." },
+  { value: "2", label: "Launch markets: Ghana & Kenya", context: "Starting carefully with two strong markets before growing into a broader African network." },
 ];
 
-const stats = [
+const platformStats = [
   { value: "Ghana", label: "Launch Market" },
   { value: "Kenya", label: "Launch Market" },
   { value: "2026", label: "MVP Launch" },
   { value: "Early", label: "Access Open" },
-  { value: "15+", label: "Years of Experience" },
+  { value: "15+", label: "Yrs Experience" },
+];
+
+const jobSeekerSteps = [
+  { icon: <FileText className="h-5 w-5" />, step: "1", title: "Create Your Profile", desc: "Sign up and build a professional profile that showcases your skills, experience, and career goals." },
+  { icon: <Search className="h-5 w-5" />, step: "2", title: "Discover Opportunities", desc: "Browse vetted roles across Ghana and Kenya, or remote positions open to African talent." },
+  { icon: <Sparkles className="h-5 w-5" />, step: "3", title: "Get AI CV Review", desc: "Use our AI-powered CV tool to sharpen your application and stand out to top employers." },
+  { icon: <Target className="h-5 w-5" />, step: "4", title: "Apply & Advance", desc: "Apply with confidence. Track your applications and grow your career with BridgePath." },
+];
+
+const employerSteps = [
+  { icon: <Building2 className="h-5 w-5" />, step: "1", title: "Create an Employer Account", desc: "Sign up as an employer to access Africa's most qualified diaspora and local professionals." },
+  { icon: <Zap className="h-5 w-5" />, step: "2", title: "Post Your Role", desc: "Describe the position, required experience, and location. We'll surface the right candidates fast." },
+  { icon: <Users className="h-5 w-5" />, step: "3", title: "Browse & Shortlist", desc: "Review pre-screened candidate profiles, assess CVs, and build your shortlist in one place." },
+  { icon: <CheckCircle2 className="h-5 w-5" />, step: "4", title: "Hire with Confidence", desc: "Engage talent directly or let our HR team manage the full hiring and onboarding process." },
 ];
 
 const newsArticles = blogPosts.slice(0, 4).map((p) => ({
@@ -59,10 +74,11 @@ const newsArticles = blogPosts.slice(0, 4).map((p) => ({
 }));
 
 const faqs = [
-  { q: "What does Bridgepath Network do?", a: "Bridgepath Network is a Human Resources Management Solutions and Executive Recruitment company headquartered in Accra, Ghana. With over 15 years of experience, we have established ourselves as a leader in providing comprehensive outsourced HR services across Africa." },
-  { q: "What services does Bridgepath Network offer beyond recruitment?", a: "We offer employment of record, HR consultancy, payroll & tax administration, psychometric assessments, staff outsourcing, interim management, and secondment services." },
-  { q: "Which countries is Bridgepath Network launching in?", a: "Bridgepath Network is launching platform access in Ghana and Kenya first, with a roadmap to expand across Africa as the network grows." },
-  { q: "What industries does Bridgepath Network serve?", a: "We serve clients across technology, FMCG, manufacturing, financial services, healthcare, logistics, hospitality, and NGO sectors." },
+  { q: "What does Bridgepath Network do?", a: "Bridgepath Network is a Human Resources Management Solutions and Executive Recruitment company headquartered in Accra, Ghana. With over 15 years of experience, we connect African talent with quality employers and provide comprehensive outsourced HR services across Africa." },
+  { q: "Who is BridgePath for?", a: "BridgePath serves two groups: professionals (diaspora and local talent) looking for quality careers in Ghana and Kenya, and employers seeking to hire verified African talent — locally or remotely." },
+  { q: "What services does Bridgepath Network offer beyond recruitment?", a: "We offer Employment of Record, HR Consultancy, Payroll & Tax Administration, Psychometric Assessments, Staff Outsourcing, Interim Management, and Secondment Services." },
+  { q: "Which countries is Bridgepath Network launching in?", a: "We are launching platform access in Ghana and Kenya first, with a clear roadmap to expand across Africa as the network grows." },
+  { q: "How does the AI CV Review work?", a: "Our AI CV Review tool analyses your CV against current hiring standards and provides structured feedback to improve your chances of getting shortlisted. Available to all registered professionals." },
   { q: "How can I get in touch with Bridgepath Network?", a: "You can reach us via email at info@bridgepathnetwork.com or by submitting an enquiry through the contact form below. Our headquarters is in Accra, Ghana." },
 ];
 
@@ -89,46 +105,74 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
-      {/* Hero — Full-page vibrant */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b border-gray-100">
+      {/* ── HERO ── */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroImage}
-            alt="African professionals collaborating in a modern boardroom meeting"
+            alt="African professionals collaborating in a modern boardroom"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.92) 35%, rgba(26,35,64,0.78) 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,35,64,0.94) 40%, rgba(26,35,64,0.75) 100%)" }} />
         </div>
         <div className="container mx-auto px-4 md:px-8 relative z-10 py-24">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-sm font-medium" style={{ backgroundColor: GREEN + "25", color: GREEN }}>
               <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GREEN }} />
-              Launching in Ghana and Kenya
+              Now accepting early access — Ghana &amp; Kenya
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-              Connecting Talent<br />
-              to Opportunity<br />
-              <span style={{ color: GREEN }}>Across Africa</span>
+              Your Career.<br />
+              Your Talent.<br />
+              <span style={{ color: GREEN }}>Your Africa.</span>
             </h1>
-            <p className="text-gray-300 text-xl leading-relaxed mb-10 max-w-xl">
-              BridgePath is a modern careers and hiring platform designed to connect diaspora and local professionals with high-quality opportunities across Africa — starting with Ghana and Kenya.
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-4 max-w-xl">
+              BridgePath connects Africa's best professionals with ambitious employers — whether you're building your career or building your team.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+
+            {/* Dual CTA — crystal-clear user journeys */}
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+              {/* Job Seeker path */}
               <Link href="/jobs">
-                <button className="px-8 py-4 font-bold text-white rounded-xl text-lg transition-all hover:opacity-90 active:scale-95 shadow-lg" style={{ backgroundColor: GREEN }}>
-                  Find Opportunities
-                </button>
+                <div className="group rounded-2xl p-5 border-2 cursor-pointer transition-all hover:scale-[1.02]" style={{ backgroundColor: GREEN, borderColor: GREEN }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Search className="h-5 w-5 text-white" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-white/80">For Professionals</span>
+                  </div>
+                  <p className="text-white font-bold text-lg leading-snug">Find Your Next Opportunity</p>
+                  <p className="text-white/70 text-xs mt-1">Browse roles across Ghana, Kenya &amp; remote</p>
+                  <div className="flex items-center gap-1 mt-3 text-white text-sm font-semibold">
+                    Browse Jobs <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
               </Link>
+
+              {/* Employer path */}
               <Link href="/employers">
-                <button className="px-8 py-4 font-bold rounded-xl text-lg border-2 border-white text-white hover:bg-white/10 transition-all">
-                  Hire Talent
-                </button>
+                <div className="group rounded-2xl p-5 border-2 cursor-pointer transition-all hover:scale-[1.02]" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.3)" }}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Building2 className="h-5 w-5 text-white" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-white/80">For Employers</span>
+                  </div>
+                  <p className="text-white font-bold text-lg leading-snug">Hire Top African Talent</p>
+                  <p className="text-white/70 text-xs mt-1">Access pre-screened diaspora &amp; local professionals</p>
+                  <div className="flex items-center gap-1 mt-3 text-white text-sm font-semibold">
+                    Post a Job <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
               </Link>
             </div>
-            <div className="flex items-center gap-6 mt-12">
-              {[{ v: "Ghana", l: "Launch" }, { v: "Kenya", l: "Launch" }, { v: "Early", l: "Access" }].map(s => (
-                <div key={s.l}>
-                  <div className="text-2xl font-bold text-white">{s.v}</div>
+
+            {/* Micro stats */}
+            <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-white/10">
+              {[
+                { v: "Ghana", l: "Launch Market" },
+                { v: "Kenya", l: "Launch Market" },
+                { v: "15+", l: "Years Experience" },
+                { v: "Early", l: "Access Open" },
+              ].map((s, i) => (
+                <div key={i}>
+                  <div className="text-xl font-bold text-white">{s.v}</div>
                   <div className="text-xs text-gray-400">{s.l}</div>
                 </div>
               ))}
@@ -137,125 +181,165 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What is BridgePath — 4 columns grid panels */}
-      <section id="about" className="bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
-        <div className="grid grid-cols-1 md:grid-cols-4" style={{ borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb", maxWidth: "1280px", margin: "0 auto" }}>
-          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
-            <h2 className="text-lg font-bold mb-3" style={{ color: DARK }}>What is BridgePath</h2>
-            <p className="text-gray-500 text-xs leading-relaxed mb-4">BridgePath is built to support the evolving workforce across Africa by making it easier for professionals and employers to find each other with clarity and trust.</p>
-            <ul className="space-y-2">
-              {["Diaspora professionals ready to build careers in Africa", "Local talent seeking quality opportunities in Ghana and Kenya", "Businesses looking for qualified, verified candidates"].map(item => (
-                <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: GREEN }} /> {item}
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs font-medium mt-4 text-gray-700">All in one platform.</p>
+      {/* ── DUAL USER JOURNEY ── */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 md:px-8 py-20 max-w-6xl">
+          <div className="text-center mb-14">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Two paths. One platform.</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
+              How BridgePath <span style={{ color: GREEN }}>works for you</span>
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto">Whether you're growing your career or building a team, BridgePath is built for your journey.</p>
           </div>
 
-          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
-            <h3 className="font-bold text-gray-800 mb-3 text-sm">For Professionals</h3>
-            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Build a profile, explore career growth, and apply easily to quality opportunities across Ghana, Kenya, and remote African markets.</p>
-            <Link href="/auth/signup">
-              <span className="text-xs font-semibold underline underline-offset-2 cursor-pointer" style={{ color: GREEN }}>
-                Create Your Profile →
-              </span>
-            </Link>
-          </div>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-10">
+            {/* Job Seeker Journey */}
+            <div className="rounded-3xl border-2 overflow-hidden" style={{ borderColor: GREEN + "40" }}>
+              <div className="px-7 py-5 flex items-center gap-3" style={{ backgroundColor: GREEN + "12" }}>
+                <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: GREEN }}>
+                  <Search className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider" style={{ color: GREEN }}>For Professionals</p>
+                  <h3 className="font-bold text-lg" style={{ color: DARK }}>Build Your Career in Africa</h3>
+                </div>
+              </div>
+              <div className="px-7 py-6 space-y-5">
+                {jobSeekerSteps.map((s) => (
+                  <div key={s.step} className="flex items-start gap-4">
+                    <div className="h-9 w-9 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-sm" style={{ backgroundColor: GREEN }}>
+                      {s.step}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm" style={{ color: DARK }}>{s.title}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="px-7 py-5 border-t border-gray-100">
+                <Link href="/auth/signup">
+                  <button className="w-full py-3 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90" style={{ backgroundColor: GREEN }}>
+                    Create Your Profile — It's Free
+                  </button>
+                </Link>
+                <Link href="/jobs">
+                  <p className="text-center text-xs mt-2 font-medium hover:underline" style={{ color: GREEN }}>
+                    Browse open roles →
+                  </p>
+                </Link>
+              </div>
+            </div>
 
-          <div className="p-8 md:p-10" style={{ borderRight: "1px solid #e5e7eb" }}>
-            <h3 className="font-bold text-gray-800 mb-3 text-sm">For Employers</h3>
-            <p className="text-xs text-gray-500 mb-4 leading-relaxed">Access diaspora and local professionals, review pre-screened talent, and move faster from search to shortlist.</p>
-            <Link href="/auth/signup?role=employer">
-              <button className="px-4 py-2 text-xs font-semibold text-white rounded-lg" style={{ backgroundColor: DARK }}>
-                Post a Job
-              </button>
-            </Link>
-          </div>
-
-          <div className="p-8 md:p-10">
-            <h3 className="font-bold text-gray-800 mb-3 text-sm">How It Works</h3>
-            <ol className="space-y-3">
-              {["Create Profile", "Discover Opportunities or Talent", "Engage and Grow"].map((step, i) => (
-                <li key={step} className="flex items-center gap-2.5 text-xs text-gray-600">
-                  <span className="h-5 w-5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 text-white" style={{ backgroundColor: GREEN }}>{i + 1}</span>
-                  {step}
-                </li>
-              ))}
-            </ol>
+            {/* Employer Journey */}
+            <div className="rounded-3xl border-2 overflow-hidden" style={{ borderColor: DARK + "25" }}>
+              <div className="px-7 py-5 flex items-center gap-3" style={{ backgroundColor: DARK + "08" }}>
+                <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: DARK }}>
+                  <Building2 className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500">For Employers</p>
+                  <h3 className="font-bold text-lg" style={{ color: DARK }}>Hire Africa's Best Talent</h3>
+                </div>
+              </div>
+              <div className="px-7 py-6 space-y-5">
+                {employerSteps.map((s) => (
+                  <div key={s.step} className="flex items-start gap-4">
+                    <div className="h-9 w-9 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-sm" style={{ backgroundColor: DARK }}>
+                      {s.step}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm" style={{ color: DARK }}>{s.title}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="px-7 py-5 border-t border-gray-100">
+                <Link href="/auth/signup?role=employer">
+                  <button className="w-full py-3 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90" style={{ backgroundColor: DARK }}>
+                    Create an Employer Account
+                  </button>
+                </Link>
+                <Link href="/services">
+                  <p className="text-center text-xs mt-2 font-medium text-gray-500 hover:text-gray-800 hover:underline">
+                    Explore HR services →
+                  </p>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20 bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── FOCUS AREAS ── */}
+      <section className="py-20 bg-gray-50 premium-grid-bg border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Where we hire</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
               Focus areas for <span style={{ color: GREEN }}>high-quality hiring</span>
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">BridgePath focuses on roles and talent communities where Africa’s next wave of growth is already happening.</p>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">BridgePath focuses on roles and talent communities where Africa's next wave of growth is already happening.</p>
           </div>
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.12 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
           >
-            {services.map((s, i) => (
-              <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
-                whileHover={{ y: -10, scale: 1.035, rotateX: -4, rotateY: i % 2 === 0 ? 4 : -4 }}
+            {focusAreas.map((s, i) => (
+              <motion.div
+                key={s.label}
+                variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                whileHover={{ y: -8, scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                className="relative rounded-3xl border border-white/80 bg-white/90 shadow-sm overflow-hidden focus-card-glow"
+                className="relative rounded-3xl border border-gray-100 bg-white shadow-sm overflow-hidden"
               >
-                {"comingSoon" in s && s.comingSoon ? (
-                  <div className="flex flex-col items-center text-center p-8 h-full opacity-50 cursor-not-allowed select-none">
-                    <div className="h-14 w-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-4 text-gray-300">
-                      {s.icon}
-                    </div>
-                    <p className="text-sm font-medium text-gray-400">{s.label}</p>
-                    <span className="mt-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full" style={{ backgroundColor: "#FFF7ED", color: "#C2410C" }}>
-                      <Clock className="h-2.5 w-2.5" /> Coming Soon
-                    </span>
+                <div className="flex flex-col items-center justify-between text-center p-7 min-h-44 group h-full hover:bg-white transition-all">
+                  <div className="absolute inset-x-8 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${GREEN}, transparent)` }} />
+                  <div className="h-14 w-14 rounded-2xl border flex items-center justify-center mb-4 transition-all group-hover:scale-110" style={{ borderColor: GREEN + "55", color: GREEN, background: `linear-gradient(135deg, ${GREEN}14, white)` }}>
+                    {s.icon}
                   </div>
-                ) : (
-                  <div className="relative flex flex-col items-center justify-between text-center p-7 min-h-48 hover:bg-white transition-all group h-full">
-                    <div className="absolute inset-x-8 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${GREEN}, transparent)` }} />
-                    <div className="h-16 w-16 rounded-2xl border flex items-center justify-center mb-5 transition-all group-hover:scale-110 group-hover:rotate-3" style={{ borderColor: GREEN + "55", color: GREEN, background: `linear-gradient(135deg, ${GREEN}14, white)` }}>
-                      {s.icon}
-                    </div>
-                    <p className="text-sm font-bold text-gray-800 group-hover:text-green-700 transition-colors">{s.label}</p>
-                    <span className="mt-4 h-1 w-8 rounded-full opacity-40 group-hover:opacity-100 group-hover:w-12 transition-all" style={{ backgroundColor: GREEN }} />
-                  </div>
-                )}
+                  <p className="text-sm font-bold text-gray-800 group-hover:text-green-700 transition-colors">{s.label}</p>
+                  <span className="mt-3 h-1 w-8 rounded-full opacity-30 group-hover:opacity-100 group-hover:w-12 transition-all" style={{ backgroundColor: GREEN }} />
+                </div>
               </motion.div>
             ))}
           </motion.div>
           <div className="text-center mt-8">
-            <Link href="/services">
-              <button className="flex items-center gap-2 mx-auto px-6 py-3 text-sm font-semibold rounded-xl border-2 transition-all hover:text-white hover:shadow-md" style={{ borderColor: GREEN, color: GREEN, backgroundColor: "transparent" }}
+            <Link href="/jobs">
+              <button
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl border-2 transition-all hover:text-white hover:shadow-md"
+                style={{ borderColor: GREEN, color: GREEN }}
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GREEN; (e.currentTarget as HTMLButtonElement).style.color = "white"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GREEN; }}>
-                Explore opportunities <ArrowRight className="h-4 w-4" />
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GREEN; }}
+              >
+                Browse open roles <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Why Partner */}
-      <section className="bg-gray-50 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── WHY BRIDGEPATH ── */}
+      <section className="bg-white premium-grid-bg border-b border-gray-100">
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: DARK }}>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Why BridgePath</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
               Built on <span style={{ color: GREEN }}>Real Hiring Experience</span>
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-sm">BridgePath combines global HR leadership, 20+ years of experience, and practical knowledge across multiple industries.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto mt-3 text-sm">
+              BridgePath combines global HR leadership, 15+ years of African workforce experience, and a deep understanding of what great hiring looks like.
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {whyPartner.map((w, i) => (
-              <div key={i} className="p-8 md:p-10 text-center"
+              <div
+                key={w.title}
+                className="p-8 md:p-10 text-center"
                 style={{ borderRight: i < whyPartner.length - 1 ? "1px solid #e5e7eb" : "none" }}
               >
                 <div className="h-14 w-14 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: GREEN + "15", color: GREEN }}>
@@ -269,44 +353,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Regional presence */}
-      <section className="py-20 premium-grid-bg-dark" style={{ backgroundColor: "#2d3e2a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      {/* ── REGIONAL PRESENCE ── */}
+      <section className="py-20" style={{ backgroundColor: "#1e2f1a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-6xl mx-auto">
-            <div className="flex-1 w-full text-left">
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6 text-white">
+            <div className="flex-1 w-full">
+              <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Where we operate</span>
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight mt-3 mb-6 text-white">
                 Launching in Ghana<br />and <span style={{ color: GREEN }}>Kenya</span>
-                <br />
-                <span className="text-2xl md:text-3xl font-semibold text-gray-200">Connecting employers and talent</span>
               </h2>
               <p className="text-gray-300 mb-8 leading-relaxed text-base md:text-lg max-w-xl">
-                BridgePath is launching with a clear focus on Ghana and Kenya, while building toward a broader African talent network that connects local and diaspora professionals with serious employers.
+                BridgePath is launching with a clear focus on Ghana and Kenya — two of Africa's fastest-growing talent markets — before expanding to a broader pan-African network.
               </p>
-              <Link href="/auth/signup">
-                <button className="px-6 py-3 font-semibold text-white rounded-lg border border-white/30 hover:bg-white/10 transition-colors text-sm">
-                  Join early access →
-                </button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/auth/signup">
+                  <button className="px-6 py-3 font-semibold text-white rounded-lg transition-all hover:opacity-90" style={{ backgroundColor: GREEN }}>
+                    Join early access
+                  </button>
+                </Link>
+                <Link href="/about">
+                  <button className="px-6 py-3 font-semibold text-white rounded-lg border border-white/30 hover:bg-white/10 transition-colors">
+                    Learn our story →
+                  </button>
+                </Link>
+              </div>
             </div>
             <div className="flex-1 w-full max-w-lg lg:max-w-none">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-[4/3] lg:aspect-[5/4]">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-[4/3]">
                 <img
                   src={credibilityImage}
-                  alt="African women professionals collaborating over laptops in a bright office"
+                  alt="African women professionals collaborating in a bright modern office"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Africa Opportunity — replaces fake testimonials */}
-      <section className="bg-white/95 premium-grid-bg" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── AFRICA OPPORTUNITY STATS ── */}
+      <section className="bg-white premium-grid-bg border-b border-gray-100">
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-200">
+          <div className="px-8 md:px-10 py-12 border-b border-gray-100">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>The Africa Opportunity</span>
@@ -323,7 +413,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {africaStats.map((stat, i) => (
               <div
-                key={i}
+                key={stat.label}
                 className="p-8 md:p-10 group hover:bg-gray-50/60 transition-colors"
                 style={{
                   borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none",
@@ -339,12 +429,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section style={{ backgroundColor: "#4a6741", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      {/* ── PLATFORM STATS BAR ── */}
+      <section style={{ backgroundColor: "#3a5a36", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="grid grid-cols-2 md:grid-cols-5" style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid rgba(255,255,255,0.08)", borderRight: "1px solid rgba(255,255,255,0.08)" }}>
-          {stats.map((s, i) => (
-            <div key={i} className="py-14 text-center"
-              style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}
+          {platformStats.map((s, i) => (
+            <div
+              key={`stat-${i}-${s.label}`}
+              className="py-14 text-center"
+              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}
             >
               <div className="text-3xl md:text-4xl font-bold text-white">{s.value}</div>
               <div className="text-xs font-medium uppercase tracking-wider text-gray-300 mt-1">{s.label}</div>
@@ -353,66 +445,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section id="contact" className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── CONTACT ── */}
+      <section id="contact" className="bg-gray-50 border-b border-gray-100">
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
-            <h2 className="text-3xl font-bold" style={{ color: DARK }}>Start building your future with BridgePath</h2>
-            <p className="text-gray-500 mt-1 text-sm">Launching in Ghana and Kenya. Tell us whether you want to find opportunities or hire talent.</p>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Get in touch</span>
+            <h2 className="text-3xl font-bold mt-2" style={{ color: DARK }}>Start building with BridgePath</h2>
+            <p className="text-gray-500 mt-2 text-sm">Tell us whether you want to find opportunities or hire top talent — we'll get back within 24 hours.</p>
           </div>
           <div className="px-8 md:px-10 py-12">
-          <div className="max-w-2xl mx-auto">
-            <form className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100" onSubmit={handleContactSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                <div>
-                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Full Name</label>
-                  <input className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="Your full name" value={contactForm.name} onChange={e => setContactForm({ ...contactForm, name: e.target.value })} />
+            <div className="max-w-2xl mx-auto">
+              <form className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100" onSubmit={handleContactSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Full Name</label>
+                    <input className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="Your full name" value={contactForm.name} onChange={e => setContactForm({ ...contactForm, name: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Company Name <span className="text-gray-400 font-normal">(optional)</span></label>
+                    <input className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="Your company" value={contactForm.company} onChange={e => setContactForm({ ...contactForm, company: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Email Address</label>
+                    <input type="email" className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="you@example.com" value={contactForm.email} onChange={e => setContactForm({ ...contactForm, email: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">Phone <span className="text-gray-400 font-normal">(optional)</span></label>
+                    <input type="tel" className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="+233 …" value={contactForm.phone} onChange={e => setContactForm({ ...contactForm, phone: e.target.value })} />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="text-sm font-medium text-gray-700 block mb-1.5">I am looking to…</label>
+                    <select className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-300" value={contactForm.type} onChange={e => setContactForm({ ...contactForm, type: e.target.value })}>
+                      <option>Hire talent</option>
+                      <option>Find a job or career opportunity</option>
+                      <option>Outsource HR / payroll</option>
+                      <option>Explore a partnership</option>
+                      <option>Get more information</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Company Name</label>
-                  <input className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="Company name" value={contactForm.company} onChange={e => setContactForm({ ...contactForm, company: e.target.value })} />
+                <div className="mb-6">
+                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Message <span className="text-gray-400 font-normal">(optional)</span></label>
+                  <textarea className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300 resize-none" rows={4} placeholder="Tell us a bit more about what you need…" value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} />
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Email Address</label>
-                  <input type="email" className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="you@example.com" value={contactForm.email} onChange={e => setContactForm({ ...contactForm, email: e.target.value })} />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Phone <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <input type="tel" className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" placeholder="+233 …" value={contactForm.phone} onChange={e => setContactForm({ ...contactForm, phone: e.target.value })} />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="text-sm font-medium text-gray-700 block mb-1.5">Enquiry Type</label>
-                  <select className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-green-300" value={contactForm.type} onChange={e => setContactForm({ ...contactForm, type: e.target.value })}>
-                    <option>Hiring talent</option>
-                    <option>Looking for a job</option>
-                    <option>HR outsourcing</option>
-                    <option>Partnership</option>
-                    <option>Other enquiry</option>
-                  </select>
-                </div>
-              </div>
-              <div className="mb-6">
-                <textarea className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300 resize-none" rows={4} placeholder="Tell us more..." value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} />
-              </div>
-              <button type="submit" disabled={contactSubmitting} className="w-full py-3 font-semibold text-white rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60" style={{ backgroundColor: GREEN }}>
-                {contactSubmitting ? "Sending…" : "Submit Request"}
-              </button>
-              <p className="text-center text-xs text-gray-500 mt-4">
-                Need to speak with us directly? <a href="mailto:info@bridgepathnetwork.com" className="font-semibold underline" style={{ color: GREEN }}>info@bridgepathnetwork.com</a>
-              </p>
-            </form>
-          </div>
+                <button type="submit" disabled={contactSubmitting} className="w-full py-3 font-semibold text-white rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60" style={{ backgroundColor: GREEN }}>
+                  {contactSubmitting ? "Sending…" : "Submit Enquiry"}
+                </button>
+                <p className="text-center text-xs text-gray-500 mt-4">
+                  Prefer email? Reach us at <a href="mailto:info@bridgepathnetwork.com" className="font-semibold underline" style={{ color: GREEN }}>info@bridgepathnetwork.com</a>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* News */}
-      <section className="bg-white" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── NEWS & INSIGHTS ── */}
+      <section className="bg-white border-b border-gray-100">
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-10 border-b border-gray-200 flex items-end justify-between">
+          <div className="px-8 md:px-10 py-10 border-b border-gray-100 flex items-end justify-between">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>News and Insights</h2>
-              <p className="text-gray-500 mt-1 text-sm">For organisations and people</p>
+              <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Knowledge hub</span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-1" style={{ color: DARK }}>News &amp; Insights</h2>
+              <p className="text-gray-500 mt-1 text-sm">For organisations and professionals across Africa</p>
             </div>
             <Link href="/blog" className="text-xs font-semibold flex items-center gap-1 shrink-0" style={{ color: GREEN }}>
               View all <ArrowRight className="h-3 w-3" />
@@ -420,18 +515,19 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4">
             {newsArticles.map((article, i) => (
-              <Link key={i} href={`/blog/${article.slug}`}>
-                <div className="group cursor-pointer h-full flex flex-col hover:bg-gray-50/60 transition-colors"
+              <Link key={article.slug} href={`/blog/${article.slug}`}>
+                <div
+                  className="group cursor-pointer h-full flex flex-col hover:bg-gray-50/60 transition-colors"
                   style={{ borderRight: i < newsArticles.length - 1 ? "1px solid #e5e7eb" : "none" }}
                 >
                   <div className="h-44 overflow-hidden">
                     <img
                       src={article.image}
-                      alt=""
+                      alt={article.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="p-6 flex flex-col flex-1" style={{ borderTop: "1px solid #e5e7eb" }}>
+                  <div className="p-6 flex flex-col flex-1 border-t border-gray-100">
                     <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded w-fit" style={{ backgroundColor: GREEN + "20", color: GREEN }}>{article.tag}</span>
                     <h3 className="font-bold text-gray-900 mt-3 mb-2 text-sm leading-snug group-hover:text-green-700 transition-colors line-clamp-2">{article.title}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{article.excerpt}</p>
@@ -447,23 +543,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-gray-50" style={{ borderBottom: "1px solid #e5e7eb" }}>
+      {/* ── FAQ ── */}
+      <section className="bg-gray-50 border-b border-gray-100">
         <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-200 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>Frequently asked questions</h2>
+          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>FAQs</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>Frequently asked questions</h2>
           </div>
           <div className="px-8 md:px-10 py-10 max-w-3xl mx-auto">
             {faqs.map((faq, i) => (
               <div key={i} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between py-5 text-left text-sm font-semibold hover:text-green-700 transition-colors" style={{ color: DARK }}>
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between py-5 text-left text-sm font-semibold hover:text-green-700 transition-colors"
+                  style={{ color: DARK }}
+                >
                   <span>{faq.q}</span>
-                  {openFaq === i ? <ChevronUp className="h-4 w-4 shrink-0 ml-4" style={{ color: GREEN }} /> : <ChevronDown className="h-4 w-4 shrink-0 ml-4 text-gray-400" />}
+                  {openFaq === i
+                    ? <ChevronUp className="h-4 w-4 shrink-0 ml-4" style={{ color: GREEN }} />
+                    : <ChevronDown className="h-4 w-4 shrink-0 ml-4 text-gray-400" />}
                 </button>
                 {openFaq === i && (
-                  <div className="pb-5 text-xs text-gray-600 leading-relaxed">
-                    {faq.a}
-                  </div>
+                  <div className="pb-5 text-xs text-gray-600 leading-relaxed">{faq.a}</div>
                 )}
               </div>
             ))}
