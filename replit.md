@@ -1,111 +1,74 @@
 # Bridgepath Network
 
-## Overview
+A premium hiring platform connecting African talent with global employers — featuring job listings, AI-powered CV reviews, dashboards for job seekers and employers, and HR consultancy services.
 
-A premium hiring platform connecting global employers with Africa's best talent. Built as a full-stack React + Vite + Express application with Supabase email/password auth, comprehensive service pages, legal pages, and interactive dashboards.
+## Run & Operate
 
-## Brand Colors
-- **Green** (primary): `#8CC63F`
-- **Dark** (secondary): `#1a2340`
+| Command | Purpose |
+|---|---|
+| `pnpm install` | Install all workspace dependencies |
+| `pnpm --filter @workspace/db run push` | Push DB schema changes (dev) |
+| `pnpm --filter @workspace/bridgepath run dev` | Start frontend (port 20522) |
+| `pnpm --filter @workspace/api-server run dev` | Start backend (port 8080) |
+| `pnpm build` | Typecheck + build all packages |
+
+**Required env vars:** `DATABASE_URL` (auto-provisioned), `AI_INTEGRATIONS_OPENAI_API_KEY`, `AI_INTEGRATIONS_OPENAI_BASE_URL` (both auto-set by Replit AI integration).
 
 ## Stack
 
-- **Monorepo tool**: pnpm workspaces
-- **Node.js version**: 24
-- **Package manager**: pnpm
-- **TypeScript version**: 5.9
-- **Frontend**: React 19 + Vite + TailwindCSS v4 + ShadCN UI + Framer Motion
-- **API framework**: Express 5
-- **Database**: PostgreSQL + Drizzle ORM
-- **Validation**: Zod (`zod/v4`), `drizzle-zod`
-- **API codegen**: Orval (from OpenAPI spec)
-- **AI**: OpenAI via Replit AI Integrations (no API key needed)
-- **Build**: esbuild
+- **Frontend:** React 19, Vite 7, TailwindCSS v4, ShadCN UI, Radix UI, Framer Motion, Wouter (routing), TanStack Query
+- **Backend:** Node.js 24, Express 5, Pino logging, esbuild (bundler)
+- **Database:** PostgreSQL via Replit, Drizzle ORM
+- **AI:** OpenAI via Replit AI Integrations (`gpt-5-mini` for CV analysis)
+- **Auth:** Custom JWT (sha256 hash + base64 token), stored in localStorage
+- **Payments:** Stripe (configured, not fully wired)
+- **Monorepo:** pnpm workspaces
 
-## Key Commands
+## Where things live
 
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- `pnpm --filter @workspace/api-server run dev` — run API server locally
+```
+artifacts/
+  bridgepath/      # React frontend (src/, vite.config.ts)
+  api-server/      # Express backend (src/routes/, src/lib/)
+lib/
+  db/              # Drizzle schema + migrations (src/schema/)
+  api-spec/        # OpenAPI spec (openapi.yaml) — source of truth for API
+  api-client-react/ # Generated React Query hooks (via Orval)
+  api-zod/         # Generated Zod schemas (via Orval)
+```
 
-## Project Structure
+## Architecture Decisions
 
-- `artifacts/bridgepath/` — React frontend (landing page, dashboards, CV review, jobs, services, about)
-- `artifacts/api-server/` — Express backend (auth, jobs, applications, CV reviews, payments, stats)
-- `lib/db/` — Drizzle schema (users, profiles, jobs, applications, cv_reviews)
-- `lib/api-spec/openapi.yaml` — OpenAPI spec (source of truth)
-- `lib/api-client-react/` — Generated React Query hooks
-- `lib/api-zod/` — Generated Zod schemas
+- **Vite proxy for `/api`:** The frontend dev server proxies `/api/*` to `localhost:8080`, so all API calls use relative URLs — no CORS issues in dev.
+- **Custom JWT auth (no Supabase/Clerk):** Auth is implemented directly in Express using sha256 hashing and base64 tokens. Demo mode auto-creates accounts for unknown emails.
+- **pnpm workspaces with catalog:** All shared dependency versions are pinned in `pnpm-workspace.yaml` catalog to prevent version drift.
+- **OpenAI via Replit AI Integrations:** CV review AI uses `AI_INTEGRATIONS_OPENAI_API_KEY` / `AI_INTEGRATIONS_OPENAI_BASE_URL` — no external API key needed.
+- **esbuild bundling for backend:** The API server is bundled with esbuild for fast cold starts; pino logging uses a plugin for worker compatibility.
 
-## Features
+## Product
 
-1. **Landing page** (`/`) — Ghana/Kenya launch-focused hero, client image assets, animated focus-area cards, credibility section, contact form, news, FAQ
-2. **Supabase Auth** — Email/password signup and login with confirmation callback, role persistence, and optional magic-link fallback.
-3. **Services overview** (`/services`) — Grid of all 9 HR services with links to detail pages
-4. **Service detail pages** (`/services/:slug`) — Rich pages with hero, stats, benefits, process steps, FAQs for each of 9 services
-5. **About page** (`/about`) — Company story, timeline, team, values
-6. **Job Seeker Dashboard** (`/dashboard/jobseeker`) — Application tracking, AI CV review CTA, mock data
-7. **Employer Dashboard** (`/dashboard/employer`) — Active jobs, applications received, shortlisted candidates, quick actions, candidate previews
-8. **Jobs Listing** (`/jobs`) — Search, filter by location and type, 12 mock jobs
-9. **AI CV Review** (`/cv-review`) — Free AI analysis via OpenAI
-10. **Human HR Review** — Paid $20 upgrade via Stripe (Stripe not connected)
-11. **BackToTop** — Global floating button on all pages (triggers at 400px scroll)
-12. **ChatSupport** — Floating chat widget with auto-replies and quick options
-13. **Legal pages** — `/privacy`, `/terms`, and `/cookies` linked from the footer
-14. **Employer landing page** (`/employers`) — Public employer CTA page with African professional team photo, Post a Job and Browse Candidates actions, Why BridgePath feature grid
-15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages. Candidate cards now show real African professional photos from local assets.
-16. **Blog imagery** — Blog cards, author avatars, article heroes, and login hero use local African professional photos from `attached_assets/unnamed_*.jpg`; article heroes use a taller `50vh` layout to avoid cramped cropping.
-17. **Premium visual system** — Global typography uses Plus Jakarta Sans with DM Serif Display for major headings. Public pages, article pages, service pages, and dashboards use subtle geometric grid backgrounds. MVP stats are framed honestly around Ghana/Kenya launch access, early access, 2026 launch, and 15+ years of HR experience.
-18. **Demo mode** — Dashboard sidebar shows "Demo mode" badge, "Exit Demo" green button (logs out → /auth/login), and "Create real account" CTA for demo users. Mobile header shows "Exit Demo" shortcut.
-19. **Mobile optimization** — All public pages use responsive padding (`px-4 md:px-10`), section spacing (`py-12 md:py-20`), and fluid grid breakpoints. Stats bars, focus area cards, news grids, and service step grids all adapt cleanly to small screens.
+- Landing page with hero, services overview, and employer/job seeker CTAs
+- Job listings with search, filtering, and detailed job pages
+- Employer dashboard: post jobs, manage candidates, view applications
+- Job seeker dashboard: track applications, manage profile
+- AI CV Review: upload CV text → GPT analysis with scores, strengths, and recommendations
+- 9 HR service pages (Employment of Record, Payroll & Tax, etc.)
+- Demo mode: pre-configured accounts for testing without registration
 
-## Auth Flow
+## User Preferences
 
-- Auth is handled entirely by the backend (`POST /api/auth/login`, `POST /api/auth/register`).
-- Login/signup stores the user and token in localStorage (`bridgepath_token`, `bridgepath_user`).
-- Demo accounts (jobseeker@demo.bridgepath.network / Demo123!, employer@demo.bridgepath.network / Demo123!) bypass the backend and use localStorage only.
-- Role and display name are persisted locally for routing and dashboard personalization.
-- No external auth provider is required — all auth is self-contained.
+_Populate as you build_
 
-## Services (9 slugs)
+## Gotchas
 
-| Slug | Label |
-|------|-------|
-| `employment-of-record` | Employment of Record |
-| `secondment-services` | Secondment Services |
-| `expatriate-services` | Expatriate Services |
-| `hr-consultancy` | HR Consultancy |
-| `payroll-tax` | Payroll & Tax Administration |
-| `psychometric-assessments` | Psychometric Assessments |
-| `recruitment-services` | Recruitment Services |
-| `staff-outsourcing` | Staff Outsourcing |
-| `interim-management` | Interim Management |
+- **Always run `pnpm install` before starting workflows** — node_modules may be missing after a fresh clone.
+- **Backend must be running for API calls** — Vite proxies `/api` to port 8080; if the backend is down, all API calls fail.
+- **DB schema changes:** Run `pnpm --filter @workspace/db run push` after editing `lib/db/src/schema/`. Replit's publish flow handles production schema diffs automatically.
+- **pnpm preinstall script** blocks `npm install` — always use `pnpm`.
 
-## Global Components
+## Pointers
 
-- `BackToTop` — `/src/components/ui/BackToTop.tsx`
-- `ChatSupport` — `/src/components/ui/ChatSupport.tsx`
-- Both mounted in `App.tsx` outside the router, always visible
-
-## Navbar
-
-- Top bar with social links + contact info + "Become a Member"
-- Main nav with Services dropdown (9 services), About, Find Jobs, Contact
-- User avatar dropdown with Dashboard, Profile, Logout when signed in
-- Mobile hamburger menu
-- Employer sidebar navigation uses Dashboard/Jobs, Candidates, Messages, with Post a Job kept as a separate header action.
-- Protected role mismatches redirect users to their own dashboard instead of the public home page.
-
-## DB Schema Notes
-
-- Supabase `profiles` table should include `id`, `role`, `full_name`, profile/contact fields, company fields, `preferences`, `onboarding_completed_at`, and `updated_at`.
-- API server still contains legacy local auth/database code; the active frontend authentication path is Supabase.
-
-## Stripe Integration
-
-Stripe was NOT connected via Replit integration. To enable payments:
-1. Connect Stripe integration in Replit
-2. Set `STRIPE_SECRET_KEY` and `STRIPE_PUBLISHABLE_KEY`
-3. Update payment routes in `artifacts/api-server/src/routes/payments.ts`
+- DB schema: `lib/db/src/schema/`
+- API routes: `artifacts/api-server/src/routes/`
+- Frontend pages: `artifacts/bridgepath/src/pages/`
+- Auth logic: `artifacts/api-server/src/lib/auth.ts` + `artifacts/bridgepath/src/lib/auth.tsx`
