@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { upsertProfile } from "@/lib/supabaseProfile";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, CheckCircle2, User, Briefcase, MapPin, GraduationCap, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, User, Briefcase, MapPin, Loader2, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { isDemoEmail } from "@/lib/demoAuth";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -20,6 +21,19 @@ const skillOptions = ["Software Engineering", "Data Science", "Finance", "HR & R
 const locationOptions = ["Accra, Ghana", "Lagos, Nigeria", "Nairobi, Kenya", "Johannesburg, South Africa", "Kampala, Uganda", "Dar es Salaam, Tanzania", "Remote", "Any Location in Africa", "Open to Relocation"];
 const jobTypeOptions = ["Full-time", "Part-time", "Contract", "Freelance", "Internship"];
 
+const DEMO_INFO = {
+  bio: "Passionate software engineer with 5 years of experience building scalable fintech and data platforms across Ghana and Kenya. Skilled in Python, React, and cloud architecture — currently seeking remote roles with global employers.",
+  location: "Accra, Ghana",
+  linkedin: "https://linkedin.com/in/ama-boateng",
+};
+const DEMO_SKILLS = ["Software Engineering", "Data Science", "Finance"];
+const DEMO_EXPERIENCE = "3–5 years";
+const DEMO_PREFS = {
+  locations: ["Accra, Ghana", "Remote", "Any Location in Africa"],
+  types: ["Full-time", "Contract"],
+  salary: "$4,000 – $7,000 / month",
+};
+
 export default function JobSeekerOnboarding() {
   const [, setLocation] = useLocation();
   const { user } = useAuth();
@@ -27,16 +41,27 @@ export default function JobSeekerOnboarding() {
   const [step, setStep] = useState(1);
   const [saving, setSaving] = useState(false);
 
+  const isDemo = isDemoEmail(user?.email);
+
   const [info, setInfo] = useState({ bio: "", location: "", linkedin: "" });
   const [skills, setSkills] = useState<string[]>([]);
   const [experience, setExperience] = useState("");
   const [prefs, setPrefs] = useState({ locations: [] as string[], types: [] as string[], salary: "" });
 
+  useEffect(() => {
+    if (isDemo) {
+      setInfo(DEMO_INFO);
+      setSkills(DEMO_SKILLS);
+      setExperience(DEMO_EXPERIENCE);
+      setPrefs(DEMO_PREFS);
+    }
+  }, [isDemo]);
+
   const toggleArr = (arr: string[], val: string) =>
     arr.includes(val) ? arr.filter((x) => x !== val) : [...arr, val];
 
   const persist = async (markComplete: boolean) => {
-    if (!user) return;
+    if (!user || isDemo) return;
     try {
       await upsertProfile({
         id: user.id,
@@ -45,8 +70,6 @@ export default function JobSeekerOnboarding() {
         linkedin_url: info.linkedin || null,
         skills,
         experience: experience || null,
-        preferences: { jobSeeker: prefs },
-        ...(markComplete ? { onboarding_completed_at: new Date().toISOString() } : {}),
       });
     } catch {
       toast({ variant: "destructive", title: "Could not save", description: "Try again from Profile later." });
@@ -57,19 +80,14 @@ export default function JobSeekerOnboarding() {
     setSaving(true);
     await persist(true);
     setSaving(false);
-    setLocation("/dashboard/jobseeker");
+    setLocation(isDemo ? "/dashboard/jobseeker" : "/dashboard/jobseeker");
   };
 
-  const handleSkip = async () => {
+  const handleNext = async () => {
     if (step < 3) {
-      await persist(false);
+      if (!isDemo) await persist(false);
       setStep(step + 1);
-      return;
     }
-    setSaving(true);
-    await persist(true);
-    setSaving(false);
-    setLocation("/dashboard/jobseeker");
   };
 
   return (
@@ -80,10 +98,26 @@ export default function JobSeekerOnboarding() {
           <span className="font-bold text-lg" style={{ color: DARK }}>Bridgepath<span style={{ color: GREEN }}>Network</span></span>
           <span className="text-[10px] italic text-gray-400">Shaping People. Strengthening Institutions.</span>
         </div>
-        <button onClick={handleSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
-          Skip for now →
-        </button>
+        {isDemo ? (
+          <div className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full" style={{ backgroundColor: GREEN + "18", color: GREEN }}>
+            <Sparkles className="h-3.5 w-3.5" /> Demo Tour
+          </div>
+        ) : (
+          <button onClick={handleFinish} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+            Skip for now →
+          </button>
+        )}
       </div>
+
+      {/* Demo banner */}
+      {isDemo && (
+        <div className="border-b px-6 py-3 flex items-center gap-3" style={{ backgroundColor: DARK, borderColor: DARK }}>
+          <Sparkles className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+          <p className="text-sm text-white">
+            <span className="font-semibold">Demo mode:</span> You're exploring as <span style={{ color: GREEN }}>Ama Boateng</span>. All data is pre-filled — just click <span className="font-semibold">Next</span> to continue.
+          </p>
+        </div>
+      )}
 
       {/* Progress */}
       <div className="bg-white border-b border-gray-100 px-6 py-4">
@@ -112,25 +146,40 @@ export default function JobSeekerOnboarding() {
             {step === 1 && (
               <motion.div key="1" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Tell us about yourself</h2>
-                <p className="text-gray-500 mb-8 text-sm">Helps employers find you faster. You can always edit this later.</p>
+                <p className="text-gray-500 mb-8 text-sm">
+                  {isDemo ? "Here's your pre-filled demo profile — just click Next to continue." : "Helps employers find you faster. You can always edit this later."}
+                </p>
                 <div className="space-y-5">
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Short Bio</label>
                     <textarea
                       rows={3}
                       placeholder="e.g. Passionate software engineer with 5 years of experience in fintech..."
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-300 resize-none"
+                      className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-300 resize-none disabled:bg-gray-50 disabled:text-gray-600 disabled:cursor-not-allowed"
                       value={info.bio}
                       onChange={(e) => setInfo({ ...info, bio: e.target.value })}
+                      disabled={isDemo}
                     />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Current Location</label>
-                    <Input placeholder="e.g. Accra, Ghana" value={info.location} onChange={(e) => setInfo({ ...info, location: e.target.value })} className="h-11" />
+                    <Input
+                      placeholder="e.g. Accra, Ghana"
+                      value={info.location}
+                      onChange={(e) => setInfo({ ...info, location: e.target.value })}
+                      className="h-11 disabled:bg-gray-50 disabled:text-gray-600 disabled:cursor-not-allowed"
+                      disabled={isDemo}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">LinkedIn Profile <span className="text-gray-400 font-normal">(optional)</span></label>
-                    <Input placeholder="https://linkedin.com/in/yourname" value={info.linkedin} onChange={(e) => setInfo({ ...info, linkedin: e.target.value })} className="h-11" />
+                    <Input
+                      placeholder="https://linkedin.com/in/yourname"
+                      value={info.linkedin}
+                      onChange={(e) => setInfo({ ...info, linkedin: e.target.value })}
+                      className="h-11 disabled:bg-gray-50 disabled:text-gray-600 disabled:cursor-not-allowed"
+                      disabled={isDemo}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -139,23 +188,37 @@ export default function JobSeekerOnboarding() {
             {step === 2 && (
               <motion.div key="2" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Skills &amp; Experience</h2>
-                <p className="text-gray-500 mb-6 text-sm">Select the areas you work in. Pick all that apply.</p>
+                <p className="text-gray-500 mb-6 text-sm">
+                  {isDemo ? "Pre-selected skills for this demo profile." : "Select the areas you work in. Pick all that apply."}
+                </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {skillOptions.map((skill) => (
-                    <button key={skill} onClick={() => setSkills(toggleArr(skills, skill))}
-                      className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
-                      style={{
-                        backgroundColor: skills.includes(skill) ? GREEN : "white",
-                        color: skills.includes(skill) ? "white" : "#555",
-                        borderColor: skills.includes(skill) ? GREEN : "#e5e7eb",
-                      }}>
-                      {skill}
-                    </button>
-                  ))}
+                  {skillOptions.map((skill) => {
+                    const selected = skills.includes(skill);
+                    return (
+                      <button
+                        key={skill}
+                        onClick={() => !isDemo && setSkills(toggleArr(skills, skill))}
+                        disabled={isDemo}
+                        className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: selected ? GREEN : "white",
+                          color: selected ? "white" : isDemo ? "#bbb" : "#555",
+                          borderColor: selected ? GREEN : "#e5e7eb",
+                          opacity: isDemo && !selected ? 0.5 : 1,
+                        }}>
+                        {skill}
+                      </button>
+                    );
+                  })}
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Years of Experience</label>
-                  <select className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-300" value={experience} onChange={(e) => setExperience(e.target.value)}>
+                  <select
+                    className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-300 disabled:bg-gray-50 disabled:text-gray-600 disabled:cursor-not-allowed"
+                    value={experience}
+                    onChange={(e) => !isDemo && setExperience(e.target.value)}
+                    disabled={isDemo}
+                  >
                     <option value="">Select years</option>
                     {["0–1 years (Entry level)", "1–3 years", "3–5 years", "5–10 years", "10+ years"].map((y) => (
                       <option key={y} value={y}>{y}</option>
@@ -168,42 +231,64 @@ export default function JobSeekerOnboarding() {
             {step === 3 && (
               <motion.div key="3" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Job Preferences</h2>
-                <p className="text-gray-500 mb-6 text-sm">Tell us what kind of opportunities you're looking for.</p>
+                <p className="text-gray-500 mb-6 text-sm">
+                  {isDemo ? "Pre-set preferences for this demo. Click Complete Setup to see your dashboard." : "Tell us what kind of opportunities you're looking for."}
+                </p>
                 <div className="mb-5">
                   <label className="text-sm font-medium text-gray-700 block mb-2">Preferred Locations</label>
                   <div className="flex flex-wrap gap-2">
-                    {locationOptions.map((loc) => (
-                      <button key={loc} onClick={() => setPrefs({ ...prefs, locations: toggleArr(prefs.locations, loc) })}
-                        className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
-                        style={{
-                          backgroundColor: prefs.locations.includes(loc) ? GREEN : "white",
-                          color: prefs.locations.includes(loc) ? "white" : "#555",
-                          borderColor: prefs.locations.includes(loc) ? GREEN : "#e5e7eb",
-                        }}>
-                        {loc}
-                      </button>
-                    ))}
+                    {locationOptions.map((loc) => {
+                      const selected = prefs.locations.includes(loc);
+                      return (
+                        <button
+                          key={loc}
+                          onClick={() => !isDemo && setPrefs({ ...prefs, locations: toggleArr(prefs.locations, loc) })}
+                          disabled={isDemo}
+                          className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
+                          style={{
+                            backgroundColor: selected ? GREEN : "white",
+                            color: selected ? "white" : isDemo ? "#bbb" : "#555",
+                            borderColor: selected ? GREEN : "#e5e7eb",
+                            opacity: isDemo && !selected ? 0.5 : 1,
+                          }}>
+                          {loc}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="mb-5">
                   <label className="text-sm font-medium text-gray-700 block mb-2">Job Type</label>
                   <div className="flex flex-wrap gap-2">
-                    {jobTypeOptions.map((t) => (
-                      <button key={t} onClick={() => setPrefs({ ...prefs, types: toggleArr(prefs.types, t) })}
-                        className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
-                        style={{
-                          backgroundColor: prefs.types.includes(t) ? DARK : "white",
-                          color: prefs.types.includes(t) ? "white" : "#555",
-                          borderColor: prefs.types.includes(t) ? DARK : "#e5e7eb",
-                        }}>
-                        {t}
-                      </button>
-                    ))}
+                    {jobTypeOptions.map((t) => {
+                      const selected = prefs.types.includes(t);
+                      return (
+                        <button
+                          key={t}
+                          onClick={() => !isDemo && setPrefs({ ...prefs, types: toggleArr(prefs.types, t) })}
+                          disabled={isDemo}
+                          className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
+                          style={{
+                            backgroundColor: selected ? DARK : "white",
+                            color: selected ? "white" : isDemo ? "#bbb" : "#555",
+                            borderColor: selected ? DARK : "#e5e7eb",
+                            opacity: isDemo && !selected ? 0.5 : 1,
+                          }}>
+                          {t}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Expected Salary <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <Input placeholder="e.g. $3,000 – $5,000 / month" value={prefs.salary} onChange={(e) => setPrefs({ ...prefs, salary: e.target.value })} className="h-11" />
+                  <Input
+                    placeholder="e.g. $3,000 – $5,000 / month"
+                    value={prefs.salary}
+                    onChange={(e) => !isDemo && setPrefs({ ...prefs, salary: e.target.value })}
+                    className="h-11 disabled:bg-gray-50 disabled:text-gray-600 disabled:cursor-not-allowed"
+                    disabled={isDemo}
+                  />
                 </div>
               </motion.div>
             )}
@@ -211,35 +296,45 @@ export default function JobSeekerOnboarding() {
 
           {/* Navigation */}
           <div className="flex items-center justify-between mt-10">
-            <button
-              onClick={() => step > 1 ? setStep(step - 1) : undefined}
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${step === 1 ? "text-gray-300 cursor-not-allowed" : "text-gray-500 hover:text-gray-800"}`}
-              disabled={step === 1}
-            >
-              <ArrowLeft className="h-4 w-4" /> Back
-            </button>
-            <div className="flex items-center gap-3">
-              <button onClick={handleSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors px-4 py-2">
-                Skip
+            {isDemo ? (
+              <div />
+            ) : (
+              <button
+                onClick={() => step > 1 ? setStep(step - 1) : undefined}
+                className={`flex items-center gap-2 text-sm font-medium transition-colors ${step === 1 ? "text-gray-300 cursor-not-allowed" : "text-gray-500 hover:text-gray-800"}`}
+                disabled={step === 1}
+              >
+                <ArrowLeft className="h-4 w-4" /> Back
               </button>
+            )}
+            <div className="flex items-center gap-3 ml-auto">
               {step < 3 ? (
-                <button onClick={() => setStep(step + 1)}
+                <button
+                  onClick={handleNext}
                   className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-md"
-                  style={{ backgroundColor: GREEN }}>
+                  style={{ backgroundColor: GREEN }}
+                >
                   Next <ArrowRight className="h-4 w-4" />
                 </button>
               ) : (
-                <button onClick={handleFinish} disabled={saving}
+                <button
+                  onClick={handleFinish}
+                  disabled={saving}
                   className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-md disabled:opacity-60"
-                  style={{ backgroundColor: GREEN }}>
-                  {saving ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</> : <>Complete Setup <CheckCircle2 className="h-4 w-4" /></>}
+                  style={{ backgroundColor: GREEN }}
+                >
+                  {saving
+                    ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</>
+                    : <><CheckCircle2 className="h-4 w-4" /> {isDemo ? "Enter Dashboard" : "Complete Setup"}</>}
                 </button>
               )}
             </div>
           </div>
 
           <p className="text-center text-xs text-gray-400 mt-6">
-            You can always update these in your profile settings later.
+            {isDemo
+              ? "This is a demo — no data is saved. Create a real account to save your profile."
+              : "You can always update these in your profile settings later."}
           </p>
         </div>
       </div>

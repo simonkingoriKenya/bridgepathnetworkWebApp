@@ -6,7 +6,7 @@ import { Link } from "wouter";
 import {
   FileText, Send, CheckCircle2, Clock, ArrowRight, Eye, Bot,
   ShieldCheck, TrendingUp, Briefcase, Sparkles, ChevronRight,
-  Search, Bell, LayoutDashboard
+  Search, Bell, LayoutDashboard, X, UserPlus
 } from "lucide-react";
 import { format } from "date-fns";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
@@ -74,6 +74,7 @@ function KPICard({ label, value, sub, icon, accent, trend }: {
 export default function JobSeekerDashboard() {
   const { user } = useAuth();
   const isDemo = isDemoEmail(user?.email);
+  const [demoBannerDismissed, setDemoBannerDismissed] = useState(false);
   const { data: stats, isLoading: statsLoading } = useGetDashboardStats({
     query: { queryKey: ["dashboardStats"], enabled: !isDemo }
   });
@@ -107,6 +108,31 @@ export default function JobSeekerDashboard() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+
+      {/* ── DEMO BANNER ── */}
+      {isDemo && !demoBannerDismissed && (
+        <div className="flex items-center justify-between rounded-2xl px-5 py-4 border gap-3" style={{ backgroundColor: DARK, borderColor: DARK }}>
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="h-8 w-8 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: GREEN + "25" }}>
+              <Sparkles className="h-4 w-4" style={{ color: GREEN }} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-white">You're in demo mode as <span style={{ color: GREEN }}>Ama Boateng</span></p>
+              <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">Explore the full platform — data is not saved. Create an account to get started for real.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Link href="/auth/signup">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: GREEN }}>
+                <UserPlus className="h-3.5 w-3.5" /> Create account
+              </button>
+            </Link>
+            <button onClick={() => setDemoBannerDismissed(true)} className="p-1.5 rounded-lg text-gray-400 hover:text-white transition-colors">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── TOP: Welcome + next action ── */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

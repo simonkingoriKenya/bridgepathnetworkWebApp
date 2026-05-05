@@ -19,6 +19,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [demoLoading, setDemoLoading] = useState<"jobseeker" | "employer" | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +40,19 @@ export default function Login() {
     }
     toast({ title: "Signed in", description: "Welcome back to Bridgepath Network." });
     setLocation(result.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
+  };
+
+  const handleDemoLogin = async (type: "jobseeker" | "employer") => {
+    setDemoLoading(type);
+    const demo = type === "jobseeker" ? DEMO_JOBSEEKER : DEMO_EMPLOYER;
+    const result = await signInWithPassword(demo.email, demo.password);
+    setDemoLoading(null);
+    if (result.error) {
+      toast({ variant: "destructive", title: "Demo login failed", description: result.error });
+      return;
+    }
+    const dest = type === "employer" ? "/onboarding/employer" : "/onboarding/jobseeker";
+    setLocation(dest);
   };
 
   return (
@@ -179,45 +193,54 @@ export default function Login() {
             className="mt-8 rounded-2xl border border-dashed p-4"
             style={{ borderColor: GREEN + "60", backgroundColor: GREEN + "08" }}
           >
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-2">
               <Sparkles className="h-4 w-4" style={{ color: GREEN }} />
               <p className="text-xs font-bold uppercase tracking-wider" style={{ color: DARK }}>
-                Try the demo accounts
+                Try a live demo — one click
               </p>
             </div>
             <p className="text-xs text-gray-500 mb-3 leading-relaxed">
-              Explore the platform end-to-end without signing up. Click a card to autofill the form.
+              No sign-up needed. Click a card to instantly enter a guided demo experience.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button
                 type="button"
-                onClick={() => {
-                  setEmail(DEMO_JOBSEEKER.email);
-                  setPassword(DEMO_JOBSEEKER.password);
-                }}
-                className="text-left rounded-xl p-3 bg-white border border-gray-200 hover:border-green-400 hover:shadow-sm transition-all group"
+                onClick={() => handleDemoLogin("jobseeker")}
+                disabled={!!demoLoading}
+                className="text-left rounded-xl p-3.5 bg-white border-2 border-transparent hover:border-green-400 hover:shadow-md transition-all group disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}
               >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Briefcase className="h-3.5 w-3.5" style={{ color: GREEN }} />
-                  <span className="text-xs font-bold" style={{ color: DARK }}>Job Seeker</span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="h-7 w-7 rounded-full flex items-center justify-center text-white font-bold text-xs" style={{ backgroundColor: GREEN }}>A</div>
+                    <span className="text-sm font-bold" style={{ color: DARK }}>Job Seeker</span>
+                  </div>
+                  {demoLoading === "jobseeker"
+                    ? <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                    : <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-green-500 transition-colors" />}
                 </div>
-                <p className="text-[11px] text-gray-500 font-mono break-all">{DEMO_JOBSEEKER.email}</p>
-                <p className="text-[11px] text-gray-400 font-mono mt-0.5">Password: {DEMO_JOBSEEKER.password}</p>
+                <p className="text-xs text-gray-500 leading-snug">Ama Boateng · Software Engineer</p>
+                <p className="text-[11px] text-gray-400 mt-0.5">Accra, Ghana · Looking for remote roles</p>
               </button>
+
               <button
                 type="button"
-                onClick={() => {
-                  setEmail(DEMO_EMPLOYER.email);
-                  setPassword(DEMO_EMPLOYER.password);
-                }}
-                className="text-left rounded-xl p-3 bg-white border border-gray-200 hover:border-green-400 hover:shadow-sm transition-all group"
+                onClick={() => handleDemoLogin("employer")}
+                disabled={!!demoLoading}
+                className="text-left rounded-xl p-3.5 bg-white border-2 border-transparent hover:border-green-400 hover:shadow-md transition-all group disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}
               >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Users className="h-3.5 w-3.5" style={{ color: GREEN }} />
-                  <span className="text-xs font-bold" style={{ color: DARK }}>Employer</span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="h-7 w-7 rounded-full flex items-center justify-center text-white font-bold text-xs" style={{ backgroundColor: DARK }}>K</div>
+                    <span className="text-sm font-bold" style={{ color: DARK }}>Employer</span>
+                  </div>
+                  {demoLoading === "employer"
+                    ? <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                    : <ArrowRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-green-500 transition-colors" />}
                 </div>
-                <p className="text-[11px] text-gray-500 font-mono break-all">{DEMO_EMPLOYER.email}</p>
-                <p className="text-[11px] text-gray-400 font-mono mt-0.5">Password: {DEMO_EMPLOYER.password}</p>
+                <p className="text-xs text-gray-500 leading-snug">Kofi Mensah · TechBridge Africa</p>
+                <p className="text-[11px] text-gray-400 mt-0.5">Technology · Hiring across Ghana &amp; Kenya</p>
               </button>
             </div>
           </motion.div>

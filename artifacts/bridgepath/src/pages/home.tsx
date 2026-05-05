@@ -1,16 +1,18 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/auth";
 import { blogPosts } from "@/pages/blog/index";
+import { DEMO_JOBSEEKER, DEMO_EMPLOYER } from "@/lib/demoAuth";
 import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
   UserCheck, Calculator, ChevronDown, ChevronUp,
   TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock,
   Code2, Landmark, Headphones, Crown, Search, Sparkles,
-  Building2, MapPin, Zap, Target
+  Building2, MapPin, Zap, Target, Loader2
 } from "lucide-react";
 import heroImage from "@assets/Hero_1778003129768.png";
 import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
@@ -84,9 +86,21 @@ const faqs = [
 
 export default function Home() {
   const { toast } = useToast();
+  const { signInWithPassword } = useAuth();
+  const [, setLocation] = useLocation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [contactForm, setContactForm] = useState({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
   const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  const handleTryDemo = async () => {
+    setDemoLoading(true);
+    const result = await signInWithPassword(DEMO_JOBSEEKER.email, DEMO_JOBSEEKER.password);
+    setDemoLoading(false);
+    if (!result.error) {
+      setLocation("/onboarding/jobseeker");
+    }
+  };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,7 +154,7 @@ export default function Home() {
                 The premium careers and hiring platform connecting Africa's brightest professionals with ambitious employers — starting in Ghana and Kenya.
               </p>
 
-              {/* Two clean CTAs */}
+              {/* CTAs */}
               <div className="flex flex-wrap gap-3">
                 <Link href="/jobs">
                   <button className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white shadow-lg transition-all hover:scale-[1.03] active:scale-[0.98]" style={{ backgroundColor: GREEN }}>
@@ -154,6 +168,15 @@ export default function Home() {
                     Hire Talent
                   </button>
                 </Link>
+                <button
+                  onClick={handleTryDemo}
+                  disabled={demoLoading}
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm border border-white/20 backdrop-blur-sm transition-all hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: "rgba(140,198,63,0.15)", color: GREEN }}
+                >
+                  {demoLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                  Try Demo
+                </button>
               </div>
 
               {/* Minimal trust line */}

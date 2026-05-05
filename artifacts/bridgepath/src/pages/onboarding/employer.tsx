@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { upsertProfile } from "@/lib/supabaseProfile";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, CheckCircle2, Briefcase, Users, Globe, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, Briefcase, Users, Globe, Loader2, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { isDemoEmail } from "@/lib/demoAuth";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -21,6 +22,10 @@ const sizeOptions = ["1–10 employees", "11–50 employees", "51–200 employee
 const hiringTypes = ["Full-time staff", "Contract / Freelance", "Interns", "Executive / C-Suite", "Remote workers", "EoR (Employment of Record)"];
 const countryOptions = ["Ghana", "Nigeria", "Kenya", "South Africa", "Uganda", "Tanzania", "Rwanda", "Ethiopia", "Senegal", "Zambia", "Other African countries", "Multiple countries"];
 
+const DEMO_COMPANY = { name: "TechBridge Africa", website: "https://techbridge.africa", industry: "Technology", size: "51–200 employees" };
+const DEMO_HIRING = { types: ["Full-time staff", "Contract / Freelance", "Remote workers"], urgency: "Within 1–3 months", roles: "Software Engineers, Data Analysts, Product Managers" };
+const DEMO_LOCATIONS = ["Ghana", "Kenya", "Multiple countries"];
+
 export default function EmployerOnboarding() {
   const [, setLocation] = useLocation();
   const { user } = useAuth();
@@ -28,15 +33,25 @@ export default function EmployerOnboarding() {
   const [step, setStep] = useState(1);
   const [saving, setSaving] = useState(false);
 
+  const isDemo = isDemoEmail(user?.email);
+
   const [company, setCompany] = useState({ name: "", website: "", industry: "", size: "" });
   const [hiring, setHiring] = useState({ types: [] as string[], urgency: "", roles: "" });
   const [locations, setLocations] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (isDemo) {
+      setCompany(DEMO_COMPANY);
+      setHiring(DEMO_HIRING);
+      setLocations(DEMO_LOCATIONS);
+    }
+  }, [isDemo]);
 
   const toggleArr = (arr: string[], val: string) =>
     arr.includes(val) ? arr.filter((x) => x !== val) : [...arr, val];
 
   const persist = async (markComplete: boolean) => {
-    if (!user) return;
+    if (!user || isDemo) return;
     try {
       await upsertProfile({
         id: user.id,
@@ -44,15 +59,6 @@ export default function EmployerOnboarding() {
         company_website: company.website || null,
         industry: company.industry || null,
         company_size: company.size || null,
-        preferences: {
-          employer: {
-            hiringTypes: hiring.types,
-            urgency: hiring.urgency,
-            roles: hiring.roles,
-            countries: locations,
-          },
-        },
-        ...(markComplete ? { onboarding_completed_at: new Date().toISOString() } : {}),
       });
     } catch {
       toast({ variant: "destructive", title: "Could not save", description: "Try again from Profile later." });
@@ -66,16 +72,11 @@ export default function EmployerOnboarding() {
     setLocation("/dashboard/employer");
   };
 
-  const handleSkip = async () => {
+  const handleNext = async () => {
     if (step < 3) {
-      await persist(false);
+      if (!isDemo) await persist(false);
       setStep(step + 1);
-      return;
     }
-    setSaving(true);
-    await persist(true);
-    setSaving(false);
-    setLocation("/dashboard/employer");
   };
 
   return (
@@ -85,10 +86,26 @@ export default function EmployerOnboarding() {
           <span className="font-bold text-lg" style={{ color: DARK }}>Bridgepath<span style={{ color: GREEN }}>Network</span></span>
           <span className="text-[10px] italic text-gray-400">Shaping People. Strengthening Institutions.</span>
         </div>
-        <button onClick={handleSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
-          Skip for now →
-        </button>
+        {isDemo ? (
+          <div className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full" style={{ backgroundColor: GREEN + "18", color: GREEN }}>
+            <Sparkles className="h-3.5 w-3.5" /> Demo Tour
+          </div>
+        ) : (
+          <button onClick={handleFinish} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+            Skip for now →
+          </button>
+        )}
       </div>
+
+      {/* Demo banner */}
+      {isDemo && (
+        <div className="border-b px-6 py-3 flex items-center gap-3" style={{ backgroundColor: DARK, borderColor: DARK }}>
+          <Sparkles className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+          <p className="text-sm text-white">
+            <span className="font-semibold">Demo mode:</span> You're exploring as <span style={{ color: GREEN }}>Kofi Mensah</span> at <span style={{ color: GREEN }}>TechBridge Africa</span>. Just click <span className="font-semibold">Next</span> to continue.
+          </p>
+        </div>
+      )}
 
       <div className="bg-white border-b border-gray-100 px-6 py-4">
         <div className="max-w-xl mx-auto">
@@ -116,26 +133,44 @@ export default function EmployerOnboarding() {
             {step === 1 && (
               <motion.div key="1" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Tell us about your company</h2>
-                <p className="text-gray-500 mb-8 text-sm">Helps us match you with the right talent. You can edit this anytime.</p>
+                <p className="text-gray-500 mb-8 text-sm">
+                  {isDemo ? "Pre-filled demo company profile. Just click Next to continue." : "Helps us match you with the right talent. You can edit this anytime."}
+                </p>
                 <div className="space-y-5">
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Company Name</label>
-                    <Input placeholder="Your company name" value={company.name} onChange={(e) => setCompany({ ...company, name: e.target.value })} className="h-11" autoFocus />
+                    <Input
+                      placeholder="Your company name"
+                      value={company.name}
+                      onChange={(e) => !isDemo && setCompany({ ...company, name: e.target.value })}
+                      className="h-11 disabled:bg-gray-50 disabled:text-gray-700 disabled:cursor-not-allowed"
+                      disabled={isDemo}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Website <span className="text-gray-400 font-normal">(optional)</span></label>
-                    <Input placeholder="https://yourcompany.com" value={company.website} onChange={(e) => setCompany({ ...company, website: e.target.value })} className="h-11" />
+                    <Input
+                      placeholder="https://yourcompany.com"
+                      value={company.website}
+                      onChange={(e) => !isDemo && setCompany({ ...company, website: e.target.value })}
+                      className="h-11 disabled:bg-gray-50 disabled:text-gray-700 disabled:cursor-not-allowed"
+                      disabled={isDemo}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Industry</label>
                     <div className="flex flex-wrap gap-2">
                       {industryOptions.map((ind) => (
-                        <button key={ind} onClick={() => setCompany({ ...company, industry: ind })}
-                          className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
+                        <button
+                          key={ind}
+                          onClick={() => !isDemo && setCompany({ ...company, industry: ind })}
+                          disabled={isDemo}
+                          className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
                           style={{
                             backgroundColor: company.industry === ind ? DARK : "white",
-                            color: company.industry === ind ? "white" : "#555",
+                            color: company.industry === ind ? "white" : isDemo ? "#bbb" : "#555",
                             borderColor: company.industry === ind ? DARK : "#e5e7eb",
+                            opacity: isDemo && company.industry !== ind ? 0.5 : 1,
                           }}>
                           {ind}
                         </button>
@@ -144,7 +179,12 @@ export default function EmployerOnboarding() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Company Size</label>
-                    <select className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2" style={{ "--tw-ring-color": DARK } as any} value={company.size} onChange={(e) => setCompany({ ...company, size: e.target.value })}>
+                    <select
+                      className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none disabled:bg-gray-50 disabled:text-gray-700 disabled:cursor-not-allowed"
+                      value={company.size}
+                      onChange={(e) => !isDemo && setCompany({ ...company, size: e.target.value })}
+                      disabled={isDemo}
+                    >
                       <option value="">Select size</option>
                       {sizeOptions.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -156,33 +196,53 @@ export default function EmployerOnboarding() {
             {step === 2 && (
               <motion.div key="2" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Hiring Needs</h2>
-                <p className="text-gray-500 mb-6 text-sm">Tell us what kind of talent you're looking for.</p>
+                <p className="text-gray-500 mb-6 text-sm">
+                  {isDemo ? "Pre-filled hiring preferences for this demo." : "Tell us what kind of talent you're looking for."}
+                </p>
                 <div className="mb-6">
                   <label className="text-sm font-medium text-gray-700 block mb-2">Type of hiring</label>
                   <div className="flex flex-wrap gap-2">
-                    {hiringTypes.map((t) => (
-                      <button key={t} onClick={() => setHiring({ ...hiring, types: toggleArr(hiring.types, t) })}
-                        className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
-                        style={{
-                          backgroundColor: hiring.types.includes(t) ? DARK : "white",
-                          color: hiring.types.includes(t) ? "white" : "#555",
-                          borderColor: hiring.types.includes(t) ? DARK : "#e5e7eb",
-                        }}>
-                        {t}
-                      </button>
-                    ))}
+                    {hiringTypes.map((t) => {
+                      const selected = hiring.types.includes(t);
+                      return (
+                        <button
+                          key={t}
+                          onClick={() => !isDemo && setHiring({ ...hiring, types: toggleArr(hiring.types, t) })}
+                          disabled={isDemo}
+                          className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
+                          style={{
+                            backgroundColor: selected ? DARK : "white",
+                            color: selected ? "white" : isDemo ? "#bbb" : "#555",
+                            borderColor: selected ? DARK : "#e5e7eb",
+                            opacity: isDemo && !selected ? 0.5 : 1,
+                          }}>
+                          {t}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="mb-5">
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Hiring urgency</label>
-                  <select className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none" value={hiring.urgency} onChange={(e) => setHiring({ ...hiring, urgency: e.target.value })}>
+                  <select
+                    className="w-full h-11 px-3 border border-gray-200 rounded-xl text-sm focus:outline-none disabled:bg-gray-50 disabled:text-gray-700 disabled:cursor-not-allowed"
+                    value={hiring.urgency}
+                    onChange={(e) => !isDemo && setHiring({ ...hiring, urgency: e.target.value })}
+                    disabled={isDemo}
+                  >
                     <option value="">Select urgency</option>
                     {["Immediately (within 2 weeks)", "Within 1–3 months", "3–6 months", "Long-term pipeline"].map((u) => <option key={u} value={u}>{u}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-1.5">Roles you're looking to fill <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <Input placeholder="e.g. Software Engineers, HR Managers, Sales Reps..." value={hiring.roles} onChange={(e) => setHiring({ ...hiring, roles: e.target.value })} className="h-11" />
+                  <Input
+                    placeholder="e.g. Software Engineers, HR Managers, Sales Reps..."
+                    value={hiring.roles}
+                    onChange={(e) => !isDemo && setHiring({ ...hiring, roles: e.target.value })}
+                    className="h-11 disabled:bg-gray-50 disabled:text-gray-700 disabled:cursor-not-allowed"
+                    disabled={isDemo}
+                  />
                 </div>
               </motion.div>
             )}
@@ -190,19 +250,28 @@ export default function EmployerOnboarding() {
             {step === 3 && (
               <motion.div key="3" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
                 <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Where are you hiring?</h2>
-                <p className="text-gray-500 mb-6 text-sm">Select all countries where you'd like to hire or already have staff.</p>
+                <p className="text-gray-500 mb-6 text-sm">
+                  {isDemo ? "Pre-selected countries for this demo. Click Enter Dashboard to proceed." : "Select all countries where you'd like to hire or already have staff."}
+                </p>
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {countryOptions.map((c) => (
-                    <button key={c} onClick={() => setLocations(toggleArr(locations, c))}
-                      className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all"
-                      style={{
-                        backgroundColor: locations.includes(c) ? GREEN : "white",
-                        color: locations.includes(c) ? "white" : "#555",
-                        borderColor: locations.includes(c) ? GREEN : "#e5e7eb",
-                      }}>
-                      {c}
-                    </button>
-                  ))}
+                  {countryOptions.map((c) => {
+                    const selected = locations.includes(c);
+                    return (
+                      <button
+                        key={c}
+                        onClick={() => !isDemo && setLocations(toggleArr(locations, c))}
+                        disabled={isDemo}
+                        className="px-3 py-1.5 rounded-full text-sm font-medium border transition-all disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: selected ? GREEN : "white",
+                          color: selected ? "white" : isDemo ? "#bbb" : "#555",
+                          borderColor: selected ? GREEN : "#e5e7eb",
+                          opacity: isDemo && !selected ? 0.5 : 1,
+                        }}>
+                        {c}
+                      </button>
+                    );
+                  })}
                 </div>
                 <div className="p-5 rounded-xl" style={{ backgroundColor: GREEN + "12", border: `1px solid ${GREEN}30` }}>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -214,29 +283,46 @@ export default function EmployerOnboarding() {
           </AnimatePresence>
 
           <div className="flex items-center justify-between mt-10">
-            <button onClick={() => step > 1 ? setStep(step - 1) : undefined}
-              className={`flex items-center gap-2 text-sm font-medium transition-colors ${step === 1 ? "text-gray-300 cursor-not-allowed" : "text-gray-500 hover:text-gray-800"}`}
-              disabled={step === 1}>
-              <ArrowLeft className="h-4 w-4" /> Back
-            </button>
-            <div className="flex items-center gap-3">
-              <button onClick={handleSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors px-4 py-2">Skip</button>
+            {isDemo ? (
+              <div />
+            ) : (
+              <button
+                onClick={() => step > 1 ? setStep(step - 1) : undefined}
+                className={`flex items-center gap-2 text-sm font-medium transition-colors ${step === 1 ? "text-gray-300 cursor-not-allowed" : "text-gray-500 hover:text-gray-800"}`}
+                disabled={step === 1}
+              >
+                <ArrowLeft className="h-4 w-4" /> Back
+              </button>
+            )}
+            <div className="flex items-center gap-3 ml-auto">
               {step < 3 ? (
-                <button onClick={() => setStep(step + 1)}
+                <button
+                  onClick={handleNext}
                   className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-md"
-                  style={{ backgroundColor: DARK }}>
+                  style={{ backgroundColor: DARK }}
+                >
                   Next <ArrowRight className="h-4 w-4" />
                 </button>
               ) : (
-                <button onClick={handleFinish} disabled={saving}
+                <button
+                  onClick={handleFinish}
+                  disabled={saving}
                   className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-md disabled:opacity-60"
-                  style={{ backgroundColor: DARK }}>
-                  {saving ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</> : <>Go to Dashboard <CheckCircle2 className="h-4 w-4" /></>}
+                  style={{ backgroundColor: DARK }}
+                >
+                  {saving
+                    ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</>
+                    : <><CheckCircle2 className="h-4 w-4" /> {isDemo ? "Enter Dashboard" : "Go to Dashboard"}</>}
                 </button>
               )}
             </div>
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">You can always update these in your profile settings later.</p>
+
+          <p className="text-center text-xs text-gray-400 mt-6">
+            {isDemo
+              ? "This is a demo — no data is saved. Create a real account to start hiring."
+              : "You can always update these in your profile settings later."}
+          </p>
         </div>
       </div>
     </div>
