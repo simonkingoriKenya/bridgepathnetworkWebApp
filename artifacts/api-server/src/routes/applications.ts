@@ -105,6 +105,32 @@ router.get("/jobs/:jobId/applications", requireAuth, async (req: AuthenticatedRe
   }
 });
 
+router.get("/applications/employer-all", requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const userId = req.userId!;
+
+    const employerJobs = await db.select({ id: jobsTable.id })
+      .from(jobsTable)
+      .where(eq(jobsTable.employerId, userId));
+
+    if (employerJobs.length === 0) {
+      res.json([]);
+      return;
+    }
+
+    const jobIds = employerJobs.map((j) => j.id);
+    const apps = await db.select().from(applicationsTable)
+      .where(sql`${applicationsTable.jobId} = ANY(${sql.raw(`ARRAY[${jobIds.join(",")}]`)})`)
+      .orderBy(sql`${applicationsTable.createdAt} DESC`);
+
+    const serialized = await Promise.all(apps.map(serializeApplication));
+    res.json(serialized);
+  } catch (err) {
+    req.log.error({ err }, "Error getting employer applications");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.put("/applications/:applicationId/status", requireAuth, async (req: AuthenticatedRequest, res) => {
   try {
     const applicationId = paramInt(req.params.applicationId);

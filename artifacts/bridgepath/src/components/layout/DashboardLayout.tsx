@@ -5,7 +5,7 @@ import { isDemoEmail } from "@/lib/demoAuth";
 import {
   LayoutDashboard, Briefcase, FileText, User, LogOut,
   Settings, ChevronLeft, Menu, PlusCircle, Bell, Home, X, Users, MessageSquare,
-  Sparkles,
+  Sparkles, KanbanSquare,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -226,6 +226,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const navItems: NavItem[] = isEmployer
     ? [
         { href: "/dashboard/employer", label: "Dashboard", icon: LayoutDashboard },
+        { href: "/dashboard/pipeline", label: "Pipeline", icon: KanbanSquare },
         { href: "/dashboard/jobs", label: "Job Board", icon: Briefcase },
         { href: "/candidates", label: "Candidates", icon: Users },
         { href: "/messages", label: "Messages", icon: MessageSquare },
@@ -241,6 +242,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const getPageTitle = () => {
     if (location === "/dashboard/jobseeker") return "Professional Dashboard";
     if (location === "/dashboard/employer") return "Employer Dashboard";
+    if (location === "/dashboard/pipeline") return "Candidate Pipeline";
     if (location === "/jobs") return "Job Board";
     if (location === "/jobs/new") return "Post a Job";
     if (location === "/candidates") return "Candidates";

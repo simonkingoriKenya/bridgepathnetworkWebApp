@@ -36,6 +36,7 @@ import CandidatesPage from "@/pages/candidates";
 import CandidateProfilePage from "@/pages/candidates/[id]";
 import MessagesPage from "@/pages/messages";
 import DashboardJobs from "@/pages/dashboard/jobs";
+import PipelinePage from "@/pages/dashboard/pipeline";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 
 const queryClient = new QueryClient({
@@ -108,6 +109,9 @@ function Router() {
       </Route>
       <Route path="/dashboard/employer">
         {() => <ProtectedRoute component={EmployerDashboard} allowedRoles={["employer"]} />}
+      </Route>
+      <Route path="/dashboard/pipeline">
+        {() => <ProtectedRoute component={PipelinePage} allowedRoles={["employer"]} />}
       </Route>
       <Route path="/candidates">
         {() => <ProtectedRoute component={CandidatesPage} allowedRoles={["employer"]} />}
