@@ -11,8 +11,8 @@ function getResend() {
   return new Resend(apiKey);
 }
 
-const CONTACT_RECIPIENT = "info@bridgepathnetwork.com";
-const FROM_ADDRESS = "Bridgepath Network <onboarding@resend.dev>";
+const CONTACT_RECIPIENT = "pkumanyc@gmail.com";
+const FROM_ADDRESS = "Bridgepath Africa <onboarding@resend.dev>";
 
 router.post("/contact", async (req, res) => {
   try {
@@ -83,7 +83,7 @@ router.post("/contact", async (req, res) => {
               </div>` : ""}
 
               <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
-                Submitted via bridgepathnetwork.com · ${new Date().toUTCString()}
+                Submitted via Bridgepath Africa · ${new Date().toUTCString()}
               </p>
             </div>
           `,
@@ -92,7 +92,7 @@ router.post("/contact", async (req, res) => {
         await resend.emails.send({
           from: FROM_ADDRESS,
           to: [email.trim()],
-          subject: "We've received your enquiry — Bridgepath Network",
+          subject: "We've received your enquiry — Bridgepath Africa",
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
               <div style="background: #1a2340; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
@@ -101,26 +101,26 @@ router.post("/contact", async (req, res) => {
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">Hi ${name.trim()},</p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
-                Thank you for contacting Bridgepath Network. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
+                Thank you for contacting Bridgepath Africa. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
               </p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 In the meantime, feel free to explore our services or browse available roles on our platform.
               </p>
 
               <div style="margin: 24px 0; text-align: center;">
-                <a href="https://bridgepathnetwork.com/jobs" style="display: inline-block; background: #8CC63F; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                <a href="https://bridgepathafricahr.com/jobs" style="display: inline-block; background: #8CC63F; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
                   Browse Jobs
                 </a>
               </div>
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 Best regards,<br/>
-                <strong>The Bridgepath Network Team</strong><br/>
-                <a href="mailto:info@bridgepathnetwork.com" style="color: #8CC63F;">info@bridgepathnetwork.com</a>
+                <strong>The Bridgepath Africa Team</strong><br/>
+                <a href="mailto:pkumanyc@gmail.com" style="color: #8CC63F;">pkumanyc@gmail.com</a>
               </p>
 
               <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
-                Bridgepath Network · Accra, Ghana · <a href="https://bridgepathnetwork.com" style="color: #9ca3af;">bridgepathnetwork.com</a>
+                Bridgepath Africa · Accra, Ghana
               </p>
             </div>
           `,

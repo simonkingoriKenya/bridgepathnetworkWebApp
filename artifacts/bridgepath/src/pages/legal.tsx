@@ -8,7 +8,7 @@ const DARK = "#1a2340";
 const content = {
   privacy: {
     title: "Privacy Policy",
-    eyebrow: "How Bridgepath Network protects your data",
+    eyebrow: "How Bridgepath Africa protects your data",
     intro: "We collect only the information needed to connect professionals, employers, and HR service enquiries across Africa.",
     sections: [
       {
@@ -25,18 +25,18 @@ const content = {
       },
       {
         title: "Your choices",
-        body: "You can update your profile from your dashboard, sign out at any time, or contact Bridgepath Network to request account support.",
+        body: "You can update your profile from your dashboard, sign out at any time, or contact Bridgepath Africa to request account support.",
       },
     ],
   },
   terms: {
     title: "Terms of Service",
-    eyebrow: "Using Bridgepath Network",
-    intro: "These terms explain the expectations for professionals, employers, and visitors using Bridgepath Network.",
+    eyebrow: "Using Bridgepath Africa",
+    intro: "These terms explain the expectations for professionals, employers, and visitors using Bridgepath Africa.",
     sections: [
       {
         title: "Platform purpose",
-        body: "Bridgepath Network provides HR solutions, recruitment support, job discovery, profile management, and employer hiring workflows for African markets.",
+        body: "Bridgepath Africa provides HR solutions, recruitment support, job discovery, profile management, and employer hiring workflows for African markets.",
       },
       {
         title: "User responsibilities",
@@ -48,14 +48,14 @@ const content = {
       },
       {
         title: "Service changes",
-        body: "Bridgepath Network may update platform features, service pages, dashboard tools, and content as the business expands across African countries.",
+        body: "Bridgepath Africa may update platform features, service pages, dashboard tools, and content as the business expands across African countries.",
       },
     ],
   },
   cookies: {
     title: "Cookie Policy",
     eyebrow: "Session and preference storage",
-    intro: "Bridgepath Network uses essential browser storage to keep users signed in and remember role-specific preferences.",
+    intro: "Bridgepath Africa uses essential browser storage to keep users signed in and remember role-specific preferences.",
     sections: [
       {
         title: "Essential storage",

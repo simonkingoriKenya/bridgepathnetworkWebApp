@@ -24,7 +24,7 @@ export const blogPosts = [
     date: "April 9, 2026",
     readTime: "6 min read",
     image: blogHero1,
-    author: { name: "Amara Osei", role: "CEO, Bridgepath Network", avatar: authorAvatar1 },
+    author: { name: "Amara Osei", role: "CEO, Bridgepath Africa", avatar: authorAvatar1 },
     content: `
 When companies expand into Africa, one of the first HR decisions they face is choosing the right employment partner. The two most commonly confused options are **Professional Employer Organizations (PEOs)** and **traditional employment agencies**. While both provide talent-related services, they operate very differently — and choosing the wrong one can cost you time, money, and compliance exposure.
 
@@ -69,13 +69,13 @@ Employment agencies are excellent for talent sourcing, but they do not provide t
 
 African labor markets are diverse and complex. Each country has its own employment laws, tax codes, social security systems, and statutory leave requirements. A company that hires in Kenya, Nigeria, and Ghana simultaneously must comply with three entirely different regulatory frameworks.
 
-A PEO like Bridgepath Network handles this complexity. An employment agency typically does not.
+A PEO like Bridgepath Africa handles this complexity. An employment agency typically does not.
 
 ## Which Should You Choose?
 
 - **Choose a PEO** if you want to hire and retain employees in Africa without setting up a local entity, and you need full compliance, payroll, and HR administration.
 - **Choose an employment agency** if you have an existing legal entity in a country and need help sourcing and placing candidates.
-- **Choose Bridgepath Network** if you want both — we combine recruitment, HR advisory, and employment-of-record guidance for teams starting in Ghana and Kenya and planning wider African expansion.
+- **Choose Bridgepath Africa** if you want both — we combine recruitment, HR advisory, and employment-of-record guidance for teams starting in Ghana and Kenya and planning wider African expansion.
 
 Ready to expand in Africa? [Get in touch](/#contact) with our team today.
     `.trim(),
@@ -102,7 +102,7 @@ But AI in Africa comes with unique considerations. Training data used by many gl
 
 **1. CV Screening and Matching**
 
-AI-powered applicant tracking systems can now screen thousands of CVs in seconds, matching candidates against role requirements with surprising accuracy. Bridgepath Network's own AI CV Review tool gives candidates immediate feedback on their CVs, highlighting strengths, gaps, and recommended roles — reducing the friction between talent and opportunity.
+AI-powered applicant tracking systems can now screen thousands of CVs in seconds, matching candidates against role requirements with surprising accuracy. Bridgepath Africa's own AI CV Review tool gives candidates immediate feedback on their CVs, highlighting strengths, gaps, and recommended roles — reducing the friction between talent and opportunity.
 
 **2. Psychometric and Cognitive Assessment**
 
@@ -175,11 +175,11 @@ All employers with employees in Kenya are required to comply — including:
 
 **4. Ensure employer-matching.** The employer's contribution must match the employee's Tier II contribution. This increases your total employment cost per head and should be factored into budgeting.
 
-## Bridgepath Network's Role
+## Bridgepath Africa's Role
 
-For companies managing their Kenyan workforce through Bridgepath Network's Employment of Record or Payroll Administration services, all NSSF calculations, filings, and remittances are handled automatically. Our compliance team monitors all legislative changes in real time — you don't need to track every regulatory update yourself.
+For companies managing their Kenyan workforce through Bridgepath Africa's Employment of Record or Payroll Administration services, all NSSF calculations, filings, and remittances are handled automatically. Our compliance team monitors all legislative changes in real time — you don't need to track every regulatory update yourself.
 
-If you manage your own payroll in Kenya and are unsure whether your systems are compliant, contact our team for a free compliance review at info@bridgepathnetwork.com.
+If you manage your own payroll in Kenya and are unsure whether your systems are compliant, contact our team for a free compliance review at pkumanyc@gmail.com.
 
 ## Looking Ahead
 
@@ -192,11 +192,11 @@ Being proactive — and working with a partner who tracks these changes on your 
     slug: "africans-global-careers",
     tag: "Career Growth",
     title: "How Africans Are Building Global Careers Using Digital Tools",
-    excerpt: "Top professionals are using platforms like Bridgepath Network to find international opportunities from anywhere on the continent.",
+    excerpt: "Top professionals are using platforms like Bridgepath Africa to find international opportunities from anywhere on the continent.",
     date: "February 28, 2026",
     readTime: "6 min read",
     image: blogHero4,
-    author: { name: "David Mensah", role: "COO, Bridgepath Network", avatar: authorAvatar4 },
+    author: { name: "David Mensah", role: "COO, Bridgepath Africa", avatar: authorAvatar4 },
     content: `
 Ten years ago, an ambitious software engineer in Accra who wanted to work for a European tech company had two realistic options: emigrate, or wait for the company to open a local office. Today, that same engineer can be hired as a remote employee of a company in Berlin, London, or Toronto — fully legally, compliantly, and from the comfort of their home in Ghana — within two weeks.
 
@@ -214,7 +214,7 @@ Africa has a compelling value proposition for global employers:
 
 ## How Digital Platforms Are Changing the Game
 
-Platforms like Bridgepath Network aggregate African talent and connect them with vetted international opportunities — removing friction from both sides of the hiring process.
+Platforms like Bridgepath Africa aggregate African talent and connect them with vetted international opportunities — removing friction from both sides of the hiring process.
 
 **For professionals**, the key benefits are:
 - Access to roles that previously required geographic proximity to apply
@@ -244,7 +244,7 @@ Platforms like Bridgepath Network aggregate African talent and connect them with
 4. **Network across borders.** Join global Slack communities, contribute to open source, and attend virtual industry events.
 5. **Be explicit about your time zone and overlap hours.** Global companies appreciate candidates who are proactive about managing asynchronous work.
 
-The barriers to building a global career from Africa have never been lower. The professionals who move fastest will secure the best opportunities. Start today at [bridgepathnetwork.com](/jobs).
+The barriers to building a global career from Africa have never been lower. The professionals who move fastest will secure the best opportunities. Start today at [bridgepathafricahr.com](/jobs).
     `.trim(),
   },
 ];
@@ -254,13 +254,21 @@ export default function BlogIndex() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <section className="py-20" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Insights & News</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">HR &amp; Talent Insights for Africa</h1>
-            <p className="text-gray-300 max-w-2xl mx-auto text-lg">Expert perspectives on recruitment, compliance, technology, and careers across the African continent.</p>
-          </motion.div>
+      <section className="relative h-[55vh] min-h-[420px] max-h-[640px] overflow-hidden flex items-end">
+        <img
+          src="/photos/boardroom-meeting.png"
+          alt="African business leaders in a boardroom — Bridgepath Africa Insights"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.97) 0%, rgba(13,27,42,0.55) 50%, rgba(13,27,42,0.08) 100%)" }} />
+        <div className="relative z-10 w-full pb-14 md:pb-20">
+          <div className="container mx-auto px-6 md:px-12 text-center">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>Insights &amp; News</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">HR &amp; Talent Insights<br />for Africa</h1>
+              <p className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">Expert perspectives on recruitment, compliance, technology, and careers across the African continent.</p>
+            </motion.div>
+          </div>
         </div>
       </section>
 

@@ -65,7 +65,7 @@ export default function Signup() {
       <div className="p-6">
         <Link href="/" className="flex flex-col gap-0.5 w-fit">
           <div className="flex items-center gap-2.5">
-            <img src="/logo.svg" alt="Bridgepath Network" className="h-8 w-8 object-contain" />
+            <img src="/logo.svg" alt="Bridgepath Africa" className="h-8 w-8 object-contain" />
             <span className="font-bold text-xl" style={{ color: DARK }}>
               Bridgepath<span style={{ color: GREEN }}>Network</span>
             </span>
@@ -87,7 +87,7 @@ export default function Signup() {
             >
               <div className="text-center mb-10">
                 <h1 className="text-3xl font-bold mb-3" style={{ color: DARK }}>
-                  Join Bridgepath Network
+                  Join Bridgepath Africa
                 </h1>
                 <p className="text-gray-500">Tell us who you are to get the right experience</p>
               </div>

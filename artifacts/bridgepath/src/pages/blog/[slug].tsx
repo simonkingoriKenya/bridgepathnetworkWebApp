@@ -163,7 +163,7 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-gray-100">
           <div className="p-6 rounded-2xl" style={{ backgroundColor: GREEN + "10", border: `1px solid ${GREEN}30` }}>
             <h3 className="font-bold mb-2" style={{ color: DARK }}>Need HR or Recruitment Support in Africa?</h3>
-            <p className="text-sm text-gray-600 mb-4">Bridgepath Network is launching platform access in Ghana and Kenya, with HR advisory support for teams expanding across Africa.</p>
+            <p className="text-sm text-gray-600 mb-4">Bridgepath Africa is launching platform access in Ghana and Kenya, with HR advisory support for teams expanding across Africa.</p>
             <Link href="/#contact">
               <button className="px-5 py-2.5 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-opacity" style={{ backgroundColor: GREEN }}>
                 Contact Our Team

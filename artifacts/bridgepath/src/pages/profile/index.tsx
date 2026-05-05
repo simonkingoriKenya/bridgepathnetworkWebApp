@@ -483,7 +483,7 @@ export default function Profile() {
                   <div>
                     <p className="text-sm font-semibold" style={{ color: TEAL }}>Boost your visibility</p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      Profiles with LinkedIn and portfolio links get 3× more employer views on BridgePath Network.
+                      Profiles with LinkedIn and portfolio links get 3× more employer views on Bridgepath Africa.
                     </p>
                   </div>
                 </div>
@@ -536,7 +536,7 @@ export default function Profile() {
         <h3 className="text-sm font-semibold text-gray-700 mb-1">Account</h3>
         <p className="text-xs text-gray-400 mb-3">Manage your account settings and data.</p>
         <div className="flex flex-wrap gap-2">
-          <a href="mailto:support@bridgepathnetwork.com" className="text-xs px-3 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors">
+          <a href="mailto:pkumanyc@gmail.com" className="text-xs px-3 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors">
             Contact Support
           </a>
           <button className="text-xs px-3 py-2 rounded-lg border border-red-200 text-red-500 hover:bg-red-50 transition-colors">

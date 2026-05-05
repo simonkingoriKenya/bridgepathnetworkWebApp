@@ -109,20 +109,28 @@ export default function ServicesPage() {
     <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
-      <section className="py-20 text-white" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-sm font-medium" style={{ backgroundColor: GREEN + "25", color: GREEN }}>
-              <TrendingUp className="h-4 w-4" /> HR & Talent Solutions
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-              Tailor-made HR &amp; Recruitment<br />
-              <span style={{ color: GREEN }}>Solutions Across Africa</span>
-            </h1>
-            <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-              From employment of record to executive search — BridgePath handles your people operations so you can focus on growth.
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[460px] max-h-[700px] overflow-hidden flex items-end">
+        <img
+          src="/photos/africa-office-team.png"
+          alt="African professionals in a modern office — Bridgepath Africa HR Services"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.96) 0%, rgba(13,27,42,0.55) 50%, rgba(13,27,42,0.10) 100%)" }} />
+        <div className="relative z-10 w-full pb-14 md:pb-20">
+          <div className="container mx-auto px-6 md:px-12 text-center">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-sm font-medium" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>
+                <TrendingUp className="h-4 w-4" /> HR &amp; Talent Solutions
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
+                Tailor-made HR &amp; Recruitment<br />
+                <span style={{ color: GREEN }}>Solutions Across Africa</span>
+              </h1>
+              <p className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">
+                From employment of record to executive search — Bridgepath Africa handles your people operations so you can focus on growth.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 

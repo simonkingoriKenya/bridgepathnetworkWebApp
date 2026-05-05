@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Uwh_GztevXdaRMZFPFYLY"
+uri = "file://artifacts/bridgepath/public/photos/africa-office-team.png"
+type = "image"
+title = "african office team corporate"
+
+[[generated]]
+id = "jIabZYAVeZNzhFe8auq4I"
+uri = "file://artifacts/bridgepath/public/photos/hr-leader.png"
+type = "image"
+title = "african hr professional woman"
+
+[[generated]]
+id = "pD3h79eGIkvyPt1cHqvnG"
+uri = "file://artifacts/bridgepath/public/photos/boardroom-meeting.png"
+type = "image"
+title = "african boardroom corporate meeting"
+
+[[generated]]
+id = "01gsiL_rFpplEXoW5P2l0"
+uri = "file://artifacts/bridgepath/public/photos/office-space.png"
+type = "image"
+title = "african modern office space"

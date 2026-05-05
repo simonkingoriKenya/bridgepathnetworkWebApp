@@ -18,7 +18,7 @@ function FounderPhoto() {
     <img
       src={src}
       onError={() => setSrc(PAMELA_FALLBACK)}
-      alt="Pamela Kuma — Founder, Bridgepath Network"
+      alt="Pamela Kuma — Founder, Bridgepath Africa"
       className="relative w-full max-w-xs mx-auto rounded-2xl object-cover shadow-2xl"
       style={{ aspectRatio: "3/4" }}
     />
@@ -26,12 +26,12 @@ function FounderPhoto() {
 }
 
 const timeline = [
-  { year: "2008", event: "Bridgepath Network founded in Accra, Ghana with a focus on HR outsourcing." },
+  { year: "2008", event: "Bridgepath Africa founded in Accra, Ghana with a focus on HR outsourcing." },
   { year: "2012", event: "Expanded into East Africa — launching operations in Kenya, Uganda, and Tanzania." },
   { year: "2015", event: "Launched our psychometric and talent assessment practice across 12 countries." },
   { year: "2018", event: "Deepened institutional HR consulting across education, energy, technology, and professional services." },
   { year: "2021", event: "Launched digital talent platform and AI-powered CV review tool." },
-  { year: "2024", event: "Designed the Bridgepath Network platform for diaspora and local talent communities." },
+  { year: "2024", event: "Designed the Bridgepath Africa platform for diaspora and local talent communities." },
   { year: "2026", event: "Launching MVP access in Ghana and Kenya, with a growing pan-African roadmap." },
 ];
 
@@ -61,21 +61,27 @@ export default function About() {
     <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative py-28 overflow-hidden premium-grid-bg-dark" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #2a4066 100%)` }}>
-        <div className="absolute inset-0 opacity-15"
-          style={{ backgroundImage: `url('${aboutHeroBg}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: GREEN }}>About Bridgepath Network</p>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Shaping People.<br />
-              <span style={{ color: GREEN }}>Strengthening Institutions.</span>
-            </h1>
-            <p className="text-gray-300 text-xl max-w-2xl mx-auto leading-relaxed">
-              Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
-            </p>
-          </motion.div>
+      {/* Hero — full bleed, image breathes */}
+      <section className="relative h-[70vh] min-h-[520px] max-h-[780px] overflow-hidden flex items-end">
+        <img
+          src="/photos/hr-leader.png"
+          alt="African HR professional — Bridgepath Africa"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.50) 45%, rgba(13,27,42,0.05) 100%)" }} />
+        <div className="relative z-10 w-full pb-14 md:pb-20">
+          <div className="container mx-auto px-6 md:px-12">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>About Bridgepath Africa</span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight">
+                Shaping People.<br />
+                <span style={{ color: GREEN }}>Strengthening Institutions.</span>
+              </h1>
+              <p className="text-white/70 text-xl max-w-2xl leading-relaxed">
+                Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -94,13 +100,12 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section className="py-14 md:py-24 bg-white/95 premium-grid-bg">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-5xl mx-auto">
+      <section className="py-20 md:py-28 bg-white">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col md:flex-row gap-14 items-start">
               <div className="md:w-2/5 shrink-0">
                 <div className="relative">
-                  <div className="absolute -inset-3 rounded-3xl opacity-20" style={{ background: `linear-gradient(135deg, ${GREEN}, ${DARK})` }} />
                   <FounderPhoto />
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[240px] rounded-xl p-3 text-white" style={{ backgroundColor: "rgba(26,35,64,0.92)" }}>
                     <p className="font-bold text-sm">Pamela Kuma</p>
@@ -120,7 +125,7 @@ export default function About() {
                   Pamela Kuma is a seasoned HR professional with over 15 years of experience leading workforce development across African markets — spanning Media, Tech Startups, Fintech, and Gas & Energy sectors.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-4 text-base">
-                  Drawing from her global expertise and deep understanding of African talent markets, Pamela founded Bridgepath Network with a singular mission: to help organizations hire better, build strong teams, and create cultures of excellence — using global best practices combined with local insight.
+                  Drawing from her global expertise and deep understanding of African talent markets, Pamela founded Bridgepath Africa with a singular mission: to help organizations hire better, build strong teams, and create cultures of excellence — using global best practices combined with local insight.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-6 text-base">
                   Her work spans institutional HR transformation, executive recruitment, and capacity building for businesses and organizations across African markets, with the platform launching first in Ghana and Kenya.
@@ -246,7 +251,7 @@ export default function About() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-2xl">
           <h2 className="text-3xl font-bold mb-4" style={{ color: DARK }}>Ready to Transform Your Organization?</h2>
-          <p className="text-gray-500 mb-8">Schedule a free consultation and discover how Bridgepath Network can revolutionize your people strategy.</p>
+          <p className="text-gray-500 mb-8">Schedule a free consultation and discover how Bridgepath Africa can revolutionize your people strategy.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
             <Link href="/#contact">
               <button className="px-8 py-3.5 font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-lg flex items-center gap-2" style={{ backgroundColor: GREEN }}>

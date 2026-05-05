@@ -3,7 +3,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Briefcase, Search, Users, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import employerPhoto from "@assets/unnamed_(1)_1776009115714.jpg";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -29,7 +28,7 @@ export default function EmployersPage() {
                 <p className="text-xs font-bold uppercase tracking-[0.25em] mb-4" style={{ color: GREEN }}>For Employers</p>
                 <h1 className="text-3xl md:text-5xl font-bold leading-tight" style={{ color: DARK }}>Hire the Right Talent Across Africa</h1>
                 <p className="text-gray-600 mt-5 leading-relaxed text-base md:text-lg">
-                  BridgePath helps employers connect with diaspora and local professionals across Ghana, Kenya, and remote African markets.
+                  Bridgepath Africa helps employers connect with diaspora and local professionals across Ghana, Kenya, and remote African markets.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
                   <Link href={employerHref("/jobs/new")} className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold" style={{ backgroundColor: GREEN }}>
@@ -45,8 +44,8 @@ export default function EmployersPage() {
               <div className="space-y-5">
                 <div className="relative rounded-3xl overflow-hidden shadow-xl" style={{ aspectRatio: "16/9" }}>
                   <img
-                    src={employerPhoto}
-                    alt="African HR professionals reviewing candidates in a modern office"
+                    src="/photos/boardroom-meeting.png"
+                    alt="African HR professionals reviewing candidates in a modern boardroom"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.55) 0%, transparent 60%)" }} />
@@ -76,11 +75,11 @@ export default function EmployersPage() {
           </div>
         </section>
 
-        {/* Why BridgePath */}
+        {/* Why Bridgepath Africa */}
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-5xl">
             <div className="text-center mb-12">
-              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Why BridgePath</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Why Bridgepath Africa</p>
               <h2 className="text-2xl md:text-3xl font-bold" style={{ color: DARK }}>Built for African hiring</h2>
               <p className="text-gray-500 mt-3 text-sm max-w-xl mx-auto">
                 From early-stage hiring to full workforce outsourcing — we cover the full spectrum.

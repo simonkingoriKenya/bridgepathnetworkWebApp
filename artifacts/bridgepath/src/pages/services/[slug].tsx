@@ -33,7 +33,7 @@ const serviceData: Record<string, {
     label: "Employment of Record",
     heroImg: heroEor,
     tagline: "Hire anyone in Africa — without a local entity",
-    description: "Our Employment of Record (EoR) service allows businesses to legally employ workers in African countries without establishing a local legal entity. BridgePath becomes the employer of record on paper, handling all local legal obligations including employment contracts, payroll, tax compliance, and statutory benefits — while your team member works exclusively for you.",
+    description: "Our Employment of Record (EoR) service allows businesses to legally employ workers in African countries without establishing a local legal entity. Bridgepath Africa becomes the employer of record on paper, handling all local legal obligations including employment contracts, payroll, tax compliance, and statutory benefits — while your team member works exclusively for you.",
     benefits: [
       "Legally compliant employment guidance for African expansion",
       "No need to set up a local subsidiary or entity",
@@ -101,7 +101,7 @@ const serviceData: Record<string, {
     label: "Expatriate Services",
     heroImg: heroExpat,
     tagline: "Moving talent into Africa — done right",
-    description: "BridgePath provides comprehensive support for companies relocating international employees to Africa, or moving African talent globally. Our expatriate services cover every aspect of the relocation lifecycle — from immigration and work permits to housing, schooling, and ongoing HR support.",
+    description: "Bridgepath Africa provides comprehensive support for companies relocating international employees to Africa, or moving African talent globally. Our expatriate services cover every aspect of the relocation lifecycle — from immigration and work permits to housing, schooling, and ongoing HR support.",
     benefits: [
       "Work permit and visa processing",
       "Immigration compliance management",
@@ -169,7 +169,7 @@ const serviceData: Record<string, {
     label: "Payroll & Tax Administration",
     heroImg: heroPayroll,
     tagline: "Accurate, compliant payroll across Africa",
-    description: "Managing payroll across multiple African countries is complex. Each country has its own tax codes, statutory deductions, and filing deadlines. BridgePath's Payroll & Tax Administration service handles all of this seamlessly — ensuring your employees are paid accurately and on time while you remain fully compliant.",
+    description: "Managing payroll across multiple African countries is complex. Each country has its own tax codes, statutory deductions, and filing deadlines. Bridgepath Africa's Payroll & Tax Administration service handles all of this seamlessly — ensuring your employees are paid accurately and on time while you remain fully compliant.",
     benefits: [
       "Multi-country payroll processing",
       "Local currency and exchange rate management",
@@ -237,7 +237,7 @@ const serviceData: Record<string, {
     label: "Recruitment Services",
     heroImg: heroRecruit,
     tagline: "Africa's top talent, delivered to your door",
-    description: "BridgePath's Recruitment Services offer end-to-end talent acquisition — from executive search for C-suite roles to high-volume recruitment for operational positions. Our sector specialists and continent-wide networks ensure we find the best candidates faster than any traditional agency.",
+    description: "Bridgepath Africa's Recruitment Services offer end-to-end talent acquisition — from executive search for C-suite roles to high-volume recruitment for operational positions. Our sector specialists and continent-wide networks ensure we find the best candidates faster than any traditional agency.",
     benefits: [
       "Executive and C-suite search",
       "Mid-level and specialist recruitment",
@@ -271,12 +271,12 @@ const serviceData: Record<string, {
     label: "Staff Outsourcing",
     heroImg: heroOutsource,
     tagline: "Your workforce, our responsibility",
-    description: "Staff Outsourcing allows you to delegate the management of specific workforce functions to BridgePath. We become the employer of your outsourced staff, handling all HR, payroll, compliance, and benefits — while your team focuses on their day-to-day output for your business.",
+    description: "Staff Outsourcing allows you to delegate the management of specific workforce functions to Bridgepath Africa. We become the employer of your outsourced staff, handling all HR, payroll, compliance, and benefits — while your team focuses on their day-to-day output for your business.",
     benefits: [
       "Significant cost reduction vs. direct employment",
       "Transfer of employment risk and liability",
       "Full HR administration handled",
-      "Access to BridgePath's benefits schemes",
+      "Access to Bridgepath Africa's benefits schemes",
       "Scalable up or down based on demand",
       "Performance management support",
       "Disciplinary process management",
@@ -284,13 +284,13 @@ const serviceData: Record<string, {
     ],
     process: [
       { step: "01", title: "Scope Definition", desc: "Agree on the scope of outsourced functions and team size." },
-      { step: "02", title: "Transition", desc: "Employees transferred to BridgePath payroll with zero disruption." },
+      { step: "02", title: "Transition", desc: "Employees transferred to Bridgepath Africa payroll with zero disruption." },
       { step: "03", title: "Management", desc: "We manage all HR administration; staff work exclusively for you." },
       { step: "04", title: "Reporting", desc: "Monthly workforce reports and cost summaries provided." },
     ],
     faqs: [
       { q: "Does the team still work for us?", a: "Yes — day-to-day direction comes from you. We simply handle the employer administrative obligations." },
-      { q: "Can we scale the team?", a: "Absolutely — adding or removing headcount is managed seamlessly by BridgePath." },
+      { q: "Can we scale the team?", a: "Absolutely — adding or removing headcount is managed seamlessly by Bridgepath Africa." },
       { q: "What sectors do you outsource in?", a: "Banking, FMCG, retail, logistics, hospitality, telecoms, and many others." },
     ],
     stats: [
@@ -305,7 +305,7 @@ const serviceData: Record<string, {
     label: "Interim Management",
     heroImg: heroInterim,
     tagline: "Senior leadership, when you need it most",
-    description: "Interim Management provides organizations with experienced senior executives on a temporary basis — for crisis management, leadership gaps, major transitions, or strategic projects. BridgePath's network of battle-tested African executives can step in and deliver results quickly.",
+    description: "Interim Management provides organizations with experienced senior executives on a temporary basis — for crisis management, leadership gaps, major transitions, or strategic projects. Bridgepath Africa's network of battle-tested African executives can step in and deliver results quickly.",
     benefits: [
       "C-suite and senior leadership roles covered",
       "Rapid deployment within 2–4 weeks",
@@ -412,7 +412,7 @@ export default function ServiceDetail() {
               <div className="text-white">{service.icon}</div>
             </div>
             <div>
-              <p className="text-sm font-medium" style={{ color: GREEN }}>BridgePath Service</p>
+              <p className="text-sm font-medium" style={{ color: GREEN }}>Bridgepath Africa Service</p>
               <h1 className="text-3xl md:text-4xl font-bold text-white">{service.label}</h1>
             </div>
           </div>

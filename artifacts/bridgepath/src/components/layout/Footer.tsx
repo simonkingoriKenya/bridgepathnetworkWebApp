@@ -58,10 +58,10 @@ export function Footer() {
           style={{ borderRight: `1px solid ${BORDER}` }}
         >
           <Link href="/" className="flex items-center gap-2.5">
-            <img src="/logo-brand.png" alt="Bridgepath Network" className="h-9 w-9 object-contain rounded-xl" />
+            <img src="/logo-brand.png" alt="Bridgepath Africa" className="h-9 w-9 object-contain rounded-xl" />
             <div className="flex flex-col leading-none">
               <span className="font-bold text-base tracking-tight text-white">
-                BridgePath<span style={{ color: GREEN }}>Network</span>
+                Bridgepath<span style={{ color: GREEN }}> Africa</span>
               </span>
             </div>
           </Link>
@@ -91,9 +91,9 @@ export function Footer() {
           </div>
 
           <div className="mt-auto pt-4 space-y-2.5" style={{ borderTop: `1px solid ${BORDER}` }}>
-            <a href="mailto:info@bridgepathnetwork.com" className="flex items-center gap-2 text-xs hover:text-white transition-colors">
+            <a href="mailto:pkumanyc@gmail.com" className="flex items-center gap-2 text-xs hover:text-white transition-colors">
               <Mail className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
-              info@bridgepathnetwork.com
+              pkumanyc@gmail.com
             </a>
             <div className="flex items-center gap-2 text-xs">
               <MapPin className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
@@ -182,7 +182,7 @@ export function Footer() {
           <div className="relative z-10">
             <h3 className="text-white font-bold text-lg mb-3">The Bottom Line</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              With BridgePath, you get focused launch access in Ghana and Kenya, practical HR guidance, and a dedicated team building toward pan-African reach.
+              With Bridgepath Africa, you get focused launch access in Ghana and Kenya, practical HR guidance, and a dedicated team building toward pan-African reach.
             </p>
           </div>
           <Link href="/auth/signup" className="relative z-10">
@@ -240,7 +240,7 @@ export function Footer() {
       {/* ── COPYRIGHT BAR ── */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-8 md:px-10 py-5">
         <p className="text-xs text-gray-700">
-          © {new Date().getFullYear()} Bridgepath Network. All Rights Reserved.
+          © {new Date().getFullYear()} Bridgepath Africa. All Rights Reserved.
         </p>
         <div className="flex gap-6 text-xs">
           <Link href="/privacy" className="text-gray-700 hover:text-gray-400 transition-colors">Privacy Policy</Link>

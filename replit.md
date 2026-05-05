@@ -1,6 +1,6 @@
-# Bridgepath Network
+# Bridgepath Africa
 
-A premium hiring platform connecting African talent with global employers — featuring job listings, AI-powered CV reviews, dashboards for job seekers and employers, and HR consultancy services.
+A premium HR hiring platform connecting African talent (Ghana & Kenya) with global employers — featuring job listings, AI-powered CV reviews, dashboards for job seekers and employers, and HR consultancy services.
 
 ## Run & Operate
 
@@ -21,7 +21,6 @@ A premium hiring platform connecting African talent with global employers — fe
 - **Database:** PostgreSQL via Replit, Drizzle ORM
 - **AI:** OpenAI via Replit AI Integrations (`gpt-5-mini` for CV analysis)
 - **Auth:** Custom JWT (sha256 hash + base64 token), stored in localStorage
-- **Payments:** Stripe (configured, not fully wired)
 - **Monorepo:** pnpm workspaces
 
 ## Where things live
@@ -29,6 +28,7 @@ A premium hiring platform connecting African talent with global employers — fe
 ```
 artifacts/
   bridgepath/      # React frontend (src/, vite.config.ts)
+    public/photos/ # AI-generated African corporate photos (4 images)
   api-server/      # Express backend (src/routes/, src/lib/)
 lib/
   db/              # Drizzle schema + migrations (src/schema/)
@@ -47,17 +47,30 @@ lib/
 
 ## Product
 
-- Landing page with hero, services overview, and employer/job seeker CTAs
+- Landing page with bold full-bleed hero, stats bar, dark navy sections (Deel/Remote.com style)
 - Job listings with search, filtering, and detailed job pages
 - Employer dashboard: post jobs, manage candidates, view applications
 - Job seeker dashboard: track applications, manage profile
 - AI CV Review: upload CV text → GPT analysis with scores, strengths, and recommendations
 - 9 HR service pages (Employment of Record, Payroll & Tax, etc.)
 - Demo mode: pre-configured accounts for testing without registration
+- Real contact form → saves to `contact_submissions` DB table
+
+## Design System
+
+- **Fonts:** Syne (display headings) + Plus Jakarta Sans (body) via Google Fonts
+- **Colors:** GREEN=#8CC63F, DARK=#0D1B2A, AMBER=#F97316
+- **Hero style:** Full-bleed African corporate photos with bottom-up dark gradient overlay, text pinned to bottom — no image shadows or overlays on body sections
+- **Photos:** `/public/photos/` — africa-office-team.png, hr-leader.png, boardroom-meeting.png, office-space.png
+- **Contact email:** pkumanyc@gmail.com (used everywhere)
 
 ## User Preferences
 
-_Populate as you build_
+- Bold, vibrant design emulating Deel / Remote.com / Rippling
+- No image shadows or overlays on photo sections
+- Full-bleed hero images with gradient overlays (bottom-heavy)
+- Syne font for display headings
+- All brand references: "Bridgepath Africa" (not "BridgePath Network")
 
 ## Gotchas
 
@@ -65,6 +78,7 @@ _Populate as you build_
 - **Backend must be running for API calls** — Vite proxies `/api` to port 8080; if the backend is down, all API calls fail.
 - **DB schema changes:** Run `pnpm --filter @workspace/db run push` after editing `lib/db/src/schema/`. Replit's publish flow handles production schema diffs automatically.
 - **pnpm preinstall script** blocks `npm install` — always use `pnpm`.
+- **Screenshot tool uses port 5000** — always broken in this project (app runs on 20522). Verify via workflow HMR logs instead.
 
 ## Pointers
 
@@ -72,3 +86,4 @@ _Populate as you build_
 - API routes: `artifacts/api-server/src/routes/`
 - Frontend pages: `artifacts/bridgepath/src/pages/`
 - Auth logic: `artifacts/api-server/src/lib/auth.ts` + `artifacts/bridgepath/src/lib/auth.tsx`
+- Theme/CSS: `artifacts/bridgepath/src/index.css`

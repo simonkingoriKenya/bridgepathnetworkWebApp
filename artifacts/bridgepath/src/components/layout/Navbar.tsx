@@ -43,12 +43,12 @@ export function Navbar() {
       <div style={{ backgroundColor: DARK }} className="py-2 hidden md:block">
         <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-gray-400">
-            <span className="font-medium text-gray-300">Bridgepath Network</span>
+            <span className="font-medium text-gray-300">Bridgepath Africa</span>
             <span className="text-gray-600">·</span>
             <span>Accra, Ghana HQ</span>
             <span className="text-gray-600">·</span>
-            <a href="mailto:info@bridgepathnetwork.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Mail className="h-3 w-3" /> info@bridgepathnetwork.com
+            <a href="mailto:pkumanyc@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Mail className="h-3 w-3" /> pkumanyc@gmail.com
             </a>
           </div>
           <div className="flex items-center gap-4 text-xs text-gray-400">
@@ -67,10 +67,10 @@ export function Navbar() {
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <img src="/logo-brand.png" alt="Bridgepath Network" className="h-10 w-10 object-contain shrink-0 rounded-xl" />
+            <img src="/logo-brand.png" alt="Bridgepath Africa" className="h-10 w-10 object-contain shrink-0 rounded-xl" />
             <div className="flex flex-col leading-none">
               <div className="font-extrabold text-xl tracking-tight leading-none">
-                <span style={{ color: "#1e3d3a" }}>Bridge</span><span style={{ color: "#1e3d3a" }}>Path</span><span style={{ color: GREEN }}>Network</span>
+                <span style={{ color: "#0D1B2A" }}>Bridgepath</span><span style={{ color: GREEN }}> Africa</span>
               </div>
               <span className="text-[9px] sm:text-[10px] italic text-gray-400 font-light tracking-tight mt-0.5">
                 Shaping People. Strengthening Institutions.

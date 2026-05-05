@@ -38,7 +38,7 @@ export default function Login() {
       toast({ variant: "destructive", title: "Could not sign in", description: result.error });
       return;
     }
-    toast({ title: "Signed in", description: "Welcome back to Bridgepath Network." });
+    toast({ title: "Signed in", description: "Welcome back to Bridgepath Africa." });
     setLocation(result.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker");
   };
 
@@ -69,7 +69,7 @@ export default function Login() {
         <div className="relative z-10 p-12 flex flex-col justify-between h-full">
           <Link href="/" className="flex flex-col gap-1">
             <div className="flex items-center gap-2.5">
-              <img src="/logo.svg" alt="Bridgepath Network" className="h-9 w-9 object-contain" />
+              <img src="/logo.svg" alt="Bridgepath Africa" className="h-9 w-9 object-contain" />
               <span className="font-bold text-2xl text-white">
                 Bridgepath<span style={{ color: GREEN }}>Network</span>
               </span>
@@ -100,7 +100,7 @@ export default function Login() {
           <div className="lg:hidden mb-8">
             <Link href="/" className="flex flex-col gap-0.5">
               <div className="flex items-center gap-2">
-                <img src="/logo.svg" alt="Bridgepath Network" className="h-8 w-8 object-contain" />
+                <img src="/logo.svg" alt="Bridgepath Africa" className="h-8 w-8 object-contain" />
                 <span className="font-bold text-xl" style={{ color: DARK }}>
                   Bridgepath<span style={{ color: GREEN }}>Network</span>
                 </span>
