@@ -24,3 +24,51 @@ id = "01gsiL_rFpplEXoW5P2l0"
 uri = "file://artifacts/bridgepath/public/photos/office-space.png"
 type = "image"
 title = "african modern office space"
+
+[[generated]]
+id = "4jaGI9o9ozf_aQs24gFpT"
+uri = "file://artifacts/bridgepath/public/photos/hero-team-meeting.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "QBfQbXSKEbo_UDPeT5k1D"
+uri = "file://artifacts/bridgepath/public/photos/hr-leader-woman.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2DFG_xA5StoWVjU1HfQcU"
+uri = "file://artifacts/bridgepath/public/photos/boardroom-deal.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "cwLMChNR6pepU9shbtt8b"
+uri = "file://artifacts/bridgepath/public/photos/modern-africa-office.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Ouy5YU0MQKB8vI9ADxMVO"
+uri = "file://artifacts/bridgepath/public/photos/coworking-team.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AaCvzF2-yPp0skjQQjyYW"
+uri = "file://artifacts/bridgepath/public/photos/job-interview.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "6Y2IYI9oo1qvUscxN2egm"
+uri = "file://artifacts/bridgepath/public/photos/africa-city-skyline.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "f690l_9r1E4T570mkmw8U"
+uri = "file://artifacts/bridgepath/public/photos/team-celebration.png"
+type = "image"
+title = "generated_image"

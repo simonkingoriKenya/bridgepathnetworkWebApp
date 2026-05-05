@@ -44,8 +44,8 @@ export default function EmployersPage() {
               <div className="space-y-5">
                 <div className="relative rounded-3xl overflow-hidden shadow-xl" style={{ aspectRatio: "16/9" }}>
                   <img
-                    src="/photos/boardroom-meeting.png"
-                    alt="African HR professionals reviewing candidates in a modern boardroom"
+                    src="/photos/boardroom-deal.png"
+                    alt="African HR professionals closing a deal in a modern boardroom"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.55) 0%, transparent 60%)" }} />

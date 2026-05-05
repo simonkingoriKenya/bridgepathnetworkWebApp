@@ -71,7 +71,7 @@ export default function Login() {
             <div className="flex items-center gap-2.5">
               <img src="/logo.svg" alt="Bridgepath Africa" className="h-9 w-9 object-contain" />
               <span className="font-bold text-2xl text-white">
-                Bridgepath<span style={{ color: GREEN }}>Network</span>
+                Bridgepath<span style={{ color: GREEN }}>Africa</span>
               </span>
             </div>
             <span className="text-xs italic text-gray-400 ml-11">Shaping People. Strengthening Institutions.</span>
@@ -79,11 +79,11 @@ export default function Login() {
           <div>
             <div className="flex gap-3 mb-6">
               {[
-                { v: "Ghana", l: "Launch" },
-                { v: "Kenya", l: "Launch" },
-                { v: "15+", l: "Years HR" },
+                { v: "Ghana", l: "Launch", k: "ghana" },
+                { v: "Kenya", l: "Launch", k: "kenya" },
+                { v: "15+", l: "Years HR", k: "years" },
               ].map((s) => (
-                <div key={s.l} className="text-center px-4 py-3 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.08)" }}>
+                <div key={s.k} className="text-center px-4 py-3 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.08)" }}>
                   <div className="text-xl font-bold text-white">{s.v}</div>
                   <div className="text-xs text-gray-400">{s.l}</div>
                 </div>
@@ -102,7 +102,7 @@ export default function Login() {
               <div className="flex items-center gap-2">
                 <img src="/logo.svg" alt="Bridgepath Africa" className="h-8 w-8 object-contain" />
                 <span className="font-bold text-xl" style={{ color: DARK }}>
-                  Bridgepath<span style={{ color: GREEN }}>Network</span>
+                  Bridgepath<span style={{ color: GREEN }}>Africa</span>
                 </span>
               </div>
               <span className="text-xs italic text-gray-400 ml-10">Shaping People. Strengthening Institutions.</span>

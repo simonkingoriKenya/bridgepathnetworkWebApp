@@ -12,7 +12,7 @@ import {
   Code2, Landmark, Headphones, Crown, Search, Sparkles,
   Building2, MapPin, Zap, Target, ArrowUpRight, Play
 } from "lucide-react";
-import heroImage from "@assets/Hero_1778003129768.png";
+const heroImage = "/photos/hero-team-meeting.png";
 
 const GREEN = "#8CC63F";
 const DARK = "#0D1B2A";
@@ -299,8 +299,8 @@ export default function Home() {
       {/* ── FULL-BLEED IMAGE SECTION: African Office Team ── */}
       <section className="relative h-[60vh] min-h-[420px] max-h-[640px] overflow-hidden">
         <img
-          src="/photos/africa-office-team.png"
-          alt="African professionals collaborating in a modern corporate office"
+          src="/photos/coworking-team.png"
+          alt="Diverse African professionals collaborating in a modern coworking space"
           className="w-full h-full object-cover object-center"
         />
         {/* Minimal overlay — let image shine */}
@@ -389,8 +389,8 @@ export default function Home() {
             <div className="relative">
               <div className="rounded-3xl overflow-hidden aspect-[4/3]">
                 <img
-                  src="/photos/boardroom-meeting.png"
-                  alt="African professionals in a corporate boardroom meeting"
+                  src="/photos/boardroom-deal.png"
+                  alt="African professionals closing a deal in a corporate boardroom"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -436,8 +436,8 @@ export default function Home() {
       {/* ── HR PROFESSIONAL IMAGE SECTION ── */}
       <section className="relative h-[55vh] min-h-[380px] max-h-[600px] overflow-hidden">
         <img
-          src="/photos/office-space.png"
-          alt="Modern African corporate office space"
+          src="/photos/job-interview.png"
+          alt="African professional HR interview in a modern corporate setting"
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to left, rgba(13,27,42,0.80) 0%, rgba(13,27,42,0.20) 60%, transparent 100%)" }} />

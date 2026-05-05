@@ -83,7 +83,7 @@ export default function EmployerOnboarding() {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f0f4ff" }}>
       <div className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
         <div className="flex flex-col">
-          <span className="font-bold text-lg" style={{ color: DARK }}>Bridgepath<span style={{ color: GREEN }}>Network</span></span>
+          <span className="font-bold text-lg" style={{ color: DARK }}>Bridgepath<span style={{ color: GREEN }}>Africa</span></span>
           <span className="text-[10px] italic text-gray-400">Shaping People. Strengthening Institutions.</span>
         </div>
         {isDemo ? (

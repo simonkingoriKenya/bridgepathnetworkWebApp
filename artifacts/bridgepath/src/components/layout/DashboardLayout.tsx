@@ -46,7 +46,7 @@ function Sidebar({
           <Link href="/" onClick={onClose} className="flex items-center gap-2 min-w-0">
             <img src="/logo.svg" alt="Logo" className="h-7 w-7 object-contain shrink-0" />
             <span className="font-bold text-sm text-white tracking-tight truncate">
-              Bridgepath<span style={{ color: GREEN }}>Network</span>
+              Bridgepath<span style={{ color: GREEN }}>Africa</span>
             </span>
           </Link>
         )}
