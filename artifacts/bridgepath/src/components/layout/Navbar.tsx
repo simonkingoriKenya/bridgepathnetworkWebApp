@@ -2,12 +2,11 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import {
   LogOut, User as UserIcon, Mail, Menu, X, ChevronDown, LayoutDashboard,
-  Briefcase, Search, FileText, Building2, Users, Sparkles, Loader2
+  Briefcase, Search, FileText, Building2, Users, Sparkles
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
-import { DEMO_JOBSEEKER } from "@/lib/demoAuth";
 
 const GREEN = "#8CC63F";
 const DARK = "#1a2340";
@@ -25,23 +24,12 @@ const employerLinks = [
 ];
 
 export function Navbar() {
-  const { user, logout, isAuthenticated, signInWithPassword } = useAuth();
-  const [location, setLocation] = useLocation();
+  const { user, logout, isAuthenticated } = useAuth();
+  const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [profOpen, setProfOpen] = useState(false);
   const [empOpen, setEmpOpen] = useState(false);
-  const [demoLoading, setDemoLoading] = useState(false);
-
-  const handleTryDemo = async () => {
-    setDemoLoading(true);
-    setMobileOpen(false);
-    const result = await signInWithPassword(DEMO_JOBSEEKER.email, DEMO_JOBSEEKER.password);
-    setDemoLoading(false);
-    if (!result.error) {
-      setLocation("/onboarding/jobseeker");
-    }
-  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -226,15 +214,6 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <>
-                <button
-                  onClick={handleTryDemo}
-                  disabled={demoLoading}
-                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg border transition-all hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{ borderColor: GREEN + "60", color: GREEN, backgroundColor: GREEN + "10" }}
-                >
-                  {demoLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
-                  Try Demo
-                </button>
                 <Link href="/auth/login">
                   <button className="px-4 py-2 text-sm font-medium border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors hidden sm:block" style={{ color: DARK }}>Sign In</button>
                 </Link>
@@ -284,24 +263,13 @@ export function Navbar() {
               </div>
             )}
             {!isAuthenticated && (
-              <div className="border-t border-gray-100 pt-3 mt-2 space-y-2">
-                <button
-                  onClick={handleTryDemo}
-                  disabled={demoLoading}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg border disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{ borderColor: GREEN + "60", color: GREEN, backgroundColor: GREEN + "10" }}
-                >
-                  {demoLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                  Try Demo
-                </button>
-                <div className="flex gap-2">
-                  <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="flex-1">
-                    <button className="w-full py-2.5 text-sm font-medium border border-gray-200 rounded-lg" style={{ color: DARK }}>Sign In</button>
-                  </Link>
-                  <Link href="/auth/signup" onClick={() => setMobileOpen(false)} className="flex-1">
-                    <button className="w-full py-2.5 text-sm font-semibold text-white rounded-lg" style={{ backgroundColor: GREEN }}>Get Started</button>
-                  </Link>
-                </div>
+              <div className="border-t border-gray-100 pt-3 mt-2 flex gap-2">
+                <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="flex-1">
+                  <button className="w-full py-2.5 text-sm font-medium border border-gray-200 rounded-lg" style={{ color: DARK }}>Sign In</button>
+                </Link>
+                <Link href="/auth/signup" onClick={() => setMobileOpen(false)} className="flex-1">
+                  <button className="w-full py-2.5 text-sm font-semibold text-white rounded-lg" style={{ backgroundColor: GREEN }}>Get Started</button>
+                </Link>
               </div>
             )}
           </div>
