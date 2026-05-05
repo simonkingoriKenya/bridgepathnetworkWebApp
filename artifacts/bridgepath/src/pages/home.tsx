@@ -11,7 +11,7 @@ import {
   TrendingUp, ShieldCheck, Star, CheckCircle2, ArrowRight, Clock,
   Code2, Landmark, Headphones, Crown
 } from "lucide-react";
-const heroImage = "/hero-boardroom.png";
+import heroImage from "@assets/Hero_1778003129768.png";
 import credibilityImage from "@assets/unnamed_(6)_1776009115712.jpg";
 
 const GREEN = "#8CC63F";
