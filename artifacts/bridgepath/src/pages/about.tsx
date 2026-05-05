@@ -94,7 +94,7 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section className="py-24 bg-white/95 premium-grid-bg">
+      <section className="py-14 md:py-24 bg-white/95 premium-grid-bg">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col md:flex-row gap-14 items-start">

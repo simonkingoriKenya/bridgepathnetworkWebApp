@@ -54,10 +54,12 @@ A premium hiring platform connecting global employers with Africa's best talent.
 11. **BackToTop** — Global floating button on all pages (triggers at 400px scroll)
 12. **ChatSupport** — Floating chat widget with auto-replies and quick options
 13. **Legal pages** — `/privacy`, `/terms`, and `/cookies` linked from the footer
-14. **Employer landing page** (`/employers`) — Public employer CTA page with Post a Job and Browse Candidates actions
-15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages for browsing profiles and simple conversations
+14. **Employer landing page** (`/employers`) — Public employer CTA page with African professional team photo, Post a Job and Browse Candidates actions, Why BridgePath feature grid
+15. **Employer candidate workflow** — Protected `/candidates`, `/candidates/:id`, and `/messages` V1 pages. Candidate cards now show real African professional photos from local assets.
 16. **Blog imagery** — Blog cards, author avatars, article heroes, and login hero use local African professional photos from `attached_assets/unnamed_*.jpg`; article heroes use a taller `50vh` layout to avoid cramped cropping.
 17. **Premium visual system** — Global typography uses Plus Jakarta Sans with DM Serif Display for major headings. Public pages, article pages, service pages, and dashboards use subtle geometric grid backgrounds. MVP stats are framed honestly around Ghana/Kenya launch access, early access, 2026 launch, and 15+ years of HR experience.
+18. **Demo mode** — Dashboard sidebar shows "Demo mode" badge, "Exit Demo" green button (logs out → /auth/login), and "Create real account" CTA for demo users. Mobile header shows "Exit Demo" shortcut.
+19. **Mobile optimization** — All public pages use responsive padding (`px-4 md:px-10`), section spacing (`py-12 md:py-20`), and fluid grid breakpoints. Stats bars, focus area cards, news grids, and service step grids all adapt cleanly to small screens.
 
 ## Auth Flow
 

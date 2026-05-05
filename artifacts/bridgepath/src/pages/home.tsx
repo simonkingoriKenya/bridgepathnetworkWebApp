@@ -180,10 +180,10 @@ export default function Home() {
 
       {/* ── DUAL USER JOURNEY ── */}
       <section className="bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 md:px-8 py-20 max-w-6xl">
-          <div className="text-center mb-14">
+        <div className="container mx-auto px-4 md:px-8 py-12 md:py-20 max-w-6xl">
+          <div className="text-center mb-10 md:mb-14">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Two paths. One platform.</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2" style={{ color: DARK }}>
               How BridgePath <span style={{ color: GREEN }}>works for you</span>
             </h2>
             <p className="text-gray-500 mt-3 max-w-xl mx-auto">Whether you're growing your career or building a team, BridgePath is built for your journey.</p>
@@ -270,17 +270,17 @@ export default function Home() {
       </section>
 
       {/* ── FOCUS AREAS ── */}
-      <section className="py-20 bg-gray-50 premium-grid-bg border-b border-gray-100">
+      <section className="py-12 md:py-20 bg-gray-50 premium-grid-bg border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10 md:mb-14">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Where we hire</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2" style={{ color: DARK }}>
               Focus areas for <span style={{ color: GREEN }}>high-quality hiring</span>
             </h2>
-            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">BridgePath focuses on roles and talent communities where Africa's next wave of growth is already happening.</p>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm md:text-base">BridgePath focuses on roles and talent communities where Africa's next wave of growth is already happening.</p>
           </div>
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 max-w-5xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.12 }}
@@ -294,7 +294,7 @@ export default function Home() {
                 transition={{ type: "spring", stiffness: 320, damping: 24 }}
                 className="relative rounded-3xl border border-gray-100 bg-white shadow-sm overflow-hidden"
               >
-                <div className="flex flex-col items-center justify-between text-center p-7 min-h-44 group h-full hover:bg-white transition-all">
+                <div className="flex flex-col items-center justify-between text-center p-5 sm:p-7 min-h-36 sm:min-h-44 group h-full hover:bg-white transition-all">
                   <div className="absolute inset-x-8 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${GREEN}, transparent)` }} />
                   <div className="h-14 w-14 rounded-2xl border flex items-center justify-center mb-4 transition-all group-hover:scale-110" style={{ borderColor: GREEN + "55", color: GREEN, background: `linear-gradient(135deg, ${GREEN}14, white)` }}>
                     {s.icon}
@@ -322,22 +322,21 @@ export default function Home() {
 
       {/* ── WHY BRIDGEPATH ── */}
       <section className="bg-white premium-grid-bg border-b border-gray-100">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+        <div className="mx-auto" style={{ maxWidth: "1280px" }}>
+          <div className="px-4 md:px-10 py-10 md:py-12 border-b border-gray-100 text-center">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Why BridgePath</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2" style={{ color: DARK }}>
               Built on <span style={{ color: GREEN }}>Real Hiring Experience</span>
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto mt-3 text-sm">
               BridgePath combines global HR leadership, 15+ years of African workforce experience, and a deep understanding of what great hiring looks like.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-            {whyPartner.map((w, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 divide-y sm:divide-y-0 divide-x-0 sm:divide-x divide-gray-100">
+            {whyPartner.map((w) => (
               <div
                 key={w.title}
-                className="p-8 md:p-10 text-center"
-                style={{ borderRight: i < whyPartner.length - 1 ? "1px solid #e5e7eb" : "none" }}
+                className="p-6 md:p-10 text-center"
               >
                 <div className="h-14 w-14 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: GREEN + "15", color: GREEN }}>
                   {w.icon}
@@ -351,7 +350,7 @@ export default function Home() {
       </section>
 
       {/* ── REGIONAL PRESENCE ── */}
-      <section className="py-20" style={{ backgroundColor: "#1e2f1a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <section className="py-12 md:py-20" style={{ backgroundColor: "#1e2f1a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-6xl mx-auto">
             <div className="flex-1 w-full">
@@ -392,13 +391,13 @@ export default function Home() {
 
       {/* ── AFRICA OPPORTUNITY STATS ── */}
       <section className="bg-white premium-grid-bg border-b border-gray-100">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-100">
+        <div className="mx-auto" style={{ maxWidth: "1280px" }}>
+          <div className="px-4 md:px-10 py-10 md:py-12 border-b border-gray-100">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>The Africa Opportunity</span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>
-                  Why Africa is the world's<br />
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2" style={{ color: DARK }}>
+                  Why Africa is the world's{" "}
                   <span style={{ color: GREEN }}>next talent frontier</span>
                 </h2>
               </div>
@@ -407,17 +406,13 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {africaStats.map((stat, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-y sm:divide-y-0 divide-x-0 divide-gray-100 [&>*]:border-b [&>*]:border-gray-100 [&>*:last-child]:border-b-0 sm:[&>*:nth-child(2n)]:border-r-0 sm:[&>*]:border-r sm:[&>*]:border-gray-100 md:[&>*:nth-child(3n)]:border-r-0 md:[&>*]:border-r md:[&>*]:border-gray-100">
+            {africaStats.map((stat) => (
               <div
                 key={stat.label}
-                className="p-8 md:p-10 group hover:bg-gray-50/60 transition-colors"
-                style={{
-                  borderRight: (i + 1) % 3 !== 0 ? "1px solid #e5e7eb" : "none",
-                  borderBottom: i < 3 ? "1px solid #e5e7eb" : "none",
-                }}
+                className="p-6 md:p-10 hover:bg-gray-50/60 transition-colors"
               >
-                <div className="text-4xl font-bold mb-1" style={{ color: GREEN }}>{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: GREEN }}>{stat.value}</div>
                 <div className="text-sm font-semibold mb-2" style={{ color: DARK }}>{stat.label}</div>
                 <p className="text-xs text-gray-500 leading-relaxed">{stat.context}</p>
               </div>
@@ -428,15 +423,15 @@ export default function Home() {
 
       {/* ── PLATFORM STATS BAR ── */}
       <section style={{ backgroundColor: "#3a5a36", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="grid grid-cols-2 md:grid-cols-5" style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid rgba(255,255,255,0.08)", borderRight: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="grid grid-cols-2 md:grid-cols-5 mx-auto" style={{ maxWidth: "1280px" }}>
           {platformStats.map((s, i) => (
             <div
               key={`stat-${i}-${s.label}`}
-              className="py-14 text-center"
+              className="py-8 md:py-12 text-center"
               style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}
             >
-              <div className="text-3xl md:text-4xl font-bold text-white">{s.value}</div>
-              <div className="text-xs font-medium uppercase tracking-wider text-gray-300 mt-1">{s.label}</div>
+              <div className="text-2xl md:text-4xl font-bold text-white">{s.value}</div>
+              <div className="text-[10px] md:text-xs font-medium uppercase tracking-wider text-gray-300 mt-1 px-2">{s.label}</div>
             </div>
           ))}
         </div>
@@ -444,15 +439,15 @@ export default function Home() {
 
       {/* ── CONTACT ── */}
       <section id="contact" className="bg-gray-50 border-b border-gray-100">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+        <div className="mx-auto" style={{ maxWidth: "1280px" }}>
+          <div className="px-4 md:px-10 py-10 md:py-12 border-b border-gray-100 text-center">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Get in touch</span>
-            <h2 className="text-3xl font-bold mt-2" style={{ color: DARK }}>Start building with BridgePath</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mt-2" style={{ color: DARK }}>Start building with BridgePath</h2>
             <p className="text-gray-500 mt-2 text-sm">Tell us whether you want to find opportunities or hire top talent — we'll get back within 24 hours.</p>
           </div>
-          <div className="px-8 md:px-10 py-12">
+          <div className="px-4 md:px-10 py-8 md:py-12">
             <div className="max-w-2xl mx-auto">
-              <form className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100" onSubmit={handleContactSubmit}>
+              <form className="bg-white rounded-2xl p-5 md:p-8 shadow-sm border border-gray-100" onSubmit={handleContactSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-1.5">Full Name</label>
@@ -499,23 +494,22 @@ export default function Home() {
 
       {/* ── NEWS & INSIGHTS ── */}
       <section className="bg-white border-b border-gray-100">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-10 border-b border-gray-100 flex items-end justify-between">
+        <div className="mx-auto" style={{ maxWidth: "1280px" }}>
+          <div className="px-4 md:px-10 py-8 md:py-10 border-b border-gray-100 flex items-end justify-between gap-4">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>Knowledge hub</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-1" style={{ color: DARK }}>News &amp; Insights</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-1" style={{ color: DARK }}>News &amp; Insights</h2>
               <p className="text-gray-500 mt-1 text-sm">For organisations and professionals across Africa</p>
             </div>
             <Link href="/blog" className="text-xs font-semibold flex items-center gap-1 shrink-0" style={{ color: GREEN }}>
               View all <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4">
-            {newsArticles.map((article, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+            {newsArticles.map((article) => (
               <Link key={article.slug} href={`/blog/${article.slug}`}>
                 <div
                   className="group cursor-pointer h-full flex flex-col hover:bg-gray-50/60 transition-colors"
-                  style={{ borderRight: i < newsArticles.length - 1 ? "1px solid #e5e7eb" : "none" }}
                 >
                   <div className="h-44 overflow-hidden">
                     <img
@@ -542,12 +536,12 @@ export default function Home() {
 
       {/* ── FAQ ── */}
       <section className="bg-gray-50 border-b border-gray-100">
-        <div style={{ maxWidth: "1280px", margin: "0 auto", borderLeft: "1px solid #e5e7eb", borderRight: "1px solid #e5e7eb" }}>
-          <div className="px-8 md:px-10 py-12 border-b border-gray-100 text-center">
+        <div className="mx-auto" style={{ maxWidth: "1280px" }}>
+          <div className="px-4 md:px-10 py-10 md:py-12 border-b border-gray-100 text-center">
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: GREEN }}>FAQs</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ color: DARK }}>Frequently asked questions</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2" style={{ color: DARK }}>Frequently asked questions</h2>
           </div>
-          <div className="px-8 md:px-10 py-10 max-w-3xl mx-auto">
+          <div className="px-4 md:px-10 py-8 md:py-10 max-w-3xl mx-auto">
             {faqs.map((faq, i) => (
               <div key={i} style={{ borderBottom: "1px solid #e5e7eb" }}>
                 <button

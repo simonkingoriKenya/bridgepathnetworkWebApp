@@ -1,9 +1,11 @@
 import { ReactNode, useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
+import { isDemoEmail } from "@/lib/demoAuth";
 import {
   LayoutDashboard, Briefcase, FileText, User, LogOut,
   Settings, ChevronLeft, Menu, PlusCircle, Bell, Home, X, Users, MessageSquare,
+  Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,18 +22,17 @@ interface SidebarProps {
   navItems: NavItem[];
   user: { name: string; email?: string };
   isEmployer: boolean;
+  isDemo: boolean;
   location: string;
-  /** show collapsed icons-only mode (desktop only) */
   collapsed?: boolean;
-  /** collapse toggle button handler (desktop) */
   onCollapse?: () => void;
-  /** close drawer handler (mobile) */
   onClose?: () => void;
   logout: () => void;
+  onExitDemo: () => void;
 }
 
 function Sidebar({
-  navItems, user, isEmployer, location, collapsed = false, onCollapse, onClose, logout,
+  navItems, user, isEmployer, isDemo, location, collapsed = false, onCollapse, onClose, logout, onExitDemo,
 }: SidebarProps) {
   const isActive = (href: string) =>
     location === href || (href !== "/" && location.startsWith(`${href}/`));
@@ -49,7 +50,6 @@ function Sidebar({
             </span>
           </Link>
         )}
-        {/* Mobile: X button */}
         {onClose && (
           <button
             onClick={onClose}
@@ -58,7 +58,6 @@ function Sidebar({
             <X className="h-4 w-4" />
           </button>
         )}
-        {/* Desktop: collapse toggle */}
         {onCollapse && (
           <button
             onClick={onCollapse}
@@ -68,6 +67,14 @@ function Sidebar({
           </button>
         )}
       </div>
+
+      {/* Demo badge */}
+      {isDemo && !collapsed && (
+        <div className="mx-3 mt-3 px-3 py-2 rounded-xl flex items-center gap-2" style={{ backgroundColor: GREEN + "18", border: `1px solid ${GREEN}35` }}>
+          <Sparkles className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
+          <p className="text-xs font-semibold" style={{ color: GREEN }}>Demo mode</p>
+        </div>
+      )}
 
       {/* User badge */}
       <div className="px-3 py-4 border-b border-white/10 shrink-0">
@@ -130,24 +137,55 @@ function Sidebar({
 
       {/* Bottom actions */}
       <div className="px-2 pb-4 space-y-0.5 border-t border-white/10 pt-3 shrink-0">
-        <Link
-          href="/"
-          onClick={onClose}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/8 transition-all"
-          title={collapsed ? "Back to Home" : undefined}
-        >
-          <Home className="h-4 w-4 shrink-0" />
-          {!collapsed && <span>Back to Home</span>}
-        </Link>
-        <Link
-          href="/profile"
-          onClick={onClose}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/8 transition-all"
-          title={collapsed ? "Settings" : undefined}
-        >
-          <Settings className="h-4 w-4 shrink-0" />
-          {!collapsed && <span>Settings</span>}
-        </Link>
+        {/* Exit Demo — only for demo users */}
+        {isDemo && (
+          <button
+            onClick={onExitDemo}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all"
+            style={{ color: GREEN, backgroundColor: GREEN + "15" }}
+            title={collapsed ? "Exit Demo" : undefined}
+          >
+            <Sparkles className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
+            {!collapsed && <span>Exit Demo</span>}
+          </button>
+        )}
+
+        {/* Create Real Account — demo users only */}
+        {isDemo && !collapsed && (
+          <Link
+            href="/auth/signup"
+            onClick={onClose}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90"
+            style={{ backgroundColor: GREEN }}
+          >
+            <User className="h-4 w-4 shrink-0" />
+            <span>Create real account</span>
+          </Link>
+        )}
+
+        {!isDemo && (
+          <>
+            <Link
+              href="/"
+              onClick={onClose}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/8 transition-all"
+              title={collapsed ? "Back to Home" : undefined}
+            >
+              <Home className="h-4 w-4 shrink-0" />
+              {!collapsed && <span>Back to Home</span>}
+            </Link>
+            <Link
+              href="/profile"
+              onClick={onClose}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/8 transition-all"
+              title={collapsed ? "Settings" : undefined}
+            >
+              <Settings className="h-4 w-4 shrink-0" />
+              {!collapsed && <span>Settings</span>}
+            </Link>
+          </>
+        )}
+
         <button
           onClick={() => { logout(); onClose?.(); }}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-all"
@@ -163,7 +201,7 @@ function Sidebar({
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -177,6 +215,13 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   if (!user) return null;
 
   const isEmployer = user.role === "employer";
+  const isDemo = isDemoEmail(user.email);
+
+  const handleExitDemo = () => {
+    logout();
+    setMobileOpen(false);
+    setLocation("/auth/login");
+  };
 
   const navItems: NavItem[] = isEmployer
     ? [
@@ -218,10 +263,12 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
           navItems={navItems}
           user={user}
           isEmployer={isEmployer}
+          isDemo={isDemo}
           location={location}
           collapsed={collapsed}
           onCollapse={() => setCollapsed(!collapsed)}
           logout={logout}
+          onExitDemo={handleExitDemo}
         />
       </aside>
 
@@ -251,10 +298,12 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
                 navItems={navItems}
                 user={user}
                 isEmployer={isEmployer}
+                isDemo={isDemo}
                 location={location}
                 collapsed={false}
                 onClose={() => setMobileOpen(false)}
                 logout={logout}
+                onExitDemo={handleExitDemo}
               />
             </motion.aside>
           </>
@@ -280,6 +329,16 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
+            {/* Demo exit shortcut in header on mobile */}
+            {isDemo && (
+              <button
+                onClick={handleExitDemo}
+                className="md:hidden flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border"
+                style={{ color: GREEN, borderColor: GREEN + "50", backgroundColor: GREEN + "12" }}
+              >
+                <Sparkles className="h-3 w-3" /> Exit Demo
+              </button>
+            )}
             <button className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors relative">
               <Bell className="h-4 w-4" />
               <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full" style={{ backgroundColor: GREEN }} />
@@ -309,9 +368,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
 
         {/* Page content */}
-        <main
-          className="flex-1 p-4 md:p-6 overflow-auto dashboard-grid-surface"
-        >
+        <main className="flex-1 p-4 md:p-6 overflow-auto dashboard-grid-surface">
           <motion.div
             key={location}
             initial={{ opacity: 0, y: 8 }}

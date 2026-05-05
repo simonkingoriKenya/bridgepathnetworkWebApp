@@ -464,7 +464,7 @@ export default function ServiceDetail() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <h2 className="text-2xl font-bold text-center mb-10" style={{ color: DARK }}>How it works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {service.process.map((p, i) => (
               <motion.div
                 key={p.step}
