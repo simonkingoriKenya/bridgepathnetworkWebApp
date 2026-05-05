@@ -95,10 +95,23 @@ export default function Home() {
       return;
     }
     setContactSubmitting(true);
-    await new Promise((r) => setTimeout(r, 600));
-    setContactSubmitting(false);
-    toast({ title: "Request received", description: "Our team will get back to you within 24 hours." });
-    setContactForm({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactForm),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error((err as { message?: string }).message || "Failed to send");
+      }
+      toast({ title: "Enquiry received!", description: "Our team will get back to you within 1–2 business days. Check your inbox for a confirmation." });
+      setContactForm({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
+    } catch (err) {
+      toast({ variant: "destructive", title: "Could not send enquiry", description: err instanceof Error ? err.message : "Please try again or email us directly at info@bridgepathnetwork.com" });
+    } finally {
+      setContactSubmitting(false);
+    }
   };
 
   return (

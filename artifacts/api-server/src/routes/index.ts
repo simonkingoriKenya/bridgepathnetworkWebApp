@@ -7,6 +7,7 @@ import applicationsRouter from "./applications";
 import cvReviewsRouter from "./cv-reviews";
 import paymentsRouter from "./payments";
 import statsRouter from "./stats";
+import contactRouter from "./contact";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,6 @@ router.use(applicationsRouter);
 router.use(cvReviewsRouter);
 router.use(paymentsRouter);
 router.use(statsRouter);
+router.use(contactRouter);
 
 export default router;
