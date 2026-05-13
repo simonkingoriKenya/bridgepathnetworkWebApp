@@ -12,8 +12,6 @@ import {
   Code2, Landmark, Headphones, Crown, Search, Sparkles,
   Building2, MapPin, Zap, Target, ArrowUpRight, Play
 } from "lucide-react";
-const heroImage = "/photos/hero-team-meeting.png";
-
 const CORAL = "#C8461A";
 const GOLD = "#E8962A";
 const CHARCOAL = "#1C1917";
@@ -120,43 +118,50 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative h-screen min-h-[680px] max-h-[960px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[680px] h-screen max-h-[960px] overflow-hidden flex items-center"
+        style={{ background: `linear-gradient(135deg, #2A0D05 0%, #5A1E0A 35%, ${CORAL} 70%, #D4641F 100%)` }}>
+        {/* Subtle warm texture overlay */}
+        <div className="absolute inset-0 opacity-10"
+          style={{ backgroundImage: "radial-gradient(circle at 20% 80%, rgba(232,150,42,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%)" }} />
+
+        {/* Extracted team photo — positioned right side */}
+        <div className="absolute bottom-0 right-0 h-full w-1/2 md:w-[52%] flex items-end justify-end pointer-events-none select-none">
           <img
-            src={heroImage}
-            alt="African professionals collaborating in a modern boardroom"
-            className="w-full h-full object-cover object-top"
+            src="/photos/hero-team-new.png"
+            alt="Diverse global team collaborating — Bridgepath Africa professionals"
+            className="h-full w-full object-contain object-bottom"
+            style={{ filter: "drop-shadow(-24px 0 48px rgba(28,25,23,0.5))" }}
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.93) 0%, rgba(28,25,23,0.45) 40%, rgba(28,25,23,0.0) 75%)" }} />
         </div>
 
-        <div className="relative z-10 w-full pb-14 md:pb-20">
+        {/* Left: copy */}
+        <div className="relative z-10 w-full">
           <div className="container mx-auto px-6 md:px-12">
-            <div className="max-w-3xl">
+            <div className="max-w-xl lg:max-w-2xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 backdrop-blur-sm border" style={{ backgroundColor: `${CORAL}20`, borderColor: `${CORAL}50` }}>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 border" style={{ backgroundColor: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.25)" }}>
                   <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GOLD }} />
                   <span className="text-xs font-bold tracking-wider uppercase" style={{ color: GOLD }}>Early access open · Ghana &amp; Kenya</span>
                 </div>
 
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.0] tracking-tight mb-6">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.02] tracking-tight mb-6">
                   Africa's talent.<br />
                   <span style={{ color: GOLD }}>Placed with<br />purpose.</span>
                 </h1>
 
-                <p className="text-white/75 text-lg md:text-xl max-w-xl mb-8 leading-relaxed font-medium">
+                <p className="text-white/80 text-lg md:text-xl max-w-md mb-8 leading-relaxed font-medium">
                   The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-10">
                   <Link href="/jobs">
                     <button
-                      className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm text-white transition-all hover:scale-105 active:scale-98"
-                      style={{ backgroundColor: CORAL }}
+                      className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm transition-all hover:scale-105 shadow-lg"
+                      style={{ backgroundColor: "white", color: CORAL }}
                     >
                       <Search className="h-4 w-4" />
                       Find Opportunities
@@ -164,7 +169,7 @@ export default function Home() {
                     </button>
                   </Link>
                   <Link href="/employers">
-                    <button className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm text-white border border-white/40 backdrop-blur-sm hover:bg-white/15 transition-all hover:scale-105">
+                    <button className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm text-white border-2 border-white/40 hover:bg-white/15 transition-all hover:scale-105">
                       <Building2 className="h-4 w-4" />
                       Hire Talent
                     </button>
@@ -181,7 +186,7 @@ export default function Home() {
                     <div key={i} className="flex items-center gap-6">
                       <div className="text-center">
                         <div className="text-base font-extrabold text-white leading-none">{s.v}</div>
-                        <div className="text-[10px] text-white/40 mt-0.5 uppercase tracking-widest">{s.l}</div>
+                        <div className="text-[10px] text-white/50 mt-0.5 uppercase tracking-widest">{s.l}</div>
                       </div>
                       {i < 3 && <div className="h-6 w-px bg-white/20" />}
                     </div>
