@@ -3,12 +3,13 @@ import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
-import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Handshake, ArrowRight } from "lucide-react";
+import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Handshake, ArrowRight, GraduationCap, Star } from "lucide-react";
 import founderFallback from "@assets/unnamed_(7)_1776009115711.jpg";
-import aboutHeroBg from "@assets/unnamed_(4)_1776009115713.jpg";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const CORAL = "#C8461A";
+const GOLD = "#E8962A";
+const CHARCOAL = "#1C1917";
+const CREAM = "#FFF8F2";
 
 const PAMELA_FALLBACK = founderFallback;
 
@@ -43,39 +44,48 @@ const pillars = [
 ];
 
 const whyUs = [
-  { title: "African HR Expertise", desc: "15+ years of HR experience supporting institutions across Ghana, Nigeria, Kenya, South Africa, and other African countries." },
+  { title: "African HR Expertise", desc: "20+ years of HR experience supporting institutions across Ghana, Nigeria, Kenya, South Africa, and other African countries." },
   { title: "Value-Aligned Partnership", desc: "We partner with organizations that prioritize diversity, inclusion, and excellence." },
   { title: "Flexible Service Delivery", desc: "In-person, virtual, and tailored consulting services to meet you where you are." },
   { title: "Proven Results", desc: "90%+ client satisfaction, measurable ROI on services, and significant staff retention improvements." },
 ];
 
 const stats = [
-  { value: "15+", label: "Years of Experience" },
+  { value: "20+", label: "Years of Experience" },
   { value: "Ghana", label: "Launch Market" },
   { value: "Kenya", label: "Launch Market" },
   { value: "90%+", label: "Client Satisfaction" },
 ];
 
+const certificates = [
+  { title: "SHRM-SCP", body: "Society for Human Resource Management", area: "Strategic HR Leadership" },
+  { title: "CIPD Level 7", body: "Chartered Institute of Personnel and Development", area: "Advanced HR Practice" },
+  { title: "Certified Talent Acquisition Specialist", body: "Human Capital Institute (HCI)", area: "Talent Acquisition" },
+  { title: "Executive Leadership Certificate", body: "Pan-African HR Leadership Programme", area: "Leadership & Strategy" },
+  { title: "Psychometric Assessment Practitioner", body: "SHL Certified", area: "Talent Assessment" },
+  { title: "Employment Law Certificate", body: "Ghana Bar Association Partner Programme", area: "Employment & Compliance" },
+];
+
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      {/* Hero — full bleed, image breathes */}
+      {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] max-h-[780px] overflow-hidden flex items-end">
         <img
           src="/photos/hr-leader.png"
           alt="African HR professional — Bridgepath Africa"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.50) 45%, rgba(13,27,42,0.05) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.95) 0%, rgba(28,25,23,0.50) 45%, rgba(28,25,23,0.05) 100%)" }} />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>About Bridgepath Africa</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: `${CORAL}25`, color: GOLD, border: `1px solid ${CORAL}40` }}>About Bridgepath Africa</span>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight">
                 Shaping People.<br />
-                <span style={{ color: GREEN }}>Strengthening Institutions.</span>
+                <span style={{ color: GOLD }}>Strengthening Institutions.</span>
               </h1>
               <p className="text-white/70 text-xl max-w-2xl leading-relaxed">
                 Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
@@ -86,7 +96,7 @@ export default function About() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-10 premium-grid-bg-dark" style={{ backgroundColor: GREEN }}>
+      <section className="py-10" style={{ backgroundColor: CORAL }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
@@ -107,35 +117,63 @@ export default function About() {
               <div className="md:w-2/5 shrink-0">
                 <div className="relative">
                   <FounderPhoto />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[240px] rounded-xl p-3 text-white" style={{ backgroundColor: "rgba(26,35,64,0.92)" }}>
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[240px] rounded-xl p-3 text-white" style={{ backgroundColor: "rgba(28,25,23,0.92)" }}>
                     <p className="font-bold text-sm">Pamela Kuma</p>
                     <p className="text-xs text-gray-300">Founder & Global HR Director</p>
                     <a href="https://www.linkedin.com/in/pamela-kuma" target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: GREEN }}>
+                      className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: GOLD }}>
                       <Linkedin className="h-3 w-3" /> linkedin.com/in/pamela-kuma
                     </a>
                   </div>
                 </div>
+
+                {/* Founder quote below photo */}
+                <div className="mt-8 px-1">
+                  <p className="text-sm italic leading-relaxed text-center font-medium" style={{ color: CORAL }}>
+                    "Africa's talent is everywhere. BridgePath brings it home — and connects it to opportunity."
+                  </p>
+                  <p className="text-xs text-center mt-2 font-semibold text-gray-400">— Pamela Kuma, Founder</p>
+                </div>
               </div>
 
               <div className="md:w-3/5 pt-4">
-                <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>About the Founder</p>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: DARK }}>Meet Pamela Kuma</h2>
+                <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: CORAL }}>About the Founder</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: CHARCOAL }}>Meet Pamela Kuma</h2>
+
                 <p className="text-gray-600 leading-relaxed mb-4 text-base">
-                  Pamela Kuma is a seasoned HR professional with over 15 years of experience leading workforce development across African markets — spanning Media, Tech Startups, Fintech, and Gas & Energy sectors.
+                  Pamela Kuma is a seasoned HR and Talent Acquisition leader with over 20 years of experience shaping workforce strategy across African and global markets — including Media, Technology, FinTech, and Energy.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-4 text-base">
-                  Drawing from her global expertise and deep understanding of African talent markets, Pamela founded Bridgepath Africa with a singular mission: to help organizations hire better, build strong teams, and create cultures of excellence — using global best practices combined with local insight.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-6 text-base">
-                  Her work spans institutional HR transformation, executive recruitment, and capacity building for businesses and organizations across African markets, with the platform launching first in Ghana and Kenya.
+                  With a deep understanding of both local talent landscapes and international hiring standards, Pamela founded BridgePath to bridge a critical gap — connecting exceptional talent with meaningful opportunity across Africa.
                 </p>
 
-                <div className="flex items-start gap-3 p-5 rounded-xl" style={{ backgroundColor: DARK + "06", border: `1px solid ${GREEN}35` }}>
-                  <Quote className="h-6 w-6 shrink-0 mt-0.5" style={{ color: GREEN }} />
+                <div className="flex items-start gap-3 p-5 rounded-xl mb-5" style={{ backgroundColor: CORAL + "08", border: `1px solid ${CORAL}25` }}>
+                  <Quote className="h-6 w-6 shrink-0 mt-0.5" style={{ color: CORAL }} />
                   <blockquote className="text-gray-700 italic leading-relaxed font-medium text-base">
-                    "Every school has a mission — but it's the people who bring it to life. Let's invest in them."
+                    "Great organizations are built by great people — and the right connections make all the difference."
                   </blockquote>
+                </div>
+
+                <p className="text-gray-600 leading-relaxed mb-4 text-base">
+                  Through BridgePath, she brings together global best practices and local insight to support organizations in hiring with clarity, building strong teams, and creating cultures that last.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-6 text-base">
+                  Her experience spans executive recruitment, HR transformation, and capacity building, working with businesses and institutions across the continent, with BridgePath launching in Ghana and Kenya.
+                </p>
+
+                {/* Experience highlights */}
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: "Media & Broadcasting" },
+                    { label: "Technology & FinTech" },
+                    { label: "Energy & Extractives" },
+                    { label: "Executive Recruitment" },
+                  ].map((area) => (
+                    <div key={area.label} className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                      <div className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: CORAL }} />
+                      {area.label}
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -143,30 +181,56 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 premium-grid-bg" style={{ backgroundColor: "#f8faf5" }}>
+      {/* Certificates & Credentials */}
+      <section className="py-20 md:py-24" style={{ backgroundColor: CREAM }}>
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-14">
-            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Purpose</p>
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>Mission &amp; Vision</h2>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: CORAL }}>Credentials</p>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: CHARCOAL }}>Certifications &amp; Qualifications</h2>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto">Pamela brings a breadth of internationally recognised HR certifications, underpinning Bridgepath Africa's commitment to world-class standards.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {certificates.map((cert, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="bg-white rounded-2xl p-6 border hover:shadow-md transition-all" style={{ borderColor: "#F5E6D8" }}>
+                <div className="h-10 w-10 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: CORAL + "15" }}>
+                  <GraduationCap className="h-5 w-5" style={{ color: CORAL }} />
+                </div>
+                <p className="font-bold text-base mb-1" style={{ color: CHARCOAL }}>{cert.title}</p>
+                <p className="text-xs text-gray-500 mb-2">{cert.body}</p>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: GOLD + "20", color: GOLD }}>
+                  {cert.area}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
+          <div className="text-center mb-14">
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: CORAL }}>Our Purpose</p>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: CHARCOAL }}>Mission &amp; Vision</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="rounded-2xl p-8 text-white shadow-xl" style={{ background: `linear-gradient(135deg, ${DARK}, #2a4066)` }}>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: GREEN + "25" }}>
-                <Target className="h-6 w-6" style={{ color: GREEN }} />
+              className="rounded-2xl p-8 text-white shadow-xl" style={{ background: `linear-gradient(135deg, ${CORAL}, #A83510)` }}>
+              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(255,255,255,0.20)" }}>
+                <Target className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-              <p className="text-gray-300 leading-relaxed text-base">
+              <p className="text-white/85 leading-relaxed text-base">
                 To shape Africa's workforce by connecting talented professionals — whether at home or in the diaspora — with employers who value them, while equipping institutions with the HR systems, leadership, and culture they need to grow with confidence.
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="rounded-2xl p-8 border-2 bg-white shadow-sm" style={{ borderColor: GREEN + "50" }}>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: GREEN + "15" }}>
-                <Eye className="h-6 w-6" style={{ color: GREEN }} />
+              className="rounded-2xl p-8 border-2 bg-white shadow-sm" style={{ borderColor: GOLD + "50" }}>
+              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: GOLD + "15" }}>
+                <Eye className="h-6 w-6" style={{ color: GOLD }} />
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{ color: DARK }}>Our Vision</h3>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: CHARCOAL }}>Our Vision</h3>
               <p className="text-gray-600 leading-relaxed text-base">
                 To become Africa's most trusted bridge between people and opportunity — a continent-wide network where every professional finds work that fits their potential, and every institution finds the people who will define its future.
               </p>
@@ -176,23 +240,23 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-white/95 premium-grid-bg">
+      <section className="py-20" style={{ backgroundColor: CREAM }}>
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Journey</p>
-            <h2 className="text-3xl font-bold" style={{ color: DARK }}>Milestones</h2>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: CORAL }}>Our Journey</p>
+            <h2 className="text-3xl font-bold" style={{ color: CHARCOAL }}>Milestones</h2>
           </div>
           <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5" style={{ backgroundColor: GREEN + "30" }} />
+            <div className="absolute left-8 top-0 bottom-0 w-0.5" style={{ backgroundColor: CORAL + "30" }} />
             <div className="space-y-6">
               {timeline.map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                   className="flex gap-6 items-start pl-4">
-                  <div className="relative z-10 h-9 w-9 rounded-full flex items-center justify-center shrink-0 text-xs font-bold text-white" style={{ backgroundColor: GREEN }}>
+                  <div className="relative z-10 h-9 w-9 rounded-full flex items-center justify-center shrink-0 text-xs font-bold text-white" style={{ backgroundColor: CORAL }}>
                     {item.year.slice(2)}
                   </div>
-                  <div className="bg-gray-50 rounded-xl p-4 flex-1 border border-gray-100">
-                    <span className="text-xs font-semibold" style={{ color: GREEN }}>{item.year}</span>
+                  <div className="bg-white rounded-xl p-4 flex-1 border" style={{ borderColor: "#F5E6D8" }}>
+                    <span className="text-xs font-semibold" style={{ color: CORAL }}>{item.year}</span>
                     <p className="text-gray-700 text-sm mt-1 leading-relaxed">{item.event}</p>
                   </div>
                 </motion.div>
@@ -203,21 +267,21 @@ export default function About() {
       </section>
 
       {/* Pillars */}
-      <section className="py-20 premium-grid-bg" style={{ backgroundColor: "#f8faf5" }}>
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our Framework</p>
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: DARK }}>Pillars of Bridgepath</h2>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: CORAL }}>Our Framework</p>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: CHARCOAL }}>Pillars of Bridgepath</h2>
             <p className="text-gray-500 mt-3 max-w-xl mx-auto">Our comprehensive framework for institutional success and human capital excellence.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {pillars.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: GREEN + "15" }}>
-                  <span style={{ color: GREEN }}>{p.icon}</span>
+                className="bg-white rounded-2xl p-7 border hover:shadow-lg transition-shadow" style={{ borderColor: "#F5E6D8" }}>
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: CORAL + "15" }}>
+                  <span style={{ color: CORAL }}>{p.icon}</span>
                 </div>
-                <h3 className="font-bold text-lg mb-2" style={{ color: DARK }}>{p.title}</h3>
+                <h3 className="font-bold text-lg mb-2" style={{ color: CHARCOAL }}>{p.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
@@ -226,20 +290,20 @@ export default function About() {
       </section>
 
       {/* Why Us */}
-      <section className="py-20" style={{ background: `linear-gradient(135deg, ${DARK}, #2a4066)` }}>
+      <section className="py-20" style={{ background: `linear-gradient(135deg, ${CORAL}, #A83510)` }}>
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Why Us</p>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3 text-white/70">Why Us</p>
             <h2 className="text-3xl md:text-4xl font-bold text-white">Why Choose Bridgepath?</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {whyUs.map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="flex gap-4 items-start p-5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" style={{ color: GREEN }} />
+                className="flex gap-4 items-start p-5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
+                <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-white" />
                 <div>
                   <h3 className="font-bold text-white mb-1">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -250,16 +314,16 @@ export default function About() {
       {/* CTA */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-8 text-center max-w-2xl">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: DARK }}>Ready to Transform Your Organization?</h2>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: CHARCOAL }}>Ready to Transform Your Organization?</h2>
           <p className="text-gray-500 mb-8">Schedule a free consultation and discover how Bridgepath Africa can revolutionize your people strategy.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
             <Link href="/#contact">
-              <button className="px-8 py-3.5 font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-lg flex items-center gap-2" style={{ backgroundColor: GREEN }}>
+              <button className="px-8 py-3.5 font-semibold text-white rounded-xl hover:opacity-90 transition-all shadow-lg flex items-center gap-2" style={{ backgroundColor: CORAL }}>
                 Get in Touch <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
             <Link href="/services">
-              <button className="px-8 py-3.5 font-semibold rounded-xl border-2 hover:bg-gray-50 transition-all" style={{ color: DARK, borderColor: DARK + "40" }}>
+              <button className="px-8 py-3.5 font-semibold rounded-xl border-2 hover:bg-orange-50 transition-all" style={{ color: CHARCOAL, borderColor: CHARCOAL + "40" }}>
                 View Services
               </button>
             </Link>

@@ -14,9 +14,10 @@ import {
 } from "lucide-react";
 const heroImage = "/photos/hero-team-meeting.png";
 
-const GREEN = "#8CC63F";
-const DARK = "#0D1B2A";
-const AMBER = "#F97316";
+const CORAL = "#C8461A";
+const GOLD = "#E8962A";
+const CHARCOAL = "#1C1917";
+const CREAM = "#FFF8F2";
 
 const focusAreas = [
   { icon: <Code2 className="h-6 w-6" />, label: "Technology" },
@@ -28,7 +29,7 @@ const focusAreas = [
 
 const whyPartner = [
   { icon: <TrendingUp className="h-7 w-7" />, title: "Global HR Leadership", desc: "Guidance shaped by senior hiring experience across African and international markets." },
-  { icon: <ShieldCheck className="h-7 w-7" />, title: "15+ Years Experience", desc: "Built on practical workforce, recruitment, compliance, and people operations expertise." },
+  { icon: <ShieldCheck className="h-7 w-7" />, title: "20+ Years Experience", desc: "Built on practical workforce, recruitment, compliance, and people operations expertise." },
   { icon: <Users className="h-7 w-7" />, title: "Multi-Industry Reach", desc: "Supporting hiring across technology, finance, HR, operations, customer success, and leadership." },
   { icon: <Star className="h-7 w-7" />, title: "Diaspora + Local Talent", desc: "Connecting employers with returning diaspora professionals and strong local talent pools." },
 ];
@@ -47,7 +48,7 @@ const platformStats = [
   { value: "Kenya", label: "Launch Market" },
   { value: "2026", label: "MVP Launch" },
   { value: "Early", label: "Access Open" },
-  { value: "15+", label: "Yrs Experience" },
+  { value: "20+", label: "Yrs Experience" },
 ];
 
 const jobSeekerSteps = [
@@ -74,7 +75,7 @@ const newsArticles = blogPosts.slice(0, 4).map((p) => ({
 }));
 
 const faqs = [
-  { q: "What does Bridgepath Africa do?", a: "Bridgepath Africa is a Human Resources Management Solutions and Executive Recruitment company headquartered in Accra, Ghana. With over 15 years of experience, we connect African talent with quality employers and provide comprehensive outsourced HR services across Africa." },
+  { q: "What does Bridgepath Africa do?", a: "Bridgepath Africa is a Human Resources Management Solutions and Executive Recruitment company headquartered in Accra, Ghana. With over 20 years of experience, we connect African talent with quality employers and provide comprehensive outsourced HR services across Africa." },
   { q: "Who is Bridgepath Africa for?", a: "Bridgepath Africa serves two groups: professionals (diaspora and local talent) looking for quality careers in Ghana and Kenya, and employers seeking to hire verified African talent — locally or remotely." },
   { q: "What services does Bridgepath Africa offer beyond recruitment?", a: "We offer Employment of Record, HR Consultancy, Payroll & Tax Administration, Psychometric Assessments, Staff Outsourcing, Interim Management, and Secondment Services." },
   { q: "Which countries is Bridgepath Africa launching in?", a: "We are launching platform access in Ghana and Kenya first, with a clear roadmap to expand across Africa as the network grows." },
@@ -118,7 +119,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      {/* ── HERO — full bleed, image breathes ── */}
+      {/* ── HERO ── */}
       <section className="relative h-screen min-h-[680px] max-h-[960px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -126,8 +127,7 @@ export default function Home() {
             alt="African professionals collaborating in a modern boardroom"
             className="w-full h-full object-cover object-top"
           />
-          {/* Gradient only at bottom for text legibility — image is the star */}
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.45) 40%, rgba(13,27,42,0.0) 75%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.93) 0%, rgba(28,25,23,0.45) 40%, rgba(28,25,23,0.0) 75%)" }} />
         </div>
 
         <div className="relative z-10 w-full pb-14 md:pb-20">
@@ -138,14 +138,14 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 backdrop-blur-sm border" style={{ backgroundColor: "rgba(140,198,63,0.15)", borderColor: "rgba(140,198,63,0.4)" }}>
-                  <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GREEN }} />
-                  <span className="text-xs font-bold tracking-wider uppercase" style={{ color: GREEN }}>Early access open · Ghana &amp; Kenya</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 backdrop-blur-sm border" style={{ backgroundColor: `${CORAL}20`, borderColor: `${CORAL}50` }}>
+                  <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GOLD }} />
+                  <span className="text-xs font-bold tracking-wider uppercase" style={{ color: GOLD }}>Early access open · Ghana &amp; Kenya</span>
                 </div>
 
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.0] tracking-tight mb-6">
                   Africa's talent.<br />
-                  <span style={{ color: GREEN }}>Placed with<br />purpose.</span>
+                  <span style={{ color: GOLD }}>Placed with<br />purpose.</span>
                 </h1>
 
                 <p className="text-white/75 text-lg md:text-xl max-w-xl mb-8 leading-relaxed font-medium">
@@ -156,7 +156,7 @@ export default function Home() {
                   <Link href="/jobs">
                     <button
                       className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm text-white transition-all hover:scale-105 active:scale-98"
-                      style={{ backgroundColor: GREEN }}
+                      style={{ backgroundColor: CORAL }}
                     >
                       <Search className="h-4 w-4" />
                       Find Opportunities
@@ -175,7 +175,7 @@ export default function Home() {
                   {[
                     { v: "Ghana", l: "Launch" },
                     { v: "Kenya", l: "Launch" },
-                    { v: "15+ yrs", l: "Experience" },
+                    { v: "20+ yrs", l: "Experience" },
                     { v: "2026", l: "MVP" },
                   ].map((s, i) => (
                     <div key={i} className="flex items-center gap-6">
@@ -193,14 +193,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── BOLD STATS BAR ── */}
-      <div style={{ backgroundColor: GREEN }}>
+      {/* ── STATS BAR ── */}
+      <div style={{ backgroundColor: CORAL }}>
         <div className="grid grid-cols-2 md:grid-cols-5 mx-auto max-w-7xl">
           {platformStats.map((s, i) => (
             <div
               key={`stat-${i}`}
               className="py-6 md:py-8 text-center"
-              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none" }}
+              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.22)" : "none" }}
             >
               <div className="text-2xl md:text-3xl font-extrabold text-white">{s.value}</div>
               <div className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-white/70 mt-1">{s.label}</div>
@@ -213,17 +213,17 @@ export default function Home() {
       <section className="bg-white py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: GREEN + "18", color: GREEN }}>Two paths. One platform.</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: DARK }}>
-              How Bridgepath Africa<br /><span style={{ color: GREEN }}>works for you</span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: CORAL + "15", color: CORAL }}>Two paths. One platform.</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold" style={{ color: CHARCOAL }}>
+              How Bridgepath Africa<br /><span style={{ color: CORAL }}>works for you</span>
             </h2>
             <p className="text-gray-500 mt-4 max-w-xl mx-auto text-lg">Whether you're growing your career or building a team — we're built for your journey.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {/* Job Seeker */}
-            <div className="rounded-3xl overflow-hidden border-2" style={{ borderColor: GREEN }}>
-              <div className="px-8 py-6 flex items-center gap-4" style={{ backgroundColor: GREEN }}>
+            <div className="rounded-3xl overflow-hidden border-2" style={{ borderColor: CORAL }}>
+              <div className="px-8 py-6 flex items-center gap-4" style={{ backgroundColor: CORAL }}>
                 <div className="h-12 w-12 rounded-2xl bg-white/20 flex items-center justify-center">
                   <Search className="h-6 w-6 text-white" />
                 </div>
@@ -235,22 +235,22 @@ export default function Home() {
               <div className="px-8 py-8 space-y-6 bg-white">
                 {jobSeekerSteps.map((s) => (
                   <div key={s.step} className="flex items-start gap-5">
-                    <div className="text-3xl font-extrabold shrink-0 leading-none" style={{ color: GREEN + "40" }}>{s.step}</div>
+                    <div className="text-3xl font-extrabold shrink-0 leading-none" style={{ color: CORAL + "35" }}>{s.step}</div>
                     <div className="pt-1">
-                      <p className="font-bold text-base" style={{ color: DARK }}>{s.title}</p>
+                      <p className="font-bold text-base" style={{ color: CHARCOAL }}>{s.title}</p>
                       <p className="text-sm text-gray-500 mt-1 leading-relaxed">{s.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="px-8 py-6 bg-white border-t border-gray-100">
+              <div className="px-8 py-6 bg-white border-t border-orange-50">
                 <Link href="/auth/signup">
-                  <button className="w-full py-3.5 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 hover:scale-[1.01]" style={{ backgroundColor: GREEN }}>
+                  <button className="w-full py-3.5 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 hover:scale-[1.01]" style={{ backgroundColor: CORAL }}>
                     Create Your Profile — It's Free
                   </button>
                 </Link>
                 <Link href="/jobs">
-                  <p className="text-center text-xs mt-3 font-semibold hover:underline" style={{ color: GREEN }}>
+                  <p className="text-center text-xs mt-3 font-semibold hover:underline" style={{ color: CORAL }}>
                     Browse open roles →
                   </p>
                 </Link>
@@ -258,8 +258,8 @@ export default function Home() {
             </div>
 
             {/* Employer */}
-            <div className="rounded-3xl overflow-hidden border-2" style={{ borderColor: DARK }}>
-              <div className="px-8 py-6 flex items-center gap-4" style={{ backgroundColor: DARK }}>
+            <div className="rounded-3xl overflow-hidden border-2" style={{ borderColor: CHARCOAL }}>
+              <div className="px-8 py-6 flex items-center gap-4" style={{ backgroundColor: CHARCOAL }}>
                 <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center">
                   <Building2 className="h-6 w-6 text-white" />
                 </div>
@@ -271,9 +271,9 @@ export default function Home() {
               <div className="px-8 py-8 space-y-6 bg-white">
                 {employerSteps.map((s) => (
                   <div key={s.step} className="flex items-start gap-5">
-                    <div className="text-3xl font-extrabold shrink-0 leading-none" style={{ color: DARK + "30" }}>{s.step}</div>
+                    <div className="text-3xl font-extrabold shrink-0 leading-none" style={{ color: CHARCOAL + "28" }}>{s.step}</div>
                     <div className="pt-1">
-                      <p className="font-bold text-base" style={{ color: DARK }}>{s.title}</p>
+                      <p className="font-bold text-base" style={{ color: CHARCOAL }}>{s.title}</p>
                       <p className="text-sm text-gray-500 mt-1 leading-relaxed">{s.desc}</p>
                     </div>
                   </div>
@@ -281,7 +281,7 @@ export default function Home() {
               </div>
               <div className="px-8 py-6 bg-white border-t border-gray-100">
                 <Link href="/auth/signup?role=employer">
-                  <button className="w-full py-3.5 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 hover:scale-[1.01]" style={{ backgroundColor: DARK }}>
+                  <button className="w-full py-3.5 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 hover:scale-[1.01]" style={{ backgroundColor: CHARCOAL }}>
                     Create an Employer Account
                   </button>
                 </Link>
@@ -296,32 +296,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FULL-BLEED IMAGE SECTION: African Office Team ── */}
+      {/* ── FULL-BLEED: Focus Areas ── */}
       <section className="relative h-[60vh] min-h-[420px] max-h-[640px] overflow-hidden">
         <img
           src="/photos/coworking-team.png"
           alt="Diverse African professionals collaborating in a modern coworking space"
           className="w-full h-full object-cover object-center"
         />
-        {/* Minimal overlay — let image shine */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(13,27,42,0.75) 0%, rgba(13,27,42,0.15) 60%, transparent 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(28,25,23,0.82) 0%, rgba(28,25,23,0.18) 60%, transparent 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-6 md:px-12">
             <div className="max-w-lg">
-              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Where we hire</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Where we hire</p>
               <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-                Focus areas for <span style={{ color: GREEN }}>high-quality hiring</span>
+                Focus areas for <span style={{ color: GOLD }}>high-quality hiring</span>
               </h2>
               <div className="flex flex-wrap gap-3 mt-6">
                 {focusAreas.map((s) => (
                   <div key={s.label} className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white backdrop-blur-sm border border-white/25" style={{ backgroundColor: "rgba(255,255,255,0.10)" }}>
-                    <span style={{ color: GREEN }}>{s.icon}</span>
+                    <span style={{ color: GOLD }}>{s.icon}</span>
                     {s.label}
                   </div>
                 ))}
               </div>
               <Link href="/jobs">
-                <button className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all hover:scale-105" style={{ backgroundColor: GREEN }}>
+                <button className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all hover:scale-105" style={{ backgroundColor: CORAL }}>
                   Browse open roles <ArrowRight className="h-4 w-4" />
                 </button>
               </Link>
@@ -330,62 +329,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── WHY BRIDGEPATH — bold dark section ── */}
-      <section style={{ backgroundColor: DARK }} className="py-20 md:py-28">
+      {/* ── WHY BRIDGEPATH — warm cream section ── */}
+      <section style={{ backgroundColor: CREAM }} className="py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: "rgba(140,198,63,0.15)", color: GREEN }}>Why Bridgepath Africa</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mt-2">
-              Built on <span style={{ color: GREEN }}>Real Hiring Experience</span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: CORAL + "18", color: CORAL }}>Why Bridgepath Africa</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2" style={{ color: CHARCOAL }}>
+              Built on <span style={{ color: CORAL }}>Real Hiring Experience</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto mt-4 text-lg">
-              15+ years of African workforce experience, global HR leadership, and a deep understanding of what great hiring looks like.
+            <p className="text-gray-500 max-w-2xl mx-auto mt-4 text-lg">
+              20+ years of African workforce experience, global HR leadership, and a deep understanding of what great hiring looks like.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyPartner.map((w) => (
-              <div
+              <motion.div
                 key={w.title}
-                className="p-8 md:p-10 text-center group hover:bg-white/5 transition-colors"
-                style={{ backgroundColor: DARK }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 text-center group hover:shadow-lg transition-all border border-orange-100/60"
               >
-                <div className="h-16 w-16 rounded-2xl flex items-center justify-center mb-5 mx-auto transition-transform group-hover:scale-110" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+                <div className="h-16 w-16 rounded-2xl flex items-center justify-center mb-5 mx-auto transition-transform group-hover:scale-110" style={{ backgroundColor: CORAL + "15", color: CORAL }}>
                   {w.icon}
                 </div>
-                <h3 className="font-bold mb-3 text-base text-white">{w.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{w.desc}</p>
-              </div>
+                <h3 className="font-bold mb-3 text-base" style={{ color: CHARCOAL }}>{w.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{w.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── REGIONAL: Bold image + copy, no shadow ── */}
+      {/* ── REGIONAL: Ghana & Kenya ── */}
       <section className="py-20 md:py-28 bg-white">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-5" style={{ backgroundColor: GREEN + "18", color: GREEN }}>Where we operate</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: DARK }}>
-                Launching in Ghana<br />and <span style={{ color: GREEN }}>Kenya</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-5" style={{ backgroundColor: CORAL + "15", color: CORAL }}>Where we operate</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: CHARCOAL }}>
+                Launching in Ghana<br />and <span style={{ color: CORAL }}>Kenya</span>
               </h2>
               <p className="text-gray-500 mb-8 leading-relaxed text-lg max-w-lg">
                 Bridgepath Africa is launching with a clear focus on Ghana and Kenya — two of Africa's fastest-growing talent markets — before expanding to a broader pan-African network.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/auth/signup">
-                  <button className="px-7 py-4 font-bold text-white rounded-xl transition-all hover:opacity-90 hover:scale-105" style={{ backgroundColor: GREEN }}>
+                  <button className="px-7 py-4 font-bold text-white rounded-xl transition-all hover:opacity-90 hover:scale-105" style={{ backgroundColor: CORAL }}>
                     Join early access
                   </button>
                 </Link>
                 <Link href="/about">
-                  <button className="px-7 py-4 font-bold rounded-xl border-2 transition-all hover:scale-105" style={{ borderColor: DARK, color: DARK }}>
+                  <button className="px-7 py-4 font-bold rounded-xl border-2 transition-all hover:scale-105" style={{ borderColor: CHARCOAL, color: CHARCOAL }}>
                     Learn our story →
                   </button>
                 </Link>
               </div>
             </div>
-            {/* Clean image — no shadow, no overlay */}
             <div className="relative">
               <div className="rounded-3xl overflow-hidden aspect-[4/3]">
                 <img
@@ -394,8 +394,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              {/* Bold accent badge */}
-              <div className="absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl font-bold text-sm text-white" style={{ backgroundColor: GREEN }}>
+              <div className="absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl font-bold text-sm text-white" style={{ backgroundColor: CORAL }}>
                 🌍 Pan-African HR Expertise
               </div>
             </div>
@@ -403,17 +402,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── AFRICA OPPORTUNITY STATS — vibrant green section ── */}
-      <section style={{ backgroundColor: "#0a1f0a" }} className="py-20 md:py-28">
+      {/* ── AFRICA OPPORTUNITY STATS — vibrant warm section ── */}
+      <section style={{ background: `linear-gradient(135deg, ${CHARCOAL} 0%, #3D2A1E 100%)` }} className="py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: GREEN + "20", color: GREEN }}>The Africa Opportunity</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: CORAL + "25", color: GOLD }}>The Africa Opportunity</span>
               <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Why Africa is the world's<br /><span style={{ color: GREEN }}>next talent frontier</span>
+                Why Africa is the world's<br /><span style={{ color: GOLD }}>next talent frontier</span>
               </h2>
             </div>
-            <p className="text-gray-400 max-w-xs leading-relaxed">
+            <p className="text-white/50 max-w-xs leading-relaxed">
               The numbers tell a story of unstoppable growth. Bridgepath Africa positions you at the centre of it.
             </p>
           </div>
@@ -422,29 +421,29 @@ export default function Home() {
               <div
                 key={stat.label}
                 className="p-8 md:p-10 group hover:bg-white/5 transition-colors"
-                style={{ backgroundColor: "#0a1f0a" }}
+                style={{ backgroundColor: "rgba(28,25,23,0.85)" }}
               >
-                <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: GREEN }}>{stat.value}</div>
+                <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: CORAL }}>{stat.value}</div>
                 <div className="text-base font-bold mb-2 text-white">{stat.label}</div>
-                <p className="text-sm text-gray-500 leading-relaxed">{stat.context}</p>
+                <p className="text-sm text-white/40 leading-relaxed">{stat.context}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── HR PROFESSIONAL IMAGE SECTION ── */}
+      {/* ── HR IMAGE SECTION ── */}
       <section className="relative h-[55vh] min-h-[380px] max-h-[600px] overflow-hidden">
         <img
           src="/photos/job-interview.png"
           alt="African professional HR interview in a modern corporate setting"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to left, rgba(13,27,42,0.80) 0%, rgba(13,27,42,0.20) 60%, transparent 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to left, rgba(28,25,23,0.82) 0%, rgba(28,25,23,0.20) 60%, transparent 100%)" }} />
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="container mx-auto px-6 md:px-12">
             <div className="max-w-md ml-auto">
-              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GREEN }}>Our services</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Our services</p>
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
                 Full-service HR for the modern African workplace
               </h2>
@@ -461,16 +460,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CONTACT — bold dark navy ── */}
-      <section id="contact" style={{ backgroundColor: DARK }} className="py-20 md:py-28">
+      {/* ── CONTACT — warm terracotta gradient ── */}
+      <section id="contact" style={{ background: `linear-gradient(135deg, #8B2E0A 0%, ${CORAL} 40%, #D4621F 100%)` }} className="py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ backgroundColor: GREEN + "20", color: GREEN }}>Get in touch</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ backgroundColor: "rgba(255,255,255,0.20)", color: "white" }}>Get in touch</span>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Start building with<br /><span style={{ color: GREEN }}>Bridgepath Africa</span>
+                Start building with<br /><span style={{ color: GOLD }}>Bridgepath Africa</span>
               </h2>
-              <p className="text-gray-400 mb-10 text-lg leading-relaxed">Tell us whether you want to find opportunities or hire top talent — we'll get back within 1–2 business days.</p>
+              <p className="text-white/75 mb-10 text-lg leading-relaxed">Tell us whether you want to find opportunities or hire top talent — we'll get back within 1–2 business days.</p>
 
               <div className="space-y-6">
                 {[
@@ -479,12 +478,12 @@ export default function Home() {
                   { icon: <UserCheck className="h-5 w-5" />, label: "Contact", value: "pkumanyc@gmail.com" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+                    <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.20)", color: "white" }}>
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-wider text-gray-500">{item.label}</p>
-                      <p className="text-sm font-medium text-gray-200 mt-0.5">{item.value}</p>
+                      <p className="text-xs font-bold uppercase tracking-wider text-white/60">{item.label}</p>
+                      <p className="text-sm font-medium text-white mt-0.5">{item.value}</p>
                     </div>
                   </div>
                 ))}
@@ -493,43 +492,43 @@ export default function Home() {
 
             <div>
               <form
-                className="rounded-3xl p-8 md:p-10"
-                style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                className="rounded-3xl p-8 md:p-10 bg-white"
                 onSubmit={handleContactSubmit}
               >
+                <h3 className="font-bold text-xl mb-6" style={{ color: CHARCOAL }}>Send an enquiry</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">Full Name</label>
-                    <input className="w-full h-11 px-4 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} placeholder="Your full name" value={contactForm.name} onChange={e => setContactForm({ ...contactForm, name: e.target.value })} />
+                    <input className="w-full h-11 px-4 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2 focus:border-transparent" style={{ "--tw-ring-color": CORAL } as any} placeholder="Your full name" value={contactForm.name} onChange={e => setContactForm({ ...contactForm, name: e.target.value })} />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">Company</label>
-                    <input className="w-full h-11 px-4 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} placeholder="Your company" value={contactForm.company} onChange={e => setContactForm({ ...contactForm, company: e.target.value })} />
+                    <input className="w-full h-11 px-4 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2" placeholder="Your company" value={contactForm.company} onChange={e => setContactForm({ ...contactForm, company: e.target.value })} />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">Email Address</label>
-                    <input type="email" className="w-full h-11 px-4 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} placeholder="you@example.com" value={contactForm.email} onChange={e => setContactForm({ ...contactForm, email: e.target.value })} />
+                    <input type="email" className="w-full h-11 px-4 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2" placeholder="you@example.com" value={contactForm.email} onChange={e => setContactForm({ ...contactForm, email: e.target.value })} />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">Phone</label>
-                    <input type="tel" className="w-full h-11 px-4 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} placeholder="+233 …" value={contactForm.phone} onChange={e => setContactForm({ ...contactForm, phone: e.target.value })} />
+                    <input type="tel" className="w-full h-11 px-4 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2" placeholder="+233 …" value={contactForm.phone} onChange={e => setContactForm({ ...contactForm, phone: e.target.value })} />
                   </div>
                   <div className="md:col-span-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">I am looking to…</label>
-                    <select className="w-full h-11 px-4 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-400" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.9)" }} value={contactForm.type} onChange={e => setContactForm({ ...contactForm, type: e.target.value })}>
-                      <option style={{ backgroundColor: DARK }}>Hire talent</option>
-                      <option style={{ backgroundColor: DARK }}>Find a job or career opportunity</option>
-                      <option style={{ backgroundColor: DARK }}>Outsource HR / payroll</option>
-                      <option style={{ backgroundColor: DARK }}>Explore a partnership</option>
-                      <option style={{ backgroundColor: DARK }}>Get more information</option>
+                    <select className="w-full h-11 px-4 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2 bg-white text-gray-700" value={contactForm.type} onChange={e => setContactForm({ ...contactForm, type: e.target.value })}>
+                      <option>Hire talent</option>
+                      <option>Find a job or career opportunity</option>
+                      <option>Outsource HR / payroll</option>
+                      <option>Explore a partnership</option>
+                      <option>Get more information</option>
                     </select>
                   </div>
                 </div>
                 <div className="mb-6">
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">Message</label>
-                  <textarea className="w-full px-4 py-3 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 resize-none" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }} rows={4} placeholder="Tell us a bit more about what you need…" value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} />
+                  <textarea className="w-full px-4 py-3 rounded-xl text-sm border border-orange-100 focus:outline-none focus:ring-2 resize-none" rows={4} placeholder="Tell us a bit more about what you need…" value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} />
                 </div>
-                <button type="submit" disabled={contactSubmitting} className="w-full py-4 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 disabled:opacity-60 hover:scale-[1.01]" style={{ backgroundColor: GREEN }}>
+                <button type="submit" disabled={contactSubmitting} className="w-full py-4 font-bold text-white rounded-xl text-sm transition-all hover:opacity-90 disabled:opacity-60 hover:scale-[1.01]" style={{ backgroundColor: CORAL }}>
                   {contactSubmitting ? "Sending…" : "Submit Enquiry →"}
                 </button>
               </form>
@@ -543,19 +542,19 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="flex items-end justify-between gap-4 mb-12">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: GREEN + "18", color: GREEN }}>Knowledge hub</span>
-              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: DARK }}>News &amp; Insights</h2>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: CORAL + "15", color: CORAL }}>Knowledge hub</span>
+              <h2 className="text-4xl md:text-5xl font-bold" style={{ color: CHARCOAL }}>News &amp; Insights</h2>
               <p className="text-gray-500 mt-2 text-base">For organisations and professionals across Africa</p>
             </div>
-            <Link href="/blog" className="flex items-center gap-1.5 text-sm font-bold shrink-0 hover:underline" style={{ color: GREEN }}>
+            <Link href="/blog" className="flex items-center gap-1.5 text-sm font-bold shrink-0 hover:underline" style={{ color: CORAL }}>
               View all <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {newsArticles.map((article) => (
               <Link key={article.slug} href={`/blog/${article.slug}`}>
-                <div className="group cursor-pointer flex flex-col rounded-2xl overflow-hidden border border-gray-100 hover:border-green-200 transition-all hover:-translate-y-1">
-                  <div className="h-48 overflow-hidden bg-gray-100">
+                <div className="group cursor-pointer flex flex-col rounded-2xl overflow-hidden border border-orange-50 hover:border-orange-200 transition-all hover:-translate-y-1">
+                  <div className="h-48 overflow-hidden bg-orange-50">
                     <img
                       src={article.image}
                       alt={article.title}
@@ -563,12 +562,12 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-5 flex flex-col flex-1">
-                    <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full w-fit mb-3" style={{ backgroundColor: GREEN + "18", color: GREEN }}>{article.tag}</span>
-                    <h3 className="font-bold text-gray-900 mb-2 text-sm leading-snug group-hover:text-green-700 transition-colors line-clamp-2">{article.title}</h3>
+                    <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full w-fit mb-3" style={{ backgroundColor: CORAL + "15", color: CORAL }}>{article.tag}</span>
+                    <h3 className="font-bold text-gray-900 mb-2 text-sm leading-snug group-hover:text-orange-700 transition-colors line-clamp-2">{article.title}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 flex-1">{article.excerpt}</p>
-                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-50">
+                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-orange-50">
                       <p className="text-xs text-gray-400">{article.date}</p>
-                      <span className="text-xs font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform" style={{ color: GREEN }}>Read <ArrowRight className="h-3 w-3" /></span>
+                      <span className="text-xs font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform" style={{ color: CORAL }}>Read <ArrowRight className="h-3 w-3" /></span>
                     </div>
                   </div>
                 </div>
@@ -579,27 +578,27 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-20 md:py-28 premium-grid-bg">
+      <section className="py-20 md:py-28" style={{ backgroundColor: CREAM }}>
         <div className="container mx-auto px-6 md:px-12 max-w-4xl">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: GREEN + "18", color: GREEN }}>FAQs</span>
-            <h2 className="text-4xl md:text-5xl font-bold" style={{ color: DARK }}>Frequently asked questions</h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3" style={{ backgroundColor: CORAL + "15", color: CORAL }}>FAQs</span>
+            <h2 className="text-4xl md:text-5xl font-bold" style={{ color: CHARCOAL }}>Frequently asked questions</h2>
           </div>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden border" style={{ borderColor: openFaq === i ? GREEN + "50" : "#e5e7eb" }}>
+              <div key={i} className="rounded-2xl overflow-hidden border bg-white" style={{ borderColor: openFaq === i ? CORAL + "50" : "#F5E6D8" }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-6 text-left font-bold text-base hover:bg-gray-50 transition-colors"
-                  style={{ color: openFaq === i ? GREEN : DARK }}
+                  className="w-full flex items-center justify-between p-6 text-left font-bold text-base hover:bg-orange-50 transition-colors"
+                  style={{ color: openFaq === i ? CORAL : CHARCOAL }}
                 >
                   <span>{faq.q}</span>
                   {openFaq === i
-                    ? <ChevronUp className="h-5 w-5 shrink-0 ml-4" style={{ color: GREEN }} />
+                    ? <ChevronUp className="h-5 w-5 shrink-0 ml-4" style={{ color: CORAL }} />
                     : <ChevronDown className="h-5 w-5 shrink-0 ml-4 text-gray-400" />}
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                  <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-orange-50 pt-4">
                     {faq.a}
                   </div>
                 )}
@@ -610,7 +609,7 @@ export default function Home() {
       </section>
 
       {/* ── FINAL CTA BAND ── */}
-      <section style={{ backgroundColor: GREEN }} className="py-16 md:py-20">
+      <section style={{ backgroundColor: CORAL }} className="py-16 md:py-20">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div>
@@ -619,7 +618,7 @@ export default function Home() {
             </div>
             <div className="flex gap-4 shrink-0">
               <Link href="/auth/signup">
-                <button className="px-8 py-4 font-bold text-sm rounded-xl bg-white hover:bg-gray-50 transition-all hover:scale-105" style={{ color: DARK }}>
+                <button className="px-8 py-4 font-bold text-sm rounded-xl bg-white hover:bg-orange-50 transition-all hover:scale-105" style={{ color: CORAL }}>
                   Join the platform →
                 </button>
               </Link>

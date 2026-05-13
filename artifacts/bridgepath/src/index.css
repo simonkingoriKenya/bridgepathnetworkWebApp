@@ -62,7 +62,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Vibrant Bridgepath Africa Theme */
+/* Vibrant Bridgepath Africa — Terracotta & Gold Theme */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
@@ -70,54 +70,54 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  /* Pure clean white background */
+  /* Warm white background */
   --background: 0 0% 100%;
-  --foreground: 215 40% 10%;
+  --foreground: 20 10% 10%;
 
-  --border: 220 13% 91%;
+  --border: 25 15% 88%;
   
   --card: 0 0% 100%;
-  --card-foreground: 215 40% 10%;
-  --card-border: 220 13% 92%;
+  --card-foreground: 20 10% 10%;
+  --card-border: 25 15% 90%;
 
-  --sidebar: 220 20% 98%;
-  --sidebar-foreground: 215 40% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-primary: 88 52% 51%;
+  --sidebar: 28 30% 98%;
+  --sidebar-foreground: 20 10% 10%;
+  --sidebar-border: 25 15% 88%;
+  --sidebar-primary: 17 76% 44%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 15% 94%;
-  --sidebar-accent-foreground: 215 40% 10%;
-  --sidebar-ring: 88 52% 51%;
+  --sidebar-accent: 28 20% 94%;
+  --sidebar-accent-foreground: 20 10% 10%;
+  --sidebar-ring: 17 76% 44%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 215 40% 10%;
-  --popover-border: 220 13% 91%;
+  --popover-foreground: 20 10% 10%;
+  --popover-border: 25 15% 88%;
 
-  /* Vibrant Bridgepath Green #8CC63F */
-  --primary: 88 52% 51%;
+  /* Terracotta Primary #C8461A */
+  --primary: 17 76% 44%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 220 15% 94%;
-  --secondary-foreground: 215 40% 10%;
+  --secondary: 28 20% 93%;
+  --secondary-foreground: 20 10% 10%;
 
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 9% 46%;
+  --muted: 28 18% 96%;
+  --muted-foreground: 20 8% 48%;
 
-  /* Warm Amber Accent */
-  --accent: 38 92% 50%;
-  --accent-foreground: 215 40% 10%;
+  /* Warm Gold Accent #E8962A */
+  --accent: 35 82% 54%;
+  --accent-foreground: 20 10% 10%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 220 13% 91%;
-  --ring: 88 52% 51%;
+  --input: 25 15% 88%;
+  --ring: 17 76% 44%;
   
-  --chart-1: 88 52% 51%;
-  --chart-2: 38 92% 50%;
-  --chart-3: 215 60% 20%;
-  --chart-4: 88 40% 60%;
-  --chart-5: 38 60% 65%;
+  --chart-1: 17 76% 44%;
+  --chart-2: 35 82% 54%;
+  --chart-3: 214 60% 38%;
+  --chart-4: 17 55% 60%;
+  --chart-5: 35 60% 65%;
 
   --app-font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
   --app-font-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
@@ -126,8 +126,7 @@
   
   --radius: 0.75rem;
   
-  /* Minimal, sharp shadows — no more dull diffuse shadows */
-  --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,0.06);
+  --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --shadow-xs: 0px 2px 4px 0px rgba(0,0,0,0.06);
   --shadow-sm: 0px 4px 8px -2px rgba(0,0,0,0.08), 0px 2px 4px -2px rgba(0,0,0,0.04);
   --shadow: 0px 8px 16px -4px rgba(0,0,0,0.10), 0px 4px 6px -4px rgba(0,0,0,0.05);
@@ -155,40 +154,40 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 215 45% 7%;
-  --foreground: 220 20% 95%;
-  --border: 215 30% 16%;
-  --card: 215 45% 9%;
-  --card-foreground: 220 20% 95%;
-  --card-border: 215 30% 16%;
-  --sidebar: 215 45% 8%;
-  --sidebar-foreground: 220 20% 95%;
-  --sidebar-border: 215 30% 16%;
-  --sidebar-primary: 88 55% 55%;
-  --sidebar-primary-foreground: 215 45% 7%;
-  --sidebar-accent: 215 30% 16%;
-  --sidebar-accent-foreground: 220 20% 95%;
-  --sidebar-ring: 88 55% 55%;
-  --popover: 215 45% 9%;
-  --popover-foreground: 220 20% 95%;
-  --popover-border: 215 30% 16%;
-  --primary: 88 55% 55%;
-  --primary-foreground: 215 45% 7%;
-  --secondary: 215 30% 16%;
-  --secondary-foreground: 220 20% 95%;
-  --muted: 215 25% 13%;
-  --muted-foreground: 220 15% 60%;
-  --accent: 38 92% 55%;
-  --accent-foreground: 215 45% 7%;
+  --background: 20 12% 8%;
+  --foreground: 28 20% 93%;
+  --border: 20 12% 18%;
+  --card: 20 12% 10%;
+  --card-foreground: 28 20% 93%;
+  --card-border: 20 12% 18%;
+  --sidebar: 20 12% 9%;
+  --sidebar-foreground: 28 20% 93%;
+  --sidebar-border: 20 12% 18%;
+  --sidebar-primary: 17 76% 52%;
+  --sidebar-primary-foreground: 20 12% 8%;
+  --sidebar-accent: 20 12% 18%;
+  --sidebar-accent-foreground: 28 20% 93%;
+  --sidebar-ring: 17 76% 52%;
+  --popover: 20 12% 10%;
+  --popover-foreground: 28 20% 93%;
+  --popover-border: 20 12% 18%;
+  --primary: 17 76% 52%;
+  --primary-foreground: 20 12% 8%;
+  --secondary: 20 12% 18%;
+  --secondary-foreground: 28 20% 93%;
+  --muted: 20 10% 14%;
+  --muted-foreground: 28 15% 58%;
+  --accent: 35 82% 58%;
+  --accent-foreground: 20 12% 8%;
   --destructive: 0 62% 45%;
   --destructive-foreground: 0 0% 100%;
-  --input: 215 30% 18%;
-  --ring: 88 55% 55%;
-  --chart-1: 88 55% 55%;
-  --chart-2: 38 92% 55%;
-  --chart-3: 215 45% 35%;
-  --chart-4: 88 40% 65%;
-  --chart-5: 38 60% 70%;
+  --input: 20 12% 20%;
+  --ring: 17 76% 52%;
+  --chart-1: 17 76% 52%;
+  --chart-2: 35 82% 58%;
+  --chart-3: 214 60% 45%;
+  --chart-4: 17 55% 65%;
+  --chart-5: 35 60% 70%;
 }
 
 @layer base {
@@ -217,19 +216,20 @@
     pointer-events: none;
   }
 
-  /* Bold dot grid — more visible, energetic */
+  /* Clean warm cream section — no busy patterns */
+  .warm-section {
+    background-color: #FFF8F2;
+  }
+
   .premium-grid-bg {
-    background-color: #ffffff;
-    background-image: radial-gradient(circle, rgba(140,198,63,0.18) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-color: #FFF8F2;
   }
 
   .premium-grid-bg-dark {
-    background-image: radial-gradient(circle, rgba(140,198,63,0.22) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-color: #FFF2E8;
   }
 
-  /* Vibrant card hover */
+  /* Vibrant card hover — terracotta glow */
   .focus-card-glow {
     transform-style: preserve-3d;
     transition: transform 200ms ease, box-shadow 200ms ease;
@@ -237,20 +237,20 @@
 
   .focus-card-glow:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(140, 198, 63, 0.25);
+    box-shadow: 0 20px 40px -12px rgba(200, 70, 26, 0.22);
   }
 
   .dashboard-grid-surface {
     background:
-      radial-gradient(circle at top right, rgba(140,198,63,0.10), transparent 32%),
-      radial-gradient(circle at bottom left, rgba(13,27,42,0.06), transparent 28%),
-      #f8fafc;
+      radial-gradient(circle at top right, rgba(200,70,26,0.08), transparent 32%),
+      radial-gradient(circle at bottom left, rgba(232,150,42,0.06), transparent 28%),
+      #fdf8f5;
   }
 
   .dashboard-card {
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(16px);
-    box-shadow: 0 4px 24px -8px rgba(13,27,42,0.12);
+    box-shadow: 0 4px 24px -8px rgba(200,70,26,0.10);
   }
 
   .toggle-elevate::before,
@@ -310,15 +310,15 @@
   }
 
   /* Section helpers */
-  .section-dark {
-    background-color: #0D1B2A;
+  .section-coral {
+    background-color: #C8461A;
   }
 
-  .section-green {
-    background-color: #8CC63F;
+  .section-cream {
+    background-color: #FFF8F2;
   }
 
-  .section-ember {
-    background-color: #F97316;
+  .section-gold {
+    background-color: #E8962A;
   }
 }
