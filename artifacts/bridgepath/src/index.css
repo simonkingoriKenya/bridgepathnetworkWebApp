@@ -51,6 +51,13 @@
   --color-sidebar-accent-border: var(--sidebar-accent-border);
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
+  /* Named semantic tokens for direct use */
+  --color-ink: hsl(var(--ink));
+  --color-cream: hsl(var(--cream));
+  --color-terracotta: hsl(var(--terracotta));
+  --color-marigold: hsl(var(--marigold));
+  --color-teal: hsl(var(--teal));
+
   --font-sans: var(--app-font-sans);
   --font-display: var(--app-font-display);
   --font-serif: var(--app-font-serif);
@@ -62,79 +69,106 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Vibrant Bridgepath Africa — Terracotta & Gold Theme */
+/* ══════════════════════════════════════════════════════════
+   WARM PAN-AFRICAN EDITORIAL
+   Palette: Terracotta · Marigold · Deep Teal
+   Feeling: Kente warmth + Gusto/Lattice HR editorial polish
+   ══════════════════════════════════════════════════════════ */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  --elevate-2: rgba(0,0,0, .07);
 
-  /* Warm white background */
-  --background: 0 0% 100%;
-  --foreground: 20 10% 10%;
+  /* ── Named Brand Tokens ──────────────────────────────── */
+  /* Ivory Cream  — warm off-white, unbleached paper feel  */
+  --cream:        32 60% 97%;      /* #FEF9F4 */
+  /* Warm Ink     — deep near-black with brown undertone   */
+  --ink:          22 18% 11%;      /* #1E1511 */
+  /* Terracotta   — burnt sienna clay, earthy confidence   */
+  --terracotta:   16 72% 43%;      /* #C04020 */
+  /* Marigold     — golden-yellow ochre, optimism          */
+  --marigold:     38 90% 50%;      /* #F0A010 */
+  /* Deep Teal    — grounded blue-green, trust & balance   */
+  --teal:         184 58% 30%;     /* #1F7A78 */
 
-  --border: 25 15% 88%;
-  
-  --card: 0 0% 100%;
-  --card-foreground: 20 10% 10%;
-  --card-border: 25 15% 90%;
+  /* ── Surface ─────────────────────────────────────────── */
+  /* Background: ivory cream — NOT pure white              */
+  --background:   32 60% 97%;      /* #FEF9F4 */
+  --foreground:   22 18% 11%;      /* warm near-black      */
 
-  --sidebar: 28 30% 98%;
-  --sidebar-foreground: 20 10% 10%;
-  --sidebar-border: 25 15% 88%;
-  --sidebar-primary: 17 76% 44%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 28 20% 94%;
-  --sidebar-accent-foreground: 20 10% 10%;
-  --sidebar-ring: 17 76% 44%;
+  --border:       28 28% 87%;      /* warm taupe — soft    */
+  --input:        28 28% 87%;
+  --ring:         16 72% 43%;      /* terracotta focus ring */
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 20 10% 10%;
-  --popover-border: 25 15% 88%;
+  /* ── Cards ───────────────────────────────────────────── */
+  --card:         30 50% 99%;      /* #FFFCF9 — barely-there warm white */
+  --card-foreground: 22 18% 11%;
+  --card-border:  28 28% 90%;
 
-  /* Terracotta Primary #C8461A */
-  --primary: 17 76% 44%;
-  --primary-foreground: 0 0% 100%;
+  /* ── Popover ─────────────────────────────────────────── */
+  --popover:      30 50% 99%;
+  --popover-foreground: 22 18% 11%;
+  --popover-border: 28 28% 88%;
 
-  --secondary: 28 20% 93%;
-  --secondary-foreground: 20 10% 10%;
+  /* ── Primary: Terracotta ─────────────────────────────── */
+  --primary:      16 72% 43%;      /* #C04020 */
+  --primary-foreground: 32 60% 97%; /* cream on terracotta */
 
-  --muted: 28 18% 96%;
-  --muted-foreground: 20 8% 48%;
+  /* ── Secondary: warm sand surface ───────────────────── */
+  --secondary:    30 35% 92%;      /* #EDE4DA warm beige chip */
+  --secondary-foreground: 22 18% 11%;
 
-  /* Warm Gold Accent #E8962A */
-  --accent: 35 82% 54%;
-  --accent-foreground: 20 10% 10%;
+  /* ── Muted: editorial warm grey ─────────────────────── */
+  --muted:        30 30% 94%;      /* #F2EDE6 — warm, NOT cool grey */
+  --muted-foreground: 24 12% 44%; /* warm mid-tone, NOT slate */
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
+  /* ── Accent: Marigold ────────────────────────────────── */
+  --accent:       38 90% 50%;      /* #F0A010 */
+  --accent-foreground: 22 18% 11%;
 
-  --input: 25 15% 88%;
-  --ring: 17 76% 44%;
-  
-  --chart-1: 17 76% 44%;
-  --chart-2: 35 82% 54%;
-  --chart-3: 214 60% 38%;
-  --chart-4: 17 55% 60%;
-  --chart-5: 35 60% 65%;
+  /* ── Destructive ─────────────────────────────────────── */
+  --destructive:  0 72% 50%;
+  --destructive-foreground: 32 60% 97%;
 
+  /* ── Sidebar ──────────────────────────────────────────── */
+  /* Warm charcoal sidebar: deep ink, NOT cool dark gray   */
+  --sidebar:      22 22% 13%;      /* #1E1511 warm charcoal */
+  --sidebar-foreground: 30 30% 90%;
+  --sidebar-border: 22 18% 20%;
+  --sidebar-primary: 16 72% 50%;   /* terracotta active     */
+  --sidebar-primary-foreground: 32 60% 97%;
+  --sidebar-accent: 22 18% 20%;    /* hover surface in sidebar */
+  --sidebar-accent-foreground: 30 30% 90%;
+  --sidebar-ring: 16 72% 50%;
+
+  /* ── Chart palette ───────────────────────────────────── */
+  --chart-1: 16 72% 43%;           /* terracotta */
+  --chart-2: 38 90% 50%;           /* marigold */
+  --chart-3: 184 58% 30%;          /* teal */
+  --chart-4: 16 55% 62%;           /* terracotta muted */
+  --chart-5: 38 65% 68%;           /* marigold muted */
+
+  /* ── Typography ─────────────────────────────────────── */
   --app-font-sans: 'Inter', 'system-ui', sans-serif;
   --app-font-display: 'Bricolage Grotesque', 'Inter', sans-serif;
   --app-font-serif: 'Inter', Georgia, serif;
   --app-font-mono: 'ui-monospace', Menlo, monospace;
-  
+
+  /* ── Shape ───────────────────────────────────────────── */
   --radius: 0.75rem;
-  
-  --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --shadow-xs: 0px 2px 4px 0px rgba(0,0,0,0.06);
-  --shadow-sm: 0px 4px 8px -2px rgba(0,0,0,0.08), 0px 2px 4px -2px rgba(0,0,0,0.04);
-  --shadow: 0px 8px 16px -4px rgba(0,0,0,0.10), 0px 4px 6px -4px rgba(0,0,0,0.05);
-  --shadow-md: 0px 12px 24px -4px rgba(0,0,0,0.12), 0px 6px 8px -4px rgba(0,0,0,0.06);
-  --shadow-lg: 0px 20px 32px -8px rgba(0,0,0,0.14), 0px 8px 12px -6px rgba(0,0,0,0.06);
-  --shadow-xl: 0px 28px 56px -16px rgba(0,0,0,0.18);
-  --shadow-2xl: 0px 56px 112px -24px rgba(0,0,0,0.22);
-  
+
+  /* ── Shadows (warm-tinted, not cool black) ───────────── */
+  --shadow-2xs: 0px 1px 2px 0px rgba(28,16,8,0.05);
+  --shadow-xs:  0px 2px 4px 0px rgba(28,16,8,0.07);
+  --shadow-sm:  0px 4px 8px -2px rgba(28,16,8,0.09), 0px 2px 4px -2px rgba(28,16,8,0.04);
+  --shadow:     0px 8px 16px -4px rgba(28,16,8,0.11), 0px 4px 6px -4px rgba(28,16,8,0.05);
+  --shadow-md:  0px 12px 24px -4px rgba(28,16,8,0.13), 0px 6px 8px -4px rgba(28,16,8,0.06);
+  --shadow-lg:  0px 20px 32px -8px rgba(28,16,8,0.15), 0px 8px 12px -6px rgba(28,16,8,0.07);
+  --shadow-xl:  0px 28px 56px -16px rgba(28,16,8,0.20);
+  --shadow-2xl: 0px 56px 112px -24px rgba(28,16,8,0.24);
+
   --tracking-normal: -0.015em;
   --spacing: 0.25rem;
 
@@ -147,6 +181,7 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+/* Dark mode — available as a class, never the default */
 .dark {
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
@@ -154,40 +189,40 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 20 12% 8%;
-  --foreground: 28 20% 93%;
-  --border: 20 12% 18%;
-  --card: 20 12% 10%;
-  --card-foreground: 28 20% 93%;
-  --card-border: 20 12% 18%;
-  --sidebar: 20 12% 9%;
-  --sidebar-foreground: 28 20% 93%;
-  --sidebar-border: 20 12% 18%;
-  --sidebar-primary: 17 76% 52%;
-  --sidebar-primary-foreground: 20 12% 8%;
-  --sidebar-accent: 20 12% 18%;
-  --sidebar-accent-foreground: 28 20% 93%;
-  --sidebar-ring: 17 76% 52%;
-  --popover: 20 12% 10%;
-  --popover-foreground: 28 20% 93%;
-  --popover-border: 20 12% 18%;
-  --primary: 17 76% 52%;
-  --primary-foreground: 20 12% 8%;
-  --secondary: 20 12% 18%;
-  --secondary-foreground: 28 20% 93%;
-  --muted: 20 10% 14%;
-  --muted-foreground: 28 15% 58%;
-  --accent: 35 82% 58%;
-  --accent-foreground: 20 12% 8%;
+  --background: 22 22% 9%;
+  --foreground: 30 30% 90%;
+  --border: 22 18% 20%;
+  --card: 22 22% 11%;
+  --card-foreground: 30 30% 90%;
+  --card-border: 22 18% 20%;
+  --sidebar: 22 22% 8%;
+  --sidebar-foreground: 30 30% 90%;
+  --sidebar-border: 22 18% 18%;
+  --sidebar-primary: 16 72% 52%;
+  --sidebar-primary-foreground: 22 22% 9%;
+  --sidebar-accent: 22 18% 18%;
+  --sidebar-accent-foreground: 30 30% 90%;
+  --sidebar-ring: 16 72% 52%;
+  --popover: 22 22% 11%;
+  --popover-foreground: 30 30% 90%;
+  --popover-border: 22 18% 20%;
+  --primary: 16 72% 52%;
+  --primary-foreground: 22 22% 9%;
+  --secondary: 22 18% 18%;
+  --secondary-foreground: 30 30% 90%;
+  --muted: 22 16% 15%;
+  --muted-foreground: 28 14% 58%;
+  --accent: 38 90% 56%;
+  --accent-foreground: 22 22% 9%;
   --destructive: 0 62% 45%;
-  --destructive-foreground: 0 0% 100%;
-  --input: 20 12% 20%;
-  --ring: 17 76% 52%;
-  --chart-1: 17 76% 52%;
-  --chart-2: 35 82% 58%;
-  --chart-3: 214 60% 45%;
-  --chart-4: 17 55% 65%;
-  --chart-5: 35 60% 70%;
+  --destructive-foreground: 32 60% 97%;
+  --input: 22 18% 22%;
+  --ring: 16 72% 52%;
+  --chart-1: 16 72% 52%;
+  --chart-2: 38 90% 56%;
+  --chart-3: 184 58% 40%;
+  --chart-4: 16 55% 65%;
+  --chart-5: 38 65% 70%;
 }
 
 @layer base {
@@ -198,7 +233,7 @@
   body {
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight;
     font-family: var(--app-font-display);
@@ -216,20 +251,53 @@
     pointer-events: none;
   }
 
-  /* Clean warm cream section — no busy patterns */
+  /* ── Section surface helpers ─────────────────────────── */
+
+  /* Ivory cream — primary page background, light sections */
   .warm-section {
-    background-color: #FFF8F2;
+    background-color: hsl(32 60% 97%);
   }
 
+  /* Slightly deeper cream for alternating sections        */
   .premium-grid-bg {
-    background-color: #FFF8F2;
+    background-color: hsl(32 60% 97%);
   }
 
+  /* Warm sand — subtle depth on secondary sections        */
   .premium-grid-bg-dark {
-    background-color: #FFF2E8;
+    background-color: hsl(30 40% 94%);
   }
 
-  /* Vibrant card hover — terracotta glow */
+  /* Ink section — warm near-black for inverted content    */
+  .section-ink {
+    background-color: hsl(22 22% 11%);
+    color: hsl(30 30% 90%);
+  }
+
+  /* Terracotta fill section                               */
+  .section-coral {
+    background-color: hsl(16 72% 43%);
+    color: hsl(32 60% 97%);
+  }
+
+  /* Cream section                                         */
+  .section-cream {
+    background-color: hsl(32 60% 97%);
+  }
+
+  /* Marigold fill section                                 */
+  .section-gold {
+    background-color: hsl(38 90% 50%);
+    color: hsl(22 18% 11%);
+  }
+
+  /* Teal fill — rare, trust signals only                  */
+  .section-teal {
+    background-color: hsl(184 58% 30%);
+    color: hsl(32 60% 97%);
+  }
+
+  /* ── Card interaction ────────────────────────────────── */
   .focus-card-glow {
     transform-style: preserve-3d;
     transition: transform 200ms ease, box-shadow 200ms ease;
@@ -237,22 +305,24 @@
 
   .focus-card-glow:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(200, 70, 26, 0.22);
+    box-shadow: 0 20px 40px -12px rgba(192, 64, 32, 0.22);
   }
 
+  /* ── Dashboard surfaces ──────────────────────────────── */
   .dashboard-grid-surface {
     background:
-      radial-gradient(circle at top right, rgba(200,70,26,0.08), transparent 32%),
-      radial-gradient(circle at bottom left, rgba(232,150,42,0.06), transparent 28%),
-      #fdf8f5;
+      radial-gradient(circle at top right, rgba(192,64,32,0.07), transparent 32%),
+      radial-gradient(circle at bottom left, rgba(240,160,16,0.05), transparent 28%),
+      hsl(32 60% 97%);
   }
 
   .dashboard-card {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 252, 249, 0.97);
     backdrop-filter: blur(16px);
-    box-shadow: 0 4px 24px -8px rgba(200,70,26,0.10);
+    box-shadow: 0 4px 24px -8px rgba(192,64,32,0.10);
   }
 
+  /* ── Elevation overlays ──────────────────────────────── */
   .toggle-elevate::before,
   .toggle-elevate-2::before {
     content: "";
@@ -307,18 +377,5 @@
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
-  }
-
-  /* Section helpers */
-  .section-coral {
-    background-color: #C8461A;
-  }
-
-  .section-cream {
-    background-color: #FFF8F2;
-  }
-
-  .section-gold {
-    background-color: #E8962A;
   }
 }
