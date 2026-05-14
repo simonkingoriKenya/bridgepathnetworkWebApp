@@ -60,9 +60,13 @@ lib/
 
 ## Design System
 
-- **Fonts:** Syne (display headings) + Plus Jakarta Sans (body) via Google Fonts
-- **Colors:** GREEN=#8CC63F, DARK=#0D1B2A, AMBER=#F97316
+- **Fonts:** Bricolage Grotesque (display headings) + Inter (body/UI) via Google Fonts
+- **Colors:** CORAL=#D94F20 (primary), GOLD=#F0A820 (accent), CHARCOAL=#1C1917 (dark), CREAM=#FFF8F2 (warm bg)
 - **Hero style:** Full-bleed African corporate photos (80% Black African professionals) with gradient overlay — text pinned to bottom. No shadows on body photo sections.
+- **Auth pages:** Premium split-screen layout — vibrant African office photo left, clean white form right.
+- **Dashboard sidebar:** Warm charcoal (#18110C) with coral active states.
+- **Favicon:** Terracotta SVG rounded rect with white "b" lettermark.
+- **Logo:** `/logo-new.png` (transparent PNG) displayed on terracotta circle background.
 - **Photos in `/public/photos/`:** hero-team-meeting.png, coworking-team.png, boardroom-deal.png, job-interview.png, team-celebration.png, africa-city-skyline.png, hr-leader.png, hr-leader-woman.png, modern-africa-office.png, africa-office-team.png
 - **Contact email:** pkumanyc@gmail.com (used everywhere)
 

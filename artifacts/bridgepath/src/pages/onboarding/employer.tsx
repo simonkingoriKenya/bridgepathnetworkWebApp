@@ -8,8 +8,8 @@ import { ArrowRight, ArrowLeft, CheckCircle2, Briefcase, Users, Globe, Loader2, 
 import { Input } from "@/components/ui/input";
 import { isDemoEmail } from "@/lib/demoAuth";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const GREEN = "#D94F20";
+const DARK = "#1C1917";
 
 const steps = [
   { id: 1, title: "Company Info", icon: <Briefcase className="h-5 w-5" /> },

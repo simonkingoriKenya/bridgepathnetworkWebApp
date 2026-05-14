@@ -8,8 +8,8 @@ import { ArrowRight, ArrowLeft, CheckCircle2, User, Briefcase, MapPin, Loader2, 
 import { Input } from "@/components/ui/input";
 import { isDemoEmail } from "@/lib/demoAuth";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const GREEN = "#D94F20";
+const DARK = "#1C1917";
 
 const steps = [
   { id: 1, title: "Personal Info", icon: <User className="h-5 w-5" /> },
