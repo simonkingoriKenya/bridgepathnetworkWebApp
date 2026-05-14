@@ -1,8 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "wouter";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from "@/pages/blog/index";
 import {
@@ -84,6 +84,10 @@ const faqs = [
 export default function Home() {
   const { toast } = useToast();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroImgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroTextY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
   const [contactForm, setContactForm] = useState({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
   const [contactSubmitting, setContactSubmitting] = useState(false);
 
@@ -118,84 +122,151 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[680px] h-screen max-h-[960px] overflow-hidden flex items-center"
-        style={{ background: `linear-gradient(135deg, #2A0D05 0%, #5A1E0A 35%, ${CORAL} 70%, #D4641F 100%)` }}>
-        {/* Subtle warm texture overlay */}
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "radial-gradient(circle at 20% 80%, rgba(232,150,42,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%)" }} />
+      <section ref={heroRef} className="relative h-screen min-h-[640px] overflow-hidden">
 
-        {/* Extracted team photo — positioned right side */}
-        <div className="absolute bottom-0 right-0 h-full w-1/2 md:w-[52%] flex items-end justify-end pointer-events-none select-none">
+        {/* Full-bleed parallax image */}
+        <motion.div className="absolute inset-0 scale-[1.08]" style={{ y: heroImgY }}>
           <img
-            src="/photos/hero-team-new.png"
-            alt="Diverse global team collaborating — Bridgepath Africa professionals"
-            className="h-full w-full object-contain object-bottom"
-            style={{ filter: "drop-shadow(-24px 0 48px rgba(28,25,23,0.5))" }}
+            src="/photos/hero-team-meeting.png"
+            alt="Diverse African professionals collaborating — Bridgepath Africa"
+            className="w-full h-full object-cover object-center"
           />
-        </div>
+        </motion.div>
 
-        {/* Left: copy */}
-        <div className="relative z-10 w-full">
-          <div className="container mx-auto px-6 md:px-12">
-            <div className="max-w-xl lg:max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
+        {/* Cinematic dark gradient overlays */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(12,4,1,0.96) 0%, rgba(12,4,1,0.75) 35%, rgba(12,4,1,0.35) 65%, rgba(12,4,1,0.15) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(12,4,1,0.70) 0%, rgba(12,4,1,0.30) 50%, transparent 100%)" }} />
+
+        {/* Gold accent line sweeping in at top */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-[3px] origin-left"
+          style={{ background: `linear-gradient(to right, ${CORAL}, ${GOLD}, transparent)` }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        {/* All content — vertically centered */}
+        <motion.div className="absolute inset-0 flex flex-col justify-center" style={{ y: heroTextY }}>
+          <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5 border backdrop-blur-sm"
+              style={{ backgroundColor: "rgba(232,150,42,0.12)", borderColor: "rgba(232,150,42,0.45)" }}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.4 }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: GOLD }} />
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: GOLD }}>Early Access Open · Ghana &amp; Kenya</span>
+            </motion.div>
+
+            {/* Line 1 */}
+            <div className="overflow-hidden">
+              <motion.h1
+                className="font-black text-white tracking-tight leading-[0.93]"
+                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
+                initial={{ y: "102%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.75, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 border" style={{ backgroundColor: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.25)" }}>
-                  <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: GOLD }} />
-                  <span className="text-xs font-bold tracking-wider uppercase" style={{ color: GOLD }}>Early access open · Ghana &amp; Kenya</span>
-                </div>
-
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.02] tracking-tight mb-6">
-                  Africa's talent.<br />
-                  <span style={{ color: GOLD }}>Placed with<br />purpose.</span>
-                </h1>
-
-                <p className="text-white/80 text-lg md:text-xl max-w-md mb-8 leading-relaxed font-medium">
-                  The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers.
-                </p>
-
-                <div className="flex flex-wrap gap-4 mb-10">
-                  <Link href="/jobs">
-                    <button
-                      className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm transition-all hover:scale-105 shadow-lg"
-                      style={{ backgroundColor: "white", color: CORAL }}
-                    >
-                      <Search className="h-4 w-4" />
-                      Find Opportunities
-                      <ArrowUpRight className="h-4 w-4" />
-                    </button>
-                  </Link>
-                  <Link href="/employers">
-                    <button className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-sm text-white border-2 border-white/40 hover:bg-white/15 transition-all hover:scale-105">
-                      <Building2 className="h-4 w-4" />
-                      Hire Talent
-                    </button>
-                  </Link>
-                </div>
-
-                <div className="flex items-center gap-6">
-                  {[
-                    { v: "Ghana", l: "Launch" },
-                    { v: "Kenya", l: "Launch" },
-                    { v: "20+ yrs", l: "Experience" },
-                    { v: "2026", l: "MVP" },
-                  ].map((s, i) => (
-                    <div key={i} className="flex items-center gap-6">
-                      <div className="text-center">
-                        <div className="text-base font-extrabold text-white leading-none">{s.v}</div>
-                        <div className="text-[10px] text-white/50 mt-0.5 uppercase tracking-widest">{s.l}</div>
-                      </div>
-                      {i < 3 && <div className="h-6 w-px bg-white/20" />}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                Africa's talent.
+              </motion.h1>
             </div>
+
+            {/* Line 2 */}
+            <div className="overflow-hidden mb-6">
+              <motion.h1
+                className="font-black tracking-tight leading-[0.93]"
+                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)", color: GOLD }}
+                initial={{ y: "102%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.75, delay: 0.66, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Placed with purpose.
+              </motion.h1>
+            </div>
+
+            {/* Subtext */}
+            <motion.p
+              className="text-white/75 max-w-lg mb-7 leading-relaxed font-medium"
+              style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)" }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.88 }}
+            >
+              The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-wrap gap-3 mb-8"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.05 }}
+            >
+              <Link href="/jobs">
+                <button
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-black text-sm transition-all duration-200 hover:scale-105 hover:brightness-110 shadow-xl"
+                  style={{ backgroundColor: CORAL, color: "white" }}
+                >
+                  <Search className="h-4 w-4" />
+                  Find Opportunities
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+              </Link>
+              <Link href="/employers">
+                <button
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-black text-sm text-white border-2 transition-all duration-200 hover:scale-105 hover:bg-white/10 backdrop-blur-sm"
+                  style={{ borderColor: "rgba(255,255,255,0.45)" }}
+                >
+                  <Building2 className="h-4 w-4" />
+                  Hire Talent
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              className="flex flex-wrap items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 1.22 }}
+            >
+              {[
+                { v: "Ghana", l: "Launch Market" },
+                { v: "Kenya", l: "Launch Market" },
+                { v: "20+ yrs", l: "Experience" },
+                { v: "2026", l: "MVP Launch" },
+              ].map((s, i) => (
+                <div key={i} className="flex items-center">
+                  <div className="px-4 py-1 text-center">
+                    <div className="text-sm font-black text-white leading-none">{s.v}</div>
+                    <div className="text-[10px] text-white/40 mt-0.5 uppercase tracking-widest">{s.l}</div>
+                  </div>
+                  {i < 3 && <div className="h-5 w-px bg-white/15" />}
+                </div>
+              ))}
+            </motion.div>
+
           </div>
-        </div>
+        </motion.div>
+
+        {/* Scroll cue */}
+        <motion.div
+          className="absolute bottom-7 right-10 z-10 flex-col items-center hidden md:flex"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.6 }}
+        >
+          <motion.div
+            className="w-px h-10 origin-top"
+            style={{ backgroundColor: GOLD }}
+            animate={{ scaleY: [0, 1, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
       </section>
 
       {/* ── STATS BAR ── */}
