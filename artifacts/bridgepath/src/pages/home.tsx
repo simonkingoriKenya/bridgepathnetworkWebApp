@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "wouter";
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from "@/pages/blog/index";
 import {
@@ -122,165 +122,238 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative h-screen min-h-[640px] overflow-hidden">
+      <section ref={heroRef} className="relative w-full overflow-hidden" style={{ height: "100svh", minHeight: 680 }}>
+
+        {/* Kente-inspired top stripe — animated sweep */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 z-20 flex h-[6px] origin-left"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {["#C8461A","#E8962A","#1C1917","#E8962A","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917","#E8962A","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917"].map((c, i) => (
+            <div key={i} className="flex-1 h-full" style={{ backgroundColor: c }} />
+          ))}
+        </motion.div>
 
         {/* Full-bleed parallax image */}
-        <motion.div className="absolute inset-0 scale-[1.08]" style={{ y: heroImgY }}>
+        <motion.div className="absolute inset-0 scale-[1.06]" style={{ y: heroImgY }}>
           <img
-            src="/photos/hero-team-meeting.png"
-            alt="Diverse African professionals collaborating — Bridgepath Africa"
+            src="/photos/ghana-team-hero.png"
+            alt="Diverse Ghana team in a vibrant boardroom — Bridgepath Africa"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>
 
-        {/* Cinematic dark gradient overlays */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(12,4,1,0.96) 0%, rgba(12,4,1,0.75) 35%, rgba(12,4,1,0.35) 65%, rgba(12,4,1,0.15) 100%)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(12,4,1,0.70) 0%, rgba(12,4,1,0.30) 50%, transparent 100%)" }} />
+        {/* Multi-layer cinematic overlays */}
+        {/* Bottom-heavy dark for text readability */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,3,0,0.97) 0%, rgba(10,3,0,0.80) 28%, rgba(10,3,0,0.42) 55%, rgba(10,3,0,0.12) 80%, transparent 100%)" }} />
+        {/* Left-sweep overlay for text panel */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, rgba(10,3,0,0.82) 0%, rgba(10,3,0,0.48) 42%, rgba(10,3,0,0.10) 70%, transparent 100%)" }} />
+        {/* Terracotta warm glow from bottom-left */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 55% at 0% 100%, rgba(200,70,26,0.28) 0%, transparent 65%)" }} />
+        {/* Marigold glow top-right */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 40% at 100% 0%, rgba(232,150,42,0.15) 0%, transparent 60%)" }} />
 
-        {/* Gold accent line sweeping in at top */}
+        {/* Floating kente diamond decorations */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-[3px] origin-left"
-          style={{ background: `linear-gradient(to right, ${CORAL}, ${GOLD}, transparent)` }}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute top-[18%] right-[8%] w-16 h-16 rotate-45 opacity-30 hidden lg:block"
+          style={{ background: "linear-gradient(135deg, #C8461A, #E8962A)" }}
+          initial={{ opacity: 0, scale: 0.4, rotate: 0 }}
+          animate={{ opacity: 0.30, scale: 1, rotate: 45 }}
+          transition={{ duration: 1.0, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <motion.div
+          className="absolute top-[24%] right-[12%] w-8 h-8 rotate-45 opacity-20 hidden lg:block"
+          style={{ backgroundColor: "#1F7A78" }}
+          initial={{ opacity: 0, scale: 0.4 }}
+          animate={{ opacity: 0.20, scale: 1 }}
+          transition={{ duration: 1.0, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <motion.div
+          className="absolute bottom-[28%] right-[6%] w-12 h-12 rotate-45 opacity-25 hidden lg:block"
+          style={{ backgroundColor: "#E8962A" }}
+          initial={{ opacity: 0, scale: 0.4 }}
+          animate={{ opacity: 0.25, scale: 1 }}
+          transition={{ duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
         />
 
-        {/* All content — vertically centered */}
-        <motion.div className="absolute inset-0 flex flex-col justify-center" style={{ y: heroTextY }}>
-          <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        {/* ── HERO CONTENT ── vertically centered */}
+        <motion.div
+          className="absolute inset-0 flex flex-col justify-center"
+          style={{ y: heroTextY }}
+        >
+          <div className="container mx-auto px-6 md:px-14 max-w-7xl">
+            <div className="max-w-2xl xl:max-w-3xl">
 
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5 border backdrop-blur-sm"
-              style={{ backgroundColor: "rgba(232,150,42,0.12)", borderColor: "rgba(232,150,42,0.45)" }}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.4 }}
-            >
-              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: GOLD }} />
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: GOLD }}>Early Access Open · Ghana &amp; Kenya</span>
-            </motion.div>
-
-            {/* Line 1 */}
-            <div className="overflow-hidden">
-              <motion.h1
-                className="font-black text-white tracking-tight leading-[0.93]"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
-                initial={{ y: "102%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.75, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
+              {/* Eyebrow badge */}
+              <motion.div
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-3 border backdrop-blur-md"
+                style={{ backgroundColor: "rgba(232,150,42,0.14)", borderColor: "rgba(232,150,42,0.50)" }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.15 }}
               >
-                Africa's talent.
-              </motion.h1>
-            </div>
+                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#E8962A" }} />
+                <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "#E8962A", fontFamily: "var(--app-font-display)" }}>
+                  Early Access Open · Ghana &amp; Kenya
+                </span>
+              </motion.div>
 
-            {/* Line 2 */}
-            <div className="overflow-hidden mb-6">
-              <motion.h1
-                className="font-black tracking-tight leading-[0.93]"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)", color: GOLD }}
-                initial={{ y: "102%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.75, delay: 0.66, ease: [0.16, 1, 0.3, 1] }}
+              {/* Headline line 1 */}
+              <div className="overflow-hidden">
+                <motion.h1
+                  className="font-extrabold text-white leading-[1.04] tracking-[-0.025em]"
+                  style={{ fontSize: "clamp(1.8rem, min(3.2vw, 5.8vh), 3.6rem)", fontFamily: "var(--app-font-display)" }}
+                  initial={{ y: "105%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.65, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Africa's talent.
+                </motion.h1>
+              </div>
+
+              {/* Headline line 2 — marigold accent */}
+              <div className="overflow-hidden mb-0.5">
+                <motion.h1
+                  className="font-extrabold leading-[1.04] tracking-[-0.025em]"
+                  style={{ fontSize: "clamp(1.8rem, min(3.2vw, 5.8vh), 3.6rem)", color: "#E8962A", fontFamily: "var(--app-font-display)" }}
+                  initial={{ y: "105%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.65, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Placed with purpose.
+                </motion.h1>
+              </div>
+
+              {/* Kente accent divider */}
+              <motion.div
+                className="flex gap-0.5 mb-2 mt-2"
+                initial={{ opacity: 0, x: -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.48 }}
               >
-                Placed with purpose.
-              </motion.h1>
-            </div>
+                {["#C8461A","#E8962A","#1C1917","#1F7A78","#E8962A","#C8461A"].map((c, i) => (
+                  <div key={i} className="h-[3px] rounded-full" style={{ width: i === 0 ? 36 : i === 1 ? 24 : 14, backgroundColor: c }} />
+                ))}
+              </motion.div>
 
-            {/* Subtext */}
-            <motion.p
-              className="text-white/75 max-w-lg mb-7 leading-relaxed font-medium"
-              style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)" }}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.88 }}
-            >
-              The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers.
-            </motion.p>
+              {/* Subtext */}
+              <motion.p
+                className="text-white/78 mb-3 leading-[1.55] font-medium"
+                style={{ fontSize: "clamp(0.88rem, 1.2vw, 1.05rem)", maxWidth: "490px", fontFamily: "var(--app-font-sans)" }}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.52 }}
+              >
+                The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers — starting in Ghana &amp; Kenya.
+              </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              className="flex flex-wrap gap-3 mb-8"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.05 }}
-            >
-              <Link href="/jobs">
-                <button
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-black text-sm transition-all duration-200 hover:scale-105 hover:brightness-110 shadow-xl"
-                  style={{ backgroundColor: CORAL, color: "white" }}
-                >
-                  <Search className="h-4 w-4" />
-                  Find Opportunities
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
-              </Link>
-              <Link href="/employers">
-                <button
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-black text-sm text-white border-2 transition-all duration-200 hover:scale-105 hover:bg-white/10 backdrop-blur-sm"
-                  style={{ borderColor: "rgba(255,255,255,0.45)" }}
-                >
-                  <Building2 className="h-4 w-4" />
-                  Hire Talent
-                </button>
-              </Link>
-            </motion.div>
+              {/* CTA buttons */}
+              <motion.div
+                className="flex flex-wrap gap-2.5 mb-4"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.60 }}
+              >
+                <Link href="/jobs">
+                  <button
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:scale-105 hover:brightness-110 active:scale-[0.98] shadow-2xl"
+                    style={{ backgroundColor: "#C8461A", fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em" }}
+                  >
+                    <Search className="h-4 w-4" />
+                    Find Opportunities
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </Link>
+                <Link href="/employers">
+                  <button
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white border-2 transition-all duration-200 hover:scale-105 active:scale-[0.98] backdrop-blur-sm hover:bg-white/12"
+                    style={{ borderColor: "rgba(255,255,255,0.42)", fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em" }}
+                  >
+                    <Building2 className="h-4 w-4" />
+                    Hire Talent
+                  </button>
+                </Link>
+              </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              className="flex flex-wrap items-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 1.22 }}
-            >
-              {[
-                { v: "Ghana", l: "Launch Market" },
-                { v: "Kenya", l: "Launch Market" },
-                { v: "20+ yrs", l: "Experience" },
-                { v: "2026", l: "MVP Launch" },
-              ].map((s, i) => (
-                <div key={i} className="flex items-center">
-                  <div className="px-4 py-1 text-center">
-                    <div className="text-sm font-black text-white leading-none">{s.v}</div>
-                    <div className="text-[10px] text-white/40 mt-0.5 uppercase tracking-widest">{s.l}</div>
+              {/* Inline proof stats */}
+              <motion.div
+                className="flex flex-wrap items-stretch gap-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.70 }}
+              >
+                {[
+                  { v: "Ghana", l: "Launch Market" },
+                  { v: "Kenya", l: "Launch Market" },
+                  { v: "20+ yrs", l: "HR Experience" },
+                  { v: "2026", l: "MVP Live" },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-stretch">
+                    <div className="px-4 py-1 text-center">
+                      <div className="text-[13px] font-extrabold text-white leading-none tracking-tight" style={{ fontFamily: "var(--app-font-display)" }}>{s.v}</div>
+                      <div className="text-[10px] text-white/40 mt-1 uppercase tracking-[0.12em] font-semibold" style={{ fontFamily: "var(--app-font-sans)" }}>{s.l}</div>
+                    </div>
+                    {i < 3 && <div className="w-px self-stretch my-0.5" style={{ backgroundColor: "rgba(255,255,255,0.14)" }} />}
                   </div>
-                  {i < 3 && <div className="h-5 w-px bg-white/15" />}
-                </div>
-              ))}
-            </motion.div>
+                ))}
+              </motion.div>
 
+            </div>
           </div>
         </motion.div>
 
-        {/* Scroll cue */}
+        {/* Scroll pulse cue — bottom right */}
         <motion.div
-          className="absolute bottom-7 right-10 z-10 flex-col items-center hidden md:flex"
+          className="absolute bottom-8 right-10 z-10 hidden md:flex flex-col items-center gap-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.6 }}
+          transition={{ duration: 1, delay: 1.7 }}
         >
+          <span className="text-[9px] font-bold uppercase tracking-[0.18em] rotate-90 text-white/30 mb-2" style={{ fontFamily: "var(--app-font-sans)" }}>Scroll</span>
           <motion.div
-            className="w-px h-10 origin-top"
-            style={{ backgroundColor: GOLD }}
-            animate={{ scaleY: [0, 1, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px origin-top"
+            style={{ backgroundColor: "#E8962A", height: 44 }}
+            animate={{ scaleY: [0.0, 1, 0.0], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
           />
+        </motion.div>
+
+        {/* Bottom kente stripe */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 z-10 flex h-[5px] origin-right"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {["#1F7A78","#E8962A","#1C1917","#C8461A","#E8962A","#1C1917","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917","#E8962A","#C8461A","#1F7A78","#1C1917"].map((c, i) => (
+            <div key={i} className="flex-1 h-full" style={{ backgroundColor: c }} />
+          ))}
         </motion.div>
       </section>
 
-      {/* ── STATS BAR ── */}
-      <div style={{ backgroundColor: CORAL }}>
+      {/* ── STATS BAR — Ghana kente-color band ── */}
+      <div style={{ background: `linear-gradient(90deg, #1C1917 0%, #2A1810 40%, #1C1917 100%)` }}>
         <div className="grid grid-cols-2 md:grid-cols-5 mx-auto max-w-7xl">
           {platformStats.map((s, i) => (
-            <div
+            <motion.div
               key={`stat-${i}`}
-              className="py-6 md:py-8 text-center"
-              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.22)" : "none" }}
+              className="py-7 md:py-9 text-center relative"
+              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.10)" : "none" }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
             >
-              <div className="text-2xl md:text-3xl font-extrabold text-white">{s.value}</div>
-              <div className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-white/70 mt-1">{s.label}</div>
-            </div>
+              <div
+                className="text-2xl md:text-3xl font-extrabold text-white leading-none tracking-tight"
+                style={{ fontFamily: "var(--app-font-display)", color: i % 2 === 0 ? "#E8962A" : "#fff" }}
+              >{s.value}</div>
+              <div className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50 mt-1.5" style={{ fontFamily: "var(--app-font-sans)" }}>{s.label}</div>
+              {/* kente dot accent */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-8 rounded-full" style={{ backgroundColor: i % 3 === 0 ? "#C8461A" : i % 3 === 1 ? "#E8962A" : "#1F7A78" }} />
+            </motion.div>
           ))}
         </div>
       </div>
