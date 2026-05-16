@@ -7,6 +7,7 @@ import {
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CORAL = "#C8461A";
 const GOLD = "#E8962A";
@@ -38,9 +39,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   return (
     <header className="w-full">
-      {/* Top bar — warm cream */}
+      {/* Top bar */}
       <div className="py-2 hidden md:block" style={{ backgroundColor: "#FFF8F2", borderBottom: "1px solid #F5E6D8" }}>
         <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs" style={{ color: "#78614E" }}>
@@ -67,7 +78,7 @@ export function Navbar() {
       <nav className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${scrolled ? "shadow-md border-b border-orange-50" : "border-b border-orange-50/60"}`}>
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMobileOpen(false)}>
             <div className="h-10 w-10 rounded-lg overflow-hidden shrink-0">
               <img src="/logo-bridgepath.png" alt="BridgePath Africa" className="h-full w-full object-cover" />
             </div>
@@ -83,11 +94,7 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-
-            {/* Home link */}
-            <Link href="/"
-              className="px-4 py-2 text-sm font-medium rounded transition-colors"
-              style={{ color: "#555555" }}>
+            <Link href="/" className="px-4 py-2 text-sm font-medium rounded transition-colors" style={{ color: "#555555" }}>
               Home
             </Link>
 
@@ -99,28 +106,39 @@ export function Navbar() {
               >
                 <Search className="h-3.5 w-3.5" />
                 For Professionals
-                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${profOpen ? "rotate-180" : ""}`} />
+                <motion.span animate={{ rotate: profOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </motion.span>
               </button>
-              {profOpen && (
-                <div className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl py-3 z-50" style={{ border: "1px solid #F5E6D8" }}>
-                  <div className="px-4 pb-2 mb-1" style={{ borderBottom: "1px solid #F5E6D8" }}>
-                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: CORAL }}>Job Seekers &amp; Professionals</p>
-                  </div>
-                  {professionalLinks.map((l) => (
-                    <Link key={l.href} href={l.href}>
-                      <div className="flex items-start gap-3 px-4 py-3 transition-colors cursor-pointer group hover:bg-orange-50">
-                        <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: CORAL + "15", color: CORAL }}>
-                          {l.icon}
+              <AnimatePresence>
+                {profOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl py-3 z-50"
+                    style={{ border: "1px solid #F5E6D8" }}
+                  >
+                    <div className="px-4 pb-2 mb-1" style={{ borderBottom: "1px solid #F5E6D8" }}>
+                      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: CORAL }}>Job Seekers &amp; Professionals</p>
+                    </div>
+                    {professionalLinks.map((l) => (
+                      <Link key={l.href} href={l.href}>
+                        <div className="flex items-start gap-3 px-4 py-3 transition-colors cursor-pointer group hover:bg-orange-50">
+                          <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: CORAL + "15", color: CORAL }}>
+                            {l.icon}
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-gray-800 group-hover:text-orange-700">{l.label}</p>
+                            <p className="text-xs text-gray-500">{l.desc}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-800 group-hover:text-orange-700">{l.label}</p>
-                          <p className="text-xs text-gray-500">{l.desc}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* For Employers dropdown */}
@@ -131,33 +149,44 @@ export function Navbar() {
               >
                 <Building2 className="h-3.5 w-3.5" />
                 For Employers
-                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${empOpen ? "rotate-180" : ""}`} />
+                <motion.span animate={{ rotate: empOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </motion.span>
               </button>
-              {empOpen && (
-                <div className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl py-3 z-50" style={{ border: "1px solid #F5E6D8" }}>
-                  <div className="px-4 pb-2 mb-1" style={{ borderBottom: "1px solid #F5E6D8" }}>
-                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: CHARCOAL }}>Hire &amp; Grow Your Team</p>
-                  </div>
-                  {employerLinks.map((l) => (
-                    <Link key={l.href} href={l.href}>
-                      <div className="flex items-start gap-3 px-4 py-3 transition-colors cursor-pointer group hover:bg-orange-50">
-                        <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: CHARCOAL + "12", color: CHARCOAL }}>
-                          {l.icon}
+              <AnimatePresence>
+                {empOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl py-3 z-50"
+                    style={{ border: "1px solid #F5E6D8" }}
+                  >
+                    <div className="px-4 pb-2 mb-1" style={{ borderBottom: "1px solid #F5E6D8" }}>
+                      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: CHARCOAL }}>Hire &amp; Grow Your Team</p>
+                    </div>
+                    {employerLinks.map((l) => (
+                      <Link key={l.href} href={l.href}>
+                        <div className="flex items-start gap-3 px-4 py-3 transition-colors cursor-pointer group hover:bg-orange-50">
+                          <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: CHARCOAL + "12", color: CHARCOAL }}>
+                            {l.icon}
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-gray-800 group-hover:text-gray-900">{l.label}</p>
+                            <p className="text-xs text-gray-500">{l.desc}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-800 group-hover:text-gray-900">{l.label}</p>
-                          <p className="text-xs text-gray-500">{l.desc}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                  <div className="pt-2 px-4 pb-1 mt-1" style={{ borderTop: "1px solid #F5E6D8" }}>
-                    <Link href="/auth/signup?role=employer" className="text-xs font-semibold hover:underline" style={{ color: CORAL }}>
-                      Create employer account →
-                    </Link>
-                  </div>
-                </div>
-              )}
+                      </Link>
+                    ))}
+                    <div className="pt-2 px-4 pb-1 mt-1" style={{ borderTop: "1px solid #F5E6D8" }}>
+                      <Link href="/auth/signup?role=employer" className="text-xs font-semibold hover:underline" style={{ color: CORAL }}>
+                        Create employer account →
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Static links */}
@@ -172,9 +201,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            <a href="#contact"
-              className="px-4 py-2 text-sm font-medium rounded transition-colors"
-              style={{ color: "#555555" }}>
+            <a href="#contact" className="px-4 py-2 text-sm font-medium rounded transition-colors" style={{ color: "#555555" }}>
               Contact
             </a>
           </div>
@@ -232,60 +259,120 @@ export function Navbar() {
                 </Link>
               </>
             )}
-            <button className="md:hidden ml-1 p-2" onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+
+            {/* Mobile hamburger */}
+            <motion.button
+              className="md:hidden ml-1 p-2 rounded-lg"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                    <X className="h-5 w-5" style={{ color: CHARCOAL }} />
+                  </motion.span>
+                ) : (
+                  <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                    <Menu className="h-5 w-5" style={{ color: CHARCOAL }} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
 
-        {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="md:hidden border-t bg-white px-4 py-4 space-y-1 shadow-lg" style={{ borderColor: "#F5E6D8" }}>
-            <p className="text-[10px] font-bold uppercase tracking-widest px-2 pt-1 pb-2" style={{ color: CORAL }}>For Professionals</p>
-            <Link href="/jobs" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-orange-700 rounded-lg hover:bg-orange-50">
-              <Search className="h-4 w-4" /> Browse Jobs
-            </Link>
-            <Link href="/cv-review" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-orange-700 rounded-lg hover:bg-orange-50">
-              <Sparkles className="h-4 w-4" /> AI CV Review
-            </Link>
+        {/* Mobile menu — animated slide down */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              style={{ overflow: "hidden", borderTop: "1px solid #F5E6D8" }}
+              className="md:hidden bg-white shadow-xl"
+            >
+              <motion.div
+                initial={{ y: -10 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.28, delay: 0.05 }}
+                className="px-4 py-4 space-y-1 max-h-[80vh] overflow-y-auto"
+              >
+                {/* For Professionals */}
+                <p className="text-[10px] font-bold uppercase tracking-widest px-2 pt-2 pb-2" style={{ color: CORAL }}>For Professionals</p>
+                {professionalLinks.map((l, i) => (
+                  <motion.div
+                    key={l.href}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.06 + i * 0.04 }}
+                  >
+                    <Link href={l.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-orange-700 rounded-lg hover:bg-orange-50 transition-colors">
+                      <span style={{ color: CORAL }}>{l.icon}</span> {l.label}
+                    </Link>
+                  </motion.div>
+                ))}
 
-            <div className="border-t pt-2 mt-2" style={{ borderColor: "#F5E6D8" }} />
-            <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-bold text-gray-900">← Home</Link>
-            <div className="border-t pt-2 mt-1" style={{ borderColor: "#F5E6D8" }} />
-            <p className="text-[10px] font-bold uppercase tracking-widest px-2 pt-1 pb-2" style={{ color: CHARCOAL }}>For Employers</p>
-            <Link href="/employers" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 rounded-lg hover:bg-orange-50">
-              <Building2 className="h-4 w-4" /> Post a Job / Hire Talent
-            </Link>
-            <Link href="/candidates" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 rounded-lg hover:bg-orange-50">
-              <Users className="h-4 w-4" /> Browse Candidates
-            </Link>
-            <Link href="/services" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 rounded-lg hover:bg-orange-50">
-              <Briefcase className="h-4 w-4" /> HR Services
-            </Link>
+                <div className="border-t my-2" style={{ borderColor: "#F5E6D8" }} />
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.18 }}>
+                  <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-bold" style={{ color: CHARCOAL }}>← Home</Link>
+                </motion.div>
+                <div className="border-t my-2" style={{ borderColor: "#F5E6D8" }} />
 
-            <div className="border-t pt-2 mt-2" style={{ borderColor: "#F5E6D8" }} />
-            <Link href="/about" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700">About</Link>
-            <Link href="/blog" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700">Insights</Link>
-            <a href="#contact" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700">Contact</a>
+                {/* For Employers */}
+                <p className="text-[10px] font-bold uppercase tracking-widest px-2 pt-1 pb-2" style={{ color: CHARCOAL }}>For Employers</p>
+                {employerLinks.map((l, i) => (
+                  <motion.div
+                    key={l.href}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.22 + i * 0.04 }}
+                  >
+                    <Link href={l.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 rounded-lg hover:bg-orange-50 transition-colors">
+                      <span style={{ color: CHARCOAL }}>{l.icon}</span> {l.label}
+                    </Link>
+                  </motion.div>
+                ))}
 
-            {isAuthenticated && user && (
-              <div className="border-t pt-2 mt-2" style={{ borderColor: "#F5E6D8" }}>
-                <Link href={user.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker"} onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700">My Dashboard</Link>
-                <button onClick={() => { logout(); setMobileOpen(false); }} className="block py-2.5 px-2 text-sm font-medium text-red-500 w-full text-left">Log out</button>
-              </div>
-            )}
-            {!isAuthenticated && (
-              <div className="border-t pt-3 mt-2 flex gap-2" style={{ borderColor: "#F5E6D8" }}>
-                <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="flex-1">
-                  <button className="w-full py-2.5 text-sm font-medium border rounded-lg" style={{ color: CHARCOAL, borderColor: "#E8D5C4" }}>Sign In</button>
-                </Link>
-                <Link href="/auth/signup" onClick={() => setMobileOpen(false)} className="flex-1">
-                  <button className="w-full py-2.5 text-sm font-semibold text-white rounded-lg" style={{ backgroundColor: CORAL }}>Get Started</button>
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
+                <div className="border-t my-2" style={{ borderColor: "#F5E6D8" }} />
+                {[
+                  { href: "/about", label: "About" },
+                  { href: "/blog", label: "Insights" },
+                ].map((link, i) => (
+                  <motion.div key={link.href} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.34 + i * 0.04 }}>
+                    <Link href={link.href} onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-orange-700 rounded-lg hover:bg-orange-50">
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.42 }}>
+                  <a href="#contact" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-orange-700 rounded-lg hover:bg-orange-50">
+                    Contact
+                  </a>
+                </motion.div>
+
+                {isAuthenticated && user && (
+                  <div className="border-t pt-2 mt-2" style={{ borderColor: "#F5E6D8" }}>
+                    <Link href={user.role === "employer" ? "/dashboard/employer" : "/dashboard/jobseeker"} onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-medium text-gray-700">My Dashboard</Link>
+                    <button onClick={() => { logout(); setMobileOpen(false); }} className="block py-2.5 px-2 text-sm font-medium text-red-500 w-full text-left">Log out</button>
+                  </div>
+                )}
+                {!isAuthenticated && (
+                  <motion.div className="border-t pt-3 mt-2 flex gap-2" style={{ borderColor: "#F5E6D8" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}>
+                    <Link href="/auth/login" onClick={() => setMobileOpen(false)} className="flex-1">
+                      <button className="w-full py-3 text-sm font-medium border rounded-xl" style={{ color: CHARCOAL, borderColor: "#E8D5C4" }}>Sign In</button>
+                    </Link>
+                    <Link href="/auth/signup" onClick={() => setMobileOpen(false)} className="flex-1">
+                      <button className="w-full py-3 text-sm font-semibold text-white rounded-xl shadow-md" style={{ backgroundColor: CORAL }}>Get Started</button>
+                    </Link>
+                  </motion.div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
