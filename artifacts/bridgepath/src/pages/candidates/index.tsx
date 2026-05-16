@@ -6,8 +6,8 @@ import avatar2 from "@assets/unnamed_(7)_1776009115711.jpg";
 import avatar3 from "@assets/unnamed_(5)_1776009115712.jpg";
 import avatar4 from "@assets/unnamed_(9)_1776009115710.jpg";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const CORAL = "#C8461A";
+const CHARCOAL = "#1C1917";
 
 const candidates = [
   {
@@ -58,13 +58,13 @@ export default function CandidatesPage() {
       <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-gray-100">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: GREEN }}>Talent Pool</p>
-            <h1 className="text-xl md:text-3xl font-bold" style={{ color: DARK }}>Browse Candidates</h1>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: CORAL }}>Talent Pool</p>
+            <h1 className="text-xl md:text-3xl font-bold" style={{ color: CHARCOAL }}>Browse Candidates</h1>
             <p className="text-sm text-gray-500 mt-2 max-w-2xl">
               Review diaspora and local professionals across Ghana, Kenya, and remote roles. Candidate data is sample V1 content while the live talent pool is being onboarded.
             </p>
           </div>
-          <Link href="/messages" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white shrink-0" style={{ backgroundColor: GREEN }}>
+          <Link href="/messages" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white shrink-0" style={{ backgroundColor: CORAL }}>
             <MessageSquare className="h-4 w-4" /> View Messages
           </Link>
         </div>
@@ -98,10 +98,10 @@ export default function CandidatesPage() {
             <p className="text-sm text-gray-500 mt-4 leading-relaxed">{candidate.summary}</p>
             <div className="flex flex-wrap gap-1.5 mt-4">
               {candidate.skills.map((skill) => (
-                <span key={skill} className="text-[11px] bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{skill}</span>
+                <span key={skill} className="text-[11px] px-2 py-1 rounded-full font-medium" style={{ backgroundColor: CORAL + "12", color: CORAL }}>{skill}</span>
               ))}
             </div>
-            <Link href={`/candidates/${candidate.id}`} className="inline-flex mt-5 text-sm font-semibold" style={{ color: GREEN }}>
+            <Link href={`/candidates/${candidate.id}`} className="inline-flex mt-5 text-sm font-semibold" style={{ color: CORAL }}>
               View Profile →
             </Link>
           </div>

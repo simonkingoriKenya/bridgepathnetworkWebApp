@@ -7,8 +7,9 @@ import {
   UserCheck, Calculator, ArrowRight, CheckCircle2, TrendingUp, Clock
 } from "lucide-react";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const CORAL = "#C8461A";
+const CHARCOAL = "#1C1917";
+const CREAM = "#FFF8F2";
 
 export const services: {
   slug: string;
@@ -106,28 +107,28 @@ const cardVariants = {
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <section className="relative h-[60vh] min-h-[460px] max-h-[700px] overflow-hidden flex items-end">
+      <section className="relative h-[55vh] min-h-[420px] max-h-[660px] overflow-hidden flex items-end">
         <img
           src="/photos/africa-office-team.png"
           alt="African professionals in a modern office — Bridgepath Africa HR Services"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.96) 0%, rgba(13,27,42,0.55) 50%, rgba(13,27,42,0.10) 100%)" }} />
-        <div className="relative z-10 w-full pb-14 md:pb-20">
-          <div className="container mx-auto px-6 md:px-12 text-center">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.30) 55%, rgba(28,25,23,0.0) 100%)" }} />
+        <div className="relative z-10 w-full pb-12 md:pb-16">
+          <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-sm font-medium" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-sm font-medium" style={{ backgroundColor: `${CORAL}22`, color: CORAL, border: `1px solid ${CORAL}40` }}>
                 <TrendingUp className="h-4 w-4" /> HR &amp; Talent Solutions
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
                 Tailor-made HR &amp; Recruitment<br />
-                <span style={{ color: GREEN }}>Solutions Across Africa</span>
+                <span style={{ color: "#E8962A" }}>Solutions Across Africa</span>
               </h1>
-              <p className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">
-                From employment of record to executive search — Bridgepath Africa handles your people operations so you can focus on growth.
+              <p className="text-white/75 max-w-2xl text-lg leading-relaxed">
+                From employment of record to executive search — BridgePath Africa handles your people operations so you can focus on growth.
               </p>
             </motion.div>
           </div>
@@ -169,35 +170,35 @@ export default function ServicesPage() {
                       Coming Soon
                     </div>
                     <div className="absolute inset-0 rounded-2xl flex items-end justify-center pb-6 pointer-events-none">
-                      <div className="px-4 py-2 rounded-full text-xs font-semibold text-white shadow" style={{ backgroundColor: "#C2410C" }}>
+                      <div className="px-4 py-2 rounded-full text-xs font-semibold text-white shadow" style={{ backgroundColor: CORAL }}>
                         Launching Soon — Stay Tuned
                       </div>
                     </div>
                   </div>
                 ) : (
                   <Link href={`/services/${s.slug}`}>
-                    <div className="group h-full bg-white rounded-2xl border border-gray-100 hover:border-green-300 hover:shadow-xl transition-all duration-300 p-7 cursor-pointer flex flex-col">
+                    <div className="group h-full bg-white rounded-2xl border hover:shadow-xl transition-all duration-300 p-7 cursor-pointer flex flex-col" style={{ borderColor: "#F5E6D8" }}>
                       <div className="flex items-start justify-between mb-5">
-                        <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-green-50" style={{ backgroundColor: GREEN + "12", color: GREEN }}>
+                        <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-colors" style={{ backgroundColor: CORAL + "12", color: CORAL }}>
                           {s.icon}
                         </div>
                         {s.tag && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ backgroundColor: CORAL + "18", color: CORAL }}>
                             {s.tag}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-green-700 transition-colors" style={{ color: DARK }}>{s.label}</h3>
+                      <h3 className="text-lg font-bold mb-2 transition-colors group-hover:text-orange-700" style={{ color: CHARCOAL }}>{s.label}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{s.shortDesc}</p>
                       <ul className="space-y-1.5 mb-5">
                         {s.highlights.map((h) => (
                           <li key={h} className="flex items-center gap-2 text-xs text-gray-600">
-                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: GREEN }} />
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: CORAL }} />
                             {h}
                           </li>
                         ))}
                       </ul>
-                      <div className="flex items-center gap-1.5 text-sm font-semibold mt-auto" style={{ color: GREEN }}>
+                      <div className="flex items-center gap-1.5 text-sm font-semibold mt-auto" style={{ color: CORAL }}>
                         Learn more <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -209,13 +210,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 text-white" style={{ backgroundColor: "#2d3e2a" }}>
+      <section className="py-20 text-white" style={{ backgroundColor: CHARCOAL }}>
         <div className="container mx-auto px-4 md:px-8 text-center max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to expand in Africa?</h2>
-          <p className="text-gray-300 mb-8 text-lg">Talk to our experts about your HR and talent needs. We'll design a solution that fits.</p>
+          <p className="text-white/70 mb-8 text-lg">Talk to our experts about your HR and talent needs. We'll design a solution that fits.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/#contact">
-              <button className="px-8 py-4 font-semibold text-white rounded-xl hover:opacity-90 transition-opacity text-base" style={{ backgroundColor: GREEN }}>
+              <button className="px-8 py-4 font-semibold text-white rounded-xl hover:opacity-90 transition-opacity text-base" style={{ backgroundColor: CORAL }}>
                 Get in Touch
               </button>
             </Link>

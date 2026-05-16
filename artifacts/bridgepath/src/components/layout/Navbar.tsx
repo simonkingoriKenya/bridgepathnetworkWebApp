@@ -44,7 +44,7 @@ export function Navbar() {
       <div className="py-2 hidden md:block" style={{ backgroundColor: "#FFF8F2", borderBottom: "1px solid #F5E6D8" }}>
         <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs" style={{ color: "#78614E" }}>
-            <span className="font-semibold" style={{ color: CHARCOAL }}>Bridgepath Africa</span>
+            <span className="font-semibold" style={{ color: CHARCOAL }}>BridgePath Africa</span>
             <span style={{ color: "#D4B8A0" }}>·</span>
             <span>Accra, Ghana HQ</span>
             <span style={{ color: "#D4B8A0" }}>·</span>
@@ -67,22 +67,29 @@ export function Navbar() {
       <nav className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${scrolled ? "shadow-md border-b border-orange-50" : "border-b border-orange-50/60"}`}>
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: CORAL }}>
-              <img src="/logo-new.png" alt="Bridgepath Africa" className="h-7 w-7 object-contain" />
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+              <img src="/logo-bridgepath.png" alt="BridgePath Africa" className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col leading-none">
-              <div className="font-extrabold text-xl tracking-tight leading-none">
-                <span style={{ color: CHARCOAL }}>Bridgepath</span><span style={{ color: CORAL }}> Africa</span>
+              <div className="font-extrabold text-[17px] tracking-tight leading-none">
+                <span style={{ color: CHARCOAL }}>BridgePath</span><span style={{ color: CORAL }}> Africa</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] italic font-light tracking-tight mt-0.5" style={{ color: "#A08060" }}>
-                Shaping People. Strengthening Institutions.
+              <span className="text-[9px] font-medium tracking-[0.08em] uppercase mt-0.5" style={{ color: "#A08060" }}>
+                Global Talent. African Opportunity.
               </span>
             </div>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
+
+            {/* Home link */}
+            <Link href="/"
+              className="px-4 py-2 text-sm font-medium rounded transition-colors"
+              style={{ color: "#555555" }}>
+              Home
+            </Link>
 
             {/* For Professionals dropdown */}
             <div className="relative" onMouseEnter={() => setProfOpen(true)} onMouseLeave={() => setProfOpen(false)}>
@@ -243,6 +250,8 @@ export function Navbar() {
             </Link>
 
             <div className="border-t pt-2 mt-2" style={{ borderColor: "#F5E6D8" }} />
+            <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2.5 px-2 text-sm font-bold text-gray-900">← Home</Link>
+            <div className="border-t pt-2 mt-1" style={{ borderColor: "#F5E6D8" }} />
             <p className="text-[10px] font-bold uppercase tracking-widest px-2 pt-1 pb-2" style={{ color: CHARCOAL }}>For Employers</p>
             <Link href="/employers" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2.5 px-2 text-sm font-medium text-gray-700 hover:text-gray-900 rounded-lg hover:bg-orange-50">
               <Building2 className="h-4 w-4" /> Post a Job / Hire Talent

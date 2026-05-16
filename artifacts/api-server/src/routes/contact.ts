@@ -55,8 +55,8 @@ router.post("/contact", async (req, res) => {
           subject: `New Enquiry: ${type || "General"} — ${name.trim()}`,
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
-              <div style="background: #1a2340; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
-                <h1 style="color: #ffffff; font-size: 20px; margin: 0;">New Contact Enquiry</h1>
+              <div style="background: #1C1917; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
+                <h1 style="color: #ffffff; font-size: 20px; margin: 0;">New Contact Enquiry — BridgePath Africa</h1>
               </div>
 
               <table style="width: 100%; border-collapse: collapse;">
@@ -66,7 +66,7 @@ router.post("/contact", async (req, res) => {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Email</td>
-                  <td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${email.trim()}" style="color: #8CC63F;">${email.trim()}</a></td>
+                  <td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${email.trim()}" style="color: #C8461A;">${email.trim()}</a></td>
                 </tr>
                 ${company ? `<tr><td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Company</td><td style="padding: 8px 0; font-size: 14px;">${company.trim()}</td></tr>` : ""}
                 ${phone ? `<tr><td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Phone</td><td style="padding: 8px 0; font-size: 14px;">${phone.trim()}</td></tr>` : ""}
@@ -77,7 +77,7 @@ router.post("/contact", async (req, res) => {
               </table>
 
               ${message ? `
-              <div style="margin-top: 16px; padding: 16px; background: #f9fafb; border-radius: 6px; border-left: 3px solid #8CC63F;">
+              <div style="margin-top: 16px; padding: 16px; background: #f9fafb; border-radius: 6px; border-left: 3px solid #C8461A;">
                 <p style="color: #6b7280; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.05em;">Message</p>
                 <p style="margin: 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${message.trim()}</p>
               </div>` : ""}
@@ -95,28 +95,28 @@ router.post("/contact", async (req, res) => {
           subject: "We've received your enquiry — Bridgepath Africa",
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
-              <div style="background: #1a2340; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
+              <div style="background: #1C1917; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
                 <h1 style="color: #ffffff; font-size: 20px; margin: 0;">Thank you for reaching out</h1>
               </div>
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">Hi ${name.trim()},</p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
-                Thank you for contacting Bridgepath Africa. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
+                Thank you for contacting BridgePath Africa. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
               </p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 In the meantime, feel free to explore our services or browse available roles on our platform.
               </p>
 
               <div style="margin: 24px 0; text-align: center;">
-                <a href="https://bridgepathafricahr.com/jobs" style="display: inline-block; background: #8CC63F; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                <a href="https://bridgepathafricahr.com/jobs" style="display: inline-block; background: #C8461A; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
                   Browse Jobs
                 </a>
               </div>
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 Best regards,<br/>
-                <strong>The Bridgepath Africa Team</strong><br/>
-                <a href="mailto:pkumanyc@gmail.com" style="color: #8CC63F;">pkumanyc@gmail.com</a>
+                <strong>The BridgePath Africa Team</strong><br/>
+                <a href="mailto:pkumanyc@gmail.com" style="color: #C8461A;">pkumanyc@gmail.com</a>
               </p>
 
               <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">

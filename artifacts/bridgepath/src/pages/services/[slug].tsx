@@ -14,8 +14,8 @@ import heroOutsource from "@assets/unnamed_(6)_1776009115712.jpg";
 import heroInterim from "@assets/unnamed_(9)_1776009115710.jpg";
 
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const GREEN = "#C8461A";
+const DARK = "#1C1917";
 
 const serviceData: Record<string, {
   icon: React.ReactNode;
@@ -402,9 +402,9 @@ export default function ServiceDetail() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${service.heroImg}')` }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,35,64,0.96) 0%, rgba(26,35,64,0.55) 60%, rgba(26,35,64,0.25) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.90) 0%, rgba(28,25,23,0.40) 60%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 container mx-auto px-4 md:px-8 pb-12 pt-24">
-          <Link href="/services" className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white mb-5 transition-colors">
+          <Link href="/services" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mb-5 transition-colors">
             <ArrowLeft className="h-4 w-4" /> All Services
           </Link>
           <div className="flex items-center gap-4 mb-4">
@@ -412,7 +412,7 @@ export default function ServiceDetail() {
               <div className="text-white">{service.icon}</div>
             </div>
             <div>
-              <p className="text-sm font-medium" style={{ color: GREEN }}>Bridgepath Africa Service</p>
+              <p className="text-sm font-medium" style={{ color: "#E8962A" }}>BridgePath Africa Service</p>
               <h1 className="text-3xl md:text-4xl font-bold text-white">{service.label}</h1>
             </div>
           </div>

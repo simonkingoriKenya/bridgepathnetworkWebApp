@@ -12,8 +12,8 @@ import authorAvatar2 from "@assets/unnamed_(4)_1776009115713.jpg";
 import authorAvatar3 from "@assets/unnamed_(5)_1776009115712.jpg";
 import authorAvatar4 from "@assets/unnamed_(6)_1776009115712.jpg";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const CORAL = "#C8461A";
+const CHARCOAL = "#1C1917";
 
 export const blogPosts = [
   {
@@ -260,11 +260,11 @@ export default function BlogIndex() {
           alt="African business leaders in a boardroom — Bridgepath Africa Insights"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(13,27,42,0.97) 0%, rgba(13,27,42,0.55) 50%, rgba(13,27,42,0.08) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.82) 0%, rgba(28,25,23,0.30) 50%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12 text-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(140,198,63,0.18)", color: GREEN, border: "1px solid rgba(140,198,63,0.35)" }}>Insights &amp; News</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: `${CORAL}22`, color: CORAL, border: `1px solid ${CORAL}40` }}>Insights &amp; News</span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">HR &amp; Talent Insights<br />for Africa</h1>
               <p className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">Expert perspectives on recruitment, compliance, technology, and careers across the African continent.</p>
             </motion.div>
@@ -294,14 +294,14 @@ export default function BlogIndex() {
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+                        <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1" style={{ backgroundColor: CORAL + "20", color: CORAL }}>
                           <Tag className="h-2.5 w-2.5" /> {post.tag}
                         </span>
                         <span className="text-xs text-gray-400 flex items-center gap-1">
                           <Clock className="h-3 w-3" /> {post.readTime}
                         </span>
                       </div>
-                      <h2 className="font-bold text-gray-900 text-lg leading-snug mb-2 group-hover:text-green-700 transition-colors flex-1">
+                      <h2 className="font-bold text-gray-900 text-lg leading-snug mb-2 group-hover:text-orange-700 transition-colors flex-1">
                         {post.title}
                       </h2>
                       <p className="text-sm text-gray-500 leading-relaxed mb-4">{post.excerpt}</p>
@@ -313,7 +313,7 @@ export default function BlogIndex() {
                             <p className="text-[10px] text-gray-400">{post.date}</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-1 text-xs font-semibold group-hover:translate-x-1 transition-transform" style={{ color: GREEN }}>
+                        <div className="flex items-center gap-1 text-xs font-semibold group-hover:translate-x-1 transition-transform" style={{ color: CORAL }}>
                           Read <ArrowRight className="h-3 w-3" />
                         </div>
                       </div>

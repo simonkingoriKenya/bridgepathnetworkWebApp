@@ -124,152 +124,122 @@ export default function Home() {
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative w-full overflow-hidden" style={{ height: "100svh", minHeight: 680 }}>
 
-        {/* Kente-inspired top stripe — animated sweep */}
-        <motion.div
-          className="absolute top-0 left-0 right-0 z-20 flex h-[6px] origin-left"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {["#C8461A","#E8962A","#1C1917","#E8962A","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917","#E8962A","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917"].map((c, i) => (
-            <div key={i} className="flex-1 h-full" style={{ backgroundColor: c }} />
-          ))}
-        </motion.div>
+        {/* Subtle top accent line */}
+        <div className="absolute top-0 left-0 right-0 z-20 h-[3px]" style={{ backgroundColor: CORAL }} />
 
-        {/* Full-bleed parallax image */}
-        <motion.div className="absolute inset-0 scale-[1.06]" style={{ y: heroImgY }}>
+        {/* Full-bleed hero image — NO tint, clear and crisp */}
+        <div className="absolute inset-0">
           <img
-            src="/photos/ghana-team-hero.png"
-            alt="Diverse Ghana team in a vibrant boardroom — Bridgepath Africa"
+            src="/photos/hero-map-team.png"
+            alt="Diverse professional team with Africa market map — Bridgepath Africa"
             className="w-full h-full object-cover object-center"
+            loading="eager"
+            decoding="async"
           />
-        </motion.div>
+        </div>
 
-        {/* Multi-layer cinematic overlays */}
-        {/* Bottom-heavy dark for text readability */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,3,0,0.97) 0%, rgba(10,3,0,0.80) 28%, rgba(10,3,0,0.42) 55%, rgba(10,3,0,0.12) 80%, transparent 100%)" }} />
-        {/* Left-sweep overlay for text panel */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, rgba(10,3,0,0.82) 0%, rgba(10,3,0,0.48) 42%, rgba(10,3,0,0.10) 70%, transparent 100%)" }} />
-        {/* Terracotta warm glow from bottom-left */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 55% at 0% 100%, rgba(200,70,26,0.28) 0%, transparent 65%)" }} />
-        {/* Marigold glow top-right */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 40% at 100% 0%, rgba(232,150,42,0.15) 0%, transparent 60%)" }} />
-
-        {/* Floating kente diamond decorations */}
-        <motion.div
-          className="absolute top-[18%] right-[8%] w-16 h-16 rotate-45 opacity-30 hidden lg:block"
-          style={{ background: "linear-gradient(135deg, #C8461A, #E8962A)" }}
-          initial={{ opacity: 0, scale: 0.4, rotate: 0 }}
-          animate={{ opacity: 0.30, scale: 1, rotate: 45 }}
-          transition={{ duration: 1.0, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        />
-        <motion.div
-          className="absolute top-[24%] right-[12%] w-8 h-8 rotate-45 opacity-20 hidden lg:block"
-          style={{ backgroundColor: "#1F7A78" }}
-          initial={{ opacity: 0, scale: 0.4 }}
-          animate={{ opacity: 0.20, scale: 1 }}
-          transition={{ duration: 1.0, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-        />
-        <motion.div
-          className="absolute bottom-[28%] right-[6%] w-12 h-12 rotate-45 opacity-25 hidden lg:block"
-          style={{ backgroundColor: "#E8962A" }}
-          initial={{ opacity: 0, scale: 0.4 }}
-          animate={{ opacity: 0.25, scale: 1 }}
-          transition={{ duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        {/* Very subtle left-edge vignette — only to keep text readable, not to darken image */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(90deg, rgba(254,249,244,0.72) 0%, rgba(254,249,244,0.30) 38%, transparent 62%)" }}
         />
 
-        {/* ── HERO CONTENT ── vertically centered */}
-        <motion.div
-          className="absolute inset-0 flex flex-col justify-center"
-          style={{ y: heroTextY }}
-        >
+        {/* ── HERO CONTENT ── vertically centered left */}
+        <div className="absolute inset-0 flex flex-col justify-center z-10">
           <div className="container mx-auto px-6 md:px-14 max-w-7xl">
-            <div className="max-w-2xl xl:max-w-3xl">
+            <div className="max-w-lg xl:max-w-xl">
 
-              {/* Eyebrow badge */}
+              {/* Status pill */}
               <motion.div
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-3 border backdrop-blur-md"
-                style={{ backgroundColor: "rgba(232,150,42,0.14)", borderColor: "rgba(232,150,42,0.50)" }}
-                initial={{ opacity: 0, y: 12 }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 border"
+                style={{ backgroundColor: "rgba(200,70,26,0.08)", borderColor: "rgba(200,70,26,0.28)", backdropFilter: "blur(8px)" }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.15 }}
+                transition={{ duration: 0.4, delay: 0.12 }}
               >
-                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#E8962A" }} />
-                <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "#E8962A", fontFamily: "var(--app-font-display)" }}>
-                  Early Access Open · Ghana &amp; Kenya
+                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: CORAL }} />
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase" style={{ color: CORAL, fontFamily: "var(--app-font-display)" }}>
+                  Ghana Active · Kenya Opening Soon
                 </span>
               </motion.div>
 
-              {/* Headline line 1 */}
-              <div className="overflow-hidden">
-                <motion.h1
-                  className="font-extrabold text-white leading-[1.04] tracking-[-0.025em]"
-                  style={{ fontSize: "clamp(1.8rem, min(3.2vw, 5.8vh), 3.6rem)", fontFamily: "var(--app-font-display)" }}
-                  initial={{ y: "105%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  Africa's talent.
-                </motion.h1>
-              </div>
-
-              {/* Headline line 2 — marigold accent */}
-              <div className="overflow-hidden mb-0.5">
-                <motion.h1
-                  className="font-extrabold leading-[1.04] tracking-[-0.025em]"
-                  style={{ fontSize: "clamp(1.8rem, min(3.2vw, 5.8vh), 3.6rem)", color: "#E8962A", fontFamily: "var(--app-font-display)" }}
-                  initial={{ y: "105%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  Placed with purpose.
-                </motion.h1>
-              </div>
-
-              {/* Kente accent divider */}
-              <motion.div
-                className="flex gap-0.5 mb-2 mt-2"
-                initial={{ opacity: 0, x: -24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.48 }}
+              {/* Main headline */}
+              <motion.h1
+                className="font-extrabold leading-[1.06] tracking-[-0.03em] mb-4"
+                style={{
+                  fontSize: "clamp(2rem, 4.2vw, 3.8rem)",
+                  fontFamily: "var(--app-font-display)",
+                  color: CHARCOAL,
+                }}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
               >
-                {["#C8461A","#E8962A","#1C1917","#1F7A78","#E8962A","#C8461A"].map((c, i) => (
-                  <div key={i} className="h-[3px] rounded-full" style={{ width: i === 0 ? 36 : i === 1 ? 24 : 14, backgroundColor: c }} />
+                Work in Africa.{" "}
+                <span style={{ color: CORAL }}>Hire in Africa.</span>
+                <br />
+                From Anywhere.
+              </motion.h1>
+
+              {/* Kente accent bar */}
+              <motion.div
+                className="flex gap-1 mb-5"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                style={{ transformOrigin: "left" }}
+                transition={{ duration: 0.5, delay: 0.34 }}
+              >
+                {["#C8461A","#E8962A","#1C1917","#1F7A78"].map((c, i) => (
+                  <div key={i} className="h-[3px] rounded-full" style={{ width: i === 0 ? 48 : i === 1 ? 28 : 16, backgroundColor: c }} />
                 ))}
               </motion.div>
 
-              {/* Subtext */}
+              {/* Supporting line */}
               <motion.p
-                className="text-white/78 mb-3 leading-[1.55] font-medium"
-                style={{ fontSize: "clamp(0.88rem, 1.2vw, 1.05rem)", maxWidth: "490px", fontFamily: "var(--app-font-sans)" }}
-                initial={{ opacity: 0, y: 14 }}
+                className="mb-3 leading-[1.6] font-medium"
+                style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)", maxWidth: "460px", color: "#3a2a1e", fontFamily: "var(--app-font-sans)" }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.52 }}
+                transition={{ duration: 0.5, delay: 0.40 }}
               >
-                The premium careers and hiring platform connecting Africa's brightest professionals with ambitious global employers — starting in Ghana &amp; Kenya.
+                BridgePath Africa connects diaspora and local professionals with employers across Africa, starting with Ghana and Kenya.
               </motion.p>
+
+              {/* Status line */}
+              <motion.div
+                className="flex items-center gap-2 mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.48 }}
+              >
+                <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold" style={{ color: CORAL, fontFamily: "var(--app-font-sans)" }}>
+                  <span className="h-2 w-2 rounded-full bg-current animate-pulse" />
+                  Ghana active.
+                </span>
+                <span className="text-[12px] font-medium" style={{ color: "#7A6A5A", fontFamily: "var(--app-font-sans)" }}>Kenya opening soon.</span>
+              </motion.div>
 
               {/* CTA buttons */}
               <motion.div
-                className="flex flex-wrap gap-2.5 mb-4"
-                initial={{ opacity: 0, y: 14 }}
+                className="flex flex-wrap gap-3"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.60 }}
+                transition={{ duration: 0.45, delay: 0.55 }}
               >
-                <Link href="/jobs">
+                <Link href="/auth">
                   <button
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:scale-105 hover:brightness-110 active:scale-[0.98] shadow-2xl"
-                    style={{ backgroundColor: "#C8461A", fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em" }}
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-[0.98] shadow-lg"
+                    style={{ backgroundColor: CORAL, fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em", boxShadow: "0 4px 20px rgba(200,70,26,0.35)" }}
                   >
-                    <Search className="h-4 w-4" />
-                    Find Opportunities
+                    <UserCheck className="h-4 w-4" />
+                    Create Your Profile
                     <ArrowUpRight className="h-4 w-4" />
                   </button>
                 </Link>
                 <Link href="/employers">
                   <button
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white border-2 transition-all duration-200 hover:scale-105 active:scale-[0.98] backdrop-blur-sm hover:bg-white/12"
-                    style={{ borderColor: "rgba(255,255,255,0.42)", fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em" }}
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] border-2"
+                    style={{ borderColor: CORAL, color: CORAL, backgroundColor: "rgba(254,249,244,0.85)", fontFamily: "var(--app-font-display)", letterSpacing: "-0.01em", backdropFilter: "blur(8px)" }}
                   >
                     <Building2 className="h-4 w-4" />
                     Hire Talent
@@ -277,60 +247,12 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              {/* Inline proof stats */}
-              <motion.div
-                className="flex flex-wrap items-stretch gap-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.70 }}
-              >
-                {[
-                  { v: "Ghana", l: "Launch Market" },
-                  { v: "Kenya", l: "Launch Market" },
-                  { v: "20+ yrs", l: "HR Experience" },
-                  { v: "2026", l: "MVP Live" },
-                ].map((s, i) => (
-                  <div key={i} className="flex items-stretch">
-                    <div className="px-4 py-1 text-center">
-                      <div className="text-[13px] font-extrabold text-white leading-none tracking-tight" style={{ fontFamily: "var(--app-font-display)" }}>{s.v}</div>
-                      <div className="text-[10px] text-white/40 mt-1 uppercase tracking-[0.12em] font-semibold" style={{ fontFamily: "var(--app-font-sans)" }}>{s.l}</div>
-                    </div>
-                    {i < 3 && <div className="w-px self-stretch my-0.5" style={{ backgroundColor: "rgba(255,255,255,0.14)" }} />}
-                  </div>
-                ))}
-              </motion.div>
-
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Scroll pulse cue — bottom right */}
-        <motion.div
-          className="absolute bottom-8 right-10 z-10 hidden md:flex flex-col items-center gap-1"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.7 }}
-        >
-          <span className="text-[9px] font-bold uppercase tracking-[0.18em] rotate-90 text-white/30 mb-2" style={{ fontFamily: "var(--app-font-sans)" }}>Scroll</span>
-          <motion.div
-            className="w-px origin-top"
-            style={{ backgroundColor: "#E8962A", height: 44 }}
-            animate={{ scaleY: [0.0, 1, 0.0], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
-
-        {/* Bottom kente stripe */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 z-10 flex h-[5px] origin-right"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {["#1F7A78","#E8962A","#1C1917","#C8461A","#E8962A","#1C1917","#C8461A","#1F7A78","#E8962A","#C8461A","#1C1917","#E8962A","#C8461A","#1F7A78","#1C1917"].map((c, i) => (
-            <div key={i} className="flex-1 h-full" style={{ backgroundColor: c }} />
-          ))}
-        </motion.div>
+        {/* Subtle bottom accent line */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-[3px]" style={{ backgroundColor: CORAL }} />
       </section>
 
       {/* ── STATS BAR — Ghana kente-color band ── */}

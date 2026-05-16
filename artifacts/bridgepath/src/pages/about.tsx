@@ -58,12 +58,10 @@ const stats = [
 ];
 
 const certificates = [
-  { title: "SHRM-SCP", body: "Society for Human Resource Management", area: "Strategic HR Leadership" },
-  { title: "CIPD Level 7", body: "Chartered Institute of Personnel and Development", area: "Advanced HR Practice" },
-  { title: "Certified Talent Acquisition Specialist", body: "Human Capital Institute (HCI)", area: "Talent Acquisition" },
-  { title: "Executive Leadership Certificate", body: "Pan-African HR Leadership Programme", area: "Leadership & Strategy" },
-  { title: "Psychometric Assessment Practitioner", body: "SHL Certified", area: "Talent Assessment" },
-  { title: "Employment Law Certificate", body: "Ghana Bar Association Partner Programme", area: "Employment & Compliance" },
+  { title: "PSM I", body: "Professional Scrum Master I", area: "Agile & Scrum" },
+  { title: "PSM II", body: "Professional Scrum Master II", area: "Advanced Scrum" },
+  { title: "PSPO I", body: "Professional Scrum Product Owner I", area: "Product Ownership" },
+  { title: "20+ Years Experience", body: "HR & Talent Acquisition Leadership", area: "Human Resources" },
 ];
 
 export default function About() {
@@ -78,7 +76,7 @@ export default function About() {
           alt="African HR professional — Bridgepath Africa"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.95) 0%, rgba(28,25,23,0.50) 45%, rgba(28,25,23,0.05) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.35) 50%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
@@ -96,13 +94,13 @@ export default function About() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-10" style={{ backgroundColor: CORAL }}>
+      <section className="py-10 border-b" style={{ backgroundColor: "#FFF8F2", borderColor: "#F5E6D8" }}>
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <div className="text-4xl font-bold text-white mb-1">{s.value}</div>
-                <div className="text-xs font-medium uppercase tracking-wider text-white/80">{s.label}</div>
+                <div className="text-4xl font-bold mb-1" style={{ color: CORAL }}>{s.value}</div>
+                <div className="text-xs font-medium uppercase tracking-wider" style={{ color: "#7A6A5A" }}>{s.label}</div>
               </motion.div>
             ))}
           </div>
@@ -119,7 +117,7 @@ export default function About() {
                   <FounderPhoto />
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[240px] rounded-xl p-3 text-white" style={{ backgroundColor: "rgba(28,25,23,0.92)" }}>
                     <p className="font-bold text-sm">Pamela Kuma</p>
-                    <p className="text-xs text-gray-300">Founder & Global HR Director</p>
+                    <p className="text-xs text-gray-300">Founder & CEO</p>
                     <a href="https://www.linkedin.com/in/pamela-kuma" target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: GOLD }}>
                       <Linkedin className="h-3 w-3" /> linkedin.com/in/pamela-kuma
@@ -132,7 +130,7 @@ export default function About() {
                   <p className="text-sm italic leading-relaxed text-center font-medium" style={{ color: CORAL }}>
                     "Africa's talent is everywhere. BridgePath brings it home — and connects it to opportunity."
                   </p>
-                  <p className="text-xs text-center mt-2 font-semibold text-gray-400">— Pamela Kuma, Founder</p>
+                  <p className="text-xs text-center mt-2 font-semibold text-gray-400">— Pamela Kuma, Founder & CEO</p>
                 </div>
               </div>
 
