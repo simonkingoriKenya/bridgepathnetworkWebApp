@@ -159,155 +159,200 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative w-full overflow-hidden" style={{ height: "100svh", minHeight: 620 }}>
+      <section ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh", background: "#FEF9F4" }}>
 
-        {/* Top accent line */}
-        <div className="absolute top-0 left-0 right-0 z-20 h-[3px]" style={{ backgroundColor: CORAL }} />
+        {/* Top accent bar */}
+        <div className="absolute top-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL}, ${GOLD}, #1F7A78)` }} />
 
-        {/* Hero image — WebP with PNG fallback, subtle zoom on scroll */}
-        <motion.div className="absolute inset-0 will-change-transform" style={{ scale: heroImgScale }}>
-          <picture>
-            <source srcSet="/photos/hero-map-team.webp" type="image/webp" />
-            <img
-              src="/photos/hero-map-team.png"
-              alt="Diverse professional team — Bridgepath Africa"
-              className="w-full h-full object-cover object-center"
-              loading="eager"
-              decoding="async"
-              style={{
-                imageRendering: "auto",
-                filter: "contrast(1.06) saturate(1.08) brightness(1.02)",
-              }}
-            />
-          </picture>
-        </motion.div>
+        {/* ── LAYOUT: left content / right photo ── */}
+        <div className="flex flex-col lg:flex-row min-h-[100svh]">
 
-        {/* Cinematic left-side gradient — dark, no cream tint */}
-        <div
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{
-            background: "linear-gradient(105deg, rgba(12,8,4,0.78) 0%, rgba(12,8,4,0.50) 38%, rgba(12,8,4,0.08) 65%, transparent 80%)",
-          }}
-        />
-        {/* Subtle bottom vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{ background: "linear-gradient(to top, rgba(12,8,4,0.45) 0%, transparent 40%)" }}
-        />
+          {/* LEFT: content panel */}
+          <div className="relative z-20 flex flex-col justify-center px-6 sm:px-10 md:px-14 xl:px-20 py-24 lg:py-0 lg:w-[48%] xl:w-[44%] shrink-0">
 
-        {/* Hero content */}
-        <motion.div
-          className="absolute inset-0 flex flex-col justify-center z-10"
-          style={{ y: heroContentY }}
-        >
-          <div className="container mx-auto px-5 sm:px-8 md:px-14 max-w-7xl">
-            <div className="max-w-[520px] xl:max-w-[600px]">
+            {/* Status pill */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-6 self-start border"
+              style={{ backgroundColor: `${CORAL}14`, borderColor: `${CORAL}40` }}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: CORAL }} />
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase" style={{ color: CORAL }}>
+                Ghana Active · Kenya Opening Soon
+              </span>
+            </motion.div>
 
-              {/* Status pill */}
-              <motion.div
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 border"
-                style={{ backgroundColor: "rgba(200,70,26,0.18)", borderColor: "rgba(200,70,26,0.45)", backdropFilter: "blur(10px)" }}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#FF7A52" }} />
-                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase text-white/90">
-                  Ghana Active · Kenya Opening Soon
+            {/* Main headline */}
+            <motion.h1
+              className="font-extrabold leading-[1.02] tracking-[-0.03em] mb-5"
+              style={{ fontSize: "clamp(2.4rem, 5.2vw, 4.4rem)", fontFamily: "var(--app-font-display)", color: CHARCOAL }}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Hire Africa.
+              <br />
+              <span style={{ color: CORAL }}>Build the Future.</span>
+            </motion.h1>
+
+            {/* Kente accent bar */}
+            <motion.div
+              className="flex gap-1 mb-5"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              style={{ transformOrigin: "left" }}
+              transition={{ duration: 0.55, delay: 0.32 }}
+            >
+              {[CORAL, GOLD, "#1F7A78", CHARCOAL].map((c, i) => (
+                <div key={i} className="h-[3.5px] rounded-full" style={{ width: i === 0 ? 52 : i === 1 ? 32 : i === 2 ? 20 : 12, backgroundColor: c }} />
+              ))}
+            </motion.div>
+
+            {/* Subtext */}
+            <motion.p
+              className="mb-8 leading-[1.7]"
+              style={{ fontSize: "clamp(0.95rem, 1.35vw, 1.08rem)", maxWidth: "440px", fontFamily: "var(--app-font-sans)", color: "#5A4A3A" }}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.42 }}
+            >
+              Bridgepath Africa connects global companies and local businesses with exceptional talent across Africa.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 mb-10"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.52 }}
+            >
+              <Link href="/auth">
+                <motion.button
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-4 rounded-2xl font-bold text-sm text-white shadow-xl"
+                  style={{ backgroundColor: CORAL, fontFamily: "var(--app-font-display)", boxShadow: `0 6px 28px ${CORAL}50` }}
+                >
+                  <UserCheck className="h-4 w-4" />
+                  Find Opportunity
+                  <ArrowUpRight className="h-4 w-4" />
+                </motion.button>
+              </Link>
+              <Link href="/employers">
+                <motion.button
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-4 rounded-2xl font-bold text-sm border-2"
+                  style={{ borderColor: CHARCOAL + "30", color: CHARCOAL, backgroundColor: "transparent", fontFamily: "var(--app-font-display)" }}
+                >
+                  <Building2 className="h-4 w-4" />
+                  Hire Talent
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Trust row */}
+            <motion.div
+              className="flex flex-wrap items-center gap-4 sm:gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.64 }}
+            >
+              {[
+                { icon: <MapPin className="h-4 w-4" />, label: "Ghana Active", dot: CORAL },
+                { icon: <Globe className="h-4 w-4" />, label: "Kenya Coming Soon", dot: GOLD },
+                { icon: <ShieldCheck className="h-4 w-4" />, label: "20+ Yrs Experience", dot: "#1F7A78" },
+              ].map((t, i) => (
+                <span key={i} className="inline-flex items-center gap-1.5 text-[12px] font-semibold" style={{ color: "#7A6A5A" }}>
+                  <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: t.dot }} />
+                  {t.label}
                 </span>
-              </motion.div>
-
-              {/* Main headline — white on dark overlay */}
-              <motion.h1
-                className="font-extrabold leading-[1.05] tracking-[-0.03em] mb-4 text-white"
-                style={{ fontSize: "clamp(1.85rem, 4.8vw, 3.9rem)", fontFamily: "var(--app-font-display)" }}
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Work in Africa.
-                <br />
-                <span style={{ color: "#FF7A52" }}>Hire in Africa.</span>
-                <br />
-                From Anywhere.
-              </motion.h1>
-
-              {/* Kente accent bar */}
-              <motion.div
-                className="flex gap-1 mb-5"
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={{ opacity: 1, scaleX: 1 }}
-                style={{ transformOrigin: "left" }}
-                transition={{ duration: 0.55, delay: 0.35 }}
-              >
-                {["#C8461A","#E8962A","#fff","#1F7A78"].map((c, i) => (
-                  <div key={i} className="h-[3px] rounded-full" style={{ width: i === 0 ? 48 : i === 1 ? 28 : 16, backgroundColor: c, opacity: i === 2 ? 0.6 : 1 }} />
-                ))}
-              </motion.div>
-
-              {/* Supporting line */}
-              <motion.p
-                className="mb-3 leading-[1.65] font-medium text-white/85"
-                style={{ fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)", maxWidth: "460px", fontFamily: "var(--app-font-sans)" }}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.42 }}
-              >
-                BridgePath Africa connects diaspora and local professionals with employers across Africa, starting with Ghana and Kenya.
-              </motion.p>
-
-              {/* Status line */}
-              <motion.div
-                className="flex items-center gap-2 mb-7"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-white/90">
-                  <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: "#FF7A52" }} />
-                  Ghana active.
-                </span>
-                <span className="text-[12px] font-medium text-white/50">Kenya opening soon.</span>
-              </motion.div>
-
-              {/* CTA buttons */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-3"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.58 }}
-              >
-                <Link href="/auth">
-                  <motion.button
-                    whileHover={{ scale: 1.04, brightness: 1.1 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-white shadow-xl"
-                    style={{ backgroundColor: CORAL, fontFamily: "var(--app-font-display)", boxShadow: "0 4px 24px rgba(200,70,26,0.45)" }}
-                  >
-                    <UserCheck className="h-4 w-4" />
-                    Create Your Profile
-                    <ArrowUpRight className="h-4 w-4" />
-                  </motion.button>
-                </Link>
-                <Link href="/employers">
-                  <motion.button
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-white border-2 border-white/40 backdrop-blur-sm"
-                    style={{ backgroundColor: "rgba(255,255,255,0.10)", fontFamily: "var(--app-font-display)" }}
-                  >
-                    <Building2 className="h-4 w-4" />
-                    Hire Talent
-                  </motion.button>
-                </Link>
-              </motion.div>
-
-            </div>
+              ))}
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* RIGHT: photo — pure, no tint, people as centrepiece */}
+          <div className="relative lg:flex-1 overflow-hidden" style={{ minHeight: "420px" }}>
+
+            {/* Connecting fade on left edge (desktop only) */}
+            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+              style={{ background: "linear-gradient(to right, #FEF9F4 0%, transparent 100%)" }} />
+
+            {/* Top mask — erases map/UI artefacts from source screenshot */}
+            <div className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
+              style={{ height: "34%", background: "linear-gradient(to bottom, #FEF9F4 0%, rgba(254,249,244,0.95) 18%, rgba(254,249,244,0.60) 50%, transparent 100%)" }} />
+
+            {/* The photo — people front and centre, zero tint on the humans */}
+            <motion.div
+              className="absolute inset-0"
+              style={{ scale: heroImgScale }}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <img
+                src="/photos/hero-team-collab.png"
+                alt="Diverse African professional team collaborating — Bridgepath Africa"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "38% 42%" }}
+                loading="eager"
+                decoding="async"
+              />
+            </motion.div>
+
+            {/* Floating badge — top left */}
+            <motion.div
+              className="absolute top-8 left-8 lg:left-12 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
+              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(200,70,26,0.15)" }}
+              initial={{ opacity: 0, x: -20, y: -10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${CORAL}18` }}>
+                <Users className="h-5 w-5" style={{ color: CORAL }} />
+              </div>
+              <div>
+                <div className="text-lg font-extrabold leading-none" style={{ color: CHARCOAL, fontFamily: "var(--app-font-display)" }}>10,000+</div>
+                <div className="text-[11px] font-semibold mt-0.5" style={{ color: "#7A6A5A" }}>Professionals placed</div>
+              </div>
+            </motion.div>
+
+            {/* Floating badge — bottom right */}
+            <motion.div
+              className="absolute bottom-10 right-6 lg:right-10 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
+              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(232,150,42,0.20)" }}
+              initial={{ opacity: 0, x: 20, y: 20 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${GOLD}20` }}>
+                <Building2 className="h-5 w-5" style={{ color: GOLD }} />
+              </div>
+              <div>
+                <div className="text-lg font-extrabold leading-none" style={{ color: CHARCOAL, fontFamily: "var(--app-font-display)" }}>500+</div>
+                <div className="text-[11px] font-semibold mt-0.5" style={{ color: "#7A6A5A" }}>Companies hiring</div>
+              </div>
+            </motion.div>
+
+            {/* Floating badge — mid right */}
+            <motion.div
+              className="absolute top-1/2 -translate-y-1/2 right-6 lg:right-10 z-20 flex items-center gap-2 px-3.5 py-2.5 rounded-2xl shadow-xl"
+              style={{ backgroundColor: CORAL, backdropFilter: "blur(12px)" }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 1.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="h-2 w-2 rounded-full bg-white animate-pulse shrink-0" />
+              <span className="text-[11px] font-bold text-white tracking-wide">Ghana Active Now</span>
+            </motion.div>
+
+          </div>
+        </div>
 
         {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 h-[3px]" style={{ backgroundColor: CORAL }} />
+        <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL}, ${GOLD}, #1F7A78)` }} />
       </section>
 
       {/* ── STATS BAR ── */}
