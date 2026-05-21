@@ -125,8 +125,10 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroImgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const heroContentY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const heroImgScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.0]);
+  const heroImgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const heroContentY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
   const [contactForm, setContactForm] = useState({ name: "", company: "", email: "", phone: "", type: "Hiring talent", message: "" });
   const [contactSubmitting, setContactSubmitting] = useState(false);
 
@@ -166,9 +168,9 @@ export default function Home() {
         {/* ── FULL-BLEED PHOTO — the showstopper ── */}
         <motion.div
           className="absolute inset-0"
-          style={{ scale: heroImgScale }}
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
+          style={{ scale: heroImgScale, y: heroImgY }}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1.06 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <img
@@ -195,7 +197,7 @@ export default function Home() {
         {/* ── CONTENT ── */}
         <motion.div
           className="relative z-20 flex flex-col justify-end lg:justify-center min-h-[100svh] px-6 sm:px-10 md:px-16 xl:px-24 pb-16 lg:pb-0"
-          style={{ y: heroContentY }}
+          style={{ y: heroContentY, opacity: heroContentOpacity }}
         >
           <div className="max-w-xl lg:max-w-[52%]">
 
