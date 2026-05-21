@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import {
-  LogOut, User as UserIcon, Mail, Menu, X, ChevronDown, LayoutDashboard,
+  LogOut, User as UserIcon, Menu, X, ChevronDown, LayoutDashboard,
   Briefcase, Search, FileText, Building2, Users, Sparkles
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -51,29 +51,6 @@ export function Navbar() {
 
   return (
     <header className="w-full">
-      {/* Top bar */}
-      <div className="py-2 hidden md:block" style={{ backgroundColor: "#FFF8F2", borderBottom: "1px solid #F5E6D8" }}>
-        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs" style={{ color: "#78614E" }}>
-            <span className="font-semibold" style={{ color: CHARCOAL }}>BridgePath Africa</span>
-            <span style={{ color: "#D4B8A0" }}>·</span>
-            <span>Accra, Ghana HQ</span>
-            <span style={{ color: "#D4B8A0" }}>·</span>
-            <a href="mailto:pkumanyc@gmail.com" className="flex items-center gap-1.5 transition-colors hover:opacity-70">
-              <Mail className="h-3 w-3" /> pkumanyc@gmail.com
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-xs">
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider" style={{ backgroundColor: CORAL + "18", color: CORAL, border: `1px solid ${CORAL}30` }}>
-              Now accepting early access — Ghana &amp; Kenya
-            </span>
-            <Link href="/auth/signup" className="text-xs font-semibold transition-colors hover:opacity-70" style={{ color: CORAL }}>
-              Join the network →
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* Main nav */}
       <nav className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${scrolled ? "shadow-md border-b border-orange-50" : "border-b border-orange-50/60"}`}>
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
