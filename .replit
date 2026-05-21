@@ -1,4 +1,4 @@
-modules = ["nodejs-24", "python-3.11"]
+modules = ["nodejs-20", "web"]
 
 [deployment]
 router = "application"
@@ -95,4 +95,3 @@ channel = "stable-25_05"
 [userenv]
 
 [userenv.shared]
-SUPABASE_DATABASE_URL = "https://ikepkjrguhurcyplsgoy.supabase.co"
