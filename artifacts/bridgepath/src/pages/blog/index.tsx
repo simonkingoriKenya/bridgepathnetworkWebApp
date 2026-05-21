@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, Tag } from "lucide-react";
 import blogHero1 from "@assets/unnamed_1776009115714.jpg";
@@ -252,6 +253,12 @@ The barriers to building a global career from Africa have never been lower. The 
 export default function BlogIndex() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <PageSEO
+        title="HR & Recruitment Insights | Africa"
+        description="Expert articles on African workforce management, hiring trends, Employment of Record, payroll compliance, and HR best practices across Ghana, Kenya, and Pan-Africa."
+        path="/blog"
+        breadcrumbs={[{ name: "Insights", path: "/blog" }]}
+      />
       <Navbar />
 
       <section className="relative h-[55vh] min-h-[420px] max-h-[640px] overflow-hidden flex items-end">

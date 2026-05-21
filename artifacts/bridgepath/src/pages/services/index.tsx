@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import {
   Users, FileText, Briefcase, Globe, Award, BarChart3,
@@ -108,6 +109,12 @@ const cardVariants = {
 export default function ServicesPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <PageSEO
+        title="HR Services in Africa | EOR, Payroll, Recruitment & Consulting"
+        description="Comprehensive African HR services: Employment of Record, payroll & tax, talent recruitment, HR consultancy, psychometric assessments, and staff outsourcing across Ghana and Kenya."
+        path="/services"
+        breadcrumbs={[{ name: "HR Services", path: "/services" }]}
+      />
       <Navbar />
 
       <section className="relative h-[55vh] min-h-[420px] max-h-[660px] overflow-hidden flex items-end">

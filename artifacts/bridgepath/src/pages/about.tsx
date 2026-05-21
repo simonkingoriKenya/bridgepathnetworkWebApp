@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Handshake, ArrowRight, GraduationCap, Star } from "lucide-react";
 import founderFallback from "@assets/unnamed_(7)_1776009115711.jpg";
@@ -68,6 +69,12 @@ const certificates = [
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <PageSEO
+        title="About Bridgepath Africa | 20+ Years of African HR Expertise"
+        description="Learn about Bridgepath Africa's mission, founding team, and 20+ years of HR experience building African workforce solutions across Ghana, Kenya, and beyond."
+        path="/about"
+        breadcrumbs={[{ name: "About Us", path: "/about" }]}
+      />
       <Navbar />
 
       {/* Hero */}

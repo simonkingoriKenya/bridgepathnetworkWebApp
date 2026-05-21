@@ -52,7 +52,10 @@ export function Navbar() {
   return (
     <header className="w-full">
       {/* Main nav */}
-      <nav className={`sticky top-0 z-50 w-full transition-all duration-400 ${
+      <nav
+        role="navigation"
+        aria-label="Main navigation"
+        className={`sticky top-0 z-50 w-full transition-all duration-400 ${
         scrolled
           ? "bg-white shadow-md border-b border-orange-50"
           : "bg-transparent border-b border-white/10 backdrop-blur-sm"

@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { useAuth } from "@/lib/auth";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -153,6 +154,12 @@ export default function JobsList() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PageSEO
+        title="Find Jobs in Africa | Ghana & Kenya Job Listings"
+        description="Browse vetted job opportunities across Ghana, Kenya, and beyond. Apply to roles in tech, finance, HR, operations and more with Bridgepath Africa."
+        path="/jobs"
+        breadcrumbs={[{ name: "Find Jobs", path: "/jobs" }]}
+      />
       <Navbar />
 
       {/* ── HERO SEARCH BAR ── */}

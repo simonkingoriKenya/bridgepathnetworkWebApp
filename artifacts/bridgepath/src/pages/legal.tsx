@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { Link } from "wouter";
 
 const GREEN = "#8CC63F";
@@ -82,6 +83,12 @@ export default function LegalPage({ type }: { type: keyof typeof content }) {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <PageSEO
+        title={`${page.title} | Bridgepath Africa`}
+        description={`Bridgepath Africa ${page.title.toLowerCase()} — our commitment to protecting your data and ensuring fair, transparent use of our platform.`}
+        path="/legal"
+        noIndex={true}
+      />
       <Navbar />
       <main className="flex-1">
         <section className="py-20" style={{ background: `linear-gradient(135deg, ${DARK} 0%, #243154 100%)` }}>

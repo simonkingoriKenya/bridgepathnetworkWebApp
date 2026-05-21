@@ -99,25 +99,29 @@ export function Footer() {
         {/* Col 2 – Services */}
         <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Our Services</h4>
-          <ul className="space-y-3">
-            {serviceLinks.map((s) => (
-              <li key={s.href}>
-                <Link href={s.href} className="text-xs text-gray-500 hover:text-white transition-colors">{s.label}</Link>
-              </li>
-            ))}
-          </ul>
+          <nav aria-label="HR services">
+            <ul className="space-y-3">
+              {serviceLinks.map((s) => (
+                <li key={s.href}>
+                  <Link href={s.href} className="text-xs text-gray-500 hover:text-white transition-colors">{s.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         {/* Col 3 – Quick Links */}
         <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Quick Links</h4>
-          <ul className="space-y-3">
-            {quickLinks.map((l) => (
-              <li key={l.label}>
-                <Link href={l.href} className="text-xs text-gray-500 hover:text-white transition-colors">{l.label}</Link>
-              </li>
-            ))}
-          </ul>
+          <nav aria-label="Site links">
+            <ul className="space-y-3">
+              {quickLinks.map((l) => (
+                <li key={l.label}>
+                  <Link href={l.href} className="text-xs text-gray-500 hover:text-white transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         {/* Col 4 – Pan-African Reach */}

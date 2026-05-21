@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { Link } from "wouter";
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
@@ -160,6 +161,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <PageSEO
+        title="Africa's Premier HR & Talent Platform | Ghana & Kenya"
+        description="Connect with top African talent or find your next opportunity. Bridgepath Africa offers premium recruitment, EOR, payroll, and HR consulting across Ghana and Kenya."
+        path="/"
+      />
       <Navbar />
 
       {/* ── HERO ── */}

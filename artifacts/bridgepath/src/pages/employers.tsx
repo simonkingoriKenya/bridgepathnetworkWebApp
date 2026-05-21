@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { Briefcase, Search, Users, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
@@ -18,6 +19,12 @@ export default function EmployersPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <PageSEO
+        title="Hire African Talent | Post Jobs & Find Candidates"
+        description="Access pre-screened African professionals. Post jobs, browse verified candidates, and get EOR and payroll support for hiring in Ghana and Kenya."
+        path="/employers"
+        breadcrumbs={[{ name: "For Employers", path: "/employers" }]}
+      />
       <Navbar />
       <main className="flex-1">
         {/* Hero */}

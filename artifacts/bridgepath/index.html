@@ -30,6 +30,60 @@
     <meta name="twitter:image" content="https://bridgepathafricahr.com/opengraph.jpg" />
     <meta name="twitter:image:alt" content="Bridgepath Africa — Hire Africa. Build the Future." />
 
+    <!-- Structured Data — Organization + WebSite schema (triggers Google Sitelinks) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://bridgepathafricahr.com/#organization",
+          "name": "Bridgepath Africa",
+          "url": "https://bridgepathafricahr.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://bridgepathafricahr.com/logo-new.png",
+            "width": 200,
+            "height": 200
+          },
+          "description": "Africa's premier HR and talent platform connecting professionals across Ghana and Kenya with global employers.",
+          "foundingDate": "2024",
+          "areaServed": [
+            { "@type": "Country", "name": "Ghana" },
+            { "@type": "Country", "name": "Kenya" }
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "pkumanyc@gmail.com",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/bridgepath-africa",
+            "https://twitter.com/bridgepathafr",
+            "https://facebook.com/bridgepathafr"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://bridgepathafricahr.com/#website",
+          "name": "Bridgepath Africa",
+          "url": "https://bridgepathafricahr.com",
+          "publisher": { "@id": "https://bridgepathafricahr.com/#organization" },
+          "description": "Africa's premier HR and talent platform — job listings, EOR, payroll, recruitment, and HR consulting for Ghana and Kenya.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://bridgepathafricahr.com/jobs?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo-new.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

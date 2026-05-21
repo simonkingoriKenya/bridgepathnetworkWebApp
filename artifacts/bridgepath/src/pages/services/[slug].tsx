@@ -1,6 +1,7 @@
 import { useRoute, Link } from "wouter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, Users, FileText, Briefcase, Globe, Award, BarChart3, UserCheck, Calculator, ArrowRight, Phone, Mail, TrendingUp, Shield, Clock, Star } from "lucide-react";
 import heroEor from "@assets/unnamed_(1)_1776009115714.jpg";
@@ -395,6 +396,31 @@ export default function ServiceDetail() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white premium-grid-bg">
+      <PageSEO
+        title={`${service.label} in Africa | ${service.tagline}`}
+        description={service.description.slice(0, 158).trimEnd() + (service.description.length > 158 ? "…" : "")}
+        path={`/services/${slug}`}
+        breadcrumbs={[
+          { name: "HR Services", path: "/services" },
+          { name: service.label, path: `/services/${slug}` },
+        ]}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": service.label,
+          "description": service.description,
+          "provider": {
+            "@type": "Organization",
+            "name": "Bridgepath Africa",
+            "url": "https://bridgepathafricahr.com",
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "Ghana" },
+            { "@type": "Country", "name": "Kenya" },
+          ],
+          "url": `https://bridgepathafricahr.com/services/${slug}`,
+        }}
+      />
       <Navbar />
 
       <section className="relative min-h-[420px] flex items-end overflow-hidden premium-grid-bg-dark">
