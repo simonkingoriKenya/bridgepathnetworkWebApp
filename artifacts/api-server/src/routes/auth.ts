@@ -38,6 +38,82 @@ function isPasswordStrong(pw: string): { ok: boolean; message?: string } {
   return { ok: true };
 }
 
+async function sendPasswordResetEmail(email: string, name: string, token: string) {
+  const resend = getResend();
+  const link = `${getAppBaseUrl()}/auth/reset-password?token=${token}`;
+  if (!resend) {
+    console.log(`[DEV] Password reset link for ${email}: ${link}`);
+    return;
+  }
+  await resend.emails.send({
+    from: FROM_ADDRESS,
+    to: [email],
+    subject: "Reset your Bridgepath Africa password",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
+        <div style="background: #1C1917; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
+          <h1 style="color: #ffffff; font-size: 20px; margin: 0;">Bridgepath Africa</h1>
+          <p style="color: #9CA3AF; font-size: 13px; margin: 4px 0 0;">Shaping People. Strengthening Institutions.</p>
+        </div>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6;">Hi ${name},</p>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6;">
+          We received a request to reset the password for your Bridgepath Africa account. Click the button below — this link expires in <strong>1 hour</strong>.
+        </p>
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${link}"
+            style="display: inline-block; background: #D94F20; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 15px;">
+            Reset Password
+          </a>
+        </div>
+        <p style="font-size: 13px; color: #9CA3AF; line-height: 1.6;">
+          If you didn't request a password reset, you can safely ignore this email — your password will remain unchanged.
+        </p>
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
+        <p style="font-size: 12px; color: #9CA3AF; text-align: center;">
+          Bridgepath Africa · Ghana &amp; Kenya · <a href="https://bridgepathafricahr.com" style="color: #D94F20;">bridgepathafricahr.com</a>
+        </p>
+      </div>`,
+  });
+}
+
+async function sendMagicLinkEmail(email: string, name: string, token: string) {
+  const resend = getResend();
+  const link = `${getAppBaseUrl()}/auth/magic-link/verify?token=${token}`;
+  if (!resend) {
+    console.log(`[DEV] Magic sign-in link for ${email}: ${link}`);
+    return;
+  }
+  await resend.emails.send({
+    from: FROM_ADDRESS,
+    to: [email],
+    subject: "Your Bridgepath Africa sign-in link",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
+        <div style="background: #1C1917; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
+          <h1 style="color: #ffffff; font-size: 20px; margin: 0;">Bridgepath Africa</h1>
+          <p style="color: #9CA3AF; font-size: 13px; margin: 4px 0 0;">Shaping People. Strengthening Institutions.</p>
+        </div>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6;">Hi ${name},</p>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6;">
+          Click the button below to sign in instantly — no password needed. This link expires in <strong>30 minutes</strong> and can only be used once.
+        </p>
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${link}"
+            style="display: inline-block; background: #D94F20; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 15px;">
+            Sign in to Bridgepath Africa
+          </a>
+        </div>
+        <p style="font-size: 13px; color: #9CA3AF; line-height: 1.6;">
+          If you did not request this link, you can safely ignore this email.
+        </p>
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
+        <p style="font-size: 12px; color: #9CA3AF; text-align: center;">
+          Bridgepath Africa · Ghana &amp; Kenya · <a href="https://bridgepathafricahr.com" style="color: #D94F20;">bridgepathafricahr.com</a>
+        </p>
+      </div>`,
+  });
+}
+
 async function sendVerificationEmail(email: string, name: string, token: string) {
   const resend = getResend();
   if (!resend) {
@@ -287,7 +363,143 @@ router.post("/auth/resend-verification", authLimiter, async (req: AuthenticatedR
   }
 });
 
-// ── MAGIC AUTH ────────────────────────────────────────────────────────
+// ── FORGOT PASSWORD ───────────────────────────────────────────────────
+router.post("/auth/forgot-password", authLimiter, async (req: AuthenticatedRequest, res) => {
+  try {
+    const { email } = req.body as { email: string };
+    if (!email) { res.status(400).json({ error: "Bad Request", message: "Email is required" }); return; }
+
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
+    if (!user) {
+      res.json({ message: "If that email is registered, a reset link has been sent." });
+      return;
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetExpires = new Date(Date.now() + 60 * 60 * 1000);
+
+    await db.update(usersTable).set({
+      passwordResetToken: resetToken,
+      passwordResetTokenExpiresAt: resetExpires,
+      updatedAt: new Date(),
+    }).where(eq(usersTable.id, user.id));
+
+    try { await sendPasswordResetEmail(user.email, user.name, resetToken); } catch {}
+    const devHint = process.env.NODE_ENV !== "production"
+      ? { devLink: `${getAppBaseUrl()}/auth/reset-password?token=${resetToken}` }
+      : {};
+    res.json({ message: "If that email is registered, a reset link has been sent.", ...devHint });
+  } catch (err) {
+    req.log.error({ err }, "Error in forgot-password");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ── RESET PASSWORD ────────────────────────────────────────────────────
+router.post("/auth/reset-password", authLimiter, async (req: AuthenticatedRequest, res) => {
+  try {
+    const { token, password } = req.body as { token: string; password: string };
+    if (!token || !password) {
+      res.status(400).json({ error: "Bad Request", message: "Token and new password are required" });
+      return;
+    }
+    const pwCheck = isPasswordStrong(password);
+    if (!pwCheck.ok) { res.status(400).json({ error: "WeakPassword", message: pwCheck.message }); return; }
+
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.passwordResetToken, token)).limit(1);
+    if (!user) {
+      res.status(400).json({ error: "InvalidToken", message: "This reset link is invalid or has already been used." });
+      return;
+    }
+    if (user.passwordResetTokenExpiresAt && user.passwordResetTokenExpiresAt < new Date()) {
+      res.status(400).json({ error: "TokenExpired", message: "This reset link has expired. Please request a new one." });
+      return;
+    }
+
+    await db.update(usersTable).set({
+      passwordHash: hashPassword(password),
+      emailVerified: true,
+      passwordResetToken: null,
+      passwordResetTokenExpiresAt: null,
+      updatedAt: new Date(),
+    }).where(eq(usersTable.id, user.id));
+
+    const [updated] = await db.select().from(usersTable).where(eq(usersTable.id, user.id)).limit(1);
+    const profile = await ensureProfile(updated.id);
+    const authToken = generateToken(updated.id);
+    res.json({ user: serializeUser(updated, profile), token: authToken });
+  } catch (err) {
+    req.log.error({ err }, "Error in reset-password");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ── REQUEST MAGIC LINK ────────────────────────────────────────────────
+router.post("/auth/magic-link", authLimiter, async (req: AuthenticatedRequest, res) => {
+  try {
+    const { email } = req.body as { email: string };
+    if (!email) { res.status(400).json({ error: "Bad Request", message: "Email is required" }); return; }
+
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
+    if (!user) {
+      res.status(404).json({ error: "NotFound", message: "No account found with that email. Please sign up first." });
+      return;
+    }
+
+    const mlToken = crypto.randomBytes(32).toString("hex");
+    const mlExpires = new Date(Date.now() + 30 * 60 * 1000);
+
+    await db.update(usersTable).set({
+      magicLinkToken: mlToken,
+      magicLinkTokenExpiresAt: mlExpires,
+      updatedAt: new Date(),
+    }).where(eq(usersTable.id, user.id));
+
+    try { await sendMagicLinkEmail(user.email, user.name, mlToken); } catch {}
+    const devHint = process.env.NODE_ENV !== "production"
+      ? { devLink: `${getAppBaseUrl()}/auth/magic-link/verify?token=${mlToken}` }
+      : {};
+    res.json({ message: "Magic link sent! Check your inbox.", ...devHint });
+  } catch (err) {
+    req.log.error({ err }, "Error requesting magic link");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ── VERIFY MAGIC LINK ─────────────────────────────────────────────────
+router.get("/auth/magic-link/verify", async (req: AuthenticatedRequest, res) => {
+  try {
+    const { token } = req.query as { token?: string };
+    if (!token) { res.status(400).json({ error: "Bad Request", message: "Token is required" }); return; }
+
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.magicLinkToken, token)).limit(1);
+    if (!user) {
+      res.status(400).json({ error: "InvalidToken", message: "This magic link is invalid or has already been used." });
+      return;
+    }
+    if (user.magicLinkTokenExpiresAt && user.magicLinkTokenExpiresAt < new Date()) {
+      res.status(400).json({ error: "TokenExpired", message: "This magic link has expired. Please request a new one." });
+      return;
+    }
+
+    await db.update(usersTable).set({
+      magicLinkToken: null,
+      magicLinkTokenExpiresAt: null,
+      emailVerified: true,
+      updatedAt: new Date(),
+    }).where(eq(usersTable.id, user.id));
+
+    const [updated] = await db.select().from(usersTable).where(eq(usersTable.id, user.id)).limit(1);
+    const profile = await ensureProfile(updated.id);
+    const authToken = generateToken(updated.id);
+    res.json({ user: serializeUser(updated, profile), token: authToken });
+  } catch (err) {
+    req.log.error({ err }, "Error verifying magic link");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ── MAGIC AUTH (legacy instant-login, kept for internal use) ──────────
 router.post("/auth/magic", authLimiter, async (req: AuthenticatedRequest, res) => {
   try {
     const { email, name, role } = req.body as { email: string; name?: string; role?: string };

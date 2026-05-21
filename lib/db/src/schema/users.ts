@@ -13,6 +13,10 @@ export const usersTable = pgTable("users", {
   verificationTokenExpiresAt: timestamp("verification_token_expires_at"),
   oauthProvider: text("oauth_provider"),
   oauthId: text("oauth_id"),
+  passwordResetToken: text("password_reset_token"),
+  passwordResetTokenExpiresAt: timestamp("password_reset_token_expires_at"),
+  magicLinkToken: text("magic_link_token"),
+  magicLinkTokenExpiresAt: timestamp("magic_link_token_expires_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

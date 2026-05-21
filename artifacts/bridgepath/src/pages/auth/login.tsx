@@ -3,17 +3,19 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles, Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
+import { Loader2, ArrowRight, Lock, Mail, Eye, EyeOff, Sparkles, Linkedin, Zap, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { DEMO_JOBSEEKER, DEMO_EMPLOYER } from "@/lib/demoAuth";
 
 const CORAL = "#D94F20";
 const CHARCOAL = "#1C1917";
 
 export default function Login() {
-  const { signInWithPassword } = useAuth();
+  const { signInWithPassword, login } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
+  // Password mode state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +23,14 @@ export default function Login() {
   const [demoLoading, setDemoLoading] = useState<"jobseeker" | "employer" | null>(null);
   const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
   const [resendLoading, setResendLoading] = useState(false);
+
+  // Magic link state
+  const [magicMode, setMagicMode] = useState(false);
+  const [magicEmail, setMagicEmail] = useState("");
+  const [magicLoading, setMagicLoading] = useState(false);
+  const [magicSent, setMagicSent] = useState(false);
+  const [magicDevLink, setMagicDevLink] = useState<string | null>(null);
+  const [magicError, setMagicError] = useState("");
 
   useEffect(() => {
     const error = new URLSearchParams(window.location.search).get("error");
@@ -62,6 +72,42 @@ export default function Login() {
     await fetch("/api/auth/resend-verification", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: unverifiedEmail }) });
     setResendLoading(false);
     toast({ title: "Verification email sent", description: `Check your inbox at ${unverifiedEmail}` });
+  };
+
+  const handleMagicLink = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMagicError("");
+    if (!magicEmail.trim() || !magicEmail.includes("@")) {
+      setMagicError("Please enter a valid email address.");
+      return;
+    }
+    setMagicLoading(true);
+    try {
+      const res = await fetch("/api/auth/magic-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: magicEmail.trim().toLowerCase() }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setMagicError(data.message || "Could not send magic link. Please try signing up first.");
+        return;
+      }
+      setMagicSent(true);
+      if (data.devLink) setMagicDevLink(data.devLink);
+    } catch {
+      setMagicError("Network error. Please try again.");
+    } finally {
+      setMagicLoading(false);
+    }
+  };
+
+  const switchMode = (toMagic: boolean) => {
+    setMagicMode(toMagic);
+    setMagicSent(false);
+    setMagicError("");
+    setMagicDevLink(null);
+    setUnverifiedEmail(null);
   };
 
   return (
@@ -160,49 +206,127 @@ export default function Login() {
             </a>
           </div>
 
-          <div className="relative mb-6">
+          {/* Divider + mode tabs */}
+          <div className="relative mb-5">
             <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div>
             <div className="relative flex justify-center"><span className="text-xs text-gray-400 bg-white px-3">or with email</span></div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="text-sm font-semibold text-gray-700 block mb-1.5">Email address</label>
-              <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input placeholder="name@example.com" type="email" value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 text-base pl-11 rounded-xl border-gray-200 focus:ring-2"
-                  autoComplete="email" autoFocus />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="text-sm font-semibold text-gray-700">Password</label>
-                <Link href="/auth/forgot-password" className="text-xs font-semibold hover:underline" style={{ color: CORAL }}>
-                  Forgot password?
-                </Link>
-              </div>
-              <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input placeholder="Your password"
-                  type={showPassword ? "text" : "password"} value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 text-base pl-11 pr-11 rounded-xl border-gray-200"
-                  autoComplete="current-password" />
-                <button type="button" onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" tabIndex={-1}>
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              </div>
-            </div>
+          <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-5">
+            <button type="button" onClick={() => switchMode(false)}
+              className="flex-1 h-9 rounded-lg text-sm font-semibold transition-all"
+              style={!magicMode
+                ? { backgroundColor: "white", color: CHARCOAL, boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }
+                : { color: "#9CA3AF" }}>
+              Password
+            </button>
+            <button type="button" onClick={() => switchMode(true)}
+              className="flex-1 h-9 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-1.5"
+              style={magicMode
+                ? { backgroundColor: "white", color: CHARCOAL, boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }
+                : { color: "#9CA3AF" }}>
+              <Zap className="h-3.5 w-3.5" /> Magic link
+            </button>
+          </div>
 
-            <motion.button type="submit" disabled={isLoading} whileTap={{ scale: 0.98 }}
-              className="w-full h-12 font-bold text-white rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60 text-base shadow-md mt-2"
-              style={{ backgroundColor: CORAL }}>
-              {isLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Signing in…</> : <>Sign in <ArrowRight className="h-4 w-4" /></>}
-            </motion.button>
-          </form>
+          <AnimatePresence mode="wait">
+            {!magicMode ? (
+              <motion.div key="password" initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.2 }}>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 block mb-1.5">Email address</label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input placeholder="name@example.com" type="email" value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="h-12 text-base pl-11 rounded-xl border-gray-200 focus:ring-2"
+                        autoComplete="email" autoFocus />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-sm font-semibold text-gray-700">Password</label>
+                      <Link href="/auth/forgot-password" className="text-xs font-semibold hover:underline" style={{ color: CORAL }}>
+                        Forgot password?
+                      </Link>
+                    </div>
+                    <div className="relative">
+                      <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input placeholder="Your password"
+                        type={showPassword ? "text" : "password"} value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="h-12 text-base pl-11 pr-11 rounded-xl border-gray-200"
+                        autoComplete="current-password" />
+                      <button type="button" onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" tabIndex={-1}>
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+                  <motion.button type="submit" disabled={isLoading} whileTap={{ scale: 0.98 }}
+                    className="w-full h-12 font-bold text-white rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60 text-base shadow-md mt-2"
+                    style={{ backgroundColor: CORAL }}>
+                    {isLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Signing in…</> : <>Sign in <ArrowRight className="h-4 w-4" /></>}
+                  </motion.button>
+                </form>
+              </motion.div>
+            ) : (
+              <motion.div key="magic" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 8 }} transition={{ duration: 0.2 }}>
+                {!magicSent ? (
+                  <form onSubmit={handleMagicLink} className="space-y-4">
+                    <p className="text-sm text-gray-500 leading-relaxed">
+                      Enter your email and we'll send you a one-click sign-in link — no password needed.
+                    </p>
+                    <div>
+                      <label className="text-sm font-semibold text-gray-700 block mb-1.5">Email address</label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                        <Input placeholder="name@example.com" type="email" value={magicEmail}
+                          onChange={(e) => setMagicEmail(e.target.value)}
+                          className="h-12 text-base pl-11 rounded-xl border-gray-200"
+                          autoComplete="email" autoFocus />
+                      </div>
+                      {magicError && <p className="text-xs text-destructive mt-1.5">{magicError}</p>}
+                    </div>
+                    <motion.button type="submit" disabled={magicLoading} whileTap={{ scale: 0.98 }}
+                      className="w-full h-12 font-bold text-white rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60 text-base shadow-md"
+                      style={{ backgroundColor: CORAL }}>
+                      {magicLoading
+                        ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>
+                        : <><Zap className="h-4 w-4" /> Send magic link</>}
+                    </motion.button>
+                    <p className="text-xs text-center text-gray-400">
+                      Need an account?{" "}
+                      <Link href="/auth/signup" className="font-semibold hover:underline" style={{ color: CORAL }}>Sign up</Link>
+                    </p>
+                  </form>
+                ) : (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                    <div className="rounded-xl border p-5 text-center" style={{ borderColor: "#1F7A7830", backgroundColor: "#1F7A7808" }}>
+                      <CheckCircle2 className="h-8 w-8 mx-auto mb-3" style={{ color: "#1F7A78" }} />
+                      <p className="font-bold text-sm mb-1" style={{ color: CHARCOAL }}>Check your inbox!</p>
+                      <p className="text-xs text-gray-500 leading-relaxed">
+                        A sign-in link was sent to <strong>{magicEmail}</strong>. Click it to sign in instantly. It expires in 30 minutes.
+                      </p>
+                    </div>
+                    {magicDevLink && (
+                      <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50 p-4">
+                        <p className="text-xs font-bold text-amber-700 mb-1.5">🧪 Dev mode — no email sent</p>
+                        <a href={magicDevLink}
+                          className="text-xs font-semibold break-all underline text-amber-800 hover:text-amber-900">
+                          {magicDevLink}
+                        </a>
+                      </div>
+                    )}
+                    <button onClick={() => { setMagicSent(false); setMagicDevLink(null); setMagicEmail(""); }}
+                      className="w-full text-sm font-semibold hover:underline" style={{ color: CORAL }}>
+                      Try a different email
+                    </button>
+                  </motion.div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <p className="text-center text-sm text-gray-500 mt-5">
             New to Bridgepath?{" "}
