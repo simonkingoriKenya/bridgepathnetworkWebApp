@@ -233,7 +233,7 @@ export default function Home() {
             <motion.h1
               className="font-extrabold leading-[1.0] tracking-[-0.03em] mb-5"
               style={{
-                fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
+                fontSize: "clamp(2rem, 6.5vw, 5.2rem)",
                 fontFamily: "var(--app-font-display)",
                 color: "#fff",
                 textShadow: "0 2px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.35)",
@@ -358,8 +358,8 @@ export default function Home() {
             <motion.div
               key={`stat-${i}`}
               variants={cardVariant}
-              className="py-7 md:py-9 text-center relative"
-              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}
+              className={`py-7 md:py-9 text-center relative ${i < platformStats.length - 1 ? "md:border-r" : ""}`}
+              style={{ borderColor: "rgba(255,255,255,0.07)" }}
             >
               <div className="text-2xl md:text-3xl font-extrabold leading-none tracking-tight text-white" style={{ fontFamily: "var(--app-font-display)" }}>
                 {s.value}

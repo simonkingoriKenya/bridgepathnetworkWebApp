@@ -78,7 +78,7 @@ export default function About() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative h-[70vh] min-h-[520px] max-h-[780px] overflow-hidden flex items-end">
+      <section className="relative h-[55vh] sm:h-[70vh] min-h-[340px] sm:min-h-[520px] max-h-[780px] overflow-hidden flex items-end">
         <img
           src="/photos/hr-leader.webp"
           alt="African HR professional — Bridgepath Africa"
@@ -91,11 +91,11 @@ export default function About() {
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
               <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.85)", color: CORAL, border: `1px solid rgba(200,70,26,0.3)`, backdropFilter: "blur(8px)" }}>About Bridgepath Africa</span>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}>
                 Shaping People.<br />
                 <span style={{ color: "#F0A010", textShadow: "0 2px 16px rgba(0,0,0,0.55)" }}>Strengthening Institutions.</span>
               </h1>
-              <p className="text-white text-xl max-w-2xl leading-relaxed" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)" }}>
+              <p className="text-white text-base md:text-xl max-w-2xl leading-relaxed" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)" }}>
                 Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
               </p>
             </motion.div>

@@ -105,6 +105,7 @@ export default function JobsList() {
   const [salaryIdx, setSalaryIdx] = useState(0);
   const [sortBy, setSortBy] = useState<"recent" | "salary">("recent");
   const [applyJob, setApplyJob] = useState<{ id: number; title: string } | null>(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   const { isAuthenticated } = useAuth();
   const debouncedSearch = useDebounce(search, 400);
@@ -238,7 +239,7 @@ export default function JobsList() {
         <div className="flex flex-col lg:flex-row gap-6">
 
           {/* ── SIDEBAR FILTERS ── */}
-          <aside className="lg:w-64 shrink-0 space-y-4">
+          <aside className={`lg:w-64 shrink-0 space-y-4 ${showFilters ? "block" : "hidden lg:block"}`}>
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-sm flex items-center gap-2" style={{ color: INK }}>
@@ -326,6 +327,15 @@ export default function JobsList() {
             {/* Results header */}
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3 flex-wrap">
+                <button
+                  className="flex lg:hidden items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl border transition-colors"
+                  style={{ borderColor: TERRACOTTA + "50", color: TERRACOTTA, backgroundColor: TERRACOTTA + "10" }}
+                  onClick={() => setShowFilters(f => !f)}
+                >
+                  <SlidersHorizontal className="h-3.5 w-3.5" />
+                  {showFilters ? "Hide Filters" : "Filters"}
+                  {activeFilters.length > 0 && <span className="h-4 w-4 flex items-center justify-center rounded-full text-white text-[10px] font-bold" style={{ backgroundColor: TERRACOTTA }}>{activeFilters.length}</span>}
+                </button>
                 <h2 className="text-sm font-semibold text-gray-700">
                   {isLoading ? "Loading…" : <><span className="font-bold text-lg" style={{ color: TERRACOTTA }}>{totalCount}</span> {totalCount === 1 ? "job" : "jobs"} found</>}
                 </h2>

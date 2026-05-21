@@ -49,10 +49,10 @@ export function Footer() {
     <footer style={{ backgroundColor: DARK }} className="text-gray-400">
 
       {/* TOP GRID */}
-      <div style={{ borderBottom: `1px solid ${BORDER}` }} className="grid grid-cols-1 md:grid-cols-4">
+      <div style={{ borderBottom: `1px solid ${BORDER}` }} className="grid grid-cols-2 md:grid-cols-4">
 
         {/* Col 1 – Brand */}
-        <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
+        <div className="p-6 md:p-10 flex flex-col gap-5 col-span-2 md:col-span-1 md:border-r" style={{ borderColor: BORDER }}>
           <Link href="/" className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: CORAL }}>
               <img src="/logo-new.png" alt="Bridgepath Africa" className="h-7 w-7 object-contain" />
@@ -97,7 +97,7 @@ export function Footer() {
         </div>
 
         {/* Col 2 – Services */}
-        <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
+        <div className="p-6 md:p-10 flex flex-col gap-5 md:border-r" style={{ borderColor: BORDER }}>
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Our Services</h4>
           <nav aria-label="HR services">
             <ul className="space-y-3">
@@ -111,7 +111,7 @@ export function Footer() {
         </div>
 
         {/* Col 3 – Quick Links */}
-        <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
+        <div className="p-6 md:p-10 flex flex-col gap-5 md:border-r" style={{ borderColor: BORDER }}>
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Quick Links</h4>
           <nav aria-label="Site links">
             <ul className="space-y-3">
@@ -125,7 +125,7 @@ export function Footer() {
         </div>
 
         {/* Col 4 – Pan-African Reach */}
-        <div className="p-8 md:p-10 flex flex-col gap-5">
+        <div className="p-6 md:p-10 flex flex-col gap-5 col-span-2 md:col-span-1">
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Pan-African Reach</h4>
           <p className="text-xs text-gray-500 leading-relaxed">
             We support hiring and HR operations across all major regions of Africa — with local expertise that makes the difference.
@@ -163,7 +163,7 @@ export function Footer() {
         </div>
 
         {/* Insights */}
-        <div className="p-8 md:p-10 flex flex-col gap-5" style={{ borderRight: `1px solid ${BORDER}` }}>
+        <div className="p-6 md:p-10 flex flex-col gap-5 md:border-r" style={{ borderColor: BORDER }}>
           <h4 className="text-white text-xs font-semibold uppercase tracking-widest">Insights</h4>
           <ul className="space-y-4">
             {[

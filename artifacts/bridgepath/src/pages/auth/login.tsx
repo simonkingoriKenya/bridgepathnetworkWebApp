@@ -347,7 +347,7 @@ export default function Login() {
             <p className="text-xs text-gray-500 mb-4 leading-relaxed">
               Explore the full platform instantly. Click a card to enter the demo experience.
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button type="button" onClick={() => handleDemoLogin("jobseeker")} disabled={!!demoLoading}
                 className="text-left rounded-xl p-3.5 bg-white border-2 border-transparent hover:shadow-md transition-all group disabled:opacity-60"
                 style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.08)" }}
