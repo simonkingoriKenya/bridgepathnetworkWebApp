@@ -65,20 +65,20 @@ export function Navbar() {
             : "bg-white shadow-md border-b border-orange-50"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 md:px-8 h-[72px] flex items-center justify-between">
 
           {/* ── Logo ── */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMobileOpen(false)}>
-            <div className="h-10 w-10 rounded-lg overflow-hidden shrink-0">
-              <img src="/logo-bridgepath.webp" alt="Bridgepath Africa" width="40" height="40" decoding="async" className="h-full w-full object-cover" />
+          <Link href="/" className="flex items-center gap-3 shrink-0" onClick={() => setMobileOpen(false)}>
+            <div className="h-12 w-12 rounded-lg overflow-hidden shrink-0">
+              <img src="/logo-bridgepath.webp" alt="Bridgepath Africa" width="48" height="48" decoding="async" className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col leading-none">
-              <div className="font-extrabold text-[17px] tracking-tight leading-none">
+              <div className="font-extrabold text-[20px] tracking-tight leading-none">
                 <span style={{ color: isOverlay ? "#FEF9F4" : CHARCOAL }}>BridgePath</span>
                 <span style={{ color: CORAL }}> Africa</span>
               </div>
               <span
-                className="text-[9px] font-medium tracking-[0.08em] uppercase mt-0.5"
+                className="text-[10px] font-medium tracking-[0.08em] uppercase mt-1"
                 style={{ color: isOverlay ? "rgba(254,249,244,0.55)" : "#A08060" }}
               >
                 Global Talent. African Opportunity.
