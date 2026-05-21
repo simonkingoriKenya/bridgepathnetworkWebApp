@@ -175,15 +175,15 @@ export default function Home() {
         <motion.div
           className="absolute inset-0"
           style={{ scale: heroImgScale, y: heroImgY }}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1.06 }}
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1.02 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <img
             src="/photos/hero-team-bright.webp"
             alt="Diverse African professional team collaborating in a bright office — Bridgepath Africa"
             className="w-full h-full object-cover"
-            style={{ objectPosition: "60% 35%" }}
+            style={{ objectPosition: "58% 62%" }}
             loading="eager"
             fetchPriority="high"
             decoding="async"
