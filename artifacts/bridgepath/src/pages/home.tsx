@@ -88,10 +88,8 @@ const africaStats = [
 
 const platformStats = [
   { value: "Ghana", label: "Launch Market" },
-  { value: "Kenya", label: "Launch Market" },
-  { value: "2026", label: "MVP Launch" },
-  { value: "Early", label: "Access Open" },
-  { value: "20+", label: "Yrs Experience" },
+  { value: "Kenya", label: "Opening Soon" },
+  { value: "20+", label: "Years Experience" },
 ];
 
 const jobSeekerSteps = [
@@ -190,160 +188,106 @@ export default function Home() {
           />
         </motion.div>
 
-        {/* ── KENTE STRIP (top) ── */}
-        <div className="absolute top-0 left-0 right-0 z-30 flex overflow-hidden" style={{ height: "5px" }}>
-          {["#C8461A","#F0A010","#1F7A78","#C8461A","#F0A010","#8B1A00","#C8461A","#F0A010","#1F7A78","#C8461A","#F0A010","#8B1A00","#C8461A","#F0A010","#1F7A78","#C8461A"].map((c,i) => (
-            <motion.div key={i} className="flex-1" style={{ backgroundColor: c }}
-              animate={{ opacity: [0.8,1,0.8] }}
-              transition={{ duration: 2.4, delay: i * 0.1, repeat: Infinity, ease: "easeInOut" }}
-            />
-          ))}
-        </div>
-
-
         {/* ── CONTENT ── */}
         <motion.div
-          className="relative z-20 flex flex-col justify-end lg:justify-center min-h-[100svh] px-6 sm:px-10 md:px-16 xl:px-24 pb-16 lg:pb-0"
+          className="relative z-20 flex flex-col justify-end lg:justify-center min-h-[100svh] px-6 sm:px-12 md:px-20 xl:px-28 pb-20 lg:pb-0"
           style={{ y: heroContentY, opacity: heroContentOpacity }}
         >
-          <div className="max-w-xl lg:max-w-[52%]">
+          <div className="max-w-2xl">
 
             {/* Status pill */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7 self-start"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 self-start"
               style={{
-                backgroundColor: "rgba(255,255,255,0.85)",
-                border: `1.5px solid rgba(200,70,26,0.4)`,
-                backdropFilter: "blur(8px)",
+                backgroundColor: "rgba(255,255,255,0.12)",
+                border: `1px solid rgba(255,255,255,0.28)`,
+                backdropFilter: "blur(10px)",
               }}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <motion.span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: CORAL }}
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.6, 1] }}
-                transition={{ duration: 1.4, repeat: Infinity }}
-              />
-              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: CORAL }}>
+              <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: CORAL }} />
+              <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/90">
                 Ghana Active · Kenya Opening Soon
               </span>
             </motion.div>
 
-            {/* Main headline — white with strong shadow for image clarity */}
+            {/* Main headline */}
             <motion.h1
-              className="font-extrabold leading-[1.0] tracking-[-0.03em] mb-5"
+              className="font-extrabold leading-[1.0] tracking-[-0.03em] mb-6"
               style={{
-                fontSize: "clamp(2rem, 6.5vw, 5.2rem)",
+                fontSize: "clamp(2.4rem, 6.5vw, 5.4rem)",
                 fontFamily: "var(--app-font-display)",
                 color: "#fff",
-                textShadow: "0 2px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.35)",
+                textShadow: "0 2px 20px rgba(0,0,0,0.4)",
               }}
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
             >
               Hire Africa.
               <br />
-              <span style={{
-                color: "#F0A010",
-                textShadow: "0 2px 14px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4)",
-              }}>Build the Future.</span>
+              <span style={{ color: "#F0A010" }}>Build the Future.</span>
             </motion.h1>
-
-            {/* Kente accent bars */}
-            <motion.div
-              className="flex gap-1.5 mb-7"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: 1, scaleX: 1 }}
-              style={{ transformOrigin: "left" }}
-              transition={{ duration: 0.6, delay: 0.42 }}
-            >
-              {[{c: CORAL, w: 64}, {c: "#F0A010", w: 32}, {c: TEAL, w: 20}, {c: "#F0A010", w: 12}].map((b, i) => (
-                <div key={i} className="h-[4px] rounded-full" style={{ width: b.w, backgroundColor: b.c }} />
-              ))}
-            </motion.div>
 
             {/* Subtext */}
             <motion.p
-              className="mb-9 leading-[1.8]"
+              className="mb-10 leading-[1.75]"
               style={{
-                fontSize: "clamp(0.98rem, 1.35vw, 1.1rem)",
-                maxWidth: "420px",
+                fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+                maxWidth: "460px",
                 fontFamily: "var(--app-font-sans)",
-                color: "rgba(255,255,255,0.95)",
-                textShadow: "0 1px 8px rgba(0,0,0,0.55)",
-                fontWeight: 500,
+                color: "rgba(255,255,255,0.88)",
+                fontWeight: 400,
               }}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.52 }}
+              transition={{ duration: 0.6, delay: 0.44 }}
             >
               Bridgepath Africa connects global companies and local businesses with{" "}
-              <span style={{ color: "#F0A010", fontWeight: 700 }}>exceptional African talent</span> — fast, trusted, human.
+              <span style={{ color: "#F0A010", fontWeight: 600 }}>exceptional African talent</span> — fast, trusted, human.
             </motion.p>
 
             {/* CTA buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 mb-10"
-              initial={{ opacity: 0, y: 14 }}
+              className="flex flex-col sm:flex-row gap-3"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.64 }}
+              transition={{ duration: 0.55, delay: 0.58 }}
             >
               <Link href="/auth/signup">
                 <motion.button
-                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white"
                   style={{
-                    background: `linear-gradient(135deg, ${CORAL} 0%, #E05A1A 100%)`,
+                    backgroundColor: CORAL,
                     fontFamily: "var(--app-font-display)",
-                    boxShadow: `0 8px 32px ${CORAL}70, 0 0 0 1px ${CORAL}50`,
+                    boxShadow: `0 4px 18px rgba(200,70,26,0.45)`,
                     fontSize: "0.95rem",
                   }}
                 >
-                  <UserCheck className="h-4 w-4" />
                   Find Opportunity
                   <ArrowUpRight className="h-4 w-4" />
                 </motion.button>
               </Link>
               <Link href="/employers">
                 <motion.button
-                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white"
                   style={{
-                    border: "1.5px solid rgba(255,255,255,0.7)",
-                    backgroundColor: "rgba(255,255,255,0.18)",
+                    border: "1.5px solid rgba(255,255,255,0.5)",
+                    backgroundColor: "rgba(255,255,255,0.10)",
                     fontFamily: "var(--app-font-display)",
                     fontSize: "0.95rem",
-                    backdropFilter: "blur(12px)",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+                    backdropFilter: "blur(8px)",
                   }}
                 >
-                  <Building2 className="h-4 w-4" />
                   Hire Talent
                 </motion.button>
               </Link>
-            </motion.div>
-
-            {/* Trust row */}
-            <motion.div
-              className="flex flex-wrap items-center gap-4 sm:gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.78 }}
-            >
-              {[
-                { label: "Ghana Active", dot: CORAL },
-                { label: "Kenya Coming Soon", dot: TEAL },
-                { label: "20+ Yrs Experience", dot: "#F0A010" },
-              ].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-2 text-[12px] font-semibold"
-                  style={{ color: "rgba(255,255,255,0.92)", textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
-                  <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: t.dot }} />
-                  {t.label}
-                </span>
-              ))}
             </motion.div>
 
           </div>
@@ -353,19 +297,18 @@ export default function Home() {
 
       {/* ── STATS BAR ── */}
       <div style={{ background: NAVY }}>
-        <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 mx-auto max-w-7xl" delay={0.1}>
+        <StaggerChildren className="grid grid-cols-3 mx-auto max-w-3xl" delay={0.1}>
           {platformStats.map((s, i) => (
             <motion.div
               key={`stat-${i}`}
               variants={cardVariant}
-              className={`py-7 md:py-9 text-center relative ${i < platformStats.length - 1 ? "md:border-r" : ""}`}
+              className={`py-8 md:py-10 text-center relative ${i < platformStats.length - 1 ? "border-r" : ""}`}
               style={{ borderColor: "rgba(255,255,255,0.07)" }}
             >
               <div className="text-2xl md:text-3xl font-extrabold leading-none tracking-tight text-white" style={{ fontFamily: "var(--app-font-display)" }}>
                 {s.value}
               </div>
-              <div className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mt-1.5">{s.label}</div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-6 rounded-full" style={{ backgroundColor: i % 2 === 0 ? CORAL : TEAL, opacity: 0.7 }} />
+              <div className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mt-2">{s.label}</div>
             </motion.div>
           ))}
         </StaggerChildren>
@@ -466,7 +409,6 @@ export default function Home() {
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          style={{ filter: "contrast(1.08) saturate(1.1)" }}
         />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
@@ -528,7 +470,7 @@ export default function Home() {
                 className="bg-white rounded-2xl p-6 sm:p-8 text-center border border-orange-100/60 transition-shadow"
               >
                 <motion.div
-                  whileHover={{ scale: 1.12, rotate: 3 }}
+                  whileHover={{ scale: 1.08 }}
                   transition={{ type: "spring", stiffness: 300 }}
                   className="h-14 w-14 rounded-2xl flex items-center justify-center mb-5 mx-auto"
                   style={{ backgroundColor: CORAL + "15", color: CORAL }}
@@ -577,20 +519,19 @@ export default function Home() {
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
-                    whileHover={{ scale: 1.04 }}
+                    whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.5 }}
-                    style={{ filter: "contrast(1.06) saturate(1.08)" }}
                   />
                 </div>
                 <motion.div
-                  initial={{ opacity: 0, x: -20, y: 10 }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.5 }}
-                  className="absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl font-bold text-sm text-white shadow-lg"
+                  className="absolute -bottom-4 -left-4 px-5 py-3 rounded-xl font-bold text-sm text-white shadow-md"
                   style={{ backgroundColor: CORAL }}
                 >
-                  🌍 Pan-African HR Expertise
+                  Pan-African HR Expertise
                 </motion.div>
               </div>
             </FadeUp>
@@ -654,7 +595,6 @@ export default function Home() {
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          style={{ filter: "contrast(1.08) saturate(1.1)" }}
         />
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
