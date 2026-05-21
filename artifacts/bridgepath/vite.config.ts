@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
+process.env.VITE_BUILD_TS = Date.now().toString();
+
 const isBuild = process.argv.includes("build");
 
 const rawPort = process.env.PORT;
@@ -78,6 +80,10 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/og-image": {
         target: "http://localhost:8080",
         changeOrigin: true,
       },
