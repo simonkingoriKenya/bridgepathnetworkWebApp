@@ -161,81 +161,146 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh", background: "#FEF9F4" }}>
+      <section ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
 
-        {/* Top accent bar */}
-        <div className="absolute top-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL}90 50%, ${TEAL} 100%)` }} />
+        {/* ── FULL BLEED DARK BACKGROUND ── */}
+        <div className="absolute inset-0" style={{
+          background: `linear-gradient(135deg, #1A0C04 0%, #2A1206 35%, #3D1A08 65%, #1A0C04 100%)`
+        }} />
+
+        {/* ── KENTE ANIMATED STRIPS (top) ── */}
+        <div className="absolute top-0 left-0 right-0 z-30 flex overflow-hidden" style={{ height: "6px" }}>
+          {["#C8461A","#F0A010","#1F7A78","#C8461A","#F0A010","#8B1A00","#C8461A","#F0A010","#1F7A78","#C8461A","#F0A010","#8B1A00","#C8461A","#F0A010","#1F7A78","#C8461A"].map((c,i) => (
+            <motion.div key={i} className="flex-1" style={{ backgroundColor: c }}
+              animate={{ opacity: [0.7,1,0.7] }}
+              transition={{ duration: 2.4, delay: i * 0.12, repeat: Infinity, ease: "easeInOut" }}
+            />
+          ))}
+        </div>
+
+        {/* ── KENTE ANIMATED STRIPS (bottom) ── */}
+        <div className="absolute bottom-0 left-0 right-0 z-30 flex overflow-hidden" style={{ height: "6px" }}>
+          {["#1F7A78","#F0A010","#C8461A","#1F7A78","#F0A010","#C8461A","#1F7A78","#F0A010","#C8461A","#1F7A78","#F0A010","#C8461A","#1F7A78","#F0A010","#C8461A","#1F7A78"].map((c,i) => (
+            <motion.div key={i} className="flex-1" style={{ backgroundColor: c }}
+              animate={{ opacity: [1,0.7,1] }}
+              transition={{ duration: 2.4, delay: i * 0.12, repeat: Infinity, ease: "easeInOut" }}
+            />
+          ))}
+        </div>
+
+        {/* ── FLOATING BACKGROUND ORB — terracotta glow ── */}
+        <motion.div className="absolute pointer-events-none"
+          style={{ width: 700, height: 700, borderRadius: "50%", background: `radial-gradient(circle, ${CORAL}28 0%, transparent 70%)`, top: "-15%", left: "-8%" }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* ── FLOATING ORB — marigold glow ── */}
+        <motion.div className="absolute pointer-events-none"
+          style={{ width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, #F0A01030 0%, transparent 70%)`, bottom: "5%", right: "42%" }}
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* ── GEOMETRIC KENTE SHAPES (decorative) ── */}
+        <motion.div className="absolute hidden lg:block pointer-events-none"
+          style={{ width: 180, height: 180, top: "12%", left: "40%", border: `3px solid ${CORAL}25`, borderRadius: "18px", transform: "rotate(20deg)" }}
+          animate={{ rotate: [20, 28, 20], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div className="absolute hidden lg:block pointer-events-none"
+          style={{ width: 80, height: 80, bottom: "22%", left: "44%", backgroundColor: `#F0A01015`, borderRadius: "12px", transform: "rotate(-12deg)" }}
+          animate={{ rotate: [-12, -20, -12], scale: [1, 1.15, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div className="absolute hidden lg:block pointer-events-none"
+          style={{ width: 50, height: 50, top: "60%", left: "46%", backgroundColor: `${TEAL}20`, borderRadius: "50%", border: `2px solid ${TEAL}40` }}
+          animate={{ y: [-8, 8, -8], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
 
         {/* ── LAYOUT: left content / right photo ── */}
-        <div className="flex flex-col lg:flex-row min-h-[100svh]">
+        <div className="relative z-10 flex flex-col lg:flex-row min-h-[100svh]">
 
-          {/* LEFT: content panel */}
-          <div className="relative z-20 flex flex-col justify-center px-6 sm:px-10 md:px-14 xl:px-20 py-24 lg:py-0 lg:w-[48%] xl:w-[44%] shrink-0">
+          {/* LEFT: dark content panel */}
+          <div className="relative z-20 flex flex-col justify-center px-6 sm:px-10 md:px-14 xl:px-20 py-28 lg:py-0 lg:w-[50%] xl:w-[46%] shrink-0">
 
-            {/* Status pill */}
+            {/* Status pill — marigold */}
             <motion.div
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-6 self-start border"
-              style={{ backgroundColor: `${CORAL}14`, borderColor: `${CORAL}40` }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 self-start"
+              style={{ backgroundColor: `#F0A01020`, border: `1.5px solid #F0A01060` }}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: CORAL }} />
-              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase" style={{ color: CORAL }}>
+              <motion.span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: "#F0A010" }}
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.6, 1] }}
+                transition={{ duration: 1.4, repeat: Infinity }}
+              />
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "#F0A010" }}>
                 Ghana Active · Kenya Opening Soon
               </span>
             </motion.div>
 
             {/* Main headline */}
             <motion.h1
-              className="font-extrabold leading-[1.02] tracking-[-0.03em] mb-5"
-              style={{ fontSize: "clamp(2.4rem, 5.2vw, 4.4rem)", fontFamily: "var(--app-font-display)", color: CHARCOAL }}
-              initial={{ opacity: 0, y: 28 }}
+              className="font-extrabold leading-[1.0] tracking-[-0.03em] mb-4"
+              style={{ fontSize: "clamp(2.8rem, 5.8vw, 5rem)", fontFamily: "var(--app-font-display)", color: "#FEF9F4" }}
+              initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
               Hire Africa.
               <br />
-              <span style={{ color: CORAL }}>Build the Future.</span>
+              <span style={{
+                background: `linear-gradient(90deg, ${CORAL} 0%, #E8602A 50%, #F0A010 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>Build the Future.</span>
             </motion.h1>
 
-            {/* Brand accent bar */}
+            {/* Kente colour bars */}
             <motion.div
-              className="flex gap-1 mb-5"
+              className="flex gap-1.5 mb-7"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
               style={{ transformOrigin: "left" }}
-              transition={{ duration: 0.55, delay: 0.32 }}
+              transition={{ duration: 0.6, delay: 0.34 }}
             >
-              {[CORAL, TEAL, CHARCOAL + "50"].map((c, i) => (
-                <div key={i} className="h-[3.5px] rounded-full" style={{ width: i === 0 ? 56 : i === 1 ? 24 : 14, backgroundColor: c }} />
+              {[{c: CORAL, w: 64}, {c: "#F0A010", w: 32}, {c: TEAL, w: 20}, {c: "#F0A010", w: 12}].map((b, i) => (
+                <div key={i} className="h-[4px] rounded-full" style={{ width: b.w, backgroundColor: b.c }} />
               ))}
             </motion.div>
 
             {/* Subtext */}
             <motion.p
-              className="mb-8 leading-[1.7]"
-              style={{ fontSize: "clamp(0.95rem, 1.35vw, 1.08rem)", maxWidth: "440px", fontFamily: "var(--app-font-sans)", color: "#5A4A3A" }}
-              initial={{ opacity: 0, y: 14 }}
+              className="mb-9 leading-[1.75]"
+              style={{ fontSize: "clamp(0.98rem, 1.4vw, 1.12rem)", maxWidth: "440px", fontFamily: "var(--app-font-sans)", color: "rgba(254,249,244,0.72)" }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.42 }}
+              transition={{ duration: 0.6, delay: 0.44 }}
             >
-              Bridgepath Africa connects global companies and local businesses with exceptional talent across Africa.
+              Bridgepath Africa connects global companies and local businesses with <span style={{ color: "#F0A010", fontWeight: 600 }}>exceptional African talent</span> — fast, trusted, human.
             </motion.p>
 
             {/* CTA buttons */}
             <motion.div
               className="flex flex-col sm:flex-row gap-3 mb-10"
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.52 }}
+              transition={{ duration: 0.55, delay: 0.56 }}
             >
               <Link href="/auth">
                 <motion.button
-                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-4 rounded-2xl font-bold text-sm text-white shadow-xl"
-                  style={{ backgroundColor: CORAL, fontFamily: "var(--app-font-display)", boxShadow: `0 6px 28px ${CORAL}50` }}
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-sm text-white"
+                  style={{
+                    background: `linear-gradient(135deg, ${CORAL} 0%, #E05A1A 100%)`,
+                    fontFamily: "var(--app-font-display)",
+                    boxShadow: `0 8px 32px ${CORAL}55, 0 0 0 1px ${CORAL}40`,
+                    fontSize: "0.95rem"
+                  }}
                 >
                   <UserCheck className="h-4 w-4" />
                   Find Opportunity
@@ -244,10 +309,17 @@ export default function Home() {
               </Link>
               <Link href="/employers">
                 <motion.button
-                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-4 rounded-2xl font-bold text-sm border-2"
-                  style={{ borderColor: CHARCOAL + "30", color: CHARCOAL, backgroundColor: "transparent", fontFamily: "var(--app-font-display)" }}
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-sm"
+                  style={{
+                    border: "1.5px solid rgba(254,249,244,0.28)",
+                    color: "#FEF9F4",
+                    backgroundColor: "rgba(254,249,244,0.07)",
+                    fontFamily: "var(--app-font-display)",
+                    fontSize: "0.95rem",
+                    backdropFilter: "blur(8px)"
+                  }}
                 >
                   <Building2 className="h-4 w-4" />
                   Hire Talent
@@ -260,14 +332,14 @@ export default function Home() {
               className="flex flex-wrap items-center gap-4 sm:gap-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.64 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
             >
               {[
-                { icon: <MapPin className="h-4 w-4" />, label: "Ghana Active", dot: CORAL },
-                { icon: <Globe className="h-4 w-4" />, label: "Kenya Coming Soon", dot: TEAL },
-                { icon: <ShieldCheck className="h-4 w-4" />, label: "20+ Yrs Experience", dot: CHARCOAL + "80" },
+                { label: "Ghana Active", dot: CORAL },
+                { label: "Kenya Coming Soon", dot: TEAL },
+                { label: "20+ Yrs Experience", dot: "#F0A010" },
               ].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-1.5 text-[12px] font-semibold" style={{ color: "#7A6A5A" }}>
+                <span key={i} className="inline-flex items-center gap-2 text-[12px] font-semibold" style={{ color: "rgba(254,249,244,0.60)" }}>
                   <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: t.dot }} />
                   {t.label}
                 </span>
@@ -275,86 +347,115 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* RIGHT: photo — pure, no tint, people as centrepiece */}
-          <div className="relative lg:flex-1 overflow-hidden" style={{ minHeight: "420px" }}>
+          {/* RIGHT: photo — humans only, zero stats visible */}
+          <div className="relative lg:flex-1 overflow-hidden" style={{ minHeight: "460px" }}>
 
-            {/* Connecting fade on left edge (desktop only) */}
-            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-              style={{ background: "linear-gradient(to right, #FEF9F4 0%, transparent 100%)" }} />
+            {/* Left edge blend into dark panel */}
+            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+              style={{ background: "linear-gradient(to right, #1A0C04 0%, transparent 100%)" }} />
 
-            {/* Top mask — erases map/UI artefacts from source screenshot */}
+            {/* TOP mask — horizontal strip */}
             <div className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
-              style={{ height: "34%", background: "linear-gradient(to bottom, #FEF9F4 0%, rgba(254,249,244,0.95) 18%, rgba(254,249,244,0.60) 50%, transparent 100%)" }} />
+              style={{ height: "26%", background: "linear-gradient(to bottom, #1A0C04 0%, rgba(26,12,4,0.9) 25%, rgba(26,12,4,0.55) 55%, transparent 100%)" }} />
 
-            {/* The photo — people front and centre, zero tint on the humans */}
+            {/* TOP-RIGHT corner vignette — kills the "Ghana Active" map UI baked into corner */}
+            <div className="absolute top-0 right-0 z-11 pointer-events-none"
+              style={{ width: "55%", height: "40%", background: "radial-gradient(ellipse at top right, #1A0C04 0%, rgba(26,12,4,0.96) 30%, rgba(26,12,4,0.7) 55%, transparent 80%)" }} />
+
+            {/* RIGHT edge fade */}
+            <div className="absolute top-0 right-0 bottom-0 z-10 pointer-events-none"
+              style={{ width: "14%", background: "linear-gradient(to left, #1A0C04 0%, rgba(26,12,4,0.4) 50%, transparent 100%)" }} />
+
+            {/* BOTTOM mask — covers all stats/icons in the lower portion of the source image */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
+              style={{ height: "65%", background: "linear-gradient(to top, #1A0C04 0%, #1A0C04 25%, rgba(26,12,4,0.97) 42%, rgba(26,12,4,0.75) 62%, transparent 100%)" }} />
+
+            {/* The photo — objectPosition pushes image UP so only faces/shoulders visible, stats fully masked */}
             <motion.div
               className="absolute inset-0"
               style={{ scale: heroImgScale }}
-              initial={{ opacity: 0, scale: 1.04 }}
+              initial={{ opacity: 0, scale: 1.06 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 1.2, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               <img
                 src="/photos/hero-team-collab.png"
                 alt="Diverse African professional team collaborating — Bridgepath Africa"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "38% 42%" }}
+                style={{ objectPosition: "40% 0%" }}
                 loading="eager"
                 decoding="async"
               />
             </motion.div>
 
-            {/* Floating badge — top left */}
+            {/* Floating badge — top right: warm marigold trust */}
             <motion.div
-              className="absolute top-8 left-8 lg:left-12 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
-              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(200,70,26,0.15)" }}
-              initial={{ opacity: 0, x: -20, y: -10 }}
+              className="absolute top-10 right-6 lg:right-10 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
+              style={{
+                background: "rgba(26,12,4,0.82)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(240,160,16,0.35)"
+              }}
+              initial={{ opacity: 0, x: 24, y: -12 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${CORAL}18` }}>
-                <Users className="h-5 w-5" style={{ color: CORAL }} />
+              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0"
+                style={{ background: "linear-gradient(135deg, #F0A01030, #C8461A20)" }}>
+                <Users className="h-5 w-5" style={{ color: "#F0A010" }} />
               </div>
               <div>
-                <div className="text-lg font-extrabold leading-none" style={{ color: CHARCOAL, fontFamily: "var(--app-font-display)" }}>10,000+</div>
-                <div className="text-[11px] font-semibold mt-0.5" style={{ color: "#7A6A5A" }}>Professionals placed</div>
+                <div className="text-xl font-extrabold leading-none" style={{ color: "#F0A010", fontFamily: "var(--app-font-display)" }}>10,000+</div>
+                <div className="text-[11px] font-semibold mt-0.5" style={{ color: "rgba(254,249,244,0.6)" }}>Professionals placed</div>
               </div>
             </motion.div>
 
-            {/* Floating badge — bottom right */}
+            {/* Floating badge — mid left: terracotta energy */}
             <motion.div
-              className="absolute bottom-10 right-6 lg:right-10 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
-              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(31,122,120,0.18)" }}
-              initial={{ opacity: 0, x: 20, y: 20 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${TEAL}18` }}>
-                <Building2 className="h-5 w-5" style={{ color: TEAL }} />
-              </div>
-              <div>
-                <div className="text-lg font-extrabold leading-none" style={{ color: CHARCOAL, fontFamily: "var(--app-font-display)" }}>500+</div>
-                <div className="text-[11px] font-semibold mt-0.5" style={{ color: "#7A6A5A" }}>Companies hiring</div>
-              </div>
-            </motion.div>
-
-            {/* Floating badge — mid right */}
-            <motion.div
-              className="absolute top-1/2 -translate-y-1/2 right-6 lg:right-10 z-20 flex items-center gap-2 px-3.5 py-2.5 rounded-2xl shadow-xl"
-              style={{ backgroundColor: CORAL, backdropFilter: "blur(12px)" }}
-              initial={{ opacity: 0, x: 20 }}
+              className="absolute z-20 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl shadow-2xl"
+              style={{
+                top: "38%",
+                left: "6%",
+                background: `linear-gradient(135deg, ${CORAL} 0%, #E05A1A 100%)`,
+                boxShadow: `0 8px 30px ${CORAL}60`,
+              }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 1.25, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="h-2 w-2 rounded-full bg-white animate-pulse shrink-0" />
-              <span className="text-[11px] font-bold text-white tracking-wide">Ghana Active Now</span>
+              <motion.span className="h-2.5 w-2.5 rounded-full bg-white shrink-0"
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+              />
+              <span className="text-[12px] font-bold text-white tracking-wide">Ghana Active Now</span>
+            </motion.div>
+
+            {/* Floating badge — bottom centre: teal trust */}
+            <motion.div
+              className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 px-5 py-3 rounded-2xl shadow-2xl"
+              style={{
+                background: "rgba(26,12,4,0.85)",
+                backdropFilter: "blur(20px)",
+                border: `1px solid ${TEAL}50`,
+                whiteSpace: "nowrap"
+              }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: `${TEAL}25` }}>
+                <Building2 className="h-4 w-4" style={{ color: TEAL }} />
+              </div>
+              <div>
+                <div className="text-lg font-extrabold leading-none" style={{ color: "#FEF9F4", fontFamily: "var(--app-font-display)" }}>500+ <span style={{ color: TEAL }}>Companies</span></div>
+                <div className="text-[11px] font-medium mt-0.5" style={{ color: "rgba(254,249,244,0.5)" }}>actively hiring African talent</div>
+              </div>
             </motion.div>
 
           </div>
         </div>
 
-        {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL}90 50%, ${TEAL} 100%)` }} />
       </section>
 
       {/* ── STATS BAR ── */}

@@ -52,7 +52,11 @@ export function Navbar() {
   return (
     <header className="w-full">
       {/* Main nav */}
-      <nav className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${scrolled ? "shadow-md border-b border-orange-50" : "border-b border-orange-50/60"}`}>
+      <nav className={`sticky top-0 z-50 w-full transition-all duration-400 ${
+        scrolled
+          ? "bg-white shadow-md border-b border-orange-50"
+          : "bg-transparent border-b border-white/10 backdrop-blur-sm"
+      }`}>
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMobileOpen(false)}>
@@ -61,9 +65,11 @@ export function Navbar() {
             </div>
             <div className="flex flex-col leading-none">
               <div className="font-extrabold text-[17px] tracking-tight leading-none">
-                <span style={{ color: CHARCOAL }}>BridgePath</span><span style={{ color: CORAL }}> Africa</span>
+                <span style={{ color: scrolled ? CHARCOAL : "#FEF9F4" }}>BridgePath</span>
+                <span style={{ color: CORAL }}> Africa</span>
               </div>
-              <span className="text-[9px] font-medium tracking-[0.08em] uppercase mt-0.5" style={{ color: "#A08060" }}>
+              <span className="text-[9px] font-medium tracking-[0.08em] uppercase mt-0.5"
+                style={{ color: scrolled ? "#A08060" : "rgba(254,249,244,0.55)" }}>
                 Global Talent. African Opportunity.
               </span>
             </div>
@@ -71,7 +77,8 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            <Link href="/" className="px-4 py-2 text-sm font-medium rounded transition-colors" style={{ color: "#555555" }}>
+            <Link href="/" className="px-4 py-2 text-sm font-medium rounded transition-colors"
+              style={{ color: scrolled ? "#555555" : "rgba(254,249,244,0.95)" }}>
               Home
             </Link>
 
@@ -79,7 +86,7 @@ export function Navbar() {
             <div className="relative" onMouseEnter={() => setProfOpen(true)} onMouseLeave={() => setProfOpen(false)}>
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded transition-colors"
-                style={{ color: location === "/jobs" || location === "/cv-review" ? CORAL : "#555555" }}
+                style={{ color: location === "/jobs" || location === "/cv-review" ? CORAL : (scrolled ? "#555555" : "rgba(254,249,244,0.82)") }}
               >
                 <Search className="h-3.5 w-3.5" />
                 For Professionals
@@ -122,7 +129,7 @@ export function Navbar() {
             <div className="relative" onMouseEnter={() => setEmpOpen(true)} onMouseLeave={() => setEmpOpen(false)}>
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded transition-colors"
-                style={{ color: location === "/employers" || location === "/candidates" ? CORAL : "#555555" }}
+                style={{ color: location === "/employers" || location === "/candidates" ? CORAL : (scrolled ? "#555555" : "rgba(254,249,244,0.82)") }}
               >
                 <Building2 className="h-3.5 w-3.5" />
                 For Employers
@@ -173,12 +180,13 @@ export function Navbar() {
             ].map((link) => (
               <Link key={link.href} href={link.href}
                 className="px-4 py-2 text-sm font-medium rounded transition-colors"
-                style={{ color: location.startsWith(link.href) ? CORAL : "#555555" }}>
+                style={{ color: location.startsWith(link.href) ? CORAL : (scrolled ? "#555555" : "rgba(254,249,244,0.82)") }}>
                 {link.label}
               </Link>
             ))}
 
-            <a href="#contact" className="px-4 py-2 text-sm font-medium rounded transition-colors" style={{ color: "#555555" }}>
+            <a href="#contact" className="px-4 py-2 text-sm font-medium rounded transition-colors"
+              style={{ color: scrolled ? "#555555" : "rgba(254,249,244,0.82)" }}>
               Contact
             </a>
           </div>
@@ -229,7 +237,12 @@ export function Navbar() {
             ) : (
               <>
                 <Link href="/auth/login">
-                  <button className="px-4 py-2 text-sm font-medium border rounded-lg hover:bg-orange-50 transition-colors hidden sm:block" style={{ color: CHARCOAL, borderColor: "#E8D5C4" }}>Sign In</button>
+                  <button className="px-4 py-2 text-sm font-medium border rounded-lg transition-colors hidden sm:block"
+                    style={{
+                      color: scrolled ? CHARCOAL : "#FEF9F4",
+                      borderColor: scrolled ? "#E8D5C4" : "rgba(254,249,244,0.35)",
+                      backgroundColor: scrolled ? "transparent" : "rgba(254,249,244,0.08)"
+                    }}>Sign In</button>
                 </Link>
                 <Link href="/auth/signup">
                   <button className="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-all hover:opacity-90 shadow-sm" style={{ backgroundColor: CORAL }}>Get Started</button>
