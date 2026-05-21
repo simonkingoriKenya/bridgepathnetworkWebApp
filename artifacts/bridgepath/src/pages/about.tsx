@@ -128,9 +128,9 @@ export default function About() {
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[240px] rounded-xl p-3 text-white" style={{ backgroundColor: "rgba(28,25,23,0.92)" }}>
                     <p className="font-bold text-sm">Pamela Kuma</p>
                     <p className="text-xs text-gray-300">Founder & CEO</p>
-                    <a href="https://www.linkedin.com/in/pamela-kuma" target="_blank" rel="noopener noreferrer"
+                    <a href="https://www.linkedin.com/company/bridgepath-africa" target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: CORAL }}>
-                      <Linkedin className="h-3 w-3" /> linkedin.com/in/pamela-kuma
+                      <Linkedin className="h-3 w-3" /> Bridgepath Africa
                     </a>
                   </div>
                 </div>

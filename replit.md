@@ -207,7 +207,7 @@ shadow-lg   → modals, popovers
 - **Favicon:** Terracotta SVG rounded rect with white "b" lettermark.
 - **Logo:** `/logo-new.png` (transparent PNG) displayed on terracotta circle background.
 - **Photos in `/public/photos/`:** hero-team-meeting.png, coworking-team.png, boardroom-deal.png, job-interview.png, team-celebration.png, africa-city-skyline.png, hr-leader.png, hr-leader-woman.png, modern-africa-office.png, africa-office-team.png
-- **Contact email:** pkumanyc@gmail.com (used everywhere)
+- **Contact email:** support@bridgepathnetwork.com (all contact forms, emails, and structured data)
 
 ## User Preferences
 
