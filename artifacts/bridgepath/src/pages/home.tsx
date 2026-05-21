@@ -191,16 +191,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* ── TEXT READABILITY GRADIENT — left-only, stops before the faces ── */}
-        <div className="absolute inset-0 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(100deg, rgba(255,250,244,0.92) 0%, rgba(255,250,244,0.78) 28%, rgba(255,250,244,0.30) 52%, transparent 68%)"
-          }}
-        />
-        {/* Bottom-left soft anchor */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
-          style={{ height: "30%", background: "linear-gradient(to top, rgba(255,250,244,0.55) 0%, transparent 100%)" }}
-        />
 
         {/* ── CONTENT ── */}
         <motion.div
@@ -212,7 +202,11 @@ export default function Home() {
             {/* Status pill */}
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7 self-start"
-              style={{ backgroundColor: `rgba(200,70,26,0.10)`, border: `1.5px solid rgba(200,70,26,0.35)` }}
+              style={{
+                backgroundColor: "rgba(255,255,255,0.85)",
+                border: `1.5px solid rgba(200,70,26,0.4)`,
+                backdropFilter: "blur(8px)",
+              }}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -226,10 +220,15 @@ export default function Home() {
               </span>
             </motion.div>
 
-            {/* Main headline — dark ink on bright background */}
+            {/* Main headline — white with strong shadow for image clarity */}
             <motion.h1
               className="font-extrabold leading-[1.0] tracking-[-0.03em] mb-5"
-              style={{ fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)", fontFamily: "var(--app-font-display)", color: CHARCOAL }}
+              style={{
+                fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
+                fontFamily: "var(--app-font-display)",
+                color: "#fff",
+                textShadow: "0 2px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.35)",
+              }}
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
@@ -237,10 +236,8 @@ export default function Home() {
               Hire Africa.
               <br />
               <span style={{
-                background: `linear-gradient(90deg, ${CORAL} 0%, #E8602A 55%, #F0A010 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                color: "#F0A010",
+                textShadow: "0 2px 14px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4)",
               }}>Build the Future.</span>
             </motion.h1>
 
@@ -260,13 +257,20 @@ export default function Home() {
             {/* Subtext */}
             <motion.p
               className="mb-9 leading-[1.8]"
-              style={{ fontSize: "clamp(0.98rem, 1.35vw, 1.1rem)", maxWidth: "420px", fontFamily: "var(--app-font-sans)", color: "rgba(30,21,17,0.72)" }}
+              style={{
+                fontSize: "clamp(0.98rem, 1.35vw, 1.1rem)",
+                maxWidth: "420px",
+                fontFamily: "var(--app-font-sans)",
+                color: "rgba(255,255,255,0.95)",
+                textShadow: "0 1px 8px rgba(0,0,0,0.55)",
+                fontWeight: 500,
+              }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.52 }}
             >
               Bridgepath Africa connects global companies and local businesses with{" "}
-              <span style={{ color: CORAL, fontWeight: 600 }}>exceptional African talent</span> — fast, trusted, human.
+              <span style={{ color: "#F0A010", fontWeight: 700 }}>exceptional African talent</span> — fast, trusted, human.
             </motion.p>
 
             {/* CTA buttons */}
@@ -284,8 +288,8 @@ export default function Home() {
                   style={{
                     background: `linear-gradient(135deg, ${CORAL} 0%, #E05A1A 100%)`,
                     fontFamily: "var(--app-font-display)",
-                    boxShadow: `0 8px 32px ${CORAL}50, 0 0 0 1px ${CORAL}35`,
-                    fontSize: "0.95rem"
+                    boxShadow: `0 8px 32px ${CORAL}70, 0 0 0 1px ${CORAL}50`,
+                    fontSize: "0.95rem",
                   }}
                 >
                   <UserCheck className="h-4 w-4" />
@@ -297,14 +301,14 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white"
                   style={{
-                    border: `1.5px solid rgba(30,21,17,0.22)`,
-                    color: CHARCOAL,
-                    backgroundColor: "rgba(255,250,244,0.55)",
+                    border: "1.5px solid rgba(255,255,255,0.7)",
+                    backgroundColor: "rgba(255,255,255,0.18)",
                     fontFamily: "var(--app-font-display)",
                     fontSize: "0.95rem",
-                    backdropFilter: "blur(12px)"
+                    backdropFilter: "blur(12px)",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
                   }}
                 >
                   <Building2 className="h-4 w-4" />
@@ -325,7 +329,8 @@ export default function Home() {
                 { label: "Kenya Coming Soon", dot: TEAL },
                 { label: "20+ Yrs Experience", dot: "#F0A010" },
               ].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-2 text-[12px] font-semibold" style={{ color: "rgba(30,21,17,0.58)" }}>
+                <span key={i} className="inline-flex items-center gap-2 text-[12px] font-semibold"
+                  style={{ color: "rgba(255,255,255,0.92)", textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
                   <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: t.dot }} />
                   {t.label}
                 </span>
