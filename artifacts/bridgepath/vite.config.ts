@@ -72,6 +72,10 @@ export default defineConfig({
             if (id.includes("framer-motion")) return "motion";
             if (id.includes("@radix-ui")) return "radix";
             if (id.includes("lucide-react")) return "icons";
+            if (id.includes("@tanstack")) return "query";
+            if (id.includes("react-dom")) return "react-dom";
+            if (id.includes("zod") || id.includes("@hookform")) return "forms";
+            if (id.includes("wouter")) return "router";
             return "vendor";
           }
         },

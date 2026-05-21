@@ -4,15 +4,15 @@ import { Footer } from "@/components/layout/Footer";
 import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, Users, FileText, Briefcase, Globe, Award, BarChart3, UserCheck, Calculator, ArrowRight, Phone, Mail, TrendingUp, Shield, Clock, Star } from "lucide-react";
-import heroEor from "@assets/unnamed_(1)_1776009115714.jpg";
-import heroSecondment from "@assets/unnamed_(2)_1776009115713.jpg";
-import heroExpat from "@assets/unnamed_(3)_1776009115713.jpg";
-import heroHr from "@assets/unnamed_(4)_1776009115713.jpg";
-import heroPayroll from "@assets/unnamed_(5)_1776009115712.jpg";
-import heroPsych from "@assets/unnamed_(7)_1776009115711.jpg";
-import heroRecruit from "@assets/unnamed_(8)_1776009115711.jpg";
-import heroOutsource from "@assets/unnamed_(6)_1776009115712.jpg";
-import heroInterim from "@assets/unnamed_(9)_1776009115710.jpg";
+const heroEor       = "/blog/blog-hero-2.jpg";
+const heroSecondment = "/blog/blog-hero-3.jpg";
+const heroExpat     = "/blog/blog-hero-4.jpg";
+const heroHr        = "/blog/author-aisha.jpg";
+const heroPayroll   = "/blog/author-kofi.jpg";
+const heroPsych     = "/blog/photo-7.jpg";
+const heroRecruit   = "/blog/author-amara.jpg";
+const heroOutsource = "/blog/author-zara.jpg";
+const heroInterim   = "/blog/photo-9.jpg";
 
 
 const GREEN = "#C8461A";

@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageSEO } from "@/components/seo/PageSEO";
 import { motion } from "framer-motion";
 import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Handshake, ArrowRight, GraduationCap, Star } from "lucide-react";
-import founderFallback from "@assets/unnamed_(7)_1776009115711.jpg";
+const founderFallback = "/blog/photo-7.jpg";
 
 const CORAL = "#C8461A";
 const TEAL = "#1F7A78";

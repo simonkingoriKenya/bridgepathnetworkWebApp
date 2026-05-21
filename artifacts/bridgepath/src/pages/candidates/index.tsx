@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import { Search, MapPin, Briefcase, MessageSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import avatar1 from "@assets/unnamed_(4)_1776009115713.jpg";
-import avatar2 from "@assets/unnamed_(7)_1776009115711.jpg";
-import avatar3 from "@assets/unnamed_(5)_1776009115712.jpg";
-import avatar4 from "@assets/unnamed_(9)_1776009115710.jpg";
+const avatar1 = "/blog/author-aisha.jpg";
+const avatar2 = "/blog/photo-7.jpg";
+const avatar3 = "/blog/author-kofi.jpg";
+const avatar4 = "/blog/photo-9.jpg";
 
 const CORAL = "#C8461A";
 const CHARCOAL = "#1C1917";
