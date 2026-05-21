@@ -347,30 +347,14 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* RIGHT: photo — humans only, zero stats visible */}
+          {/* RIGHT: photo — faces as the centrepiece, zero tint */}
           <div className="relative lg:flex-1 overflow-hidden" style={{ minHeight: "460px" }}>
 
-            {/* Left edge blend into dark panel */}
-            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+            {/* Subtle left-edge blend so photo doesn't hard-cut against text panel */}
+            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
               style={{ background: "linear-gradient(to right, #1A0C04 0%, transparent 100%)" }} />
 
-            {/* TOP mask — horizontal strip */}
-            <div className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
-              style={{ height: "26%", background: "linear-gradient(to bottom, #1A0C04 0%, rgba(26,12,4,0.9) 25%, rgba(26,12,4,0.55) 55%, transparent 100%)" }} />
-
-            {/* TOP-RIGHT corner vignette — kills the "Ghana Active" map UI baked into corner */}
-            <div className="absolute top-0 right-0 z-11 pointer-events-none"
-              style={{ width: "55%", height: "40%", background: "radial-gradient(ellipse at top right, #1A0C04 0%, rgba(26,12,4,0.96) 30%, rgba(26,12,4,0.7) 55%, transparent 80%)" }} />
-
-            {/* RIGHT edge fade */}
-            <div className="absolute top-0 right-0 bottom-0 z-10 pointer-events-none"
-              style={{ width: "14%", background: "linear-gradient(to left, #1A0C04 0%, rgba(26,12,4,0.4) 50%, transparent 100%)" }} />
-
-            {/* BOTTOM mask — covers all stats/icons in the lower portion of the source image */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
-              style={{ height: "65%", background: "linear-gradient(to top, #1A0C04 0%, #1A0C04 25%, rgba(26,12,4,0.97) 42%, rgba(26,12,4,0.75) 62%, transparent 100%)" }} />
-
-            {/* The photo — objectPosition pushes image UP so only faces/shoulders visible, stats fully masked */}
+            {/* The photo — full brightness, faces centred */}
             <motion.div
               className="absolute inset-0"
               style={{ scale: heroImgScale }}
@@ -382,7 +366,7 @@ export default function Home() {
                 src="/photos/hero-team-collab.png"
                 alt="Diverse African professional team collaborating — Bridgepath Africa"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "40% 0%" }}
+                style={{ objectPosition: "50% 20%" }}
                 loading="eager"
                 decoding="async"
               />
