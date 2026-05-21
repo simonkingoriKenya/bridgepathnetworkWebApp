@@ -80,9 +80,12 @@ export default function About() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[520px] max-h-[780px] overflow-hidden flex items-end">
         <img
-          src="/photos/hr-leader.png"
+          src="/photos/hr-leader.webp"
           alt="African HR professional — Bridgepath Africa"
           className="absolute inset-0 w-full h-full object-cover object-top"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12">

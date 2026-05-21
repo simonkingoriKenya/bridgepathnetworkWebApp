@@ -51,9 +51,11 @@ export default function EmployersPage() {
               <div className="space-y-5">
                 <div className="relative rounded-3xl overflow-hidden shadow-xl" style={{ aspectRatio: "16/9" }}>
                   <img
-                    src="/photos/boardroom-deal.png"
+                    src="/photos/boardroom-deal.webp"
                     alt="African HR professionals closing a deal in a modern boardroom"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute bottom-4 left-5 right-5">
                     <p className="text-white text-xs font-semibold" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7), 0 2px 16px rgba(0,0,0,0.5)" }}>Connecting Africa's best talent with ambitious employers</p>

@@ -119,9 +119,12 @@ export default function ServicesPage() {
 
       <section className="relative h-[55vh] min-h-[420px] max-h-[660px] overflow-hidden flex items-end">
         <img
-          src="/photos/africa-office-team.png"
+          src="/photos/africa-office-team.webp"
           alt="African professionals in a modern office — Bridgepath Africa HR Services"
           className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="relative z-10 w-full pb-12 md:pb-16">
           <div className="container mx-auto px-6 md:px-12">

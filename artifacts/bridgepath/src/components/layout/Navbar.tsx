@@ -64,7 +64,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setMobileOpen(false)}>
             <div className="h-10 w-10 rounded-lg overflow-hidden shrink-0">
-              <img src="/logo-bridgepath.png" alt="BridgePath Africa" className="h-full w-full object-cover" />
+              <img src="/logo-bridgepath.webp" alt="Bridgepath Africa" width="40" height="40" decoding="async" className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col leading-none">
               <div className="font-extrabold text-[17px] tracking-tight leading-none">

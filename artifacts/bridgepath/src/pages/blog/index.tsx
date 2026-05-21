@@ -263,9 +263,12 @@ export default function BlogIndex() {
 
       <section className="relative h-[55vh] min-h-[420px] max-h-[640px] overflow-hidden flex items-end">
         <img
-          src="/photos/boardroom-meeting.png"
+          src="/photos/boardroom-meeting.webp"
           alt="African business leaders in a boardroom — Bridgepath Africa Insights"
           className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12 text-center">

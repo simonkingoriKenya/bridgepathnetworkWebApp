@@ -124,8 +124,8 @@ export default function Signup() {
     <div className="min-h-screen flex bg-white">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-[48%] relative overflow-hidden flex-col">
-        <img src="/photos/africa-office-team.png" alt="Vibrant African professionals in a modern office"
-          className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src="/photos/africa-office-team.webp" alt="Vibrant African professionals in a modern office"
+          className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" decoding="async" />
         <div className="relative z-10 flex flex-col h-full p-12">
           <Link href="/" className="flex items-center gap-3 w-fit">
             <div className="h-11 w-11 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: CORAL }}>

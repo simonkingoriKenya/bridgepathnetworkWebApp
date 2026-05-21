@@ -180,11 +180,12 @@ export default function Home() {
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <img
-            src="/photos/hero-team-bright.jpg"
+            src="/photos/hero-team-bright.webp"
             alt="Diverse African professional team collaborating in a bright office — Bridgepath Africa"
             className="w-full h-full object-cover"
             style={{ objectPosition: "60% 35%" }}
             loading="eager"
+            fetchPriority="high"
             decoding="async"
           />
         </motion.div>
@@ -456,9 +457,11 @@ export default function Home() {
       {/* ── FULL-BLEED: Focus Areas ── */}
       <section className="relative h-[55vh] sm:h-[60vh] min-h-[380px] max-h-[640px] overflow-hidden">
         <motion.img
-          src="/photos/coworking-team.png"
+          src="/photos/coworking-team.webp"
           alt="African professionals collaborating"
           className="w-full h-full object-cover object-center"
+          loading="lazy"
+          decoding="async"
           initial={{ scale: 1.06 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
@@ -569,9 +572,11 @@ export default function Home() {
               <div className="relative">
                 <div className="rounded-3xl overflow-hidden aspect-[4/3]">
                   <motion.img
-                    src="/photos/boardroom-deal.png"
+                    src="/photos/boardroom-deal.webp"
                     alt="African professionals closing a deal"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                     whileHover={{ scale: 1.04 }}
                     transition={{ duration: 0.5 }}
                     style={{ filter: "contrast(1.06) saturate(1.08)" }}
@@ -640,9 +645,11 @@ export default function Home() {
       {/* ── HR IMAGE SECTION ── */}
       <section className="relative h-[50vh] sm:h-[55vh] min-h-[320px] max-h-[600px] overflow-hidden">
         <motion.img
-          src="/photos/job-interview.png"
+          src="/photos/job-interview.webp"
           alt="African professional HR interview"
           className="w-full h-full object-cover object-center"
+          loading="lazy"
+          decoding="async"
           initial={{ scale: 1.06 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}

@@ -72,7 +72,7 @@ export default function Login() {
         <div className="absolute inset-0 pointer-events-none"
           style={{ backgroundImage: "radial-gradient(circle at 15% 85%, rgba(240,168,32,0.25) 0%, transparent 45%), radial-gradient(circle at 85% 15%, rgba(255,255,255,0.06) 0%, transparent 40%)" }} />
         <div className="absolute inset-0">
-          <img src="/photos/coworking-team.png" alt="" className="w-full h-full object-cover opacity-20 object-center" />
+          <img src="/photos/coworking-team.webp" alt="" className="w-full h-full object-cover opacity-20 object-center" loading="lazy" decoding="async" />
         </div>
         <div className="relative z-10 flex flex-col h-full p-12">
           <Link href="/" className="flex items-center gap-3 w-fit">

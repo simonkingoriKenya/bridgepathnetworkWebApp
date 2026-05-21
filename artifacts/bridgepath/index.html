@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
+    <!-- Critical image preload — starts fetching the hero before JS runs (improves LCP) -->
+    <link rel="preload" href="/photos/hero-team-bright.webp" as="image" type="image/webp" fetchpriority="high" />
+
     <!-- Primary meta -->
     <title>Bridgepath Africa — Africa's Premier HR &amp; Talent Platform</title>
     <meta name="description" content="Bridgepath Africa connects African talent with global employers. Premium HR services, recruitment, and job opportunities across Ghana and Kenya." />
