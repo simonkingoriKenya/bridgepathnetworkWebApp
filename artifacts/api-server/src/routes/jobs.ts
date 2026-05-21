@@ -108,6 +108,13 @@ router.get("/jobs", async (req, res) => {
 router.post("/jobs", requireAuth, async (req: AuthenticatedRequest, res) => {
   try {
     const userId = req.userId!;
+
+    const [user] = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
+    if (!user || user.role !== "employer") {
+      res.status(403).json({ error: "Forbidden", message: "Only employers can post jobs" });
+      return;
+    }
+
     const { title, description, requirements, location, country, type, salaryMin, salaryMax, currency, industry, skills, isActive } = req.body as {
       title: string;
       description: string;

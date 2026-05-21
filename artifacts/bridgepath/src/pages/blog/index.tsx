@@ -180,7 +180,7 @@ All employers with employees in Kenya are required to comply — including:
 
 For companies managing their Kenyan workforce through Bridgepath Africa's Employment of Record or Payroll Administration services, all NSSF calculations, filings, and remittances are handled automatically. Our compliance team monitors all legislative changes in real time — you don't need to track every regulatory update yourself.
 
-If you manage your own payroll in Kenya and are unsure whether your systems are compliant, contact our team for a free compliance review at pkumanyc@gmail.com.
+If you manage your own payroll in Kenya and are unsure whether your systems are compliant, contact our team for a free compliance review at support@bridgepathnetwork.com.
 
 ## Looking Ahead
 

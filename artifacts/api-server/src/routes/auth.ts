@@ -11,7 +11,7 @@ import { authLimiter } from "../lib/limiters";
 const router = Router();
 
 const DEMO_EMAILS = ["jobseeker@demo.bridgepath.network", "employer@demo.bridgepath.network"];
-const FROM_ADDRESS = "Bridgepath Africa <onboarding@resend.dev>";
+const FROM_ADDRESS = "Bridgepath Africa <noreply@bridgepathnetwork.com>";
 
 function getResend(): Resend | null {
   const k = process.env.RESEND_API_KEY;

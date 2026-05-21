@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 
-const GREEN = "#8CC63F";
+const TERRACOTTA = "#C04020";
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -25,7 +25,7 @@ export function BackToTop() {
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
           className="fixed bottom-24 right-6 z-50 h-11 w-11 rounded-full shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity"
-          style={{ backgroundColor: GREEN }}
+          style={{ backgroundColor: TERRACOTTA }}
           aria-label="Back to top"
         >
           <ChevronUp className="h-5 w-5 text-white" />

@@ -336,7 +336,7 @@ export default function About() {
               </button>
             </Link>
           </div>
-          <p className="text-xs text-gray-400">Email: <a href="mailto:pkumanyc@gmail.com" className="underline hover:text-gray-600">pkumanyc@gmail.com</a></p>
+          <p className="text-xs text-gray-400">Email: <a href="mailto:support@bridgepathnetwork.com" className="underline hover:text-gray-600">support@bridgepathnetwork.com</a></p>
         </div>
       </section>
 

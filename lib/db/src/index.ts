@@ -4,7 +4,9 @@ import * as schema from "./schema";
 
 const { Pool } = pg;
 
-const connectionString = process.env.SUPABASE_DATABASE_URL ?? process.env.DATABASE_URL;
+const supabaseUrl = process.env.SUPABASE_DATABASE_URL;
+const isValidPgUrl = (s?: string) => !!s && (s.startsWith("postgresql://") || s.startsWith("postgres://"));
+const connectionString = isValidPgUrl(supabaseUrl) ? supabaseUrl : process.env.DATABASE_URL;
 
 if (!connectionString) {
   throw new Error(

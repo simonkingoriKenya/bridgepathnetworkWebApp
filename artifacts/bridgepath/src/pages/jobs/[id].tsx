@@ -4,6 +4,7 @@ import { useGetJob, useCreateApplication, useGetMyApplications } from "@workspac
 import { useAuth } from "@/lib/auth";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageSEO } from "@/components/seo/PageSEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,8 +17,8 @@ import {
 import { format } from "date-fns";
 import { isDemoEmail, addDemoApplication, getDemoApplications } from "@/lib/demoAuth";
 
-const GREEN = "#8CC63F";
-const DARK = "#0D1B2A";
+const TERRACOTTA = "#C04020";
+const INK = "#0D1B2A";
 
 const demoMockJobs: Record<number, any> = {
   101: { id: 101, title: "Software Engineer (Full Stack)", employer: { name: "Andela" }, employerProfile: { companyName: "Andela", industry: "Technology", country: "Kenya" }, location: "Remote", country: "Kenya", type: "remote", salaryMin: 70000, salaryMax: 110000, currency: "USD", industry: "Technology", skills: ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker"], isActive: true, createdAt: new Date().toISOString(), description: "Join Andela's world-class engineering team and work with global technology companies. You will architect and build scalable full-stack applications that serve millions of users across emerging markets.\n\nYou'll collaborate with cross-functional teams to deliver high-quality software solutions, mentor junior developers, and contribute to our engineering culture.", requirements: "5+ years of full-stack development experience.\nStrong proficiency in React, Node.js, and TypeScript.\nExperience with cloud platforms (AWS, GCP or Azure).\nAbility to work in a fully remote, globally distributed team.\nExcellent communication and problem-solving skills." },
@@ -127,10 +128,10 @@ export default function JobDetail() {
             <div className="h-16 w-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "#fee2e2" }}>
               <AlertCircle className="h-8 w-8 text-red-500" />
             </div>
-            <h2 className="text-2xl font-bold mb-2" style={{ color: DARK }}>Job Not Found</h2>
+            <h2 className="text-2xl font-bold mb-2" style={{ color: INK }}>Job Not Found</h2>
             <p className="text-gray-500 mb-6">This job listing doesn't exist or has been removed.</p>
             <Link href="/jobs">
-              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm" style={{ backgroundColor: GREEN }}>
+              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm" style={{ backgroundColor: TERRACOTTA }}>
                 <ArrowLeft className="h-4 w-4" /> Back to Jobs
               </button>
             </Link>
@@ -143,13 +144,23 @@ export default function JobDetail() {
 
   const jobType = job?.type?.replace("_", " ") ?? "";
 
+  const ogImage = jobId && jobId < 100
+    ? `https://bridgepathafricahr.com/og-image/job/${jobId}`
+    : undefined;
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#f8f9fb" }}>
+      <PageSEO
+        title={job ? `${job.title} at ${job.employerProfile?.companyName ?? job.employer?.name ?? "Top Company"}` : "Job Listing"}
+        description={job?.description ? job.description.slice(0, 158).trimEnd() + "…" : "View this job listing on Bridgepath Africa — Africa's premier HR hiring platform."}
+        path={`/jobs/${jobId}`}
+        image={ogImage}
+      />
       <Navbar />
 
       <main className="flex-1">
         {/* ── Header Band ── */}
-        <div style={{ backgroundColor: DARK }}>
+        <div style={{ backgroundColor: INK }}>
           <div className="container mx-auto px-4 md:px-8 py-10 md:py-14">
             {isLoading && !isDemo ? (
               <div className="space-y-4">
@@ -160,7 +171,7 @@ export default function JobDetail() {
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
                 <div className="max-w-2xl">
                   <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide" style={{ backgroundColor: GREEN + "25", color: GREEN }}>
+                    <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide" style={{ backgroundColor: TERRACOTTA + "25", color: TERRACOTTA }}>
                       {jobType}
                     </span>
                     {!job.isActive && (
@@ -177,7 +188,7 @@ export default function JobDetail() {
 
                   <div className="flex flex-wrap items-center gap-5 text-sm text-white/70">
                     <div className="flex items-center gap-2 font-semibold text-white">
-                      <Building2 className="h-4 w-4" style={{ color: GREEN }} />
+                      <Building2 className="h-4 w-4" style={{ color: TERRACOTTA }} />
                       {job.employer?.name || job.employerProfile?.companyName || "Company"}
                     </div>
                     <div className="flex items-center gap-2">
@@ -185,7 +196,7 @@ export default function JobDetail() {
                       {job.location}
                     </div>
                     {job.salaryMin && job.salaryMax && (
-                      <div className="flex items-center gap-2 font-semibold" style={{ color: GREEN }}>
+                      <div className="flex items-center gap-2 font-semibold" style={{ color: TERRACOTTA }}>
                         <DollarSign className="h-4 w-4" />
                         {job.currency} {job.salaryMin.toLocaleString()} – {job.salaryMax.toLocaleString()}
                       </div>
@@ -210,7 +221,7 @@ export default function JobDetail() {
                   ) : (
                     <button
                       className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-sm text-white shadow-lg transition-all hover:scale-105 active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed"
-                      style={{ backgroundColor: GREEN }}
+                      style={{ backgroundColor: TERRACOTTA }}
                       onClick={handleApply}
                       disabled={!job.isActive || applyMutation.isPending}
                     >
@@ -259,7 +270,7 @@ export default function JobDetail() {
               <div className="lg:col-span-2 space-y-8">
 
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                  <h2 className="text-xl font-bold mb-4" style={{ color: DARK }}>About the role</h2>
+                  <h2 className="text-xl font-bold mb-4" style={{ color: INK }}>About the role</h2>
                   <div className="space-y-3 text-gray-600 leading-relaxed">
                     {job.description.split("\n").filter(Boolean).map((para: string, idx: number) => (
                       <p key={idx}>{para}</p>
@@ -269,12 +280,12 @@ export default function JobDetail() {
 
                 {job.requirements && (
                   <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                    <h2 className="text-xl font-bold mb-4" style={{ color: DARK }}>Requirements</h2>
+                    <h2 className="text-xl font-bold mb-4" style={{ color: INK }}>Requirements</h2>
                     <ul className="space-y-2.5">
                       {job.requirements.split("\n").filter(Boolean).map((req: string, idx: number) => (
                         <li key={idx} className="flex items-start gap-3 text-gray-600">
-                          <span className="h-5 w-5 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: GREEN + "20" }}>
-                            <CheckCircle2 className="h-3 w-3" style={{ color: GREEN }} />
+                          <span className="h-5 w-5 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: TERRACOTTA + "20" }}>
+                            <CheckCircle2 className="h-3 w-3" style={{ color: TERRACOTTA }} />
                           </span>
                           {req}
                         </li>
@@ -284,13 +295,13 @@ export default function JobDetail() {
                 )}
 
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                  <h2 className="text-xl font-bold mb-4" style={{ color: DARK }}>Required Skills</h2>
+                  <h2 className="text-xl font-bold mb-4" style={{ color: INK }}>Required Skills</h2>
                   <div className="flex flex-wrap gap-2">
                     {(job.skills || []).map((skill: string, idx: number) => (
                       <span
                         key={idx}
                         className="px-4 py-1.5 rounded-full text-sm font-semibold border"
-                        style={{ backgroundColor: GREEN + "10", color: GREEN, borderColor: GREEN + "30" }}
+                        style={{ backgroundColor: TERRACOTTA + "10", color: TERRACOTTA, borderColor: TERRACOTTA + "30" }}
                       >
                         {skill}
                       </span>
@@ -307,7 +318,7 @@ export default function JobDetail() {
                   ) : (
                     <button
                       className="w-full py-4 rounded-xl font-bold text-white text-sm transition-all hover:opacity-90 disabled:opacity-50"
-                      style={{ backgroundColor: GREEN }}
+                      style={{ backgroundColor: TERRACOTTA }}
                       onClick={handleApply}
                       disabled={!job.isActive || applyMutation.isPending}
                     >
@@ -320,14 +331,14 @@ export default function JobDetail() {
               {/* Right: Company card + apply card */}
               <div className="space-y-5">
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
-                  <h3 className="font-bold text-base mb-5 pb-4 border-b border-gray-100" style={{ color: DARK }}>
+                  <h3 className="font-bold text-base mb-5 pb-4 border-b border-gray-100" style={{ color: INK }}>
                     Company Overview
                   </h3>
 
                   <div className="space-y-4 mb-6">
                     <div className="flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: DARK + "10" }}>
-                        <Building2 className="h-4 w-4" style={{ color: DARK }} />
+                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: INK + "10" }}>
+                        <Building2 className="h-4 w-4" style={{ color: INK }} />
                       </div>
                       <div>
                         <div className="text-xs text-gray-400 mb-0.5">Company</div>
@@ -336,8 +347,8 @@ export default function JobDetail() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: DARK + "10" }}>
-                        <Briefcase className="h-4 w-4" style={{ color: DARK }} />
+                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: INK + "10" }}>
+                        <Briefcase className="h-4 w-4" style={{ color: INK }} />
                       </div>
                       <div>
                         <div className="text-xs text-gray-400 mb-0.5">Industry</div>
@@ -346,8 +357,8 @@ export default function JobDetail() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: DARK + "10" }}>
-                        <Globe className="h-4 w-4" style={{ color: DARK }} />
+                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: INK + "10" }}>
+                        <Globe className="h-4 w-4" style={{ color: INK }} />
                       </div>
                       <div>
                         <div className="text-xs text-gray-400 mb-0.5">Location</div>
@@ -356,12 +367,12 @@ export default function JobDetail() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: GREEN + "15" }}>
-                        <Clock className="h-4 w-4" style={{ color: GREEN }} />
+                      <div className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: TERRACOTTA + "15" }}>
+                        <Clock className="h-4 w-4" style={{ color: TERRACOTTA }} />
                       </div>
                       <div>
                         <div className="text-xs text-gray-400 mb-0.5">Job Type</div>
-                        <div className="font-semibold text-sm capitalize" style={{ color: GREEN }}>{jobType}</div>
+                        <div className="font-semibold text-sm capitalize" style={{ color: TERRACOTTA }}>{jobType}</div>
                       </div>
                     </div>
                   </div>
@@ -388,7 +399,7 @@ export default function JobDetail() {
                       <p className="font-bold text-emerald-700">You've applied!</p>
                       <p className="text-xs text-gray-500">Track your progress in your dashboard.</p>
                       <Link href="/dashboard/jobseeker">
-                        <button className="mt-1 text-xs font-semibold underline" style={{ color: GREEN }}>View Dashboard →</button>
+                        <button className="mt-1 text-xs font-semibold underline" style={{ color: TERRACOTTA }}>View Dashboard →</button>
                       </Link>
                     </div>
                   ) : (
@@ -396,7 +407,7 @@ export default function JobDetail() {
                       <p className="text-sm text-gray-500 mb-4">Ready to take the next step?</p>
                       <button
                         className="w-full py-4 rounded-xl font-bold text-white text-sm shadow-md transition-all hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{ backgroundColor: GREEN }}
+                        style={{ backgroundColor: TERRACOTTA }}
                         onClick={handleApply}
                         disabled={!job.isActive || applyMutation.isPending}
                       >

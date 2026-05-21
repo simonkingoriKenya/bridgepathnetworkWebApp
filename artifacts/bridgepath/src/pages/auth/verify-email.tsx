@@ -84,7 +84,7 @@ export default function VerifyEmail() {
             <p className="text-sm text-muted-foreground mb-2">{message || "This link may have expired or already been used."}</p>
             <p className="text-sm text-muted-foreground mb-8">
               Try signing in and requesting a new verification email, or contact{" "}
-              <a href="mailto:pkumanyc@gmail.com" className="underline" style={{ color: CORAL }}>support</a>.
+              <a href="mailto:support@bridgepathnetwork.com" className="underline" style={{ color: CORAL }}>support</a>.
             </p>
             <Link href="/auth/login"
               className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl text-white font-bold text-sm shadow-md"

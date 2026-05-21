@@ -85,9 +85,9 @@ export function Footer() {
           </div>
 
           <div className="mt-auto pt-4 space-y-2.5" style={{ borderTop: `1px solid ${BORDER}` }}>
-            <a href="mailto:pkumanyc@gmail.com" className="flex items-center gap-2 text-xs hover:text-white transition-colors">
+            <a href="mailto:support@bridgepathnetwork.com" className="flex items-center gap-2 text-xs hover:text-white transition-colors">
               <Mail className="h-3.5 w-3.5 shrink-0" style={{ color: CORAL }} />
-              pkumanyc@gmail.com
+              support@bridgepathnetwork.com
             </a>
             <div className="flex items-center gap-2 text-xs">
               <MapPin className="h-3.5 w-3.5 shrink-0" style={{ color: CORAL }} />
@@ -201,9 +201,9 @@ export function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-8 md:px-10 py-5">
         <p className="text-xs text-gray-700">© {new Date().getFullYear()} Bridgepath Africa. All rights reserved.</p>
         <div className="flex gap-6 text-xs">
-          <Link href="/legal" className="text-gray-700 hover:text-gray-400 transition-colors">Privacy Policy</Link>
-          <Link href="/legal" className="text-gray-700 hover:text-gray-400 transition-colors">Terms of Service</Link>
-          <Link href="/legal" className="text-gray-700 hover:text-gray-400 transition-colors">Cookie Policy</Link>
+          <Link href="/privacy" className="text-gray-700 hover:text-gray-400 transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="text-gray-700 hover:text-gray-400 transition-colors">Terms of Service</Link>
+          <Link href="/cookies" className="text-gray-700 hover:text-gray-400 transition-colors">Cookie Policy</Link>
         </div>
       </div>
     </footer>

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 
 type Message = { from: "bot" | "user"; text: string };
 
@@ -60,16 +60,16 @@ export function ChatSupport() {
             className="fixed bottom-20 right-6 z-50 w-80 rounded-2xl shadow-2xl overflow-hidden border border-gray-100"
             style={{ backgroundColor: "#fff" }}
           >
-            <div className="flex items-center justify-between px-4 py-3" style={{ backgroundColor: DARK }}>
+            <div className="flex items-center justify-between px-4 py-3" style={{ backgroundColor: INK }}>
               <div className="flex items-center gap-2.5">
-                <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{ backgroundColor: GREEN }}>
+                <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{ backgroundColor: TERRACOTTA }}>
                   <Bot className="h-4 w-4 text-white" />
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold">Bridgepath Africa Support</p>
                   <div className="flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-green-400 text-xs">Online</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-orange-50 animate-pulse" />
+                    <span className="text-primary text-xs">Online</span>
                   </div>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export function ChatSupport() {
                     className="max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed"
                     style={
                       msg.from === "user"
-                        ? { backgroundColor: GREEN, color: "white", borderBottomRightRadius: 4 }
+                        ? { backgroundColor: TERRACOTTA, color: "white", borderBottomRightRadius: 4 }
                         : { backgroundColor: "white", color: "#374151", border: "1px solid #e5e7eb", borderBottomLeftRadius: 4 }
                     }
                   >
@@ -114,7 +114,7 @@ export function ChatSupport() {
                   <button
                     key={opt}
                     onClick={() => sendMessage(opt)}
-                    className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-green-400 hover:text-green-600 transition-colors"
+                    className="text-xs px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-primary/50 hover:text-primary transition-colors"
                   >
                     {opt}
                   </button>
@@ -127,13 +127,13 @@ export function ChatSupport() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 text-sm px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-300"
+                className="flex-1 text-sm px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
               <button
                 type="submit"
                 disabled={!input.trim()}
                 className="h-9 w-9 rounded-xl flex items-center justify-center text-white disabled:opacity-40 transition-opacity"
-                style={{ backgroundColor: GREEN }}
+                style={{ backgroundColor: TERRACOTTA }}
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
@@ -147,7 +147,7 @@ export function ChatSupport() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-xl flex items-center justify-center transition-all"
-        style={{ backgroundColor: DARK }}
+        style={{ backgroundColor: INK }}
         aria-label="Chat support"
       >
         <AnimatePresence mode="wait">
@@ -162,7 +162,7 @@ export function ChatSupport() {
           )}
         </AnimatePresence>
         {!open && (
-          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-[9px] font-bold text-white flex items-center justify-center" style={{ backgroundColor: GREEN }}>
+          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-[9px] font-bold text-white flex items-center justify-center" style={{ backgroundColor: TERRACOTTA }}>
             1
           </span>
         )}

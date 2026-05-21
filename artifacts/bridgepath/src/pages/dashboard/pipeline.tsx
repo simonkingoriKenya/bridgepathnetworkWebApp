@@ -9,18 +9,18 @@ import {
 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 const AMBER = "#F97316";
 const PURPLE = "#8b5cf6";
 
 const PIPELINE_STAGES = [
-  { key: "pending",     label: "Applied",     color: DARK,    bg: "#e8ecf2" },
+  { key: "pending",     label: "Applied",     color: INK,    bg: "#e8ecf2" },
   { key: "reviewed",    label: "Reviewed",    color: AMBER,   bg: "#fff3e6" },
   { key: "shortlisted", label: "Shortlisted", color: PURPLE,  bg: "#f3effd" },
   { key: "interview",   label: "Interview",   color: "#0ea5e9", bg: "#e6f5fb" },
   { key: "offer",       label: "Offer Made",  color: "#10b981", bg: "#e6f8f3" },
-  { key: "hired",       label: "Hired",       color: GREEN,   bg: "#f0f8e6" },
+  { key: "hired",       label: "Hired",       color: TERRACOTTA,   bg: "#FDF0EB" },
 ] as const;
 
 type StageKey = (typeof PIPELINE_STAGES)[number]["key"];
@@ -102,8 +102,8 @@ function FeedbackModal({ candidate, onClose, onSubmit, submitting }: FeedbackMod
             placeholder="Share constructive insights — what went well, what could improve, skills to develop..."
             rows={5}
             className="w-full text-sm text-gray-700 border border-gray-200 rounded-xl px-3.5 py-3 resize-none outline-none focus:ring-2 focus:border-transparent transition-all leading-relaxed"
-            style={{ focusRingColor: "#8CC63F" } as any}
-            onFocus={e => e.target.style.boxShadow = `0 0 0 2px ${GREEN}40`}
+            style={{ focusRingColor: "#C04020" } as any}
+            onFocus={e => e.target.style.boxShadow = `0 0 0 2px ${TERRACOTTA}40`}
             onBlur={e => e.target.style.boxShadow = "none"}
           />
           <p className="text-[11px] text-gray-400 mt-1.5">{content.length}/500 characters</p>
@@ -113,15 +113,15 @@ function FeedbackModal({ candidate, onClose, onSubmit, submitting }: FeedbackMod
           onClick={() => setIsAnonymous(!isAnonymous)}
           className="w-full flex items-center gap-3 p-3.5 rounded-xl border mb-4 transition-all"
           style={isAnonymous
-            ? { borderColor: DARK, backgroundColor: DARK + "08" }
+            ? { borderColor: INK, backgroundColor: INK + "08" }
             : { borderColor: "#e5e7eb", backgroundColor: "#f9fafb" }}
         >
           <div
             className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-colors"
-            style={{ backgroundColor: isAnonymous ? DARK + "15" : "#f3f4f6" }}
+            style={{ backgroundColor: isAnonymous ? INK + "15" : "#f3f4f6" }}
           >
             {isAnonymous
-              ? <EyeOff className="h-4 w-4" style={{ color: DARK }} />
+              ? <EyeOff className="h-4 w-4" style={{ color: INK }} />
               : <Eye className="h-4 w-4 text-gray-400" />}
           </div>
           <div className="text-left flex-1">
@@ -134,7 +134,7 @@ function FeedbackModal({ candidate, onClose, onSubmit, submitting }: FeedbackMod
           </div>
           <div
             className="h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all"
-            style={isAnonymous ? { borderColor: DARK, backgroundColor: DARK } : { borderColor: "#d1d5db" }}
+            style={isAnonymous ? { borderColor: INK, backgroundColor: INK } : { borderColor: "#d1d5db" }}
           >
             {isAnonymous && <Check className="h-3 w-3 text-white" />}
           </div>
@@ -148,7 +148,7 @@ function FeedbackModal({ candidate, onClose, onSubmit, submitting }: FeedbackMod
             disabled={!content.trim() || submitting}
             onClick={() => onSubmit(content, isAnonymous)}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-white rounded-xl transition-all hover:opacity-90 disabled:opacity-40"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: TERRACOTTA }}
           >
             {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             {submitting ? "Sending..." : "Send Feedback"}
@@ -183,7 +183,7 @@ function CandidateCard({
       <div className="flex items-start gap-3 mb-3">
         <div
           className="h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-          style={{ backgroundColor: DARK }}
+          style={{ backgroundColor: INK }}
         >
           {candidate.initials}
         </div>
@@ -237,7 +237,7 @@ function CandidateCard({
             </button>
           )}
           {!canGoForward && candidate.status === "hired" && (
-            <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+            <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: TERRACOTTA + "20", color: TERRACOTTA }}>
               <Check className="h-3 w-3" /> Hired
             </span>
           )}
@@ -358,7 +358,7 @@ export default function PipelinePage() {
   if (!isDemo && realLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin" style={{ color: GREEN }} />
+        <Loader2 className="h-8 w-8 animate-spin" style={{ color: TERRACOTTA }} />
       </div>
     );
   }
@@ -387,12 +387,12 @@ export default function PipelinePage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Employer Tools</p>
-          <h1 className="text-2xl font-bold" style={{ color: DARK }}>Candidate Pipeline</h1>
+          <h1 className="text-2xl font-bold" style={{ color: INK }}>Candidate Pipeline</h1>
           <p className="text-sm text-gray-500 mt-0.5">{filtered.length} candidate{filtered.length !== 1 ? "s" : ""} across {PIPELINE_STAGES.length} stages</p>
         </div>
         <div className="flex items-center gap-2">
           {isDemo && (
-            <span className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg" style={{ backgroundColor: GREEN + "18", color: GREEN }}>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg" style={{ backgroundColor: TERRACOTTA + "18", color: TERRACOTTA }}>
               <Sparkles className="h-3.5 w-3.5" /> Demo data
             </span>
           )}

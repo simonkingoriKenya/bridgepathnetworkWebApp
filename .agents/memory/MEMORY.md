@@ -1,0 +1,2 @@
+- [SUPABASE_DATABASE_URL conflict](db-url-conflict.md) — when SUPABASE_DATABASE_URL is an https:// URL, it silently breaks the DB pool; always validate pg:// prefix before using it.
+- [OG image routes](og-image-routes.md) — /og-image/job/:id and /og-image/service/:slug added to api-server; caches keyed by id/slug with 60s TTL in Map.

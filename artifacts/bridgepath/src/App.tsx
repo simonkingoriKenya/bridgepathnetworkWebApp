@@ -119,6 +119,9 @@ function Router() {
       <Route path="/dashboard/pipeline">
         {() => <ProtectedRoute component={PipelinePage} allowedRoles={["employer"]} />}
       </Route>
+      <Route path="/dashboard/jobs">
+        {() => <ProtectedRoute component={DashboardJobs} allowedRoles={["employer"]} />}
+      </Route>
       <Route path="/candidates">
         {() => <ProtectedRoute component={CandidatesPage} allowedRoles={["employer"]} />}
       </Route>

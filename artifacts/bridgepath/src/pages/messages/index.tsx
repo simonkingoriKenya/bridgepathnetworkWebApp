@@ -3,8 +3,8 @@ import { Send, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 
 const conversations = [
   { name: "Amina Mensah", role: "Senior Software Engineer", preview: "Thank you for reaching out. I’m available for an intro call this week.", time: "10:24" },
@@ -18,8 +18,8 @@ export default function MessagesPage() {
   return (
     <div className="space-y-5 animate-in fade-in duration-500">
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: GREEN }}>Employer Messages</p>
-        <h1 className="text-2xl md:text-3xl font-bold" style={{ color: DARK }}>Candidate Conversations</h1>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: TERRACOTTA }}>Employer Messages</p>
+        <h1 className="text-2xl md:text-3xl font-bold" style={{ color: INK }}>Candidate Conversations</h1>
         <p className="text-sm text-gray-500 mt-2 max-w-2xl">A simple V1 message area for employer-candidate conversations. Full real-time messaging can be connected after candidate onboarding is live.</p>
       </div>
 
@@ -33,7 +33,7 @@ export default function MessagesPage() {
           </div>
           <div className="divide-y divide-gray-50">
             {conversations.map((conversation, index) => (
-              <button key={conversation.name} className={`w-full text-left p-4 transition-colors ${index === 0 ? "bg-green-50/60" : "hover:bg-gray-50"}`}>
+              <button key={conversation.name} className={`w-full text-left p-4 transition-colors ${index === 0 ? "bg-orange-50/60" : "hover:bg-gray-50"}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm font-semibold text-gray-900">{conversation.name}</p>
@@ -53,14 +53,14 @@ export default function MessagesPage() {
               <p className="font-semibold text-gray-900">{active.name}</p>
               <p className="text-xs text-gray-500">{active.role}</p>
             </div>
-            <Link href="/candidates/1" className="text-xs font-semibold" style={{ color: GREEN }}>View profile</Link>
+            <Link href="/candidates" className="text-xs font-semibold" style={{ color: TERRACOTTA }}>View profiles</Link>
           </div>
 
           <div className="flex-1 p-5 space-y-4 bg-gray-50/60">
             <div className="max-w-[75%] bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-gray-100">
               <p className="text-sm text-gray-700">Thank you for reaching out. I’m available for an intro call this week.</p>
             </div>
-            <div className="max-w-[75%] ml-auto rounded-2xl rounded-tr-sm p-4 text-white" style={{ backgroundColor: DARK }}>
+            <div className="max-w-[75%] ml-auto rounded-2xl rounded-tr-sm p-4 text-white" style={{ backgroundColor: INK }}>
               <p className="text-sm">Great. We’re hiring for a senior engineering role supporting products in Ghana and Kenya. Could you share your availability?</p>
             </div>
             <div className="max-w-[75%] bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-gray-100">
@@ -70,7 +70,7 @@ export default function MessagesPage() {
 
           <div className="p-4 border-t border-gray-100 flex gap-3">
             <Input placeholder="Write a message" />
-            <Button className="text-white" style={{ backgroundColor: GREEN }}>
+            <Button className="text-white" style={{ backgroundColor: TERRACOTTA }}>
               <Send className="h-4 w-4" />
             </Button>
           </div>

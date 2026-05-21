@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 const AMBER = "#f59e0b";
 const PURPLE = "#8b5cf6";
 
@@ -48,10 +48,10 @@ const candidateProfiles = [
 ];
 
 const recentActivity = [
-  { text: "Amina M. applied for Senior Software Engineer", time: "2h ago", dot: GREEN },
+  { text: "Amina M. applied for Senior Software Engineer", time: "2h ago", dot: TERRACOTTA },
   { text: "Kwame O. shortlisted for Product Manager", time: "5h ago", dot: AMBER },
   { text: "Rosa L. accepted interview for HR Business Partner", time: "1d ago", dot: PURPLE },
-  { text: "New application received for Data Analyst", time: "2d ago", dot: DARK },
+  { text: "New application received for Data Analyst", time: "2d ago", dot: INK },
 ];
 
 function KPICard({ label, value, sub, icon, accent, trend }: {
@@ -70,7 +70,7 @@ function KPICard({ label, value, sub, icon, accent, trend }: {
           </span>
         )}
       </div>
-      <div className="text-2xl font-bold tracking-tight" style={{ color: DARK }}>{value}</div>
+      <div className="text-2xl font-bold tracking-tight" style={{ color: INK }}>{value}</div>
       <div className="text-xs font-medium text-gray-800 mt-0.5">{label}</div>
       <div className="text-[11px] text-gray-400 mt-0.5">{sub}</div>
     </div>
@@ -94,19 +94,19 @@ export default function EmployerDashboard() {
 
       {/* ── DEMO BANNER ── */}
       {isDemo && !demoBannerDismissed && (
-        <div className="flex items-center justify-between rounded-2xl px-5 py-4 border gap-3" style={{ backgroundColor: DARK, borderColor: DARK }}>
+        <div className="flex items-center justify-between rounded-2xl px-5 py-4 border gap-3" style={{ backgroundColor: INK, borderColor: INK }}>
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-8 w-8 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: GREEN + "25" }}>
-              <Sparkles className="h-4 w-4" style={{ color: GREEN }} />
+            <div className="h-8 w-8 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: TERRACOTTA + "25" }}>
+              <Sparkles className="h-4 w-4" style={{ color: TERRACOTTA }} />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-white">You're in demo mode as <span style={{ color: GREEN }}>Kofi Mensah</span> · TechBridge Africa</p>
+              <p className="text-sm font-semibold text-white">You're in demo mode as <span style={{ color: TERRACOTTA }}>Kofi Mensah</span> · TechBridge Africa</p>
               <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">Explore the full platform — data is not saved. Create an account to start hiring for real.</p>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <Link href="/auth/signup">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: GREEN }}>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: TERRACOTTA }}>
                 <UserPlus className="h-3.5 w-3.5" /> Create account
               </button>
             </Link>
@@ -121,17 +121,17 @@ export default function EmployerDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Employer Dashboard</p>
-          <h1 className="text-2xl font-bold" style={{ color: DARK }}>Welcome back, {firstName}</h1>
+          <h1 className="text-2xl font-bold" style={{ color: INK }}>Welcome back, {firstName}</h1>
           <p className="text-sm text-gray-500 mt-0.5">You have {activeJobCount} active listings and {totalApplicants} total applicants.</p>
         </div>
         <div className="flex gap-2 shrink-0">
           <Link href="/jobs/new">
-            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl shadow-sm transition-all hover:opacity-90" style={{ backgroundColor: GREEN }}>
+            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl shadow-sm transition-all hover:opacity-90" style={{ backgroundColor: TERRACOTTA }}>
               <PlusCircle className="h-4 w-4" /> Post a Job
             </button>
           </Link>
           <Link href="/candidates">
-            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors" style={{ color: DARK }}>
+            <button className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors" style={{ color: INK }}>
               <Search className="h-4 w-4" /> Find Talent
             </button>
           </Link>
@@ -163,14 +163,14 @@ export default function EmployerDashboard() {
           value={activeJobCount}
           sub="Currently live"
           icon={<Briefcase className="h-4.5 w-4.5" />}
-          accent={GREEN}
+          accent={TERRACOTTA}
         />
         <KPICard
           label="Total Applications"
           value={totalApplicants}
           sub="Across all listings"
           icon={<Users className="h-4.5 w-4.5" />}
-          accent={DARK}
+          accent={INK}
           trend="+8 this week"
         />
         <KPICard
@@ -197,14 +197,14 @@ export default function EmployerDashboard() {
             icon: <Zap className="h-5 w-5" />,
             title: "Post a New Role",
             desc: "Go live in Ghana, Kenya, or remote hiring",
-            accent: GREEN,
+            accent: TERRACOTTA,
           },
           {
             href: "/candidates",
             icon: <Search className="h-5 w-5" />,
             title: "Browse Candidates",
             desc: "Filter by role, location, skills, experience",
-            accent: DARK,
+            accent: INK,
           },
           {
             href: "/messages",
@@ -220,10 +220,10 @@ export default function EmployerDashboard() {
                 {a.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-gray-900 group-hover:text-green-700 transition-colors">{a.title}</p>
+                <p className="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors">{a.title}</p>
                 <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{a.desc}</p>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-gray-300 group-hover:text-green-500 transition-colors shrink-0 mt-0.5" />
+              <ArrowUpRight className="h-4 w-4 text-gray-300 group-hover:text-primary transition-colors shrink-0 mt-0.5" />
             </div>
           </Link>
         ))}
@@ -237,7 +237,7 @@ export default function EmployerDashboard() {
               <h2 className="font-semibold text-gray-900 text-sm">Application Trend</h2>
               <p className="text-xs text-gray-400 mt-0.5">Monthly applications received across all roles</p>
             </div>
-            <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: GREEN + "15", color: GREEN }}>Last 6 months</span>
+            <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: TERRACOTTA + "15", color: TERRACOTTA }}>Last 6 months</span>
           </div>
           <ResponsiveContainer width="100%" height={180}>
             <LineChart data={trendData} margin={{ top: 5, right: 5, bottom: 0, left: -20 }}>
@@ -248,7 +248,7 @@ export default function EmployerDashboard() {
                 contentStyle={{ borderRadius: 10, border: "1px solid #e5e7eb", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", fontSize: 12 }}
                 cursor={{ stroke: "#f3f4f6", strokeWidth: 2 }}
               />
-              <Line type="monotone" dataKey="applications" stroke={GREEN} strokeWidth={2.5} dot={{ fill: GREEN, r: 3, strokeWidth: 0 }} name="Applications" />
+              <Line type="monotone" dataKey="applications" stroke={TERRACOTTA} strokeWidth={2.5} dot={{ fill: TERRACOTTA, r: 3, strokeWidth: 0 }} name="Applications" />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -261,17 +261,17 @@ export default function EmployerDashboard() {
               <div key={f.stage}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-gray-600">{f.stage}</span>
-                  <span className="text-xs font-bold" style={{ color: DARK }}>{f.count}</span>
+                  <span className="text-xs font-bold" style={{ color: INK }}>{f.count}</span>
                 </div>
                 <div className="h-1.5 bg-gray-100 rounded-full">
-                  <div className="h-1.5 rounded-full" style={{ width: `${(f.count / 47) * 100}%`, backgroundColor: f.stage === "Hired" ? GREEN : f.stage === "Shortlisted" ? PURPLE : DARK + "50" }} />
+                  <div className="h-1.5 rounded-full" style={{ width: `${(f.count / 47) * 100}%`, backgroundColor: f.stage === "Hired" ? TERRACOTTA : f.stage === "Shortlisted" ? PURPLE : INK + "50" }} />
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
             <span className="text-xs text-gray-500">Conversion to hire</span>
-            <span className="text-xs font-bold text-green-600">4.3%</span>
+            <span className="text-xs font-bold text-primary">4.3%</span>
           </div>
         </div>
       </div>
@@ -286,7 +286,7 @@ export default function EmployerDashboard() {
               <p className="text-xs text-gray-400 mt-0.5">{jobs.filter((j: any) => j.isActive).length} live · {jobs.filter((j: any) => !j.isActive).length} closed</p>
             </div>
             <Link href="/jobs/new">
-              <button className="flex items-center gap-1.5 text-xs font-semibold text-white px-3 py-1.5 rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: GREEN }}>
+              <button className="flex items-center gap-1.5 text-xs font-semibold text-white px-3 py-1.5 rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: TERRACOTTA }}>
                 <PlusCircle className="h-3.5 w-3.5" /> Post Job
               </button>
             </Link>
@@ -297,7 +297,7 @@ export default function EmployerDashboard() {
               <p className="text-sm font-medium text-gray-400">No jobs posted yet</p>
               <p className="text-xs text-gray-300 mt-1">Post your first role to start finding talent</p>
               <Link href="/jobs/new">
-                <button className="mt-4 px-4 py-2 text-xs font-semibold text-white rounded-lg" style={{ backgroundColor: GREEN }}>Post a Job</button>
+                <button className="mt-4 px-4 py-2 text-xs font-semibold text-white rounded-lg" style={{ backgroundColor: TERRACOTTA }}>Post a Job</button>
               </Link>
             </div>
           ) : (
@@ -305,12 +305,12 @@ export default function EmployerDashboard() {
               {jobs.map((job: any) => (
                 <div key={job.id} className="px-5 py-3.5 flex items-center justify-between hover:bg-gray-50/50 transition-colors">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="h-8 w-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: GREEN + "15", color: GREEN }}>
+                    <div className="h-8 w-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: TERRACOTTA + "15", color: TERRACOTTA }}>
                       {job.title[0]}
                     </div>
                     <div className="min-w-0">
                       <Link href={`/jobs/${job.id}`}>
-                        <p className="font-medium text-gray-900 text-sm hover:text-green-600 transition-colors cursor-pointer truncate">{job.title}</p>
+                        <p className="font-medium text-gray-900 text-sm hover:text-primary transition-colors cursor-pointer truncate">{job.title}</p>
                       </Link>
                       <p className="text-xs text-gray-400 flex items-center gap-1.5">
                         {job.location}
@@ -322,12 +322,12 @@ export default function EmployerDashboard() {
                   </div>
                   <div className="flex items-center gap-4 shrink-0">
                     <div className="text-right hidden sm:block">
-                      <div className="text-sm font-bold" style={{ color: DARK }}>{job.applicantCount}</div>
+                      <div className="text-sm font-bold" style={{ color: INK }}>{job.applicantCount}</div>
                       <div className="text-[10px] text-gray-400">applicants</div>
                     </div>
                     <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full"
                       style={job.isActive
-                        ? { backgroundColor: GREEN + "20", color: GREEN }
+                        ? { backgroundColor: TERRACOTTA + "20", color: TERRACOTTA }
                         : { backgroundColor: "#f3f4f6", color: "#9ca3af" }}>
                       {job.isActive ? "Active" : "Closed"}
                     </span>
@@ -343,7 +343,7 @@ export default function EmployerDashboard() {
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
               <h2 className="font-semibold text-gray-900 text-sm">Top Candidates</h2>
-              <Link href="/candidates" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: GREEN }}>
+              <Link href="/candidates" className="text-xs font-semibold flex items-center gap-0.5" style={{ color: TERRACOTTA }}>
                 View all <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -351,7 +351,7 @@ export default function EmployerDashboard() {
               {candidateProfiles.slice(0, 3).map((c) => (
                 <div key={c.id} className="px-4 py-3 hover:bg-gray-50/50 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 text-white" style={{ backgroundColor: DARK }}>
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 text-white" style={{ backgroundColor: INK }}>
                       {c.initials}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -359,7 +359,7 @@ export default function EmployerDashboard() {
                       <p className="text-xs text-gray-500 truncate">{c.title} · {c.location}</p>
                     </div>
                     <div className="text-right shrink-0">
-                      <div className="text-xs font-bold" style={{ color: GREEN }}>{c.score}</div>
+                      <div className="text-xs font-bold" style={{ color: TERRACOTTA }}>{c.score}</div>
                       <div className="text-[10px] text-gray-400">match</div>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ export default function EmployerDashboard() {
             </div>
             <div className="px-4 py-3 border-t border-gray-50">
               <Link href="/candidates">
-                <button className="w-full text-sm font-semibold py-2.5 rounded-xl text-white transition-opacity hover:opacity-90" style={{ backgroundColor: DARK }}>
+                <button className="w-full text-sm font-semibold py-2.5 rounded-xl text-white transition-opacity hover:opacity-90" style={{ backgroundColor: INK }}>
                   Browse All Candidates
                 </button>
               </Link>
@@ -377,7 +377,7 @@ export default function EmployerDashboard() {
 
           <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
             <h2 className="font-semibold text-gray-900 text-sm mb-4 flex items-center gap-2">
-              <BarChart3 className="h-4 w-4" style={{ color: GREEN }} /> Recent Activity
+              <BarChart3 className="h-4 w-4" style={{ color: TERRACOTTA }} /> Recent Activity
             </h2>
             <div className="space-y-4">
               {recentActivity.map((item, i) => (

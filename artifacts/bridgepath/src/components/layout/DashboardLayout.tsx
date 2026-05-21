@@ -211,7 +211,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       ]
     : [
         { href: "/dashboard/jobseeker", label: "Overview", icon: LayoutDashboard },
-        { href: "/dashboard/jobs", label: "Find Jobs", icon: Briefcase },
+        { href: "/jobs", label: "Find Jobs", icon: Briefcase },
         { href: "/cv-review", label: "AI CV Review", icon: FileText },
         { href: "/profile", label: "My Profile", icon: User },
       ];

@@ -400,6 +400,7 @@ export default function ServiceDetail() {
         title={`${service.label} in Africa | ${service.tagline}`}
         description={service.description.slice(0, 158).trimEnd() + (service.description.length > 158 ? "…" : "")}
         path={`/services/${slug}`}
+        image={`https://bridgepathafricahr.com/og-image/service/${slug}`}
         breadcrumbs={[
           { name: "HR Services", path: "/services" },
           { name: service.label, path: `/services/${slug}` },

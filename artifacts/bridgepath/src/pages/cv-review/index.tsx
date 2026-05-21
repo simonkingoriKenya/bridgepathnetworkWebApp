@@ -163,7 +163,7 @@ export default function CvReview() {
       if (res.status === 503) {
         toast({
           title: "Request a Human HR Review",
-          description: "Email pkumanyc@gmail.com to arrange your expert review. One-time fee of $15.",
+          description: "Email support@bridgepathnetwork.com to arrange your expert review. One-time fee of $15.",
         });
         return;
       }
@@ -175,7 +175,7 @@ export default function CvReview() {
     } catch {
       toast({
         title: "Request received",
-        description: "Email pkumanyc@gmail.com to arrange your expert HR CV review — $15 one-time fee.",
+        description: "Email support@bridgepathnetwork.com to arrange your expert HR CV review — $15 one-time fee.",
       });
     } finally {
       setUpgradeLoading(false);
@@ -397,7 +397,7 @@ export default function CvReview() {
                     <p className="text-[11px] text-gray-400 text-center">One-time payment · 48-hour turnaround</p>
                     <p className="text-[11px] text-gray-400 text-center">
                       Or email us directly:{" "}
-                      <a href="mailto:pkumanyc@gmail.com" className="underline hover:text-gray-600">pkumanyc@gmail.com</a>
+                      <a href="mailto:support@bridgepathnetwork.com" className="underline hover:text-gray-600">support@bridgepathnetwork.com</a>
                     </p>
                   </div>
                 </div>
@@ -412,7 +412,7 @@ export default function CvReview() {
                   <p className="text-xs text-gray-400 mt-1">Our HR specialist will review your CV within 48 hours.</p>
                   <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-gray-500">
                     <Mail className="h-3.5 w-3.5" />
-                    <span>pkumanyc@gmail.com</span>
+                    <span>support@bridgepathnetwork.com</span>
                   </div>
                 </div>
               )}

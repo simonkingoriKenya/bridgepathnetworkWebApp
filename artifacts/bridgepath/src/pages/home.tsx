@@ -118,7 +118,7 @@ const faqs = [
   { q: "What services does Bridgepath Africa offer beyond recruitment?", a: "We offer Employment of Record, HR Consultancy, Payroll & Tax Administration, Psychometric Assessments, Staff Outsourcing, Interim Management, and Secondment Services." },
   { q: "Which countries is Bridgepath Africa launching in?", a: "We are launching platform access in Ghana and Kenya first, with a clear roadmap to expand across Africa as the network grows." },
   { q: "How does the AI CV Review work?", a: "Our AI CV Review tool analyses your CV against current hiring standards and provides structured feedback to improve your chances of getting shortlisted. Available to all registered professionals." },
-  { q: "How can I get in touch with Bridgepath Africa?", a: "You can reach us via email at pkumanyc@gmail.com or by submitting an enquiry through the contact form below. Our headquarters is in Accra, Ghana." },
+  { q: "How can I get in touch with Bridgepath Africa?", a: "You can reach us via email at support@bridgepathnetwork.com or by submitting an enquiry through the contact form below. Our headquarters is in Accra, Ghana." },
 ];
 
 export default function Home() {
@@ -289,7 +289,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.64 }}
             >
-              <Link href="/auth">
+              <Link href="/auth/signup">
                 <motion.button
                   whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.97 }}
@@ -694,7 +694,7 @@ export default function Home() {
                 {[
                   { icon: <MapPin className="h-5 w-5" />, label: "Headquarters", value: "Accra, Ghana", accent: CORAL },
                   { icon: <Globe className="h-5 w-5" />, label: "Operating in", value: "Ghana · Kenya · East & West Africa", accent: TEAL },
-                  { icon: <UserCheck className="h-5 w-5" />, label: "Contact", value: "pkumanyc@gmail.com", accent: CORAL },
+                  { icon: <UserCheck className="h-5 w-5" />, label: "Contact", value: "support@bridgepathnetwork.com", accent: CORAL },
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}

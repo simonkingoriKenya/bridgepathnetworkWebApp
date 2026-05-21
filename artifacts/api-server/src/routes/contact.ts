@@ -11,8 +11,8 @@ function getResend() {
   return new Resend(apiKey);
 }
 
-const CONTACT_RECIPIENT = "pkumanyc@gmail.com";
-const FROM_ADDRESS = "Bridgepath Africa <onboarding@resend.dev>";
+const CONTACT_RECIPIENT = "support@bridgepathnetwork.com";
+const FROM_ADDRESS = "Bridgepath Africa <noreply@bridgepathnetwork.com>";
 
 router.post("/contact", async (req, res) => {
   try {
@@ -56,7 +56,7 @@ router.post("/contact", async (req, res) => {
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
               <div style="background: #1C1917; padding: 20px 24px; border-radius: 6px 6px 0 0; margin: -24px -24px 24px;">
-                <h1 style="color: #ffffff; font-size: 20px; margin: 0;">New Contact Enquiry — BridgePath Africa</h1>
+                <h1 style="color: #ffffff; font-size: 20px; margin: 0;">New Contact Enquiry — Bridgepath Africa</h1>
               </div>
 
               <table style="width: 100%; border-collapse: collapse;">
@@ -101,7 +101,7 @@ router.post("/contact", async (req, res) => {
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">Hi ${name.trim()},</p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
-                Thank you for contacting BridgePath Africa. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
+                Thank you for contacting Bridgepath Africa. We've received your enquiry about <strong>${type || "our services"}</strong> and a member of our team will be in touch within 1–2 business days.
               </p>
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 In the meantime, feel free to explore our services or browse available roles on our platform.
@@ -115,8 +115,8 @@ router.post("/contact", async (req, res) => {
 
               <p style="font-size: 15px; color: #374151; line-height: 1.6;">
                 Best regards,<br/>
-                <strong>The BridgePath Africa Team</strong><br/>
-                <a href="mailto:pkumanyc@gmail.com" style="color: #C8461A;">pkumanyc@gmail.com</a>
+                <strong>The Bridgepath Africa Team</strong><br/>
+                <a href="mailto:support@bridgepathnetwork.com" style="color: #C04020;">support@bridgepathnetwork.com</a>
               </p>
 
               <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">

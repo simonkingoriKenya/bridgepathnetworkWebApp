@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 
 const INDUSTRIES = [
   "All Industries", "Technology", "Banking & Finance", "FinTech",
@@ -71,7 +71,7 @@ const COMPANY_COLORS: Record<string, string> = {
 };
 
 function companyColor(name: string) {
-  return COMPANY_COLORS[name] || GREEN;
+  return COMPANY_COLORS[name] || TERRACOTTA;
 }
 
 function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean; onSave: () => void; isEmployer: boolean }) {
@@ -86,7 +86,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.25 }}
-      className="group bg-white rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-lg transition-all duration-250 p-5 flex flex-col gap-4"
+      className="group bg-white rounded-2xl border border-gray-100 hover:border-primary/50 hover:shadow-lg transition-all duration-250 p-5 flex flex-col gap-4"
     >
       {/* Header row */}
       <div className="flex items-start gap-3">
@@ -99,7 +99,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
         <div className="flex-1 min-w-0">
           <h3
             className="font-bold text-base leading-snug truncate cursor-pointer hover:underline"
-            style={{ color: DARK }}
+            style={{ color: INK }}
             onClick={() => navigate(`/jobs/${job.id}`)}
           >
             {job.title}
@@ -112,7 +112,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
         <button
           onClick={onSave}
           className="shrink-0 p-2 rounded-lg transition-all hover:scale-110"
-          style={{ color: saved ? GREEN : "#9ca3af" }}
+          style={{ color: saved ? TERRACOTTA : "#9ca3af" }}
           title={saved ? "Saved" : "Save job"}
         >
           {saved ? <BookmarkCheck className="h-5 w-5" /> : <Bookmark className="h-5 w-5" />}
@@ -127,7 +127,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
         <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
           <Briefcase className="h-3 w-3" /> {typeLabel(job.type)}
         </span>
-        <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: GREEN + "15", color: "#3d6e10" }}>
+        <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: TERRACOTTA + "15", color: "#3d6e10" }}>
           <DollarSign className="h-3 w-3" /> ${(job.salaryMin / 1000).toFixed(0)}k – ${(job.salaryMax / 1000).toFixed(0)}k
         </span>
         <span className="inline-flex items-center gap-1 text-xs text-gray-400 ml-auto">
@@ -150,7 +150,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
         <span className="text-xs text-gray-400">{job.industry}</span>
         {isEmployer ? (
           <Link href={`/jobs/${job.id}`}>
-            <button className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg border transition-all hover:bg-gray-50" style={{ color: DARK, borderColor: "#e5e7eb" }}>
+            <button className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg border transition-all hover:bg-gray-50" style={{ color: INK, borderColor: "#e5e7eb" }}>
               View <ExternalLink className="h-3 w-3" />
             </button>
           </Link>
@@ -158,7 +158,7 @@ function JobCard({ job, saved, onSave, isEmployer }: { job: Job; saved: boolean;
           <button
             onClick={() => navigate(`/jobs/${job.id}`)}
             className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg text-white transition-all hover:opacity-90"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: TERRACOTTA }}
           >
             Apply now
           </button>
@@ -247,8 +247,8 @@ export default function DashboardJobs() {
   const FilterPanel = () => (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-0">
       <div className="flex items-center justify-between mb-5">
-        <p className="text-sm font-bold flex items-center gap-2" style={{ color: DARK }}>
-          <Filter className="h-4 w-4" style={{ color: GREEN }} /> Filters
+        <p className="text-sm font-bold flex items-center gap-2" style={{ color: INK }}>
+          <Filter className="h-4 w-4" style={{ color: TERRACOTTA }} /> Filters
         </p>
         {activeFilterCount > 0 && (
           <button onClick={clearAll} className="text-xs text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1">
@@ -264,7 +264,7 @@ export default function DashboardJobs() {
               key={t.v}
               onClick={() => setType(t.v)}
               className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors"
-              style={type === t.v ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 } : { color: "#6b7280" }}
+              style={type === t.v ? { backgroundColor: TERRACOTTA + "15", color: TERRACOTTA, fontWeight: 600 } : { color: "#6b7280" }}
             >
               {t.l}
               {type === t.v && <CheckCircle2 className="h-3.5 w-3.5" />}
@@ -280,7 +280,7 @@ export default function DashboardJobs() {
               key={ind}
               onClick={() => setIndustry(ind)}
               className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors"
-              style={industry === ind ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 } : { color: "#6b7280" }}
+              style={industry === ind ? { backgroundColor: TERRACOTTA + "15", color: TERRACOTTA, fontWeight: 600 } : { color: "#6b7280" }}
             >
               {ind}
               {industry === ind && <CheckCircle2 className="h-3.5 w-3.5" />}
@@ -296,7 +296,7 @@ export default function DashboardJobs() {
               key={c}
               onClick={() => setCountry(c)}
               className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors"
-              style={country === c ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 } : { color: "#6b7280" }}
+              style={country === c ? { backgroundColor: TERRACOTTA + "15", color: TERRACOTTA, fontWeight: 600 } : { color: "#6b7280" }}
             >
               {c}
               {country === c && <CheckCircle2 className="h-3.5 w-3.5" />}
@@ -312,7 +312,7 @@ export default function DashboardJobs() {
               key={r.label}
               onClick={() => setSalaryIdx(i)}
               className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors"
-              style={salaryIdx === i ? { backgroundColor: GREEN + "15", color: GREEN, fontWeight: 600 } : { color: "#6b7280" }}
+              style={salaryIdx === i ? { backgroundColor: TERRACOTTA + "15", color: TERRACOTTA, fontWeight: 600 } : { color: "#6b7280" }}
             >
               {r.label}
               {salaryIdx === i && <CheckCircle2 className="h-3.5 w-3.5" />}
@@ -330,10 +330,10 @@ export default function DashboardJobs() {
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 md:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-1" style={{ color: GREEN }}>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-1" style={{ color: TERRACOTTA }}>
               {isEmployer ? "Talent & Jobs" : "Job Discovery"}
             </p>
-            <h1 className="text-xl md:text-2xl font-bold" style={{ color: DARK }}>
+            <h1 className="text-xl md:text-2xl font-bold" style={{ color: INK }}>
               {isEmployer ? "Browse the Job Board" : "Find Your Next Role"}
             </h1>
             <p className="text-sm text-gray-500 mt-1">
@@ -343,10 +343,10 @@ export default function DashboardJobs() {
             </p>
           </div>
           {!isEmployer && (
-            <div className="flex items-center gap-2 shrink-0 px-4 py-3 rounded-xl" style={{ backgroundColor: GREEN + "12", border: `1px solid ${GREEN}30` }}>
-              <Sparkles className="h-4 w-4 shrink-0" style={{ color: GREEN }} />
-              <p className="text-xs font-semibold" style={{ color: GREEN }}>CV Review boosts your match rate</p>
-              <Link href="/cv-review" className="text-xs font-bold underline shrink-0" style={{ color: GREEN }}>Try it →</Link>
+            <div className="flex items-center gap-2 shrink-0 px-4 py-3 rounded-xl" style={{ backgroundColor: TERRACOTTA + "12", border: `1px solid ${TERRACOTTA}30` }}>
+              <Sparkles className="h-4 w-4 shrink-0" style={{ color: TERRACOTTA }} />
+              <p className="text-xs font-semibold" style={{ color: TERRACOTTA }}>CV Review boosts your match rate</p>
+              <Link href="/cv-review" className="text-xs font-bold underline shrink-0" style={{ color: TERRACOTTA }}>Try it →</Link>
             </div>
           )}
         </div>
@@ -363,7 +363,7 @@ export default function DashboardJobs() {
               onChange={e => setSearch(e.target.value)}
               placeholder="Job title, skills, or company…"
               className="w-full h-11 pl-10 pr-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:bg-white transition-colors"
-              style={{ "--tw-ring-color": GREEN + "55" } as any}
+              style={{ "--tw-ring-color": TERRACOTTA + "55" } as any}
             />
             {search && (
               <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -379,12 +379,12 @@ export default function DashboardJobs() {
               onChange={e => setLocationVal(e.target.value)}
               placeholder="City, country, or Remote"
               className="w-full h-11 pl-10 pr-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:bg-white transition-colors"
-              style={{ "--tw-ring-color": GREEN + "55" } as any}
+              style={{ "--tw-ring-color": TERRACOTTA + "55" } as any}
             />
           </div>
           <button
             className="h-11 px-6 font-semibold text-sm text-white rounded-xl shrink-0 hover:opacity-90 transition-opacity"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: TERRACOTTA }}
           >
             Search
           </button>
@@ -398,7 +398,7 @@ export default function DashboardJobs() {
               onClick={() => setType(t.v)}
               className="text-xs font-semibold px-3 py-1.5 rounded-full border transition-all"
               style={type === t.v
-                ? { backgroundColor: GREEN, borderColor: GREEN, color: "white" }
+                ? { backgroundColor: TERRACOTTA, borderColor: TERRACOTTA, color: "white" }
                 : { backgroundColor: "white", borderColor: "#e5e7eb", color: "#6b7280" }}
             >
               {t.l}
@@ -411,7 +411,7 @@ export default function DashboardJobs() {
               onClick={() => setIndustry(industry === ind ? "All Industries" : ind)}
               className="text-xs font-semibold px-3 py-1.5 rounded-full border transition-all"
               style={industry === ind
-                ? { backgroundColor: DARK, borderColor: DARK, color: "white" }
+                ? { backgroundColor: INK, borderColor: INK, color: "white" }
                 : { backgroundColor: "white", borderColor: "#e5e7eb", color: "#6b7280" }}
             >
               {ind}
@@ -440,7 +440,7 @@ export default function DashboardJobs() {
                   onClick={() => setTab(t.k as any)}
                   className="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all"
                   style={tab === t.k
-                    ? { backgroundColor: DARK, color: "white" }
+                    ? { backgroundColor: INK, color: "white" }
                     : { color: "#6b7280" }}
                 >
                   {t.l}
@@ -453,7 +453,7 @@ export default function DashboardJobs() {
               <button
                 onClick={() => setFiltersOpen(!filtersOpen)}
                 className="lg:hidden flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg border border-gray-200 bg-white"
-                style={{ color: activeFilterCount > 0 ? GREEN : "#6b7280" }}
+                style={{ color: activeFilterCount > 0 ? TERRACOTTA : "#6b7280" }}
               >
                 <SlidersHorizontal className="h-3.5 w-3.5" />
                 Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
@@ -494,12 +494,12 @@ export default function DashboardJobs() {
           {activeFilterCount > 0 && (
             <div className="flex flex-wrap gap-2">
               {type !== "all" && (
-                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: GREEN }}>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: TERRACOTTA }}>
                   {typeLabel(type)} <button onClick={() => setType("all")}><X className="h-3 w-3" /></button>
                 </span>
               )}
               {industry !== "All Industries" && (
-                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: DARK }}>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: INK }}>
                   {industry} <button onClick={() => setIndustry("All Industries")}><X className="h-3 w-3" /></button>
                 </span>
               )}
@@ -509,7 +509,7 @@ export default function DashboardJobs() {
                 </span>
               )}
               {salaryIdx > 0 && (
-                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: GREEN + "20", color: "#3d6e10" }}>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full" style={{ backgroundColor: TERRACOTTA + "20", color: "#3d6e10" }}>
                   <DollarSign className="h-3 w-3" /> {SALARY_RANGES[salaryIdx].label} <button onClick={() => setSalaryIdx(0)}><X className="h-3 w-3" /></button>
                 </span>
               )}
@@ -519,10 +519,10 @@ export default function DashboardJobs() {
           {/* Job cards grid */}
           {filtered.length === 0 ? (
             <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
-              <div className="h-14 w-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: GREEN + "15" }}>
-                <Search className="h-6 w-6" style={{ color: GREEN }} />
+              <div className="h-14 w-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: TERRACOTTA + "15" }}>
+                <Search className="h-6 w-6" style={{ color: TERRACOTTA }} />
               </div>
-              <h3 className="font-semibold mb-2" style={{ color: DARK }}>
+              <h3 className="font-semibold mb-2" style={{ color: INK }}>
                 {tab === "saved" ? "No saved jobs yet" : "No roles match your filters"}
               </h3>
               <p className="text-sm text-gray-500 mb-4">
@@ -531,11 +531,11 @@ export default function DashboardJobs() {
                   : "Try adjusting your search or clearing some filters."}
               </p>
               {tab === "saved" ? (
-                <button onClick={() => setTab("all")} className="text-sm font-semibold" style={{ color: GREEN }}>
+                <button onClick={() => setTab("all")} className="text-sm font-semibold" style={{ color: TERRACOTTA }}>
                   Browse all roles →
                 </button>
               ) : (
-                <button onClick={clearAll} className="text-sm font-semibold" style={{ color: GREEN }}>
+                <button onClick={clearAll} className="text-sm font-semibold" style={{ color: TERRACOTTA }}>
                   Clear all filters
                 </button>
               )}

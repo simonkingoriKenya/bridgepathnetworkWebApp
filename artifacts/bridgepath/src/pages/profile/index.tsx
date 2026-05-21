@@ -11,8 +11,8 @@ import {
   ChevronRight, Save,
 } from "lucide-react";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 const TEAL = "#1e3d3a";
 
 const INDUSTRIES = [
@@ -54,7 +54,7 @@ const employerSchema = z.object({
 type Tab = "info" | "skills" | "links";
 
 function ProfileStrength({ pct, label }: { pct: number; label: string }) {
-  const color = pct < 40 ? "#f59e0b" : pct < 75 ? "#3b82f6" : GREEN;
+  const color = pct < 40 ? "#f59e0b" : pct < 75 ? "#3b82f6" : TERRACOTTA;
   return (
     <div className="mt-4">
       <div className="flex justify-between text-xs mb-1.5">
@@ -74,7 +74,7 @@ function ProfileStrength({ pct, label }: { pct: number; label: string }) {
 function SkillChip({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
     <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all group"
-      style={{ borderColor: GREEN + "60", backgroundColor: GREEN + "12", color: TEAL }}>
+      style={{ borderColor: TERRACOTTA + "60", backgroundColor: TERRACOTTA + "12", color: TEAL }}>
       {label}
       <button onClick={onRemove} className="rounded-full p-0.5 hover:bg-red-100 hover:text-red-500 transition-colors">
         <X className="h-3 w-3" />
@@ -228,13 +228,13 @@ export default function Profile() {
       {/* ── Profile header card ── */}
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
         {/* Banner gradient */}
-        <div className="h-24 w-full" style={{ background: `linear-gradient(135deg, ${DARK} 0%, ${TEAL} 100%)` }} />
+        <div className="h-24 w-full" style={{ background: `linear-gradient(135deg, ${INK} 0%, ${TEAL} 100%)` }} />
 
         <div className="px-6 pb-6 -mt-10">
           {/* Avatar */}
           <div
             className="h-20 w-20 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg border-4 border-white mb-4"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: TERRACOTTA }}
           >
             {user?.name?.charAt(0).toUpperCase() || "U"}
           </div>
@@ -245,7 +245,7 @@ export default function Profile() {
               <p className="text-sm text-gray-500 mt-0.5">{user?.email}</p>
               <span
                 className="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full"
-                style={{ backgroundColor: GREEN + "18", color: TEAL }}
+                style={{ backgroundColor: TERRACOTTA + "18", color: TEAL }}
               >
                 {isEmployer ? "Employer Account" : "Professional Account"}
               </span>
@@ -272,7 +272,7 @@ export default function Profile() {
                 onClick={() => setTab(t.id)}
                 className="flex items-center gap-2 px-5 py-4 text-sm font-semibold border-b-2 transition-colors"
                 style={active
-                  ? { borderColor: GREEN, color: TEAL }
+                  ? { borderColor: TERRACOTTA, color: TEAL }
                   : { borderColor: "transparent", color: "#9ca3af" }}
               >
                 <Icon className="h-4 w-4" />
@@ -328,7 +328,7 @@ export default function Profile() {
                               onClick={() => form.setValue("companySize", active ? "" : s)}
                               className="px-4 py-2 rounded-xl text-sm font-semibold border transition-all"
                               style={active
-                                ? { backgroundColor: DARK, borderColor: DARK, color: "white" }
+                                ? { backgroundColor: INK, borderColor: INK, color: "white" }
                                 : { borderColor: "#e5e7eb", color: "#6b7280" }}
                             >
                               {s} employees
@@ -393,7 +393,7 @@ export default function Profile() {
             {tab === "skills" && !isEmployer && (
               <>
                 <Field label="Skills" hint="Press Enter or comma to add each skill">
-                  <div className="flex flex-wrap gap-2 p-3 min-h-[52px] rounded-xl border border-gray-200 focus-within:border-green-400 focus-within:ring-2 focus-within:ring-green-100 transition-all bg-white">
+                  <div className="flex flex-wrap gap-2 p-3 min-h-[52px] rounded-xl border border-gray-200 focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
                     {skills.map(skill => (
                       <SkillChip key={skill} label={skill} onRemove={() => setSkills(prev => prev.filter(s => s !== skill))} />
                     ))}
@@ -430,7 +430,7 @@ export default function Profile() {
                           key={s}
                           type="button"
                           onClick={() => setSkills(prev => [...prev, s])}
-                          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium border border-dashed border-gray-300 text-gray-500 hover:border-green-400 hover:text-green-700 transition-colors"
+                          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium border border-dashed border-gray-300 text-gray-500 hover:border-primary/50 hover:text-primary transition-colors"
                         >
                           <Plus className="h-3 w-3" />{s}
                         </button>
@@ -478,8 +478,8 @@ export default function Profile() {
                 </div>
 
                 {/* Visibility hint */}
-                <div className="mt-4 rounded-xl p-4 flex items-start gap-3" style={{ backgroundColor: GREEN + "0d" }}>
-                  <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" style={{ color: GREEN }} />
+                <div className="mt-4 rounded-xl p-4 flex items-start gap-3" style={{ backgroundColor: TERRACOTTA + "0d" }}>
+                  <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" style={{ color: TERRACOTTA }} />
                   <div>
                     <p className="text-sm font-semibold" style={{ color: TEAL }}>Boost your visibility</p>
                     <p className="text-xs text-gray-500 mt-0.5">
@@ -495,7 +495,7 @@ export default function Profile() {
           <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-gray-400">
               {savedOk && (
-                <span className="flex items-center gap-1.5 text-green-600 font-medium animate-in fade-in slide-in-from-left-2 duration-300">
+                <span className="flex items-center gap-1.5 text-primary font-medium animate-in fade-in slide-in-from-left-2 duration-300">
                   <CheckCircle2 className="h-4 w-4" /> Saved successfully
                 </span>
               )}
@@ -520,7 +520,7 @@ export default function Profile() {
                 type="submit"
                 disabled={saving}
                 className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
-                style={{ backgroundColor: GREEN }}
+                style={{ backgroundColor: TERRACOTTA }}
               >
                 {saving
                   ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving…</>
@@ -536,7 +536,7 @@ export default function Profile() {
         <h3 className="text-sm font-semibold text-gray-700 mb-1">Account</h3>
         <p className="text-xs text-gray-400 mb-3">Manage your account settings and data.</p>
         <div className="flex flex-wrap gap-2">
-          <a href="mailto:pkumanyc@gmail.com" className="text-xs px-3 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors">
+          <a href="mailto:support@bridgepathnetwork.com" className="text-xs px-3 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors">
             Contact Support
           </a>
           <button className="text-xs px-3 py-2 rounded-lg border border-red-200 text-red-500 hover:bg-red-50 transition-colors">
@@ -551,7 +551,7 @@ export default function Profile() {
 /* ── Small helpers ── */
 
 const inputCls =
-  "w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white outline-none focus:ring-2 focus:ring-green-200 focus:border-green-400 transition placeholder:text-gray-400";
+  "w-full h-11 px-3.5 text-sm rounded-xl border border-gray-200 bg-white outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition placeholder:text-gray-400";
 
 function Field({
   label,

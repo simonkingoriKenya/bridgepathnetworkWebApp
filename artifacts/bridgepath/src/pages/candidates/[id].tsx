@@ -1,8 +1,8 @@
 import { Link, useRoute } from "wouter";
 import { ArrowLeft, Briefcase, MapPin, MessageSquare, FileText } from "lucide-react";
 
-const GREEN = "#8CC63F";
-const DARK = "#1a2340";
+const TERRACOTTA = "#C04020";
+const INK = "#1E1511";
 
 const candidates = [
   {
@@ -64,15 +64,15 @@ export default function CandidateProfilePage() {
       <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: GREEN }}>Candidate Profile</p>
-            <h1 className="text-2xl md:text-3xl font-bold" style={{ color: DARK }}>{candidate.name}</h1>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ color: TERRACOTTA }}>Candidate Profile</p>
+            <h1 className="text-2xl md:text-3xl font-bold" style={{ color: INK }}>{candidate.name}</h1>
             <p className="text-gray-600 mt-2">{candidate.role}</p>
             <div className="flex flex-wrap gap-4 mt-4 text-sm text-gray-500">
               <span className="inline-flex items-center gap-1.5"><Briefcase className="h-4 w-4" /> {candidate.experience}</span>
               <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" /> {candidate.location}</span>
             </div>
           </div>
-          <Link href="/messages" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white" style={{ backgroundColor: GREEN }}>
+          <Link href="/messages" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white" style={{ backgroundColor: TERRACOTTA }}>
             <MessageSquare className="h-4 w-4" /> Message Candidate
           </Link>
         </div>
@@ -90,7 +90,7 @@ export default function CandidateProfilePage() {
             <div className="space-y-3">
               {candidate.history.map((item) => (
                 <div key={item} className="flex gap-3">
-                  <span className="h-2 w-2 rounded-full mt-2 shrink-0" style={{ backgroundColor: GREEN }} />
+                  <span className="h-2 w-2 rounded-full mt-2 shrink-0" style={{ backgroundColor: TERRACOTTA }} />
                   <p className="text-sm text-gray-600">{item}</p>
                 </div>
               ))}
@@ -109,7 +109,7 @@ export default function CandidateProfilePage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div className="h-10 w-10 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: GREEN + "20", color: GREEN }}>
+            <div className="h-10 w-10 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: TERRACOTTA + "20", color: TERRACOTTA }}>
               <FileText className="h-5 w-5" />
             </div>
             <h2 className="font-semibold text-gray-900 mb-2">CV Summary</h2>
