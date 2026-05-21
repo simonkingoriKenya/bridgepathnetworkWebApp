@@ -30,6 +30,8 @@ import EmployersPage from "@/pages/employers";
 import AuthCallback from "@/pages/auth/callback";
 import ForgotPassword from "@/pages/auth/forgot-password";
 import ResetPassword from "@/pages/auth/reset-password";
+import VerifyEmail from "@/pages/auth/verify-email";
+import OAuthCallback from "@/pages/auth/oauth-callback";
 import JobSeekerOnboarding from "@/pages/onboarding/jobseeker";
 import EmployerOnboarding from "@/pages/onboarding/employer";
 import CandidatesPage from "@/pages/candidates";
@@ -84,6 +86,8 @@ function Router() {
       <Route path="/auth/callback" component={AuthCallback} />
       <Route path="/auth/forgot-password" component={ForgotPassword} />
       <Route path="/auth/reset-password" component={ResetPassword} />
+      <Route path="/auth/verify-email" component={VerifyEmail} />
+      <Route path="/auth/oauth/callback" component={OAuthCallback} />
       <Route path="/onboarding/jobseeker">
         {() => <ProtectedRoute component={JobSeekerOnboarding} allowedRoles={["job_seeker"]} useLayout={false} />}
       </Route>

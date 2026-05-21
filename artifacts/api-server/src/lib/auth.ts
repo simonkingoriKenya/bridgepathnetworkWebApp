@@ -22,6 +22,13 @@ export function hashPassword(password: string): string {
   return crypto.createHash("sha256").update(password + salt).digest("hex");
 }
 
+export function verifyPassword(password: string, hash: string): boolean {
+  return crypto.timingSafeEqual(
+    Buffer.from(hashPassword(password)),
+    Buffer.from(hash),
+  );
+}
+
 export function generateToken(userId: number): string {
   const issuedAt = Date.now();
   const payload = `${userId}:${issuedAt}`;

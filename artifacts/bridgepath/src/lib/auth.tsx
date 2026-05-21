@@ -12,6 +12,7 @@ export type AppUser = {
   name: string;
   role: "job_seeker" | "employer" | "admin";
   avatarUrl?: string;
+  emailVerified?: boolean;
 };
 
 interface AuthContextType {
@@ -25,7 +26,8 @@ interface AuthContextType {
     password: string,
     name: string,
     role: "job_seeker" | "employer",
-  ) => Promise<{ error?: string; needsConfirmation?: boolean }>;
+    linkedinUrl?: string,
+  ) => Promise<{ error?: string; needsVerification?: boolean }>;
   logout: () => Promise<void>;
   updateRole: (role: string) => void;
   login: (token: string, user: any) => void;
@@ -89,6 +91,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (!res.ok) {
+        if (data.error === "EmailNotVerified") {
+          return { error: `EmailNotVerified: ${data.message}` };
+        }
         return { error: data.message ?? "Login failed" };
       }
       const appUser: AppUser = {
@@ -96,6 +101,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email: data.user.email,
         name: data.user.name,
         role: data.user.role as AppUser["role"],
+        emailVerified: data.user.emailVerified,
       };
       localStorage.setItem(TOKEN_KEY, data.token);
       localStorage.setItem(ROLE_KEY, appUser.role);
@@ -113,22 +119,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     password: string,
     name: string,
     role: "job_seeker" | "employer",
+    linkedinUrl?: string,
   ) => {
     try {
       const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim().toLowerCase(), password, name: name.trim(), role }),
+        body: JSON.stringify({ email: email.trim().toLowerCase(), password, name: name.trim(), role, linkedinUrl }),
       });
       const data = await res.json();
       if (!res.ok) {
         return { error: data.message ?? "Registration failed" };
+      }
+      if (data.needsVerification) {
+        return { needsVerification: true };
       }
       const appUser: AppUser = {
         id: String(data.user.id),
         email: data.user.email,
         name: data.user.name,
         role: data.user.role as AppUser["role"],
+        emailVerified: data.user.emailVerified,
       };
       localStorage.setItem(TOKEN_KEY, data.token);
       localStorage.setItem(ROLE_KEY, appUser.role);
@@ -163,9 +174,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const login = (_token: string, backendUser: any) => {
+  const login = (token: string, backendUser: any) => {
+    if (token) localStorage.setItem(TOKEN_KEY, token);
     if (backendUser) {
-      localStorage.setItem(ROLE_KEY, backendUser.role || "job_seeker");
+      const appUser: AppUser = {
+        id: String(backendUser.id),
+        email: backendUser.email,
+        name: backendUser.name,
+        role: backendUser.role as AppUser["role"],
+        emailVerified: backendUser.emailVerified,
+      };
+      localStorage.setItem(ROLE_KEY, appUser.role);
+      localStorage.setItem(NAME_KEY, appUser.name);
+      setStoredUser(appUser);
+      setUser(appUser);
     }
   };
 
