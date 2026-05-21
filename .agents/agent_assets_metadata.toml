@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "Uwh_GztevXdaRMZFPFYLY"
@@ -90,3 +89,9 @@ id = "OfIGhU2xguKA1jriO5lp4"
 uri = "file://attached_assets/generated_images/hero-bg-new.png"
 type = "image"
 title = "hero-african-office-bg"
+
+[[outputs]]
+id = "9_sop3YqO3-xK62pwWajj"
+uri = "file://artifacts/bridgepath/public/opengraph.jpg"
+type = "image"
+title = "opengraph.jpg — Link preview card (1200×630)"
