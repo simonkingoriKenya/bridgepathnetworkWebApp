@@ -188,6 +188,16 @@ export default function Home() {
           />
         </motion.div>
 
+        {/* ── GRADIENT OVERLAYS — always-on text legibility ── */}
+        {/* Top band: keeps navbar links readable */}
+        <div className="absolute inset-x-0 top-0 h-40 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 100%)" }} />
+        {/* Left + bottom: keeps hero headline & buttons readable */}
+        <div className="absolute inset-0 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.12) 75%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-64 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)" }} />
+
         {/* ── CONTENT ── */}
         <motion.div
           className="relative z-20 flex flex-col justify-end lg:justify-center min-h-[100svh] px-6 sm:px-12 md:px-20 xl:px-28 pb-20 lg:pb-0"
@@ -410,6 +420,9 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         />
+        {/* Gradient overlay — guarantees text legibility */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.15) 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <div className="max-w-lg">
@@ -596,6 +609,9 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         />
+        {/* Gradient overlay — text on right side */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.15) 100%)" }} />
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <FadeUp className="max-w-md ml-auto" delay={0.1}>

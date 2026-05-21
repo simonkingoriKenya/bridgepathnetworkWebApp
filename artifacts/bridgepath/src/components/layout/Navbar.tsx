@@ -50,9 +50,10 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Derived text colours
-  const linkColor    = isOverlay ? "rgba(254,249,244,0.92)" : "#444444";
-  const activeLinkColor = CORAL;
+  // Derived text colours — overlay mode always white+shadow so links stay readable over any photo
+  const linkColor    = isOverlay ? "#ffffff" : "#444444";
+  const linkShadow   = isOverlay ? "0 1px 6px rgba(0,0,0,0.7)" : "none";
+  const activeLinkColor = isOverlay ? "#ffffff" : CORAL;
 
   return (
     <header className="w-full">
@@ -90,7 +91,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-1">
             <Link href="/"
               className="px-4 py-2 text-sm font-medium rounded transition-colors hover:text-primary"
-              style={{ color: location === "/" ? activeLinkColor : linkColor }}
+              style={{ color: location === "/" ? activeLinkColor : linkColor, textShadow: linkShadow }}
             >
               Home
             </Link>
@@ -99,7 +100,7 @@ export function Navbar() {
             <div className="relative" onMouseEnter={() => setProfOpen(true)} onMouseLeave={() => setProfOpen(false)}>
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded transition-colors hover:text-primary"
-                style={{ color: location === "/jobs" || location === "/cv-review" ? activeLinkColor : linkColor }}
+                style={{ color: location === "/jobs" || location === "/cv-review" ? activeLinkColor : linkColor, textShadow: linkShadow }}
               >
                 <Search className="h-3.5 w-3.5" />
                 For Professionals
@@ -142,7 +143,7 @@ export function Navbar() {
             <div className="relative" onMouseEnter={() => setEmpOpen(true)} onMouseLeave={() => setEmpOpen(false)}>
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded transition-colors hover:text-primary"
-                style={{ color: location === "/employers" || location === "/candidates" ? activeLinkColor : linkColor }}
+                style={{ color: location === "/employers" || location === "/candidates" ? activeLinkColor : linkColor, textShadow: linkShadow }}
               >
                 <Building2 className="h-3.5 w-3.5" />
                 For Employers
@@ -193,7 +194,7 @@ export function Navbar() {
             ].map((link) => (
               <Link key={link.href} href={link.href}
                 className="px-4 py-2 text-sm font-medium rounded transition-colors hover:text-primary"
-                style={{ color: location.startsWith(link.href) ? activeLinkColor : linkColor }}
+                style={{ color: location.startsWith(link.href) ? activeLinkColor : linkColor, textShadow: linkShadow }}
               >
                 {link.label}
               </Link>
@@ -201,7 +202,7 @@ export function Navbar() {
 
             <a href="#contact"
               className="px-4 py-2 text-sm font-medium rounded transition-colors hover:text-primary"
-              style={{ color: linkColor }}
+              style={{ color: linkColor, textShadow: linkShadow }}
             >
               Contact
             </a>
