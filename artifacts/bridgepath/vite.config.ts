@@ -6,6 +6,14 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 process.env.VITE_BUILD_TS = Date.now().toString();
 
+// Inject the app origin so index.html og:image tags work on any domain
+// (Replit dev, staging, production — all get the right absolute URL)
+if (!process.env.VITE_APP_ORIGIN) {
+  process.env.VITE_APP_ORIGIN = process.env.REPLIT_DEV_DOMAIN
+    ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+    : "https://bridgepathafricahr.com";
+}
+
 const isBuild = process.argv.includes("build");
 
 const rawPort = process.env.PORT;
