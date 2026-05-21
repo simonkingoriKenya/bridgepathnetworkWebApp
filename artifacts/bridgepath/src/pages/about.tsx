@@ -63,6 +63,7 @@ const certificates = [
   { title: "PSM I", body: "Professional Scrum Master I", area: "Agile & Scrum" },
   { title: "PSM II", body: "Professional Scrum Master II", area: "Advanced Scrum" },
   { title: "PSPO I", body: "Professional Scrum Product Owner I", area: "Product Ownership" },
+  { title: "PSPO II", body: "Professional Scrum Product Owner II", area: "Advanced Product Ownership" },
   { title: "20+ Years Experience", body: "HR & Talent Acquisition Leadership", area: "Human Resources" },
 ];
 
