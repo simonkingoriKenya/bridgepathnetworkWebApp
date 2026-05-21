@@ -69,9 +69,6 @@ export default function Signup() {
         {/* Background image */}
         <img src="/photos/africa-office-team.png" alt="Vibrant African professionals in a modern office"
           className="absolute inset-0 w-full h-full object-cover object-center" />
-        {/* Dark gradient for text legibility */}
-        <div className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(28,25,23,0.96) 0%, rgba(28,25,23,0.55) 40%, rgba(28,25,23,0.15) 100%)" }} />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col h-full p-12">
@@ -81,8 +78,8 @@ export default function Signup() {
               <img src="/logo-new.png" alt="Bridgepath Africa" className="h-8 w-8 object-contain" />
             </div>
             <div>
-              <div className="font-bold text-xl text-white tracking-tight">Bridgepath Africa</div>
-              <div className="text-[10px] text-white/50 italic">Shaping People. Strengthening Institutions.</div>
+              <div className="font-bold text-xl text-white tracking-tight" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}>Bridgepath Africa</div>
+              <div className="text-[10px] text-white italic" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>Shaping People. Strengthening Institutions.</div>
             </div>
           </Link>
 
@@ -91,30 +88,30 @@ export default function Signup() {
             <div className="flex gap-2 mb-6">
               {["Free to join", "Ghana & Kenya", "20+ yrs expertise"].map((tag) => (
                 <span key={tag} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full text-white"
-                  style={{ backgroundColor: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                  style={{ backgroundColor: "rgba(255,255,255,0.22)", border: "1px solid rgba(255,255,255,0.4)", backdropFilter: "blur(8px)" }}>
                   {tag}
                 </span>
               ))}
             </div>
-            <h2 className="text-4xl font-bold text-white leading-tight mb-4">
-              Your career in Africa <span style={{ color: GOLD }}>starts here.</span>
+            <h2 className="text-4xl font-bold text-white leading-tight mb-4" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.5)" }}>
+              Your career in Africa <span style={{ color: GOLD, textShadow: "0 2px 14px rgba(0,0,0,0.55)" }}>starts here.</span>
             </h2>
-            <p className="text-white/60 text-base leading-relaxed max-w-md">
+            <p className="text-white text-base leading-relaxed max-w-md" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.65)", fontWeight: 500 }}>
               Join a platform built on 20 years of HR expertise — connecting Africa's brightest professionals with ambitious global employers.
             </p>
 
             {/* Social proof */}
-            <div className="mt-6 pt-6 border-t border-white/15 flex items-center gap-4">
+            <div className="mt-6 pt-6 border-t border-white/25 flex items-center gap-4">
               <div className="flex -space-x-2">
                 {[CORAL, "#3B82F6", "#10B981", GOLD].map((c, i) => (
-                  <div key={i} className="h-8 w-8 rounded-full border-2 border-white/30 flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: c }}>
+                  <div key={i} className="h-8 w-8 rounded-full border-2 border-white/50 flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: c }}>
                     {["A", "K", "E", "M"][i]}
                   </div>
                 ))}
               </div>
               <div>
-                <p className="text-white text-sm font-semibold">Join professionals from across Africa</p>
-                <p className="text-white/50 text-xs">Ghana · Kenya · Nigeria · South Africa</p>
+                <p className="text-white text-sm font-semibold" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}>Join professionals from across Africa</p>
+                <p className="text-white text-xs" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>Ghana · Kenya · Nigeria · South Africa</p>
               </div>
             </div>
           </div>

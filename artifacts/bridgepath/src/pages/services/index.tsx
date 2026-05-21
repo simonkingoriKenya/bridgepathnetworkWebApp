@@ -116,18 +116,17 @@ export default function ServicesPage() {
           alt="African professionals in a modern office — Bridgepath Africa HR Services"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.30) 55%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 w-full pb-12 md:pb-16">
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-sm font-medium" style={{ backgroundColor: `${CORAL}22`, color: CORAL, border: `1px solid ${CORAL}40` }}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-sm font-medium" style={{ backgroundColor: "rgba(255,255,255,0.85)", color: CORAL, border: `1px solid rgba(200,70,26,0.3)`, backdropFilter: "blur(8px)" }}>
                 <TrendingUp className="h-4 w-4" /> HR &amp; Talent Solutions
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}>
                 Tailor-made HR &amp; Recruitment<br />
-                <span style={{ color: "#E8962A" }}>Solutions Across Africa</span>
+                <span style={{ color: "#F0A010", textShadow: "0 2px 16px rgba(0,0,0,0.55)" }}>Solutions Across Africa</span>
               </h1>
-              <p className="text-white/75 max-w-2xl text-lg leading-relaxed">
+              <p className="text-white max-w-2xl text-lg leading-relaxed" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)", fontWeight: 500 }}>
                 From employment of record to executive search — BridgePath Africa handles your people operations so you can focus on growth.
               </p>
             </motion.div>

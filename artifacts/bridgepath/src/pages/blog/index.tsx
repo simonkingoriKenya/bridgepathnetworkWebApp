@@ -260,13 +260,12 @@ export default function BlogIndex() {
           alt="African business leaders in a boardroom — Bridgepath Africa Insights"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.82) 0%, rgba(28,25,23,0.30) 50%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12 text-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: `${CORAL}22`, color: CORAL, border: `1px solid ${CORAL}40` }}>Insights &amp; News</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">HR &amp; Talent Insights<br />for Africa</h1>
-              <p className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed">Expert perspectives on recruitment, compliance, technology, and careers across the African continent.</p>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.85)", color: CORAL, border: `1px solid rgba(200,70,26,0.3)`, backdropFilter: "blur(8px)" }}>Insights &amp; News</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}>HR &amp; Talent Insights<br />for Africa</h1>
+              <p className="text-white max-w-2xl mx-auto text-lg leading-relaxed" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)", fontWeight: 500 }}>Expert perspectives on recruitment, compliance, technology, and careers across the African continent.</p>
             </motion.div>
           </div>
         </div>

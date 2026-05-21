@@ -77,16 +77,15 @@ export default function About() {
           alt="African HR professional — Bridgepath Africa"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.35) 50%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.65)", border: "1px solid rgba(255,255,255,0.18)" }}>About Bridgepath Africa</span>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.85)", color: CORAL, border: `1px solid rgba(200,70,26,0.3)`, backdropFilter: "blur(8px)" }}>About Bridgepath Africa</span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}>
                 Shaping People.<br />
-                <span style={{ color: CORAL }}>Strengthening Institutions.</span>
+                <span style={{ color: "#F0A010", textShadow: "0 2px 16px rgba(0,0,0,0.55)" }}>Strengthening Institutions.</span>
               </h1>
-              <p className="text-white/70 text-xl max-w-2xl leading-relaxed">
+              <p className="text-white text-xl max-w-2xl leading-relaxed" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)" }}>
                 Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
               </p>
             </motion.div>

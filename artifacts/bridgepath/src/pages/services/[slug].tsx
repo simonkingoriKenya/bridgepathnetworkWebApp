@@ -402,9 +402,8 @@ export default function ServiceDetail() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${service.heroImg}')` }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.90) 0%, rgba(28,25,23,0.40) 60%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="relative z-10 container mx-auto px-4 md:px-8 pb-12 pt-24">
-          <Link href="/services" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mb-5 transition-colors">
+          <Link href="/services" className="inline-flex items-center gap-2 text-sm text-white font-semibold mb-5 transition-colors" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}>
             <ArrowLeft className="h-4 w-4" /> All Services
           </Link>
           <div className="flex items-center gap-4 mb-4">
@@ -412,11 +411,11 @@ export default function ServiceDetail() {
               <div className="text-white">{service.icon}</div>
             </div>
             <div>
-              <p className="text-sm font-medium" style={{ color: "#E8962A" }}>BridgePath Africa Service</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-white">{service.label}</h1>
+              <p className="text-sm font-medium" style={{ color: "#F0A010", textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>Bridgepath Africa Service</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-white" style={{ textShadow: "0 2px 14px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.45)" }}>{service.label}</h1>
             </div>
           </div>
-          <p className="text-xl text-gray-200 max-w-2xl">{service.tagline}</p>
+          <p className="text-xl text-white max-w-2xl" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)", fontWeight: 500 }}>{service.tagline}</p>
         </div>
       </section>
 

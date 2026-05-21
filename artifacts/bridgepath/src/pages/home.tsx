@@ -459,14 +459,13 @@ export default function Home() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           style={{ filter: "contrast(1.08) saturate(1.1)" }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.22) 60%, transparent 100%)" }} />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <div className="max-w-lg">
               <FadeUp delay={0.05}>
-                <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white/60">Where we hire</p>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-                  Focus areas for <span style={{ color: CORAL }}>high-quality hiring</span>
+                <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.65)" }}>Where we hire</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.45)" }}>
+                  Focus areas for <span style={{ color: "#F0A010", textShadow: "0 2px 14px rgba(0,0,0,0.55)" }}>high-quality hiring</span>
                 </h2>
               </FadeUp>
               <StaggerChildren className="flex flex-wrap gap-2 sm:gap-3 mt-5" delay={0.2}>
@@ -474,8 +473,8 @@ export default function Home() {
                   <motion.div
                     key={s.label}
                     variants={cardVariant}
-                    className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white border border-white/20"
-                    style={{ backgroundColor: "rgba(255,255,255,0.10)", backdropFilter: "blur(8px)" }}
+                    className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white border border-white/30"
+                    style={{ backgroundColor: "rgba(255,255,255,0.18)", backdropFilter: "blur(10px)" }}
                   >
                     <span className="text-white/70">{s.icon}</span>
                     {s.label}
@@ -644,15 +643,14 @@ export default function Home() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           style={{ filter: "contrast(1.08) saturate(1.1)" }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to left, rgba(28,25,23,0.88) 0%, rgba(28,25,23,0.20) 60%, transparent 100%)" }} />
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <FadeUp className="max-w-md ml-auto" delay={0.1}>
-              <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white/55">Our services</p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+              <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.65)" }}>Our services</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-4" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.45)" }}>
                 Full-service HR for the modern African workplace
               </h2>
-              <p className="text-white/70 text-sm sm:text-base mb-6">
+              <p className="text-white text-sm sm:text-base mb-6" style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)", fontWeight: 500 }}>
                 From EOR to payroll, outsourcing to psychometric assessments — we handle the complexity so you can focus on growth.
               </p>
               <Link href="/services">

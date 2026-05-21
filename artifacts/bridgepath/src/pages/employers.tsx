@@ -48,9 +48,8 @@ export default function EmployersPage() {
                     alt="African HR professionals closing a deal in a modern boardroom"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(22,33,62,0.60) 0%, transparent 60%)" }} />
                   <div className="absolute bottom-4 left-5 right-5">
-                    <p className="text-white text-xs font-semibold">Connecting Africa's best talent with ambitious employers</p>
+                    <p className="text-white text-xs font-semibold" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7), 0 2px 16px rgba(0,0,0,0.5)" }}>Connecting Africa's best talent with ambitious employers</p>
                   </div>
                 </div>
 

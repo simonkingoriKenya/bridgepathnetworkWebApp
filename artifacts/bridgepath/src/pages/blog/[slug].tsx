@@ -123,21 +123,20 @@ export default function BlogPost() {
 
       <div className="relative h-[50vh] min-h-[340px] md:min-h-[460px] overflow-hidden">
         <img src={post.image} alt={post.title} className="w-full h-full object-cover object-top" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,23,0.90) 0%, rgba(28,25,23,0.45) 50%, rgba(28,25,23,0.0) 100%)" }} />
         <div className="absolute bottom-0 left-0 right-0 px-4 py-8 md:p-10">
           <div className="container mx-auto max-w-3xl">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mb-4 transition-colors">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-white font-semibold mb-4 transition-colors" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}>
               <ArrowLeft className="h-4 w-4" /> Back to Insights
             </Link>
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full flex items-center gap-1.5" style={{ backgroundColor: `${CORAL}25`, color: CORAL }}>
+              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full flex items-center gap-1.5" style={{ backgroundColor: "rgba(255,255,255,0.85)", color: CORAL, backdropFilter: "blur(8px)" }}>
                 <Tag className="h-3 w-3" /> {post.tag}
               </span>
-              <span className="text-xs text-white/60 flex items-center gap-1">
+              <span className="text-xs text-white flex items-center gap-1" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>
                 <Clock className="h-3 w-3" /> {post.readTime}
               </span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">{post.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.45)" }}>{post.title}</h1>
           </div>
         </div>
       </div>
