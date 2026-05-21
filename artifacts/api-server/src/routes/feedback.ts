@@ -28,7 +28,7 @@ router.post("/applications/:applicationId/view", requireAuth, async (req: Authen
           candidateName: candidate.name,
           candidateEmail: candidate.email,
           jobTitle: job.title,
-          companyName: employerProfile?.company ?? employer?.name ?? "An employer",
+          companyName: employerProfile?.companyName ?? employer?.name ?? "An employer",
         })).catch(() => {});
       }
     }

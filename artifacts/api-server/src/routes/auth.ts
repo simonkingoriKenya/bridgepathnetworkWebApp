@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { hashPassword, generateToken } from "../lib/auth";
 import type { AuthenticatedRequest } from "../lib/auth";
 import { requireAuth } from "../lib/auth";
+import { authLimiter } from "../lib/limiters";
 
 const router = Router();
 
@@ -48,7 +49,7 @@ async function ensureProfile(userId: number) {
 }
 
 // REGISTER — email + password + name + role
-router.post("/auth/register", async (req: AuthenticatedRequest, res) => {
+router.post("/auth/register", authLimiter, async (req: AuthenticatedRequest, res) => {
   try {
     const { email, password, name, role } = req.body as {
       email: string; password?: string; name: string; role: string;
@@ -88,7 +89,7 @@ router.post("/auth/register", async (req: AuthenticatedRequest, res) => {
 });
 
 // LOGIN — accepts any email+password (demo mode: no password check)
-router.post("/auth/login", async (req: AuthenticatedRequest, res) => {
+router.post("/auth/login", authLimiter, async (req: AuthenticatedRequest, res) => {
   try {
     const { email, password } = req.body as { email: string; password?: string };
 
@@ -121,7 +122,7 @@ router.post("/auth/login", async (req: AuthenticatedRequest, res) => {
 });
 
 // MAGIC AUTH — email only (or email + name + role for new accounts)
-router.post("/auth/magic", async (req: AuthenticatedRequest, res) => {
+router.post("/auth/magic", authLimiter, async (req: AuthenticatedRequest, res) => {
   try {
     const { email, name, role } = req.body as { email: string; name?: string; role?: string };
 

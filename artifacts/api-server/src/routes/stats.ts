@@ -59,7 +59,6 @@ router.get("/stats/dashboard", requireAuth, async (req: AuthenticatedRequest, re
         recentApplications: recentApps,
       });
     } else {
-      const myJobs = await db.select().from(jobsTable).where(eq(jobsTable.id, userId));
       const allMyJobs = await db.select().from(jobsTable).where(eq(jobsTable.employerId, userId));
       const activeJobs = allMyJobs.filter(j => j.isActive).length;
 

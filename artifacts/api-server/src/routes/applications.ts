@@ -111,6 +111,15 @@ router.get("/applications/my", requireAuth, async (req: AuthenticatedRequest, re
 router.get("/jobs/:jobId/applications", requireAuth, async (req: AuthenticatedRequest, res) => {
   try {
     const jobId = paramInt(req.params.jobId);
+    const requesterId = req.userId!;
+
+    const [job] = await db.select().from(jobsTable).where(eq(jobsTable.id, jobId)).limit(1);
+    if (!job) { res.status(404).json({ error: "Not Found" }); return; }
+    if (job.employerId !== requesterId) {
+      res.status(403).json({ error: "Forbidden", message: "Only the job owner can view applicants" });
+      return;
+    }
+
     const apps = await db.select().from(applicationsTable)
       .where(eq(applicationsTable.jobId, jobId))
       .orderBy(sql`${applicationsTable.createdAt} DESC`);
@@ -152,10 +161,32 @@ router.get("/applications/employer-all", requireAuth, async (req: AuthenticatedR
 router.put("/applications/:applicationId/status", requireAuth, async (req: AuthenticatedRequest, res) => {
   try {
     const applicationId = paramInt(req.params.applicationId);
+    const requesterId = req.userId!;
     const { status } = req.body as { status: string };
 
-    if (!status) {
-      res.status(400).json({ error: "Bad Request", message: "Status required" });
+    const validStatuses = ["pending", "shortlisted", "accepted", "rejected", "withdrawn"];
+    if (!status || !validStatuses.includes(status)) {
+      res.status(400).json({ error: "Bad Request", message: `Status must be one of: ${validStatuses.join(", ")}` });
+      return;
+    }
+
+    const [app] = await db.select().from(applicationsTable)
+      .where(eq(applicationsTable.id, applicationId))
+      .limit(1);
+
+    if (!app) { res.status(404).json({ error: "Not Found" }); return; }
+
+    const [job] = await db.select().from(jobsTable).where(eq(jobsTable.id, app.jobId)).limit(1);
+    const isEmployerOfJob = job?.employerId === requesterId;
+    const isOwnApplication = app.applicantId === requesterId;
+
+    if (!isEmployerOfJob && !isOwnApplication) {
+      res.status(403).json({ error: "Forbidden", message: "Not authorized to update this application" });
+      return;
+    }
+
+    if (isOwnApplication && !isEmployerOfJob && status !== "withdrawn") {
+      res.status(403).json({ error: "Forbidden", message: "Applicants can only withdraw their own applications" });
       return;
     }
 
@@ -163,11 +194,6 @@ router.put("/applications/:applicationId/status", requireAuth, async (req: Authe
       .set({ status, updatedAt: new Date() })
       .where(eq(applicationsTable.id, applicationId))
       .returning();
-
-    if (!updated) {
-      res.status(404).json({ error: "Not Found" });
-      return;
-    }
 
     res.json(await serializeApplication(updated));
   } catch (err) {
