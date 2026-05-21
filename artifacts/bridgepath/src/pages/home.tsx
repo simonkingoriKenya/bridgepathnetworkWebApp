@@ -14,9 +14,11 @@ import {
 } from "lucide-react";
 
 const CORAL = "#C8461A";
-const GOLD = "#E8962A";
+const GOLD = "#E8962A"; // kept for rare use — no longer used prominently
+const TEAL = "#1F7A78";
 const CHARCOAL = "#1C1917";
 const CREAM = "#FFF8F2";
+const NAVY = "#16213E";
 
 /* ── Reusable scroll-reveal wrapper ── */
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -162,7 +164,7 @@ export default function Home() {
       <section ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: "100svh", background: "#FEF9F4" }}>
 
         {/* Top accent bar */}
-        <div className="absolute top-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL}, ${GOLD}, #1F7A78)` }} />
+        <div className="absolute top-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL}90 50%, ${TEAL} 100%)` }} />
 
         {/* ── LAYOUT: left content / right photo ── */}
         <div className="flex flex-col lg:flex-row min-h-[100svh]">
@@ -197,7 +199,7 @@ export default function Home() {
               <span style={{ color: CORAL }}>Build the Future.</span>
             </motion.h1>
 
-            {/* Kente accent bar */}
+            {/* Brand accent bar */}
             <motion.div
               className="flex gap-1 mb-5"
               initial={{ opacity: 0, scaleX: 0 }}
@@ -205,8 +207,8 @@ export default function Home() {
               style={{ transformOrigin: "left" }}
               transition={{ duration: 0.55, delay: 0.32 }}
             >
-              {[CORAL, GOLD, "#1F7A78", CHARCOAL].map((c, i) => (
-                <div key={i} className="h-[3.5px] rounded-full" style={{ width: i === 0 ? 52 : i === 1 ? 32 : i === 2 ? 20 : 12, backgroundColor: c }} />
+              {[CORAL, TEAL, CHARCOAL + "50"].map((c, i) => (
+                <div key={i} className="h-[3.5px] rounded-full" style={{ width: i === 0 ? 56 : i === 1 ? 24 : 14, backgroundColor: c }} />
               ))}
             </motion.div>
 
@@ -262,8 +264,8 @@ export default function Home() {
             >
               {[
                 { icon: <MapPin className="h-4 w-4" />, label: "Ghana Active", dot: CORAL },
-                { icon: <Globe className="h-4 w-4" />, label: "Kenya Coming Soon", dot: GOLD },
-                { icon: <ShieldCheck className="h-4 w-4" />, label: "20+ Yrs Experience", dot: "#1F7A78" },
+                { icon: <Globe className="h-4 w-4" />, label: "Kenya Coming Soon", dot: TEAL },
+                { icon: <ShieldCheck className="h-4 w-4" />, label: "20+ Yrs Experience", dot: CHARCOAL + "80" },
               ].map((t, i) => (
                 <span key={i} className="inline-flex items-center gap-1.5 text-[12px] font-semibold" style={{ color: "#7A6A5A" }}>
                   <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: t.dot }} />
@@ -322,13 +324,13 @@ export default function Home() {
             {/* Floating badge — bottom right */}
             <motion.div
               className="absolute bottom-10 right-6 lg:right-10 z-20 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
-              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(232,150,42,0.20)" }}
+              style={{ backgroundColor: "rgba(255,252,249,0.92)", backdropFilter: "blur(16px)", border: "1px solid rgba(31,122,120,0.18)" }}
               initial={{ opacity: 0, x: 20, y: 20 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.7, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${GOLD}20` }}>
-                <Building2 className="h-5 w-5" style={{ color: GOLD }} />
+              <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${TEAL}18` }}>
+                <Building2 className="h-5 w-5" style={{ color: TEAL }} />
               </div>
               <div>
                 <div className="text-lg font-extrabold leading-none" style={{ color: CHARCOAL, fontFamily: "var(--app-font-display)" }}>500+</div>
@@ -352,24 +354,24 @@ export default function Home() {
         </div>
 
         {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL}, ${GOLD}, #1F7A78)` }} />
+        <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px]" style={{ background: `linear-gradient(90deg, ${CORAL} 0%, ${CORAL}90 50%, ${TEAL} 100%)` }} />
       </section>
 
       {/* ── STATS BAR ── */}
-      <div style={{ background: `linear-gradient(90deg, #1C1917 0%, #2A1810 40%, #1C1917 100%)` }}>
+      <div style={{ background: NAVY }}>
         <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 mx-auto max-w-7xl" delay={0.1}>
           {platformStats.map((s, i) => (
             <motion.div
               key={`stat-${i}`}
               variants={cardVariant}
               className="py-7 md:py-9 text-center relative"
-              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}
+              style={{ borderRight: i < platformStats.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}
             >
-              <div className="text-2xl md:text-3xl font-extrabold leading-none tracking-tight" style={{ fontFamily: "var(--app-font-display)", color: i % 2 === 0 ? "#E8962A" : "#fff" }}>
+              <div className="text-2xl md:text-3xl font-extrabold leading-none tracking-tight text-white" style={{ fontFamily: "var(--app-font-display)" }}>
                 {s.value}
               </div>
-              <div className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45 mt-1.5">{s.label}</div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-8 rounded-full" style={{ backgroundColor: i % 3 === 0 ? "#C8461A" : i % 3 === 1 ? "#E8962A" : "#1F7A78" }} />
+              <div className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mt-1.5">{s.label}</div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-6 rounded-full" style={{ backgroundColor: i % 2 === 0 ? CORAL : TEAL, opacity: 0.7 }} />
             </motion.div>
           ))}
         </StaggerChildren>
@@ -475,9 +477,9 @@ export default function Home() {
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <div className="max-w-lg">
               <FadeUp delay={0.05}>
-                <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Where we hire</p>
+                <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white/60">Where we hire</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-                  Focus areas for <span style={{ color: GOLD }}>high-quality hiring</span>
+                  Focus areas for <span style={{ color: CORAL }}>high-quality hiring</span>
                 </h2>
               </FadeUp>
               <StaggerChildren className="flex flex-wrap gap-2 sm:gap-3 mt-5" delay={0.2}>
@@ -485,10 +487,10 @@ export default function Home() {
                   <motion.div
                     key={s.label}
                     variants={cardVariant}
-                    className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white border border-white/25"
-                    style={{ backgroundColor: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}
+                    className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white border border-white/20"
+                    style={{ backgroundColor: "rgba(255,255,255,0.10)", backdropFilter: "blur(8px)" }}
                   >
-                    <span style={{ color: GOLD }}>{s.icon}</span>
+                    <span className="text-white/70">{s.icon}</span>
                     {s.label}
                   </motion.div>
                 ))}
@@ -600,42 +602,43 @@ export default function Home() {
       </section>
 
       {/* ── AFRICA OPPORTUNITY STATS ── */}
-      <section style={{ background: `linear-gradient(135deg, ${CHARCOAL} 0%, #3D2A1E 100%)` }} className="py-16 md:py-24">
+      <section style={{ background: NAVY }} className="py-16 md:py-24">
         <div className="container mx-auto px-5 sm:px-8 md:px-12 max-w-7xl">
           <FadeUp>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
               <div>
-                <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: CORAL + "25", color: GOLD }}>The Africa Opportunity</span>
+                <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.55)" }}>The Africa Opportunity</span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-                  Why Africa is the world's<br /><span style={{ color: GOLD }}>next talent frontier</span>
+                  Why Africa is the world's<br /><span style={{ color: CORAL }}>next talent frontier</span>
                 </h2>
               </div>
-              <p className="text-white/50 max-w-xs leading-relaxed text-sm sm:text-base">
+              <p className="text-white/45 max-w-xs leading-relaxed text-sm sm:text-base">
                 The numbers tell a story of unstoppable growth. Bridgepath Africa positions you at the centre of it.
               </p>
             </div>
           </FadeUp>
-          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ backgroundColor: "rgba(255,255,255,0.06)" } as any} delay={0.1}>
-            {africaStats.map((stat) => (
+          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" delay={0.1}>
+            {africaStats.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 variants={cardVariant}
-                whileHover={{ backgroundColor: "rgba(255,255,255,0.07)" }}
-                className="p-7 sm:p-8 md:p-10 transition-colors"
-                style={{ backgroundColor: "rgba(28,25,23,0.85)" }}
+                whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.25)" }}
+                className="p-7 sm:p-8 rounded-2xl border transition-all"
+                style={{ backgroundColor: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.07)" }}
               >
+                <div className="h-[2px] w-10 rounded-full mb-6" style={{ backgroundColor: i % 2 === 0 ? CORAL : TEAL }} />
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, type: "spring" }}
-                  className="text-4xl md:text-5xl font-extrabold mb-2"
-                  style={{ color: CORAL }}
+                  className="text-4xl md:text-5xl font-extrabold mb-3 text-white"
+                  style={{ fontFamily: "var(--app-font-display)" }}
                 >
                   {stat.value}
                 </motion.div>
-                <div className="text-sm sm:text-base font-bold mb-2 text-white">{stat.label}</div>
-                <p className="text-xs sm:text-sm text-white/40 leading-relaxed">{stat.context}</p>
+                <div className="text-sm sm:text-base font-semibold mb-2" style={{ color: "rgba(255,255,255,0.75)" }}>{stat.label}</div>
+                <p className="text-xs sm:text-sm text-white/35 leading-relaxed">{stat.context}</p>
               </motion.div>
             ))}
           </StaggerChildren>
@@ -658,7 +661,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="container mx-auto px-5 sm:px-8 md:px-12">
             <FadeUp className="max-w-md ml-auto" delay={0.1}>
-              <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Our services</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-3 text-white/55">Our services</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
                 Full-service HR for the modern African workplace
               </h2>
@@ -680,20 +683,20 @@ export default function Home() {
       </section>
 
       {/* ── CONTACT ── */}
-      <section id="contact" style={{ background: `linear-gradient(135deg, #8B2E0A 0%, ${CORAL} 40%, #D4621F 100%)` }} className="py-16 md:py-24">
+      <section id="contact" style={{ background: NAVY }} className="py-16 md:py-24">
         <div className="container mx-auto px-5 sm:px-8 md:px-12 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start">
             <FadeUp delay={0.05}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ backgroundColor: "rgba(255,255,255,0.20)", color: "white" }}>Get in touch</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6" style={{ backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.55)" }}>Get in touch</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-                Start building with<br /><span style={{ color: GOLD }}>Bridgepath Africa</span>
+                Start building with<br /><span style={{ color: CORAL }}>Bridgepath Africa</span>
               </h2>
               <p className="text-white/75 mb-10 text-base sm:text-lg leading-relaxed">Tell us whether you want to find opportunities or hire top talent — we'll get back within 1–2 business days.</p>
               <div className="space-y-5 sm:space-y-6">
                 {[
-                  { icon: <MapPin className="h-5 w-5" />, label: "Headquarters", value: "Accra, Ghana" },
-                  { icon: <Globe className="h-5 w-5" />, label: "Operating in", value: "Ghana · Kenya · East & West Africa" },
-                  { icon: <UserCheck className="h-5 w-5" />, label: "Contact", value: "pkumanyc@gmail.com" },
+                  { icon: <MapPin className="h-5 w-5" />, label: "Headquarters", value: "Accra, Ghana", accent: CORAL },
+                  { icon: <Globe className="h-5 w-5" />, label: "Operating in", value: "Ghana · Kenya · East & West Africa", accent: TEAL },
+                  { icon: <UserCheck className="h-5 w-5" />, label: "Contact", value: "pkumanyc@gmail.com", accent: CORAL },
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -703,11 +706,11 @@ export default function Home() {
                     transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
                     className="flex items-start gap-4"
                   >
-                    <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.20)", color: "white" }}>
+                    <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0 text-white" style={{ backgroundColor: item.accent + "22", border: `1px solid ${item.accent}30` }}>
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-wider text-white/60">{item.label}</p>
+                      <p className="text-xs font-bold uppercase tracking-wider text-white/45">{item.label}</p>
                       <p className="text-sm font-medium text-white mt-0.5">{item.value}</p>
                     </div>
                   </motion.div>
@@ -863,20 +866,20 @@ export default function Home() {
       </section>
 
       {/* ── FINAL CTA BAND ── */}
-      <section style={{ backgroundColor: CORAL }} className="py-14 md:py-20">
+      <section className="py-14 md:py-20" style={{ background: `linear-gradient(135deg, ${CORAL} 0%, #A83515 100%)` }}>
         <div className="container mx-auto px-5 sm:px-8 md:px-12 max-w-7xl">
           <FadeUp>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">Ready to join Bridgepath Africa?</h2>
-                <p className="text-white/75 text-base sm:text-lg">Early access is open in Ghana and Kenya. Get started today.</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">Ready to join Bridgepath Africa?</h2>
+                <p className="text-white/70 text-base sm:text-lg">Early access is open in Ghana and Kenya. Get started today.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
                 <Link href="/auth/signup">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.04, y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="w-full sm:w-auto px-7 sm:px-8 py-4 font-bold text-sm rounded-xl bg-white hover:bg-orange-50 transition-all"
+                    className="w-full sm:w-auto px-7 sm:px-8 py-4 font-bold text-sm rounded-xl bg-white transition-all shadow-lg"
                     style={{ color: CORAL }}
                   >
                     Join the platform →
@@ -884,9 +887,9 @@ export default function Home() {
                 </Link>
                 <Link href="/services">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.04, y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="w-full sm:w-auto px-7 sm:px-8 py-4 font-bold text-sm rounded-xl text-white border-2 border-white/40 hover:bg-white/15 transition-all"
+                    className="w-full sm:w-auto px-7 sm:px-8 py-4 font-bold text-sm rounded-xl text-white border border-white/30 hover:bg-white/10 transition-all"
                   >
                     Our services
                   </motion.button>

@@ -7,9 +7,10 @@ import { Linkedin, Quote, CheckCircle2, Target, Eye, Users, Award, Lightbulb, Ha
 import founderFallback from "@assets/unnamed_(7)_1776009115711.jpg";
 
 const CORAL = "#C8461A";
-const GOLD = "#E8962A";
+const TEAL = "#1F7A78";
 const CHARCOAL = "#1C1917";
 const CREAM = "#FFF8F2";
+const NAVY = "#16213E";
 
 const PAMELA_FALLBACK = founderFallback;
 
@@ -80,10 +81,10 @@ export default function About() {
         <div className="relative z-10 w-full pb-14 md:pb-20">
           <div className="container mx-auto px-6 md:px-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: `${CORAL}25`, color: GOLD, border: `1px solid ${CORAL}40` }}>About Bridgepath Africa</span>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.65)", border: "1px solid rgba(255,255,255,0.18)" }}>About Bridgepath Africa</span>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-5 leading-tight">
                 Shaping People.<br />
-                <span style={{ color: GOLD }}>Strengthening Institutions.</span>
+                <span style={{ color: CORAL }}>Strengthening Institutions.</span>
               </h1>
               <p className="text-white/70 text-xl max-w-2xl leading-relaxed">
                 Your roadmap to organizational excellence — through people-first HR solutions across Africa and beyond.
@@ -119,7 +120,7 @@ export default function About() {
                     <p className="font-bold text-sm">Pamela Kuma</p>
                     <p className="text-xs text-gray-300">Founder & CEO</p>
                     <a href="https://www.linkedin.com/in/pamela-kuma" target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: GOLD }}>
+                      className="flex items-center gap-1 text-xs mt-1.5 hover:opacity-80 transition-opacity" style={{ color: CORAL }}>
                       <Linkedin className="h-3 w-3" /> linkedin.com/in/pamela-kuma
                     </a>
                   </div>
@@ -196,7 +197,7 @@ export default function About() {
                 </div>
                 <p className="font-bold text-base mb-1" style={{ color: CHARCOAL }}>{cert.title}</p>
                 <p className="text-xs text-gray-500 mb-2">{cert.body}</p>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: GOLD + "20", color: GOLD }}>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: TEAL + "18", color: TEAL }}>
                   {cert.area}
                 </span>
               </motion.div>
@@ -224,9 +225,9 @@ export default function About() {
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="rounded-2xl p-8 border-2 bg-white shadow-sm" style={{ borderColor: GOLD + "50" }}>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: GOLD + "15" }}>
-                <Eye className="h-6 w-6" style={{ color: GOLD }} />
+              className="rounded-2xl p-8 border-2 bg-white shadow-sm" style={{ borderColor: TEAL + "40" }}>
+              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: TEAL + "12" }}>
+                <Eye className="h-6 w-6" style={{ color: TEAL }} />
               </div>
               <h3 className="text-2xl font-bold mb-4" style={{ color: CHARCOAL }}>Our Vision</h3>
               <p className="text-gray-600 leading-relaxed text-base">
