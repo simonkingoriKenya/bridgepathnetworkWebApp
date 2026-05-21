@@ -181,7 +181,7 @@ export default function Home() {
             src="/photos/hero-team-bright.webp"
             alt="Diverse African professional team collaborating in a bright office — Bridgepath Africa"
             className="w-full h-full object-cover"
-            style={{ objectPosition: "58% 62%" }}
+            style={{ objectPosition: "55% 30%" }}
             loading="eager"
             fetchPriority="high"
             decoding="async"
